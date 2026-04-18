@@ -1,0 +1,2 @@
+{"question": "How did revenue change?", "expected_substring": "Revenue grew 20%", "reference_answer": "Revenue grew 20% year over year, driven by strong demand in core markets.", "document_id": "replace-with-real-document-id"}
+{"question": "Which page mentions the revenue increase?", "expected_substring": "page", "reference_answer": "The revenue increase is mentioned on page 3 of the annual report.", "document_id": "replace-with-real-document-id"}
