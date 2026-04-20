@@ -4,7 +4,7 @@
 
 Phase 2 在 Phase 0+1 的基础上增加了完整的 RAG 能力：
 
-- 上传 PDF 文档并解析为结构化文本
+- 上传 PDF / Markdown / 纯文本文档并进入索引流程
 - 分块 → 向量化 → 存入向量数据库
 - 语义检索 + Reranking 精排
 - 基于检索结果的 LLM 回答（带来源引用）
@@ -128,7 +128,7 @@ Phase 2 新增了以下层次：
 
 设计要点：
 - 所有子服务通过构造函数注入
-- `_build_context` 格式化带编号和来源的上下文
+- `build_context` 格式化带编号和来源的上下文
 - 使用 `RAG_SYSTEM_PROMPT` 约束 LLM 行为
 
 ### 3.9 `app/services/evaluation_service.py`
@@ -147,7 +147,7 @@ Phase 2 新增了以下层次：
 - 暴露 3 个 RAG 端点
 
 端点：
-- `POST /api/v1/rag/ingest`：multipart 文件上传，校验 content_type
+- `POST /api/v1/rag/ingest`：multipart 文件上传，基于 content_type、文件名和文件头判断 PDF 或文本路径
 - `POST /api/v1/rag/search`：JSON 请求
 - `POST /api/v1/rag/ask`：JSON 请求
 
@@ -160,6 +160,10 @@ Phase 2 新增了以下层次：
 职责：
 - CLI 异步评估脚本
 - 示例评估数据
+
+设计要点：
+- 评估脚本通过 `ask()` 返回的 `sources` 重建 groundedness 所需上下文
+- 不要求 `AskResponse` 额外暴露内部 `context` 字段
 
 ## 4. 完整文件结构
 
@@ -194,12 +198,12 @@ Phase 2 新增了以下层次：
 │  ├─ test_document_parser_service.py      # Phase 2 ← 新增
 │  ├─ test_chunking_service.py             # Phase 2 ← 新增
 │  ├─ test_embedding_service.py            # Phase 2 ← 新增
-│  ├─ test_vector_store_service.py         # Phase 2 ← 新增
 │  ├─ test_retrieval_service.py            # Phase 2 ← 新增
 │  ├─ test_rerank_service.py               # Phase 2 ← 新增
 │  ├─ test_rag_service.py                  # Phase 2 ← 新增
-│  ├─ test_rag_schemas.py                  # Phase 2 ← 新增
-│  └─ test_evaluation_service.py           # Phase 2 ← 新增
+│  ├─ test_rag_endpoints.py                # Phase 2 ← 新增
+│  ├─ test_evaluation_service.py           # Phase 2 ← 新增
+│  └─ test_run_rag_eval.py                 # Phase 2 ← 新增
 ├─ scripts/
 │  └─ run_rag_eval.py                      # Phase 2 ← 新增
 ├─ eval/
@@ -229,9 +233,9 @@ sequenceDiagram
     participant Qdrant as Qdrant DB
     participant EmbAPI as Embedding API
 
-    Client->>Route: POST /api/v1/rag/ingest (PDF file)
-    Route->>Route: 校验 content_type = application/pdf
-    Route->>RAG: ingest_pdf(file_bytes, filename)
+    Client->>Route: POST /api/v1/rag/ingest (PDF / Markdown / Text file)
+    Route->>Route: 读取字节并判断 PDF 或文本路径
+    Route->>RAG: ingest_pdf(file_bytes, filename) / ingest_text(text, filename)
     RAG->>Parser: parse_pdf(file_bytes, filename)
     Parser->>Parser: 写临时文件 → docling 转换 → 导出 Markdown
     Parser-->>RAG: list[ParsedSection]
@@ -301,12 +305,12 @@ sequenceDiagram
     Ret-->>RAG: candidates (top_k 个)
     RAG->>Rerank: rerank(query, candidates, final_k)
     Rerank-->>RAG: reranked (final_k 个)
-    RAG->>RAG: _build_context(reranked)
+    RAG->>RAG: build_context(reranked)
     RAG->>LLM: chat(prompt, system_prompt=RAG_SYSTEM_PROMPT)
     LLM->>LLMAPI: POST /chat/completions
     LLMAPI-->>LLM: generated answer
     LLM-->>RAG: reply
-    RAG-->>Route: AskResponse(answer, sources, model)
+    RAG-->>Route: AskResponse(answer, sources, model, rerank_model)
     Route-->>Client: 200 OK
 ```
 

@@ -24,6 +24,38 @@ def test_ingest_endpoint_accepts_pdf(mock_ingest: AsyncMock) -> None:
     assert response.json()["chunk_count"] == 3
 
 
+@patch("app.api.routes.rag.rag_service.ingest_text", new_callable=AsyncMock)
+@patch("app.api.routes.rag.rag_service.ingest_pdf", new_callable=AsyncMock)
+def test_ingest_endpoint_routes_octet_stream_pdf_to_pdf_path(
+    mock_ingest_pdf: AsyncMock,
+    mock_ingest_text: AsyncMock,
+) -> None:
+    mock_ingest_pdf.return_value = {
+        "document_id": "doc-1",
+        "filename": "guide.pdf",
+        "chunk_count": 3,
+    }
+
+    response = client.post(
+        "/api/v1/rag/ingest",
+        files={"file": ("guide.pdf", b"%PDF-1.4 test payload", "application/octet-stream")},
+    )
+
+    assert response.status_code == 200
+    mock_ingest_pdf.assert_awaited_once()
+    mock_ingest_text.assert_not_awaited()
+
+
+def test_ingest_endpoint_rejects_non_pdf_octet_stream() -> None:
+    response = client.post(
+        "/api/v1/rag/ingest",
+        files={"file": ("blob.bin", b"\xff\xfe\x00", "application/octet-stream")},
+    )
+
+    assert response.status_code == 400
+    assert response.json()["detail"] == "Only PDF, Markdown, and plain text files are supported."
+
+
 @patch("app.api.routes.rag.rag_service.search", new_callable=AsyncMock)
 def test_search_endpoint_returns_results(mock_search: AsyncMock) -> None:
     mock_search.return_value = {

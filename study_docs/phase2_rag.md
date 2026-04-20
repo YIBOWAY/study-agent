@@ -521,15 +521,20 @@ class RAGService:
         """在线阶段：检索 + Reranking + LLM 生成"""
         retrieved = await self.retrieval_service.retrieve(query, top_k, document_id)
         reranked = await self.rerank_service.rerank(query, retrieved, final_k)
-        context = self._build_context(reranked)
+        context = self.build_context(reranked)
         prompt = f"Question: {query}\n\nContext:\n{context}"
         response = await self.llm_service.chat(prompt, system_prompt=RAG_SYSTEM_PROMPT)
-        return {"answer": response["reply"], "sources": reranked}
+        return {
+            "answer": response["reply"],
+            "sources": reranked,
+            "model": response["model"],
+            "rerank_model": self.settings.rerank_model,
+        }
 ```
 
 ### 8.2 Context 构建
 
-`_build_context` 把检索结果格式化为 LLM 能理解的上下文：
+`build_context` 把检索结果格式化为 LLM 能理解的上下文：
 
 ```
 [1] report.pdf (page 3)
@@ -563,9 +568,13 @@ Cite the provided sources naturally when helpful and do not invent facts."""
 
 | 端点 | 方法 | 用途 |
 |------|------|------|
-| `/api/v1/rag/ingest` | POST (multipart) | 上传 PDF 文件，触发索引构建 |
+| `/api/v1/rag/ingest` | POST (multipart) | 上传 PDF、Markdown 或纯文本文件，触发索引构建 |
 | `/api/v1/rag/search` | POST (JSON) | 语义搜索，返回相关片段 |
 | `/api/v1/rag/ask` | POST (JSON) | 检索 + 生成，返回回答和来源 |
+
+补充说明：
+- 如果 PDF 被客户端上传成 `application/octet-stream`，只要文件名是 `.pdf` 或文件头以 `%PDF-` 开头，服务端也会走 PDF 解析路径
+- `AskResponse` 对外返回 `answer`、`sources`、`model`、`rerank_model`，不会暴露内部 prompt `context`
 
 ### 9.2 请求/响应模型
 
@@ -643,7 +652,10 @@ def compute_retrieval_hit_rate(cases, result_batches):
 
 ```bash
 python -m scripts.run_rag_eval --cases eval/sample_questions.jsonl --top-k 5
+python -m scripts.run_rag_eval --cases eval/sample_questions.jsonl --top-k 20 --final-k 5 --judge
 ```
+
+`--judge` 模式下，评估脚本会根据 `ask()` 返回的 `sources` 重建 groundedness 所需上下文，而不是依赖 API 返回内部 `context` 字段。
 
 ### 10.5 更完善的评估框架（了解即可）
 
@@ -757,7 +769,7 @@ def test_ingest_pdf_orchestrates_dependencies_in_order(self):
 ### 实操能力
 
 - [ ] 我能启动 Qdrant 并通过 API 创建集合
-- [ ] 我能上传 PDF 并触发完整的 Ingest 流程
+- [ ] 我能上传 PDF / Markdown / 纯文本并触发正确的 Ingest 流程
 - [ ] 我能调用 /search 和 /ask 端点并理解返回结果
 - [ ] 我能修改 chunk_size/overlap 并观察对检索结果的影响
 - [ ] 我能运行评估脚本并解读 Hit Rate

@@ -85,7 +85,7 @@ class RAGService:
     ) -> dict[str, object]:
         retrieved = await self.retrieval_service.retrieve(query=query, top_k=top_k, document_id=document_id)
         reranked = await self.rerank_service.rerank(query=query, candidates=retrieved, final_k=final_k)
-        context = self._build_context(reranked)
+        context = self.build_context(reranked)
         prompt = f"Question: {query}\n\nContext:\n{context}"
         response = await self.llm_service.chat(
             user_message=prompt,
@@ -99,7 +99,7 @@ class RAGService:
         }
 
     @staticmethod
-    def _build_context(results: list[object]) -> str:
+    def build_context(results: list[object]) -> str:
         lines: list[str] = []
         for index, result in enumerate(results, start=1):
             page_number = getattr(result, "page_number", None)

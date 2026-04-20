@@ -19,13 +19,17 @@
 
 ## Quick Start
 
-1. 激活你的 conda 环境：`ai-agent`
-2. 安装依赖：
+1. 确认 Python 版本为 `3.10+`：
+   - `python --version`
+2. 激活你的 conda 环境：`ai-agent`
+3. 安装依赖：
    - `pip install -r requirements.txt`
-3. 复制环境变量：
+4. 复制环境变量：
    - 将 `.env.example` 复制为 `.env`
-4. 启动服务：
+5. 启动服务：
    - `uvicorn app.main:app --reload --host 127.0.0.1 --port 8000`
+
+> 说明：当前代码使用了 `X | None` 这类 Python `3.10+` 语法，低于 `3.10` 的解释器会在导入阶段直接报错。
 
 ## Docs
 

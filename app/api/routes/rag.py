@@ -12,24 +12,28 @@ logger = logging.getLogger(__name__)
 
 @router.post("/ingest", response_model=IngestResponse)
 async def ingest(file: UploadFile = File(...)) -> IngestResponse:
-    supported_types = {
-        "application/pdf",
-        "text/markdown",
-        "text/plain",
-        "application/octet-stream",
-    }
     filename = file.filename or "uploaded"
-    is_markdown = filename.lower().endswith(".md")
-
-    if file.content_type not in supported_types and not is_markdown:
-        raise HTTPException(
-            status_code=400,
-            detail="Only PDF and Markdown files are supported.",
-        )
+    lowercase_filename = filename.lower()
+    is_markdown = lowercase_filename.endswith(".md")
 
     try:
         file_bytes = await file.read()
-        if file.content_type == "application/pdf" and not is_markdown:
+        is_octet_stream_pdf = (
+            file.content_type == "application/octet-stream"
+            and (lowercase_filename.endswith(".pdf") or file_bytes.startswith(b"%PDF-"))
+        )
+        is_pdf = not is_markdown and (
+            file.content_type == "application/pdf" or is_octet_stream_pdf
+        )
+        is_text = is_markdown or file.content_type in {"text/markdown", "text/plain"}
+
+        if not is_pdf and not is_text:
+            raise HTTPException(
+                status_code=400,
+                detail="Only PDF, Markdown, and plain text files are supported.",
+            )
+
+        if is_pdf:
             result = await rag_service.ingest_pdf(file_bytes, filename)
         else:
             text = file_bytes.decode("utf-8")

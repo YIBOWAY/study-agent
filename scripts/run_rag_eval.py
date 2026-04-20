@@ -48,7 +48,7 @@ async def main() -> None:
             document_id=case.document_id,
         )
         answers.append(ask_result["answer"])
-        contexts.append(ask_result["context"])
+        contexts.append(RAGService.build_context(ask_result["sources"]))
         source_counts.append(len(ask_result["sources"]))
 
     summary: dict[str, object] = {

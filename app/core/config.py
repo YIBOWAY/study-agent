@@ -30,6 +30,15 @@ class Settings(BaseSettings):
     rerank_base_url: str = "https://api.cohere.com/v2"
     rerank_model: str = "rerank-v3.5"
 
+    tavily_api_key: str = ""
+    tavily_base_url: str = "https://api.tavily.com"
+    enable_code_execution_tool: bool = False
+
+    tool_call_max_iterations: int = Field(default=10, ge=1)
+    tool_call_timeout: int = Field(default=30, gt=0)
+    research_max_iterations: int = Field(default=3, ge=1, le=10)
+    research_top_k: int = Field(default=5, ge=1, le=20)
+
     rag_chunk_size: int = Field(default=800, gt=0)
     rag_chunk_overlap: int = Field(default=120, ge=0)
     rag_top_k: int = Field(default=20, gt=0)
@@ -41,6 +50,7 @@ class Settings(BaseSettings):
         "embedding_base_url",
         "qdrant_api_key",
         "rerank_api_key",
+        "tavily_api_key",
         mode="before",
     )
     @classmethod

@@ -8,3 +8,4 @@ pytest-asyncio==0.24.0
 python-multipart==0.0.9
 docling==2.18.0
 qdrant-client==1.11.3
+langgraph>=0.2.0

@@ -129,7 +129,13 @@ uvicorn app.main:app --reload --host 127.0.0.1 --port 8001
 
 ## 6. 接口验证
 
-### 6.1 上传 PDF（Ingest）
+### 6.1 上传文档（Ingest）
+
+`/api/v1/rag/ingest` 当前支持：
+- PDF：`application/pdf`
+- Markdown：`text/markdown`
+- 纯文本：`text/plain`
+- 被通用上传器标成 `application/octet-stream` 的 PDF：当文件名是 `.pdf` 或文件头以 `%PDF-` 开头时，也会自动走 PDF 解析路径
 
 使用 curl：
 
@@ -157,6 +163,8 @@ Invoke-RestMethod -Uri "http://127.0.0.1:8000/api/v1/rag/ingest" -Method Post -F
 ```
 
 > 首次 ingest 会自动创建 Qdrant 集合。可在 Qdrant Dashboard 验证。
+>
+> 如果某些浏览器或通用客户端把 PDF 上传成 `application/octet-stream`，服务端会根据文件名和 PDF 文件头自动识别。
 
 ### 6.2 语义搜索（Search）
 
@@ -219,13 +227,13 @@ python -m pytest -v --tb=short
 
 > **重要**：必须使用 `python -m pytest` 而非 `pytest`，否则会出现 `ModuleNotFoundError: No module named 'app'`。
 
-只运行 Phase 2 测试：
+只运行 RAG 相关测试：
 
 ```bash
-python -m pytest tests/test_document_parser_service.py tests/test_chunking_service.py tests/test_embedding_service.py tests/test_vector_store_service.py tests/test_retrieval_service.py tests/test_rerank_service.py tests/test_rag_service.py tests/test_rag_schemas.py tests/test_evaluation_service.py -v
+python -m pytest tests/test_document_parser_service.py tests/test_chunking_service.py tests/test_embedding_service.py tests/test_retrieval_service.py tests/test_rerank_service.py tests/test_rag_service.py tests/test_rag_endpoints.py tests/test_evaluation_service.py tests/test_run_rag_eval.py -v
 ```
 
-预期结果：78/78 通过（包含 Phase 0+1 的 2 个测试）。
+预期结果：上述测试全部通过。
 
 ## 8. 运行评估
 
@@ -235,6 +243,8 @@ python -m scripts.run_rag_eval --cases eval/sample_questions.jsonl --top-k 20 --
 ```
 
 > 需要 Qdrant 运行中且已 ingest 过相关文档。`sample_questions.jsonl` 中的 `document_id` 需要替换为实际值。
+>
+> `--judge` 模式下，脚本会基于 `ask()` 返回的 `sources` 重建 groundedness 所需上下文；API 响应本身不暴露内部 `context` 字段。
 
 完整评估（含 LLM-as-judge 指标，会消耗 API 调用）：
 
@@ -318,11 +328,11 @@ curl http://localhost:6333/healthz  # 验证连接
 
 修复：确保 `final_k <= top_k`（如 `top_k=20, final_k=5`）。
 
-### 报错 6：`415 Unsupported Media Type` (Ingest)
+### 报错 6：`400 Bad Request` (Ingest)
 
-原因：上传的文件不是 PDF 格式，或 content_type 不是 `application/pdf`。
+原因：上传的文件既不是 PDF，也不是 Markdown/纯文本；或者上传的是 `application/octet-stream` 但文件名和文件头都不像 PDF。
 
-修复：确认上传的是 PDF 文件，curl 中用 `type=application/pdf`。
+修复：确认上传的是 PDF、Markdown 或纯文本。上传 PDF 时优先使用 `.pdf` 文件名；curl 中可显式写 `type=application/pdf`。
 
 ### 报错 7：整个 app 启动失败，`ImportError` 指向 docling/qdrant_client
 
