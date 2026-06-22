@@ -51,7 +51,7 @@ class FakeRAGService:
 
 class FakeLLMService:
     async def chat(self, user_message: str, system_prompt: str | None = None) -> dict[str, str]:
-        return {"reply": "supported", "model": "gpt-5.4"}
+        return {"reply": "{}", "model": "gpt-5.4"}
 
 
 @pytest.mark.asyncio
@@ -75,19 +75,21 @@ async def test_run_rag_eval_rebuilds_context_from_sources_for_judge(
     monkeypatch.setattr(run_rag_eval, "compute_retrieval_hit_rate", lambda loaded_cases, batches: 1.0)
     monkeypatch.setattr(run_rag_eval, "compute_citation_usefulness", lambda answers, source_counts: 1.0)
 
-    async def fake_compute_answer_correctness(loaded_cases, answers, judge_fn) -> float:
-        return 1.0
-
-    async def fake_compute_groundedness(answers, contexts, judge_fn) -> float:
+    async def fake_faithfulness(question, answer, contexts, judge_fn):
         assert contexts == ["[1] guide.pdf (page 2)\nRevenue grew 20% year over year."]
-        return 1.0
+        return {"score": 1.0}
 
-    monkeypatch.setattr(run_rag_eval, "compute_answer_correctness", fake_compute_answer_correctness)
-    monkeypatch.setattr(run_rag_eval, "compute_groundedness", fake_compute_groundedness)
+    async def fake_context_precision(question, contexts, judge_fn):
+        assert contexts == ["Revenue grew 20% year over year."]
+        return {"score": 1.0}
 
-    import app.services.llm_service as llm_service_module
+    async def fake_answer_relevance(question, answer, judge_fn):
+        return {"score": 1.0}
 
-    monkeypatch.setattr(llm_service_module, "LLMService", FakeLLMService)
+    monkeypatch.setattr(run_rag_eval, "llm_judge_faithfulness", fake_faithfulness)
+    monkeypatch.setattr(run_rag_eval, "llm_judge_context_precision", fake_context_precision)
+    monkeypatch.setattr(run_rag_eval, "llm_judge_answer_relevance", fake_answer_relevance)
+    monkeypatch.setattr(run_rag_eval, "LLMService", FakeLLMService)
     monkeypatch.setattr(
         sys,
         "argv",
@@ -107,4 +109,6 @@ async def test_run_rag_eval_rebuilds_context_from_sources_for_judge(
 
     output = json.loads(capsys.readouterr().out)
     assert output["total_cases"] == 1
-    assert output["groundedness"] == 1.0
+    assert output["faithfulness"]["avg_score"] == 1.0
+    assert output["context_precision"]["avg_score"] == 1.0
+    assert output["answer_relevance"]["avg_score"] == 1.0

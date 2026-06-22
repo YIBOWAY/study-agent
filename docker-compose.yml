@@ -1,0 +1,55 @@
+services:
+  qdrant:
+    image: qdrant/qdrant:v1.11.3
+    ports:
+      - "6333:6333"
+      - "6334:6334"
+    volumes:
+      - qdrant_data:/qdrant/storage
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - qdrant
+    environment:
+      APP_ENV: production
+      APP_DEBUG: "false"
+      QDRANT_URL: http://qdrant:6333
+      MEMORY_DATA_DIR: /data/memory
+      TRACING_DB_PATH: /data/traces.db
+      LLM_API_KEY: ${LLM_API_KEY:-}
+      LLM_BASE_URL: ${LLM_BASE_URL:-https://api.xairouter.com/v1}
+      LLM_MODEL: ${LLM_MODEL:-gpt-5.4}
+      EMBEDDING_API_KEY: ${EMBEDDING_API_KEY:-}
+      EMBEDDING_BASE_URL: ${EMBEDDING_BASE_URL:-}
+      EMBEDDING_MODEL: ${EMBEDDING_MODEL:-text-embedding-3-large}
+      RERANK_API_KEY: ${RERANK_API_KEY:-}
+      RERANK_BASE_URL: ${RERANK_BASE_URL:-https://api.cohere.com/v2}
+      RERANK_MODEL: ${RERANK_MODEL:-rerank-v3.5}
+      TAVILY_API_KEY: ${TAVILY_API_KEY:-}
+      TAVILY_BASE_URL: ${TAVILY_BASE_URL:-https://api.tavily.com}
+      API_KEY_REQUIRED: ${API_KEY_REQUIRED:-false}
+      API_KEY: ${API_KEY:-}
+      GUARDRAILS_ENABLED: ${GUARDRAILS_ENABLED:-true}
+      TRACING_ENABLED: ${TRACING_ENABLED:-true}
+    ports:
+      - "8000:8000"
+    volumes:
+      - backend_data:/data
+
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    depends_on:
+      - backend
+    environment:
+      BACKEND_URL: http://backend:8000
+    ports:
+      - "8501:8501"
+
+volumes:
+  qdrant_data:
+  backend_data:

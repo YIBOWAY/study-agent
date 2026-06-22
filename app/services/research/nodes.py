@@ -9,6 +9,7 @@ from app.services.research.state import ResearchSearchResult, ResearchState, Res
 
 if TYPE_CHECKING:
     from app.services.llm_service import LLMService
+    from app.services.memory_service import MemoryService
     from app.services.rag_service import RAGService
     from app.services.tool_registry import ToolRegistry
 
@@ -30,6 +31,20 @@ _REPORT_PROMPT = (
     "You are a research assistant. Produce a structured report with sections: Title, Summary, "
     "Key Findings, Sources, Conclusion. Base the answer only on the provided evidence."
 )
+_PLAN_PROMPT = (
+    "You are a research planner. Break the topic into 2-4 specific sub-questions that would "
+    "cover the topic well. Return JSON only in the form "
+    "{\"sub_tasks\": [\"question 1\", \"question 2\"]}."
+)
+_REFLECT_PROMPT = (
+    "You are a research report reviewer. Evaluate the report for completeness, accuracy, clarity, "
+    "and coverage. Return JSON only in the form "
+    "{\"verdict\": \"pass\"|\"revise\", \"feedback\": \"...\"}."
+)
+_REVISE_REPORT_PROMPT = (
+    "You are a research report editor. Revise the report based on the review feedback while "
+    "keeping the same overall structure and grounding the changes in the provided evidence."
+)
 
 
 def _timestamp() -> str:
@@ -47,13 +62,18 @@ def _step(node: str, action: str, output_summary: str) -> ResearchStep:
 
 def make_rewrite_query_node(llm_service: "LLMService") -> NodeHandler:
     async def rewrite_query(state: ResearchState) -> dict[str, Any]:
+        user_message = _build_rewrite_query_prompt(state)
         try:
-            result = await llm_service.chat(state["topic"], system_prompt=_QUERY_REWRITE_PROMPT)
+            result = await llm_service.chat(user_message, system_prompt=_QUERY_REWRITE_PROMPT)
             query = result["reply"].strip() or state["topic"].strip()
-            return {
+            payload: dict[str, Any] = {
                 "queries": [query],
                 "steps": [_step("rewrite_query", "Rewrote topic to search query", query)],
             }
+            current_step = state.get("current_step")
+            if current_step:
+                payload["current_step"] = current_step
+            return payload
         except Exception as exc:
             fallback = state["topic"].strip()
             return {
@@ -156,18 +176,24 @@ def make_evaluate_results_node(llm_service: "LLMService") -> NodeHandler:
 
 def make_refine_query_node(llm_service: "LLMService") -> NodeHandler:
     async def refine_query(state: ResearchState) -> dict[str, Any]:
+        next_step = _next_plan_step(state)
         prompt = (
             f"Topic: {state['topic']}\n"
+            f"Current plan step: {next_step or state.get('current_step', '')}\n"
             f"Previous queries: {state['queries']}\n"
+            f"Prior insights: {state.get('prior_insights', [])}\n"
             f"Evidence so far:\n{_format_evidence(state)}"
         )
         try:
             result = await llm_service.chat(prompt, system_prompt=_REFINE_PROMPT)
             query = result["reply"].strip() or state["topic"].strip()
-            return {
+            payload: dict[str, Any] = {
                 "queries": [query],
                 "steps": [_step("refine_query", "Generated refined query", query)],
             }
+            if next_step:
+                payload["current_step"] = next_step
+            return payload
         except Exception as exc:
             return {
                 "steps": [_step("refine_query", "Query refinement failed", str(exc))],
@@ -199,6 +225,168 @@ def make_generate_report_node(llm_service: "LLMService") -> NodeHandler:
             }
 
     return generate_report
+
+
+def make_plan_node(llm_service: "LLMService") -> NodeHandler:
+    async def plan(state: ResearchState) -> dict[str, Any]:
+        prompt = (
+            f"Topic: {state['topic']}\n"
+            f"Prior insights: {state.get('prior_insights', [])}\n"
+            "Return 2-4 sub_tasks that would guide the research."
+        )
+        try:
+            result = await llm_service.chat(prompt, system_prompt=_PLAN_PROMPT)
+            parsed = _safe_load_json(result["reply"])
+            raw_tasks = parsed.get("sub_tasks")
+            tasks = [str(item).strip() for item in raw_tasks] if isinstance(raw_tasks, list) else []
+            tasks = [item for item in tasks if item]
+            if not tasks:
+                raise ValueError("No valid sub_tasks returned.")
+        except Exception as exc:
+            fallback = state["topic"].strip()
+            return {
+                "plan": [fallback],
+                "current_step": fallback,
+                "steps": [_step("plan", "Planning failed; using fallback plan", str(exc))],
+            }
+
+        return {
+            "plan": tasks,
+            "current_step": tasks[0],
+            "steps": [_step("plan", "Generated research plan", f"{len(tasks)} sub-tasks")],
+        }
+
+    return plan
+
+
+def make_reflect_node(llm_service: "LLMService") -> NodeHandler:
+    async def reflect(state: ResearchState) -> dict[str, Any]:
+        prompt = (
+            f"Topic: {state['topic']}\n\n"
+            f"Report:\n{state.get('report', '')}\n\n"
+            f"Evidence:\n{_format_evidence(state)}"
+        )
+        try:
+            result = await llm_service.chat(prompt, system_prompt=_REFLECT_PROMPT)
+            parsed = _safe_load_json(result["reply"])
+            verdict = str(parsed.get("verdict") or "pass").strip().lower()
+            feedback = str(parsed.get("feedback") or "").strip()
+            if verdict == "revise":
+                reflection = feedback or "Revise the report."
+            else:
+                reflection = "pass"
+        except Exception as exc:
+            reflection = "pass"
+            feedback = str(exc)
+        return {
+            "reflection": reflection,
+            "steps": [
+                _step(
+                    "reflect",
+                    "Reviewed generated report",
+                    reflection if reflection != "pass" else feedback or "pass",
+                )
+            ],
+        }
+
+    return reflect
+
+
+def make_revise_report_node(llm_service: "LLMService") -> NodeHandler:
+    async def revise_report(state: ResearchState) -> dict[str, Any]:
+        prompt = (
+            f"Topic: {state['topic']}\n\n"
+            f"Original report:\n{state.get('report', '')}\n\n"
+            f"Review feedback:\n{state.get('reflection', '')}\n\n"
+            f"Evidence:\n{_format_evidence(state)}"
+        )
+        try:
+            result = await llm_service.chat(prompt, system_prompt=_REVISE_REPORT_PROMPT)
+            report = result["reply"].strip()
+            return {
+                "report": report,
+                "steps": [
+                    _step(
+                        "revise_report",
+                        "Revised report from review feedback",
+                        f"Report revised ({len(report)} chars)",
+                    )
+                ],
+            }
+        except Exception as exc:
+            return {
+                "steps": [_step("revise_report", "Report revision failed", str(exc))],
+            }
+
+    return revise_report
+
+
+def make_recall_memory_node(memory_service: "MemoryService") -> NodeHandler:
+    async def recall_memory(state: ResearchState) -> dict[str, Any]:
+        session_id = str(state.get("session_id") or "").strip()
+        if not session_id:
+            return {
+                "prior_insights": [],
+                "steps": [_step("recall_memory", "Skipped memory recall", "No session_id provided")],
+            }
+
+        prior_insights: list[str] = []
+        session = await memory_service.get_session_context(session_id)
+        if session is not None:
+            prior_insights.extend(str(item).strip() for item in session.get("insights", []) if str(item).strip())
+
+        records = await memory_service.retrieve_relevant_insights(state["topic"], top_k=3)
+        for record in records:
+            insight = str(record.get("insight") or "").strip()
+            if insight and insight not in prior_insights:
+                prior_insights.append(insight)
+
+        return {
+            "prior_insights": prior_insights,
+            "steps": [
+                _step(
+                    "recall_memory",
+                    "Recalled prior memory",
+                    f"Loaded {len(prior_insights)} prior insights",
+                )
+            ],
+        }
+
+    return recall_memory
+
+
+def make_save_memory_node(memory_service: "MemoryService") -> NodeHandler:
+    async def save_memory(state: ResearchState) -> dict[str, Any]:
+        session_id = str(state.get("session_id") or "").strip()
+        if not session_id:
+            return {
+                "steps": [_step("save_memory", "Skipped memory save", "No session_id provided")],
+            }
+
+        insight = state.get("report", "").strip()[:200].strip()
+        if insight:
+            await memory_service.save_insight(
+                topic=state["topic"],
+                insight=insight,
+                source_count=len(state["search_results"]),
+                session_id=session_id,
+            )
+            await memory_service.add_session_context(
+                session_id=session_id,
+                topic=state["topic"],
+                insights=[insight],
+            )
+        return {
+            "steps": [
+                _step(
+                    "save_memory",
+                    "Saved memory after research run",
+                    "Saved insight to session and long-term memory" if insight else "No insight to save",
+                )
+            ],
+        }
+
+    return save_memory
 
 
 def _format_evidence(state: ResearchState) -> str:
@@ -285,3 +473,26 @@ def _safe_load_json(value: str) -> dict[str, Any]:
     if isinstance(parsed, dict):
         return parsed
     return {}
+
+
+def _build_rewrite_query_prompt(state: ResearchState) -> str:
+    current_step = str(state.get("current_step") or "").strip()
+    prior_insights = state.get("prior_insights", [])
+    if not current_step and not prior_insights:
+        return state["topic"]
+    return (
+        f"Topic: {state['topic']}\n"
+        f"Current plan step: {current_step}\n"
+        f"Prior insights: {prior_insights}\n"
+        "Write the best next search query."
+    )
+
+
+def _next_plan_step(state: ResearchState) -> str:
+    plan = state.get("plan", [])
+    if not plan:
+        return ""
+    iteration = int(state.get("iteration", 0))
+    if iteration < len(plan):
+        return str(plan[iteration])
+    return ""

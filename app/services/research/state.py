@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import operator
-from typing import Annotated, TypedDict
+from typing import Annotated, NotRequired, TypedDict
 
 
 class ResearchSearchResult(TypedDict):
@@ -30,3 +30,8 @@ class ResearchState(TypedDict):
     max_iterations: int
     evaluation: str
     top_k: int
+    plan: NotRequired[list[str]]
+    current_step: NotRequired[str]
+    reflection: NotRequired[str]
+    session_id: NotRequired[str]
+    prior_insights: NotRequired[list[str]]

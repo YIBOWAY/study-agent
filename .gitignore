@@ -32,3 +32,10 @@ Thumbs.db
 
 # Qdrant local data
 qdrant_storage/
+
+# Local memory data
+data/memory/
+
+# Local traces and eval results
+data/traces.db
+eval/results/

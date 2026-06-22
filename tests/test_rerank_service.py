@@ -1,5 +1,6 @@
 from unittest.mock import AsyncMock, patch
 
+import httpx
 import pytest
 
 from app.core.config import Settings
@@ -18,6 +19,20 @@ class DummyResponse:
         return self.payload
 
 
+class FailingHTTPResponse:
+    def __init__(self, status_code: int) -> None:
+        self.status_code = status_code
+        self.request = httpx.Request("POST", "https://api.cohere.com/v2/rerank")
+        self.response = httpx.Response(status_code=status_code, request=self.request)
+
+    def raise_for_status(self) -> None:
+        raise httpx.HTTPStatusError(
+            f"Client error '{self.status_code}'",
+            request=self.request,
+            response=self.response,
+        )
+
+
 @pytest.fixture
 def rerank_settings() -> Settings:
     return Settings(
@@ -25,6 +40,7 @@ def rerank_settings() -> Settings:
         llm_api_key="llm-key",
         qdrant_url="http://localhost:6333",
         rerank_api_key="rerank-key",
+        rerank_fail_soft=True,
     )
 
 
@@ -175,3 +191,44 @@ async def test_rerank_malformed_provider_payload_raises_value_error(
 
     with pytest.raises(ValueError, match=error_match):
         await service.rerank("query", rerank_candidates, final_k=2)
+
+
+@patch("app.services.rerank_service.httpx.AsyncClient")
+@pytest.mark.asyncio
+async def test_rerank_provider_403_falls_back_when_fail_soft_enabled(
+    mock_client: AsyncMock,
+    rerank_settings: Settings,
+    rerank_candidates: list[SearchResult],
+) -> None:
+    client_instance = AsyncMock()
+    client_instance.post.return_value = FailingHTTPResponse(403)
+    mock_client.return_value.__aenter__.return_value = client_instance
+
+    service = RerankService(settings=rerank_settings)
+
+    reranked = await service.rerank("query", rerank_candidates, final_k=1)
+
+    assert [item.chunk_id for item in reranked] == ["chunk-a"]
+
+
+@patch("app.services.rerank_service.httpx.AsyncClient")
+@pytest.mark.asyncio
+async def test_rerank_provider_403_raises_when_fail_soft_disabled(
+    mock_client: AsyncMock,
+    rerank_candidates: list[SearchResult],
+) -> None:
+    settings = Settings(
+        _env_file=None,
+        llm_api_key="llm-key",
+        qdrant_url="http://localhost:6333",
+        rerank_api_key="rerank-key",
+        rerank_fail_soft=False,
+    )
+    client_instance = AsyncMock()
+    client_instance.post.return_value = FailingHTTPResponse(403)
+    mock_client.return_value.__aenter__.return_value = client_instance
+
+    service = RerankService(settings=settings)
+
+    with pytest.raises(httpx.HTTPStatusError):
+        await service.rerank("query", rerank_candidates, final_k=1)

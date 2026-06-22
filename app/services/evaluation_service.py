@@ -170,3 +170,152 @@ def _result_text(result: object) -> str:
     else:
         value = getattr(result, "text", "")
     return value if isinstance(value, str) else str(value)
+
+
+async def llm_judge_faithfulness(
+    question: str,
+    answer: str,
+    contexts: list[str],
+    judge_fn: JudgeFn,
+) -> dict[str, Any]:
+    claim_prompt = (
+        "Extract atomic factual claims from the answer. "
+        "Return strict JSON: {\"claims\": [\"claim 1\", \"claim 2\"]}.\n\n"
+        f"Question: {question}\nAnswer: {answer}"
+    )
+    claim_response = await judge_fn(claim_prompt, None)
+    claim_payload = _safe_json_object(claim_response.get("reply", ""))
+    raw_claims = claim_payload.get("claims")
+    if not isinstance(raw_claims, list):
+        return {"score": 0.0, "supported": 0, "total": 0, "claims": [], "reasoning": "parse_failed"}
+
+    claims = [str(claim).strip() for claim in raw_claims if str(claim).strip()]
+    if not claims:
+        return {"score": 0.0, "supported": 0, "total": 0, "claims": [], "reasoning": "no_claims"}
+
+    supported = 0
+    checked_claims: list[dict[str, Any]] = []
+    context_block = "\n\n".join(contexts)
+    for claim in claims:
+        support_prompt = (
+            "Decide whether the context supports the claim. "
+            "Return strict JSON: {\"supported\": true|false, \"reasoning\": \"...\"}.\n\n"
+            f"Question: {question}\nClaim: {claim}\nContext:\n{context_block}"
+        )
+        support_response = await judge_fn(support_prompt, None)
+        support_payload = _safe_json_object(support_response.get("reply", ""))
+        is_supported = bool(support_payload.get("supported"))
+        if is_supported:
+            supported += 1
+        checked_claims.append(
+            {
+                "claim": claim,
+                "supported": is_supported,
+                "reasoning": str(support_payload.get("reasoning") or ""),
+            }
+        )
+
+    return {
+        "score": supported / len(claims),
+        "supported": supported,
+        "total": len(claims),
+        "claims": checked_claims,
+    }
+
+
+async def llm_judge_context_precision(
+    question: str,
+    contexts: list[str],
+    judge_fn: JudgeFn,
+) -> dict[str, Any]:
+    if not contexts:
+        return {"score": 0.0, "relevant": 0, "total": 0}
+
+    relevant = 0
+    for context in contexts:
+        prompt = (
+            "Decide whether the context is relevant to the question. "
+            "Return strict JSON: {\"relevant\": true|false, \"reasoning\": \"...\"}.\n\n"
+            f"Question: {question}\nContext:\n{context}"
+        )
+        response = await judge_fn(prompt, None)
+        payload = _safe_json_object(response.get("reply", ""))
+        if bool(payload.get("relevant")):
+            relevant += 1
+
+    return {"score": relevant / len(contexts), "relevant": relevant, "total": len(contexts)}
+
+
+async def llm_judge_answer_relevance(
+    question: str,
+    answer: str,
+    judge_fn: JudgeFn,
+) -> dict[str, Any]:
+    prompt = (
+        "Rate whether the answer directly addresses the question on a 1-5 scale. "
+        "Return strict JSON: {\"score\": 1, \"reasoning\": \"...\"}.\n\n"
+        f"Question: {question}\nAnswer: {answer}"
+    )
+    response = await judge_fn(prompt, None)
+    payload = _safe_json_object(response.get("reply", ""))
+    try:
+        raw_score = int(payload.get("score"))
+    except (TypeError, ValueError):
+        return {"score": 0.0, "raw_score": 0, "reasoning": "parse_failed"}
+    raw_score = max(1, min(5, raw_score))
+    return {
+        "score": raw_score / 5,
+        "raw_score": raw_score,
+        "reasoning": str(payload.get("reasoning") or ""),
+    }
+
+
+def _safe_json_object(content: str) -> dict[str, Any]:
+    try:
+        payload = json.loads(content)
+    except json.JSONDecodeError:
+        return {}
+    return payload if isinstance(payload, dict) else {}
+
+
+# ── Panel-of-judges (self-consistency) ────────────────────────────
+
+
+async def panel_judge(
+    judge_callable: Callable[..., Awaitable[dict[str, Any]]],
+    *args: Any,
+    panel_size: int = 3,
+    **kwargs: Any,
+) -> dict[str, Any]:
+    """Run a single-judge metric ``panel_size`` times and average the score.
+
+    Useful for self-consistency when only one judge model is available: the same
+    judge is invoked repeatedly. With a temperature-aware ``judge_fn`` you get
+    real diversity; otherwise the runs are deterministic and ``stdev`` will be 0
+    (still helpful as a sanity check / parsing-failure detector).
+    """
+    if panel_size < 1:
+        raise ValueError("panel_size must be >= 1")
+
+    runs: list[dict[str, Any]] = []
+    for _ in range(panel_size):
+        runs.append(await judge_callable(*args, **kwargs))
+
+    scores = [float(run.get("score") or 0.0) for run in runs]
+    mean = sum(scores) / len(scores)
+    if len(scores) >= 2:
+        variance = sum((s - mean) ** 2 for s in scores) / (len(scores) - 1)
+        stdev = variance**0.5
+    else:
+        stdev = 0.0
+
+    aggregated = dict(runs[-1])
+    aggregated["score"] = mean
+    aggregated["panel"] = {
+        "size": panel_size,
+        "scores": scores,
+        "stdev": stdev,
+        "min": min(scores),
+        "max": max(scores),
+    }
+    return aggregated

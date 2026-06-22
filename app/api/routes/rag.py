@@ -1,6 +1,6 @@
 import logging
 
-from fastapi import APIRouter, File, HTTPException, UploadFile
+from fastapi import APIRouter, Body, File, HTTPException, UploadFile
 
 from app.schemas.rag import AskRequest, AskResponse, IngestResponse, SearchRequest, SearchResponse
 from app.services.rag_service import RAGService
@@ -47,7 +47,21 @@ async def ingest(file: UploadFile = File(...)) -> IngestResponse:
 
 
 @router.post("/search", response_model=SearchResponse)
-async def search(request: SearchRequest) -> SearchResponse:
+async def search(
+    request: SearchRequest = Body(
+        ...,
+        openapi_examples={
+            "search": {
+                "summary": "Search indexed chunks",
+                "value": {
+                    "query": "What changed in Phase 8?",
+                    "top_k": 5,
+                    "document_id": None,
+                },
+            }
+        },
+    )
+) -> SearchResponse:
     try:
         result = await rag_service.search(
             query=request.query,
@@ -63,7 +77,22 @@ async def search(request: SearchRequest) -> SearchResponse:
 
 
 @router.post("/ask", response_model=AskResponse)
-async def ask(request: AskRequest) -> AskResponse:
+async def ask(
+    request: AskRequest = Body(
+        ...,
+        openapi_examples={
+            "ask": {
+                "summary": "Ask a grounded question over indexed files",
+                "value": {
+                    "query": "How does the platform expose streaming chat?",
+                    "top_k": 5,
+                    "final_k": 3,
+                    "document_id": None,
+                },
+            }
+        },
+    )
+) -> AskResponse:
     try:
         result = await rag_service.ask(
             query=request.query,

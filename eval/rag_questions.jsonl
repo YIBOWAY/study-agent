@@ -1,0 +1,10 @@
+{"question": "What capability does Phase 7 add?", "expected_substring": "evaluation", "reference_answer": "Phase 7 adds evaluation, guardrails, and observability."}
+{"question": "What does MCP expose?", "expected_substring": "tools", "reference_answer": "MCP exposes tools to external clients."}
+{"question": "What protects tool calls?", "expected_substring": "guardrails", "reference_answer": "Guardrails validate tool calls before execution."}
+{"question": "Where are traces stored?", "expected_substring": "SQLite", "reference_answer": "Traces are stored in SQLite."}
+{"question": "What does observability track?", "expected_substring": "cost", "reference_answer": "Observability tracks traces, latency, tokens, and cost."}
+{"question": "What is faithfulness?", "expected_substring": "supported", "reference_answer": "Faithfulness measures whether claims are supported by context."}
+{"question": "What is context precision?", "expected_substring": "relevant", "reference_answer": "Context precision measures how many retrieved contexts are relevant."}
+{"question": "What is answer relevance?", "expected_substring": "question", "reference_answer": "Answer relevance measures whether an answer addresses the question."}
+{"question": "What can agent evaluator report?", "expected_substring": "latency", "reference_answer": "Agent evaluator reports completion, coverage, iterations, and latency."}
+{"question": "What should not be exposed publicly?", "expected_substring": "debug", "reference_answer": "The MCP debug invoke endpoint should remain local/debug only."}

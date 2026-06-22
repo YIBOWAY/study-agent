@@ -1,0 +1,5 @@
+{"topic": "Phase 7 evaluation system", "expected_keywords": ["evaluation", "faithfulness"], "mode": "agent_v2", "max_iterations": 3}
+{"topic": "Phase 7 guardrails", "expected_keywords": ["guardrails", "injection"], "mode": "agent_v2", "max_iterations": 3}
+{"topic": "Phase 7 observability", "expected_keywords": ["tracing", "cost"], "mode": "agent_v2", "max_iterations": 3}
+{"topic": "MCP debug endpoint safety", "expected_keywords": ["mcp", "debug", "guardrails"], "mode": "multi_agent", "max_iterations": 3}
+{"topic": "Agent evaluation metrics", "expected_keywords": ["latency", "coverage"], "mode": "agent", "max_iterations": 3}

@@ -1,11 +1,14 @@
 from __future__ import annotations
 
+import logging
 from typing import Any
 
 import httpx
 
 from app.core.config import Settings, get_settings
 from app.schemas.rag import SearchResult
+
+logger = logging.getLogger(__name__)
 
 
 class RerankService:
@@ -41,7 +44,16 @@ class RerankService:
             follow_redirects=True,
         ) as client:
             response = await client.post(url, headers=headers, json=payload)
-            response.raise_for_status()
+            try:
+                response.raise_for_status()
+            except httpx.HTTPStatusError as exc:
+                if self._should_fail_soft(exc):
+                    logger.warning(
+                        "Rerank provider failed with status=%s; falling back to original candidate order",
+                        exc.response.status_code,
+                    )
+                    return candidates[:final_k]
+                raise
             data = response.json()
 
         results = data.get("results")
@@ -79,3 +91,9 @@ class RerankService:
             reranked_results.append(candidate.model_copy(update={"score": float(relevance_score)}))
 
         return reranked_results
+
+    def _should_fail_soft(self, exc: httpx.HTTPStatusError) -> bool:
+        if not self.settings.rerank_fail_soft:
+            return False
+        status_code = exc.response.status_code
+        return status_code in {403, 429} or status_code >= 500

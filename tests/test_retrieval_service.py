@@ -1,5 +1,5 @@
 import pytest
-from qdrant_client.http.models import FieldCondition, Filter, MatchValue
+from qdrant_client.http.models import Filter
 
 from app.core.config import Settings
 from app.schemas.rag import ChunkRecord

@@ -1,0 +1,32 @@
+name: tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  pytest:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
+
+      - name: Run pytest
+        env:
+          LLM_API_KEY: dummy-for-tests
+          EMBEDDING_API_KEY: dummy-for-tests
+        run: python -m pytest -q

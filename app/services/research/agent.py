@@ -27,14 +27,11 @@ def _route_after_evaluation(state: ResearchState) -> str:
     return "needs_more"
 
 
-async def run_agent(
-    topic: str,
-    max_iterations: int,
-    top_k: int,
+def build_agent_graph(
     rag_service: "RAGService",
     llm_service: "LLMService",
     tool_registry: "ToolRegistry",
-) -> dict[str, Any]:
+):
     graph = StateGraph(ResearchState)
     graph.add_node("rewrite_query", make_rewrite_query_node(llm_service))
     graph.add_node("search", make_search_node(rag_service, tool_registry))
@@ -54,21 +51,33 @@ async def run_agent(
     )
     graph.add_edge("refine_query", "search")
     graph.add_edge("generate_report", END)
-    compiled = graph.compile()
+    return graph.compile()
 
-    result = await compiled.ainvoke(
-        {
-            "topic": topic,
-            "queries": [],
-            "search_results": [],
-            "report": "",
-            "steps": [],
-            "iteration": 0,
-            "max_iterations": max_iterations,
-            "evaluation": "",
-            "top_k": top_k,
-        }
-    )
+
+def build_agent_initial_state(topic: str, max_iterations: int, top_k: int) -> ResearchState:
+    return {
+        "topic": topic,
+        "queries": [],
+        "search_results": [],
+        "report": "",
+        "steps": [],
+        "iteration": 0,
+        "max_iterations": max_iterations,
+        "evaluation": "",
+        "top_k": top_k,
+    }
+
+
+async def run_agent(
+    topic: str,
+    max_iterations: int,
+    top_k: int,
+    rag_service: "RAGService",
+    llm_service: "LLMService",
+    tool_registry: "ToolRegistry",
+) -> dict[str, Any]:
+    compiled = build_agent_graph(rag_service, llm_service, tool_registry)
+    result = await compiled.ainvoke(build_agent_initial_state(topic, max_iterations, top_k))
     return {
         "report": result["report"],
         "steps": result["steps"],
