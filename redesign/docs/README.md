@@ -17,6 +17,7 @@ This directory is the canonical archive for the redesign version of the project.
 - `plans/2026-06-25-phase-0-redesign-scaffold.md`: first executable implementation plan.
 - `plans/2026-06-25-phase-1-agent-kernel-course-spine.md`: Agent Kernel course spine implementation plan.
 - `plans/2026-06-25-phase-2-research-core.md`: Research Core implementation plan.
+- `plans/2026-06-26-phase-3-memory-and-skills.md`: Memory and Skills implementation plan.
 - `progress/overall.md`: phase status dashboard for humans and agents.
 - `architecture/overview.md`: double-layer repository and dependency direction.
 - `architecture/runtime.md`: runtime contracts, Phase 1 agent loop, and fake provider boundary.

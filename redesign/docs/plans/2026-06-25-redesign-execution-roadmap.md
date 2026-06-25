@@ -77,13 +77,21 @@ Follow-up:
 
 ### Phase 3: Memory and Skills
 
+Plan: `redesign/docs/plans/2026-06-26-phase-3-memory-and-skills.md`
+
 Purpose:
 
 - Add MemoryEngine with recall/write policies.
 - Add SkillRuntime with folder-based progressive disclosure.
 - Add memory pollution and skill loading eval cases.
 
-Plan document should be created after Phase 2 research entities are available.
+Exit criteria:
+
+- `cd redesign && uv run pytest -q` passes.
+- `cd redesign && uv run ruff check .` passes.
+- `MemoryEngine` supports deterministic recall/write policy tests.
+- `SkillRuntime` loads `SKILL.md` before explicitly reading references.
+- Memory pollution and skill loading eval cases pass.
 
 ### Phase 4: Multi-Agent and Delegation
 
