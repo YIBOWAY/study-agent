@@ -389,11 +389,11 @@ Expected: tests pass and ruff reports `All checks passed!`.
 - Create: `redesign/course/labs/01-agent-runner-lab.md`
 - Create: `redesign/course/solutions/01-agent-runner-solution.md`
 
-- [ ] **Step 1: Add chapter**
+- [x] **Step 1: Add chapter**
 
 Write a chapter that explains internal messages, events, tools, context, and the runner loop. Include one short code example that uses `FakeModel`, `ToolRuntime`, and `AgentRunner`.
 
-- [ ] **Step 2: Add lab**
+- [x] **Step 2: Add lab**
 
 Write a lab with these exercises:
 
@@ -402,11 +402,11 @@ Write a lab with these exercises:
 - inspect the trajectory event sequence;
 - break the tool name and observe the error path.
 
-- [ ] **Step 3: Add solution**
+- [x] **Step 3: Add solution**
 
 Write the expected solution using the public Phase 1 contracts.
 
-- [ ] **Step 4: Verify doc references**
+- [x] **Step 4: Verify doc references**
 
 Run:
 
@@ -492,7 +492,7 @@ Commit with a message that records the Phase 1 deliverables and verification com
 - [x] `ContextBuilder` tests pass.
 - [x] `AgentRunner` tests pass.
 - [x] trajectory regression helper tests pass.
-- [ ] Course chapter, lab, and solution exist.
+- [x] Course chapter, lab, and solution exist.
 - [x] `redesign/docs/progress/overall.md` and `phase-1.md` are updated.
 - [ ] `cd redesign && uv run pytest -q` passes.
 - [ ] `cd redesign && uv run ruff check .` passes.
