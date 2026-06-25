@@ -81,6 +81,37 @@ It supports repeatable research tests without API keys or network access.
 A stable record that connects one report claim to one evidence item and the
 source behind that evidence.
 
+## MemoryRecord
+
+An immutable memory entry with kind, content, tags, importance, and
+JSON-compatible metadata.
+
+## MemoryWritePolicy
+
+The policy that decides whether a proposed memory record is safe and useful
+enough to store.
+
+## MemoryRecallPolicy
+
+The policy that controls deterministic memory recall by query, kind filter,
+limit, and pinned-first ordering.
+
+## MemoryEngine
+
+The Phase 3 in-process memory store.
+It accepts records through `MemoryWritePolicy` and recalls them with
+`MemoryRecallPolicy`.
+
+## SkillPackage
+
+The loaded representation of a folder-based skill, including its `SKILL.md`
+entrypoint and discovered resource paths.
+
+## SkillRuntime
+
+The Phase 3 loader for folder-based skills.
+It loads `SKILL.md` first and reads references only when explicitly requested.
+
 ## Research Agent Workbench
 
 The final product interface for projects, research runs, delegation, evidence, reports, memory, skills, and evals.

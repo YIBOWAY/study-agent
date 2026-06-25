@@ -81,3 +81,20 @@ claim-source mapping helpers.
 The runtime package remains independent from the research package. Research
 contracts may reuse runtime immutability helpers, but `research_core.runtime`
 must not import research entities.
+
+## Phase 3 Memory and Skills Boundary
+
+Phase 3 adds two stateful-agent surfaces above the runtime kernel:
+
+- `research_core.memory`: deterministic in-process memory records, write
+  policies, recall policies, and token recall.
+- `research_core.skills`: folder-based skill loading with progressive
+  disclosure.
+
+Memory and skills remain offline-first. Memory is not persistent storage or
+embedding search yet. Skills load `SKILL.md` first and only read files under
+`references/` when `SkillRuntime.read_reference()` is called explicitly.
+
+The event enum now includes the comprehensive stream values needed by later
+phases: `skill_step`, `delegate_event`, `compaction_start`,
+`compaction_finish`, and `eval_result`.

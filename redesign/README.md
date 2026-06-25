@@ -32,7 +32,13 @@ Phase 2 adds the first Research Core contracts:
 - Deterministic `SourceIngestor` and offline `FakeRetriever`.
 - Claim-source mapping helpers for citation-quality tests.
 
-Product APIs, memory, skills, delegation, and real retrieval adapters arrive in later phases.
+Phase 3 adds the first stateful-agent contracts:
+
+- `MemoryEngine`, `MemoryRecord`, recall policy, and write policy.
+- `SkillRuntime` and `SkillPackage` for folder-based progressive disclosure.
+- Memory pollution and skill loading eval cases.
+
+Product APIs, delegation, persistence, and real retrieval adapters arrive in later phases.
 
 ## Commands
 
@@ -56,4 +62,4 @@ uv run pytest -q
 uv run ruff check .
 ```
 
-The pytest suite should include runtime message, event, fake provider, and research core tests.
+The pytest suite should include runtime, fake provider, research core, memory, and skill tests.

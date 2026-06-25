@@ -75,3 +75,35 @@ Research planning and report synthesis are not implemented by Phase 2. They
 need memory policy, skill policy, and richer eval fixtures before they become
 useful product workflows. Until that slice lands, Phase 2 should be treated as
 the stable data contract layer for later planning and synthesis work.
+
+## Memory Model
+
+Phase 3 introduces `MemoryRecord` as the first stateful-agent memory contract.
+A record has an `id`, `kind`, `content`, ordered tags, an `importance` value,
+and JSON-compatible metadata.
+
+Supported `MemoryKind` values are:
+
+- `working`
+- `session`
+- `episodic`
+- `semantic`
+- `procedural`
+- `pinned`
+
+`MemoryWritePolicy` controls which records can be written by kind, importance,
+content length, and forbidden phrases. `MemoryRecallPolicy` controls deterministic
+token recall by query, allowed kinds, limit, and pinned-first ordering.
+
+## Skill Model
+
+`SkillPackage` is the loaded representation of a folder-based skill. It contains
+the skill name, description, root path, `SKILL.md` entrypoint content, and
+discovered resource paths.
+
+`SkillRuntime` enforces progressive disclosure:
+
+- load `SKILL.md` first,
+- discover `references/`, `scripts/`, and `assets/` paths,
+- read reference content only through explicit `read_reference()` calls,
+- reject path traversal and non-reference reads.

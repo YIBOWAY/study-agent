@@ -242,19 +242,19 @@ Expected: tests pass and ruff reports `All checks passed!`.
 - Modify: `redesign/docs/progress/phases/phase-3.md`
 - Modify: `redesign/docs/plans/2026-06-25-redesign-execution-roadmap.md`
 
-- [ ] **Step 1: Update runtime architecture**
+- [x] **Step 1: Update runtime architecture**
 
 Document memory write/recall policy, skill progressive disclosure, and Phase 3 event enum alignment.
 
-- [ ] **Step 2: Update data model and glossary**
+- [x] **Step 2: Update data model and glossary**
 
 Add `MemoryRecord`, `MemoryWritePolicy`, `MemoryRecallPolicy`, `MemoryEngine`, `SkillPackage`, and `SkillRuntime`.
 
-- [ ] **Step 3: Update root docs and progress**
+- [x] **Step 3: Update root docs and progress**
 
 Mark Phase 3 complete only after final verification passes.
 
-- [ ] **Step 4: Verify docs**
+- [x] **Step 4: Verify docs**
 
 Run:
 
@@ -271,7 +271,7 @@ Expected: Phase 3 concepts are discoverable from docs, architecture, glossary, a
 - Modify: `redesign/docs/progress/overall.md`
 - Modify: `redesign/docs/progress/phases/phase-3.md`
 
-- [ ] **Step 1: Run full verification**
+- [x] **Step 1: Run full verification**
 
 Run:
 
@@ -289,24 +289,24 @@ All checks passed!
 No whitespace errors.
 ```
 
-- [ ] **Step 2: Clean generated side effects**
+- [x] **Step 2: Clean generated side effects**
 
 Remove generated `redesign/.venv`, `redesign/.ruff_cache`, `redesign/.pytest_cache`, `redesign/uv.lock`, and any `__pycache__` directories unless an approved plan adds them as tracked artifacts.
 
-- [ ] **Step 3: Commit and push**
+- [x] **Step 3: Commit and push**
 
 Commit with a message that records the Phase 3 deliverables and verification commands. Push branch `codex/redesign-phase-3`.
 
 ## Phase 3 Completion Checklist
 
-- [ ] Memory engine contracts are implemented and exported.
-- [ ] Memory engine tests pass.
-- [ ] Skill runtime contracts are implemented and exported.
-- [ ] Skill runtime tests pass.
-- [ ] Memory pollution and skill loading eval cases pass.
-- [ ] Runtime event enum includes Phase 3-adjacent comprehensive event values.
-- [ ] Architecture, glossary, README, AGENTS, roadmap, and progress docs are updated.
-- [ ] `cd redesign && uv run pytest -q` passes.
-- [ ] `cd redesign && uv run ruff check .` passes.
-- [ ] `git diff --check` is clean.
-- [ ] No legacy `app/`, `frontend/`, root `tests/`, or root `eval/` files are modified.
+- [x] Memory engine contracts are implemented and exported.
+- [x] Memory engine tests pass.
+- [x] Skill runtime contracts are implemented and exported.
+- [x] Skill runtime tests pass.
+- [x] Memory pollution and skill loading eval cases pass.
+- [x] Runtime event enum includes Phase 3-adjacent comprehensive event values.
+- [x] Architecture, glossary, README, AGENTS, roadmap, and progress docs are updated.
+- [x] `cd redesign && uv run pytest -q` passes.
+- [x] `cd redesign && uv run ruff check .` passes.
+- [x] `git diff --check` is clean.
+- [x] No legacy `app/`, `frontend/`, root `tests/`, or root `eval/` files are modified.

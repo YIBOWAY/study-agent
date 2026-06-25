@@ -93,6 +93,11 @@ Exit criteria:
 - `SkillRuntime` loads `SKILL.md` before explicitly reading references.
 - Memory pollution and skill loading eval cases pass.
 
+Follow-up:
+
+- Persistent memory, memory conflict resolution, skill execution steps, MCP, and
+  product memory/skill panels are deferred to later phases.
+
 ### Phase 4: Multi-Agent and Delegation
 
 Purpose:

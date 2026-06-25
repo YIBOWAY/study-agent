@@ -10,7 +10,9 @@ These instructions apply to files under `redesign/`.
 - Keep tests offline by default.
 - Use `FakeModel` and public `research_core.runtime` contracts for offline runtime tests and labs.
 - Keep `research_core.research` independent from product apps, databases, provider SDKs, embeddings, and legacy root code.
+- Keep `research_core.memory` and `research_core.skills` offline-first and independent from product apps, databases, provider SDKs, embeddings, and legacy root code.
 - Use `SourceIngestor` and `FakeRetriever` for deterministic offline research tests.
+- Use `MemoryEngine` and `SkillRuntime` for deterministic memory/skill tests.
 - Add or update docs when a runtime concept is introduced.
 - Do not import from the legacy root `app/` or `frontend/` directories.
 - Store redesign specs and plans under `redesign/docs/`.
@@ -33,5 +35,6 @@ The runtime should follow these boundaries:
 - Runtime activity is recorded as `RunEvent`.
 - Phase 1 runtime flow is `ContextBuilder -> AgentRunner -> ToolRuntime -> RunEvent`.
 - Phase 2 research flow is `SourceInput -> SourceIngestor -> FakeRetriever -> Evidence -> Claim -> Report -> ClaimSourceLink`.
+- Phase 3 stateful flow is `MemoryWritePolicy -> MemoryEngine -> MemoryRecallPolicy` and `SkillRuntime -> SKILL.md -> explicit references`.
 - Provider adapters convert at the boundary.
 - Fake model providers are first-class testing infrastructure.
