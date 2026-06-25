@@ -2,5 +2,15 @@
 
 from research_core.runtime.events import RunEvent, RunEventType
 from research_core.runtime.messages import AgentMessage, MessageRole
+from research_core.runtime.tools import ToolCall, ToolDefinition, ToolResult, ToolRuntime
 
-__all__ = ["AgentMessage", "MessageRole", "RunEvent", "RunEventType"]
+__all__ = [
+    "AgentMessage",
+    "MessageRole",
+    "RunEvent",
+    "RunEventType",
+    "ToolCall",
+    "ToolDefinition",
+    "ToolResult",
+    "ToolRuntime",
+]
