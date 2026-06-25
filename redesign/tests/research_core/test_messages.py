@@ -19,6 +19,21 @@ def test_agent_message_requires_non_empty_content() -> None:
         raise AssertionError("Expected empty content to be rejected")
 
 
+def test_agent_message_normalizes_role_values() -> None:
+    message = AgentMessage(id="msg_1", role="user", content="hello")
+
+    assert message.role is MessageRole.USER
+
+
+def test_agent_message_rejects_unknown_role_values() -> None:
+    try:
+        AgentMessage(id="msg_1", role="unknown", content="hello")
+    except ValueError as exc:
+        assert "role must be one of" in str(exc)
+    else:
+        raise AssertionError("Expected unknown role to be rejected")
+
+
 def test_agent_message_metadata_is_copied() -> None:
     metadata = {"source": "unit-test"}
     message = AgentMessage(id="msg_1", role=MessageRole.USER, content="hello", metadata=metadata)
