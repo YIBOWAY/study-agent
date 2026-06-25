@@ -203,7 +203,7 @@ Expected: tests pass and ruff reports `All checks passed!`.
 - Modify: `redesign/packages/research_core/src/research_core/research/__init__.py`
 - Modify: `redesign/docs/progress/phases/phase-2.md`
 
-- [ ] **Step 1: Write failing tests**
+- [x] **Step 1: Write failing tests**
 
 Create tests for:
 
@@ -213,7 +213,7 @@ Create tests for:
 - missing source IDs raise `ValueError`;
 - claims with no evidence are rejected.
 
-- [ ] **Step 2: Run tests to verify they fail**
+- [x] **Step 2: Run tests to verify they fail**
 
 Run:
 
@@ -223,15 +223,15 @@ cd redesign && uv run pytest tests/research_core/test_claim_source_mapping.py -q
 
 Expected: failure because `research_core.research.mapping` does not exist.
 
-- [ ] **Step 3: Implement mapping helpers**
+- [x] **Step 3: Implement mapping helpers**
 
 Create `ClaimSourceLink` and `build_claim_source_links()` using only Phase 2 entity contracts.
 
-- [ ] **Step 4: Export mapping contracts**
+- [x] **Step 4: Export mapping contracts**
 
 Update `research_core.research.__init__`.
 
-- [ ] **Step 5: Verify**
+- [x] **Step 5: Verify**
 
 Run:
 

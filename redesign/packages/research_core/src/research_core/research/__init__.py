@@ -10,10 +10,12 @@ from research_core.research.entities import (
     Source,
 )
 from research_core.research.ingestion import SourceIngestor, SourceInput
+from research_core.research.mapping import ClaimSourceLink, build_claim_source_links
 from research_core.research.retrieval import FakeRetriever, SearchResult
 
 __all__ = [
     "Claim",
+    "ClaimSourceLink",
     "Evidence",
     "FakeRetriever",
     "Project",
@@ -24,4 +26,5 @@ __all__ = [
     "Source",
     "SourceIngestor",
     "SourceInput",
+    "build_claim_source_links",
 ]
