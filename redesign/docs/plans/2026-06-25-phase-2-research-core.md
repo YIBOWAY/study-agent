@@ -155,7 +155,7 @@ Expected: tests pass and ruff reports `All checks passed!`.
 - Modify: `redesign/packages/research_core/src/research_core/research/__init__.py`
 - Modify: `redesign/docs/progress/phases/phase-2.md`
 
-- [ ] **Step 1: Write failing tests**
+- [x] **Step 1: Write failing tests**
 
 Create tests for:
 
@@ -165,7 +165,7 @@ Create tests for:
 - search results are sorted by score then source order;
 - empty queries and invalid limits are rejected.
 
-- [ ] **Step 2: Run tests to verify they fail**
+- [x] **Step 2: Run tests to verify they fail**
 
 Run:
 
@@ -175,15 +175,15 @@ cd redesign && uv run pytest tests/research_core/test_research_retrieval.py -q
 
 Expected: failure because ingestion and retrieval modules do not exist.
 
-- [ ] **Step 3: Implement ingestion and fake retrieval**
+- [x] **Step 3: Implement ingestion and fake retrieval**
 
 Create deterministic source ingestion and token/substring fake retrieval without external dependencies.
 
-- [ ] **Step 4: Export ingestion and retrieval contracts**
+- [x] **Step 4: Export ingestion and retrieval contracts**
 
 Update `research_core.research.__init__`.
 
-- [ ] **Step 5: Verify**
+- [x] **Step 5: Verify**
 
 Run:
 

@@ -9,13 +9,19 @@ from research_core.research.entities import (
     ResearchRunStatus,
     Source,
 )
+from research_core.research.ingestion import SourceIngestor, SourceInput
+from research_core.research.retrieval import FakeRetriever, SearchResult
 
 __all__ = [
     "Claim",
     "Evidence",
+    "FakeRetriever",
     "Project",
     "Report",
     "ResearchRun",
     "ResearchRunStatus",
+    "SearchResult",
     "Source",
+    "SourceIngestor",
+    "SourceInput",
 ]
