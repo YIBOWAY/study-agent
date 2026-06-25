@@ -106,7 +106,7 @@ Expected: the Phase 2 plan and active progress state are discoverable from the d
 - Create: `redesign/tests/research_core/test_research_entities.py`
 - Modify: `redesign/docs/progress/phases/phase-2.md`
 
-- [ ] **Step 1: Write failing tests**
+- [x] **Step 1: Write failing tests**
 
 Create tests for:
 
@@ -116,7 +116,7 @@ Create tests for:
 - `Claim.evidence_ids` and `Report.claims` are immutable tuples;
 - `Report` preserves claim order.
 
-- [ ] **Step 2: Run tests to verify they fail**
+- [x] **Step 2: Run tests to verify they fail**
 
 Run:
 
@@ -126,15 +126,15 @@ cd redesign && uv run pytest tests/research_core/test_research_entities.py -q
 
 Expected: failure because `research_core.research` does not exist.
 
-- [ ] **Step 3: Implement entities**
+- [x] **Step 3: Implement entities**
 
 Create the research package and entity dataclasses. Reuse `freeze_json_value` for metadata and `thaw_json_value` for record helpers where needed.
 
-- [ ] **Step 4: Export entities**
+- [x] **Step 4: Export entities**
 
 Update `research_core.research.__init__` to export all public Phase 2 entity contracts.
 
-- [ ] **Step 5: Verify**
+- [x] **Step 5: Verify**
 
 Run:
 

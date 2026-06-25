@@ -29,6 +29,7 @@ Add research domain entities, fake retrieval, source ingestion, and claim-source
 | Date | Update |
 | --- | --- |
 | 2026-06-25 | Phase 2 started from Phase 1 baseline. Verification before changes: `uv run pytest -q` -> `78 passed`; `uv run ruff check .` -> `All checks passed!`. |
+| 2026-06-25 | Research entities delivered: `Project`, `ResearchRun`, `ResearchRunStatus`, `Source`, `Evidence`, `Claim`, and `Report` with frozen dataclass contracts, strict JSON-compatible metadata, immutable evidence IDs, and immutable report claims. Verification: `uv run pytest tests/research_core/test_research_entities.py -q` -> `10 passed`; scoped `ruff` clean. |
 
 ## Verification Target
 
