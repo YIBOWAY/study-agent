@@ -50,7 +50,7 @@ Build the first executable agent kernel spine: tool runtime, context builder, ag
 
 ## Next Focus
 
-Phase 2 is complete. Current next focus is Phase 3 planning: memory recall/write policies, skill runtime, and memory/skill eval cases.
+Phase 3 is complete. Current next focus is Phase 4 planning: delegation runtime, isolated child contexts, role policies, budget accounting, and merge contracts.
 
 ## Verification Target
 

@@ -71,10 +71,11 @@ source.
 
 ## Deferred Research Workflow
 
-Research planning and report synthesis are not implemented by Phase 2. They
-need memory policy, skill policy, and richer eval fixtures before they become
-useful product workflows. Until that slice lands, Phase 2 should be treated as
-the stable data contract layer for later planning and synthesis work.
+Research planning and report synthesis are not implemented by Phase 2. Phase 3
+now provides the first memory and skill policies they need, but richer eval
+fixtures are still required before they become useful product workflows. Until
+that slice lands, Phase 2 should be treated as the stable data contract layer
+for later planning and synthesis work.
 
 ## Memory Model
 

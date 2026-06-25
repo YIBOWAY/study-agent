@@ -43,5 +43,5 @@ the related domain is considered complete.
 - Backfill Chapter 01 into the complete chapter contract.
 - Add the Memory and Skills chapter after Phase 3 runtime contracts land.
 - Add a Knowledge and Deep Research slice for research planning and report
-  synthesis after memory and skill policies are available.
+  synthesis now that initial memory and skill policies are available.
 - Keep framework comparisons out of the product runtime path.

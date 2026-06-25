@@ -106,7 +106,7 @@ Purpose:
 - Add multi-agent eval cases.
 - Add an A2A adapter stub.
 
-Plan document should be created after Phase 3 memory and skill policies are stable.
+Plan document should be created next, now that Phase 3 memory and skill policies are stable.
 
 ### Phase 5: Workbench Product
 
