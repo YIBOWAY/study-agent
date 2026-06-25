@@ -98,7 +98,7 @@ Expected: the Phase 3 plan and active progress state are discoverable from the d
 - Create: `redesign/tests/research_core/test_memory_engine.py`
 - Modify: `redesign/docs/progress/phases/phase-3.md`
 
-- [ ] **Step 1: Write failing tests**
+- [x] **Step 1: Write failing tests**
 
 Create tests for:
 
@@ -108,7 +108,7 @@ Create tests for:
 - `MemoryEngine.write()` stores accepted records and returns the stored record;
 - `MemoryEngine.recall()` returns deterministic pinned-first token matches with a positive limit.
 
-- [ ] **Step 2: Run tests to verify they fail**
+- [x] **Step 2: Run tests to verify they fail**
 
 Run:
 
@@ -118,15 +118,15 @@ cd redesign && uv run pytest tests/research_core/test_memory_engine.py -q
 
 Expected: failure because `research_core.memory` does not exist.
 
-- [ ] **Step 3: Implement memory contracts**
+- [x] **Step 3: Implement memory contracts**
 
 Create `MemoryKind`, `MemoryRecord`, `MemoryWritePolicy`, `MemoryRecallPolicy`, and `MemoryEngine`. Reuse `freeze_json_value` for metadata and keep recall deterministic.
 
-- [ ] **Step 4: Export memory contracts**
+- [x] **Step 4: Export memory contracts**
 
 Update `research_core.memory.__init__` to export all public Phase 3 memory contracts.
 
-- [ ] **Step 5: Verify**
+- [x] **Step 5: Verify**
 
 Run:
 
