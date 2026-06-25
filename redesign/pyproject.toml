@@ -1,0 +1,27 @@
+[project]
+name = "study-agent-redesign"
+version = "0.1.0"
+description = "Clean-room redesign of the Study Agent learning and research workbench project."
+requires-python = ">=3.11"
+dependencies = []
+
+[dependency-groups]
+dev = [
+  "pytest>=8.2",
+  "ruff>=0.5",
+]
+
+[tool.pytest.ini_options]
+pythonpath = [
+  "packages/research_core/src",
+]
+testpaths = [
+  "tests",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]

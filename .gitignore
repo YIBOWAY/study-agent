@@ -30,6 +30,11 @@ htmlcov/
 Thumbs.db
 .DS_Store
 
+# Local agent/tool output
+.firecrawl/
+.superpowers/
+.understand-anything/
+
 # Qdrant local data
 qdrant_storage/
 

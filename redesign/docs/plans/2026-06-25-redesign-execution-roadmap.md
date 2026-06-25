@@ -17,7 +17,7 @@ Purpose:
 - Create the self-contained `redesign/` project shell.
 - Add the first Python package boundaries.
 - Add minimal runtime contracts.
-- Add fake model/search fixtures.
+- Add the fake model fixture baseline.
 - Add the first offline test baseline.
 
 Exit criteria:
@@ -25,6 +25,7 @@ Exit criteria:
 - `cd redesign && uv run pytest -q` passes.
 - `cd redesign && uv run ruff check .` passes.
 - `redesign/README.md`, `redesign/AGENTS.md`, and architecture docs explain the new boundary.
+- Fake search and retrieval fixtures are deferred to Phase 2, where retrieval contracts are introduced.
 
 ### Phase 1: Agent Kernel Course Spine
 

@@ -44,6 +44,16 @@ flowchart LR
 | Phase 7 | Evaluation、Guardrails、Observability |
 | Phase 8 | Streaming、Docker Compose、Streamlit 前端、CI、文档增强 |
 
+## 全新 redesign 项目
+
+新的 clean-room 学习型 Agent 工程版本位于 `redesign/`。它从 Phase 0 scaffold 开始，采用 `packages/research_core` 共享核心、课程/产品双层结构，并默认离线可测试。
+
+入口文档：
+
+- `redesign/README.md`
+- `redesign/docs/README.md`
+- `redesign/docs/plans/2026-06-25-redesign-execution-roadmap.md`
+
 ## 快速开始
 
 ### 本地启动
@@ -185,6 +195,7 @@ python -m scripts.smoke_test_eval --base-url http://127.0.0.1:8000
 ├── scripts/             # 脚本与 smoke test
 ├── data/                # 本地数据、记忆、追踪
 ├── docs/superpowers/    # 设计、计划、过程记录
+├── redesign/            # clean-room redesign 课程/产品双层项目
 ├── Dockerfile
 ├── docker-compose.yml
 └── .github/workflows/   # CI
@@ -206,7 +217,7 @@ python -m scripts.smoke_test_eval --base-url http://127.0.0.1:8000
 
 ### 为什么 Guardrails 用规则，不用 NeMo
 
-第一道防线要便宜、快、可解释。规则匹配虽然简单，但能稳稳挡住一批明显风险。更重的方案可以放到后续扩展，不必在学习项目里先把复杂度拉满。
+第一道防线要便宜、快、可解释。规则匹配虽然简单，但能稳稳挡住一批明显风险。更重的方案可以放到扩展阶段，不必在学习项目里先把复杂度拉满。
 
 ## 生产化说明
 

@@ -2,11 +2,20 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Create a self-contained `redesign/` project shell with documentation, Python package boundaries, minimal runtime contracts, fake providers, and an offline test baseline.
+**Goal:** Create a self-contained `redesign/` project shell with documentation, Python package boundaries, minimal runtime contracts, a fake model provider baseline, and an offline test baseline.
 
 **Architecture:** The first phase creates a clean-room v2 workspace under `redesign/` without modifying the legacy app. `packages/research_core` is the only Python runtime package in this phase; apps, course material, and evals are represented by directories and docs until their own phase plans define implementation details.
 
 **Tech Stack:** Python 3.11, uv, pytest, ruff, dataclasses, Pydantic-free core contracts for the first runtime layer.
+
+**Implementation refinements applied during execution:**
+
+- Shared recursive immutability helpers live in `runtime/immutability.py`.
+- `AgentMessage.metadata` and `FakeModelResponse.metadata` are recursively frozen.
+- `RunEvent.payload` is constrained to strict JSON-compatible values for JSONL event logs.
+- `FakeModel.complete()` accepts `Sequence[AgentMessage]` and records a copied list.
+- Fake search/retrieval fixtures are deferred to Phase 2, when retrieval contracts are introduced.
+- The final Phase 0 suite contains 33 tests.
 
 ---
 
@@ -31,6 +40,7 @@ Create or update these files:
 - Create: `redesign/docs/glossary.md`
 - Create: `redesign/packages/research_core/src/research_core/__init__.py`
 - Create: `redesign/packages/research_core/src/research_core/runtime/__init__.py`
+- Create: `redesign/packages/research_core/src/research_core/runtime/immutability.py`
 - Create: `redesign/packages/research_core/src/research_core/runtime/messages.py`
 - Create: `redesign/packages/research_core/src/research_core/runtime/events.py`
 - Create: `redesign/packages/research_core/src/research_core/testing/__init__.py`
@@ -103,15 +113,17 @@ The redesign is both a course and a product reference:
 - Product layer: build a professional Research Agent Workbench.
 - Shared core: keep runtime contracts testable, offline-first, and framework-independent.
 
-## Current Phase
+## Phase 0 Scope
 
 Phase 0 creates the scaffold:
 
 - Python package boundary under `packages/research_core`.
 - Minimal runtime message and event contracts.
-- Fake model/search fixtures.
+- Fake model fixture baseline.
 - Offline pytest and ruff baseline.
 - Architecture docs and glossary.
+
+Fake search and retrieval fixtures arrive with the Research Core phase.
 
 ## Commands
 
@@ -124,7 +136,7 @@ uv run ruff check .
 
 ## Boundaries
 
-Legacy code remains outside this folder. New redesign work should live under `redesign/` unless a later plan explicitly says otherwise.
+Legacy code remains outside this folder. New redesign work should live under `redesign/` unless an approved phase plan explicitly says otherwise.
 ````
 
 - [ ] **Step 3: Add `redesign/AGENTS.md`**
@@ -142,7 +154,8 @@ These instructions apply to files under `redesign/`.
 
 - Keep `packages/research_core` independent from FastAPI, React, databases, and provider SDKs.
 - Keep tests offline by default.
-- Use fake model/search fixtures for baseline tests.
+- Use fake model fixtures for Phase 0 baseline tests.
+- Add fake search/retrieval fixtures only when the Research Core phase introduces retrieval contracts.
 - Add or update docs when a runtime concept is introduced.
 - Do not import from the legacy root `app/` or `frontend/` directories.
 - Store redesign specs and plans under `redesign/docs/`.
@@ -163,7 +176,7 @@ The runtime should follow these boundaries:
 - Internal messages are `AgentMessage`, not provider messages.
 - Runtime activity is recorded as `RunEvent`.
 - Provider adapters convert at the boundary.
-- Fake providers are first-class testing infrastructure.
+- Fake model providers are first-class testing infrastructure.
 ````
 
 - [ ] **Step 4: Add `redesign/pyproject.toml`**
@@ -261,11 +274,11 @@ Phase 0 only creates:
 
 - runtime message contracts,
 - runtime event contracts,
-- fake providers,
+- fake model provider baseline,
 - tests,
 - docs.
 
-Product APIs, web UI, memory, skills, delegation, and retrieval are introduced by later phase plans.
+Product APIs, web UI, memory, skills, delegation, and retrieval are introduced by their approved phase plans.
 ```
 
 - [ ] **Step 2: Add `redesign/docs/architecture/runtime.md`**
@@ -281,11 +294,11 @@ Write:
 
 ## RunEvent
 
-`RunEvent` records what happened during a research or agent run. Event logs are append-only and later become the basis for timeline UI, replay, trajectory tests, and evals.
+`RunEvent` records what happened during a research or agent run. Event logs are append-only and provide the basis for timeline UI, replay, trajectory tests, and evals.
 
 ## Provider Boundary
 
-Provider adapters convert internal messages into provider-specific request payloads. Fake providers use the same internal contracts as live providers.
+Provider adapters convert internal messages into provider-specific request payloads. The Phase 0 fake model provider uses the same internal contracts as live model providers.
 
 ## Phase 0 Runtime Scope
 
@@ -425,10 +438,12 @@ Create `redesign/packages/research_core/src/research_core/runtime/messages.py`:
 ```python
 from __future__ import annotations
 
+from collections.abc import Mapping
 from dataclasses import dataclass, field
 from enum import StrEnum
-from types import MappingProxyType
-from typing import Any, Mapping
+from typing import Any
+
+from research_core.runtime.immutability import freeze_nested
 
 
 class MessageRole(StrEnum):
@@ -450,7 +465,7 @@ class AgentMessage:
             raise ValueError("id must not be empty")
         if not self.content.strip():
             raise ValueError("content must not be empty")
-        object.__setattr__(self, "metadata", MappingProxyType(dict(self.metadata)))
+        object.__setattr__(self, "metadata", freeze_nested(dict(self.metadata)))
 
     def to_provider_dict(self) -> dict[str, str]:
         return {"role": self.role.value, "content": self.content}
@@ -467,7 +482,7 @@ cd redesign && uv run pytest tests/research_core/test_messages.py -q
 Expected:
 
 ```text
-3 passed
+7 passed
 ```
 
 - [ ] **Step 6: Run lint**
@@ -562,10 +577,12 @@ Create `redesign/packages/research_core/src/research_core/runtime/events.py`:
 ```python
 from __future__ import annotations
 
+from collections.abc import Mapping
 from dataclasses import dataclass, field
 from enum import StrEnum
-from types import MappingProxyType
-from typing import Any, Mapping
+from typing import Any
+
+from research_core.runtime.immutability import freeze_json_value, thaw_json_value
 
 
 class RunEventType(StrEnum):
@@ -593,14 +610,14 @@ class RunEvent:
             raise ValueError("id must not be empty")
         if not self.run_id.strip():
             raise ValueError("run_id must not be empty")
-        object.__setattr__(self, "payload", MappingProxyType(dict(self.payload)))
+        object.__setattr__(self, "payload", freeze_json_value(dict(self.payload)))
 
     def to_record(self) -> dict[str, Any]:
         return {
             "id": self.id,
             "run_id": self.run_id,
             "type": self.type.value,
-            "payload": dict(self.payload),
+            "payload": thaw_json_value(self.payload),
         }
 ```
 
@@ -628,7 +645,7 @@ cd redesign && uv run pytest tests/research_core/test_events.py -q
 Expected:
 
 ```text
-3 passed
+15 passed
 ```
 
 - [ ] **Step 6: Run focused runtime tests**
@@ -642,7 +659,7 @@ cd redesign && uv run pytest tests/research_core/test_messages.py tests/research
 Expected:
 
 ```text
-6 passed
+22 passed
 ```
 
 - [ ] **Step 7: Commit**
@@ -719,9 +736,9 @@ Create `redesign/packages/research_core/src/research_core/testing/fakes.py`:
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from types import MappingProxyType
-from typing import Any, Iterable, Mapping
+from typing import Any, Iterable, Mapping, Sequence
 
+from research_core.runtime.immutability import freeze_nested
 from research_core.runtime.messages import AgentMessage
 
 
@@ -733,7 +750,7 @@ class FakeModelResponse:
     def __post_init__(self) -> None:
         if not self.content.strip():
             raise ValueError("content must not be empty")
-        object.__setattr__(self, "metadata", MappingProxyType(dict(self.metadata)))
+        object.__setattr__(self, "metadata", freeze_nested(dict(self.metadata)))
 
 
 class FakeModel:
@@ -741,7 +758,7 @@ class FakeModel:
         self._responses = list(responses)
         self.calls: list[list[AgentMessage]] = []
 
-    def complete(self, messages: list[AgentMessage]) -> FakeModelResponse:
+    def complete(self, messages: Sequence[AgentMessage]) -> FakeModelResponse:
         self.calls.append(list(messages))
         if not self._responses:
             raise RuntimeError("FakeModel has no scripted responses left")
@@ -769,7 +786,7 @@ cd redesign && uv run pytest tests/research_core/test_fakes.py -q
 Expected:
 
 ```text
-3 passed
+11 passed
 ```
 
 - [ ] **Step 5: Run all Phase 0 tests**
@@ -783,7 +800,7 @@ cd redesign && uv run pytest -q
 Expected:
 
 ```text
-9 passed
+33 passed
 ```
 
 - [ ] **Step 6: Commit**
@@ -841,7 +858,7 @@ cd redesign && uv run ruff check .
 Expected:
 
 ```text
-9 passed
+33 passed
 All checks passed!
 ```
 

@@ -2,7 +2,7 @@
 
 ## Goal
 
-把当前的 Research Agent Platform 重构为一个完整的学习型 Agent 工程项目：
+把 legacy Research Agent Platform 重构为一个完整的学习型 Agent 工程项目：
 
 - 它首先是课程：适合从基础 Python 起步，系统学习现代 Agent 工程。
 - 它也是工程参考：展示 Agent loop、context、memory、skills、MCP、multi-agent、eval、observability、harness 的真实边界。
@@ -10,9 +10,9 @@
 
 项目目标不是追逐某个框架，而是让学习者先理解机制，再理解框架在什么条件下值得使用。
 
-## Current Baseline
+## Legacy Baseline
 
-当前仓库已经是一个不错的 Agent 工程全景项目，但不是合格的从零学习课程。
+2026-06-25 的 legacy 仓库已经是一个不错的 Agent 工程全景项目，但不是合格的从零学习课程。
 
 已有优势：
 
@@ -29,7 +29,7 @@
 - 产品形态还不像专业研究工作台。
 - 离线可运行性、fake model、trajectory regression 和文档 gate 需要重新设计。
 
-最近一次基线验证结果：
+2026-06-25 重构设计前的 legacy 基线验证结果：
 
 - `compileall` 通过。
 - `ruff check app tests` 通过。
@@ -42,7 +42,7 @@
 
 1. 课程优先，同时兼顾工程参考和作品集展示。
 2. 面向有基础 Python、但不熟 async、FastAPI、Agent 工程的学习者。
-3. 允许破坏式重构，不要求原地兼容当前目录结构。
+3. 允许破坏式重构，不要求原地兼容 legacy 目录结构。
 4. 使用双层仓库：课程/labs 层与最终产品层并存。
 5. 默认离线可运行，不需要 API key。
 6. 业务主题保持为 research assistant。
@@ -101,7 +101,7 @@ Pi 是 coding-agent harness，不是本项目的业务模板。它更适合作�
 对照规则：
 
 - 同一个任务。
-- 同一套 fake model/search fixtures。
+- 同一套 fake model fixtures；fake search/retrieval fixtures 在 Research Core 阶段建立后加入。
 - 同一套 trajectory/eval metrics。
 - 对比表达力、复杂度、可测试性、debuggability、state/resume 能力、团队协作成本。
 
@@ -506,7 +506,7 @@ event stream 同时服务：
 
 ### Session Storage
 
-初版采用 JSONL session storage，后续可接 SQLite/Postgres。
+Phase 0+ storage starts from JSONL session storage; persistence hardening phases may add SQLite/Postgres.
 
 必须支持：
 
@@ -643,7 +643,7 @@ skills/
 
 ### Why Not Incremental Refactor
 
-当前仓库可以作为学习素材，但结构已经不适合直接长成双层课程/产品项目。
+Legacy 仓库可以作为学习素材，但结构已经不适合直接长成双层课程/产品项目。
 
 原地渐进式重构的风险：
 
@@ -656,7 +656,7 @@ skills/
 
 推荐步骤：
 
-1. 保留当前 git history。
+1. 保留 legacy git history。
 2. 新建 v2 package/app/course/evals/docs 骨架。
 3. 先迁移有价值的 tests、fixtures、docs 片段，而不是迁移全部旧代码。
 4. 先建立 `research_core` contracts。
@@ -668,7 +668,7 @@ skills/
 
 ## Milestones
 
-这些 milestones 是总体路线，不要求在一个实现计划或一个 PR 中全部完成。后续 writing-plans 阶段应把它们拆成可评审、可测试、可回滚的执行计划。
+这些 milestones 是总体路线，不要求在一个实现计划或一个 PR 中全部完成。Phase-specific writing-plans 应把它们拆成可评审、可测试、可回滚的执行计划。
 
 ### Milestone 0: Redesign Scaffold
 
@@ -677,7 +677,7 @@ skills/
 - AGENTS.md。
 - glossary。
 - architecture overview。
-- fake model/search fixtures。
+- fake model fixture baseline。
 - test harness baseline。
 
 ### Milestone 1: Agent Kernel Course Spine
