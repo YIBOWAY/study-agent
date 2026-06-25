@@ -1,0 +1,70 @@
+# Research Data Model
+
+Phase 2 introduces the first research-domain layer under
+`packages/research_core/src/research_core/research/`. These contracts are
+offline-first, frozen dataclasses and do not depend on FastAPI, React, databases,
+provider SDKs, embeddings, or legacy root code.
+
+## Entity Boundary
+
+The Phase 2 entities are:
+
+- `Project`: a research workspace boundary with an `id`, `name`, optional
+  `description`, and JSON-compatible metadata.
+- `ResearchRun`: one research task inside a project with an `id`, `project_id`,
+  `question`, `status`, and JSON-compatible metadata.
+- `ResearchRunStatus`: the run lifecycle enum: `planned`, `running`,
+  `completed`, and `failed`.
+- `Source`: ingested material with `id`, `uri`, `title`, `content`, and
+  JSON-compatible metadata.
+- `Evidence`: a quoted support item extracted from a `Source`, including
+  `source_id`, `quote`, optional `summary`, optional `location`, and metadata.
+- `Claim`: a verifiable report statement with ordered `evidence_ids`.
+- `Report`: a research output with `run_id`, `title`, `summary`, ordered
+  `Claim` objects, and metadata.
+
+All metadata is copied, recursively read-only, and strict JSON-compatible. Claim
+evidence IDs and report claims are stored as immutable tuples so later evals and
+trajectory fixtures can rely on stable ordering.
+
+## Source Ingestion
+
+`SourceInput` is the caller-facing ingestion request. `SourceIngestor` turns a
+sequence of inputs into `Source` objects with deterministic IDs such as
+`source_1`, `source_2`, or a caller-provided prefix. The ingestor rejects blank
+URI, title, content, and ID prefix values.
+
+This is intentionally local and deterministic. Real crawlers, document parsers,
+embedding pipelines, and databases arrive in later product or retrieval phases.
+
+## Fake Retrieval
+
+`FakeRetriever` provides offline search over ingested `Source` objects.
+`SearchResult` records the source ID, title, snippet, score, and metadata.
+
+The fake retriever uses deterministic token and phrase scoring:
+
+- query token matches provide the base score,
+- title token matches add a bonus,
+- full query phrase matches add a bonus,
+- ties keep source ingestion order.
+
+This is a fixture boundary, not a production search engine. Its job is to make
+research tests, labs, and future eval fixtures repeatable without API keys or
+network access.
+
+## Claim-Source Mapping
+
+`build_claim_source_links(report, evidence, sources)` turns report claims into
+stable `ClaimSourceLink` records. It walks report claims in order and follows
+each claim's evidence ID order.
+
+The mapper rejects:
+
+- a claim with no evidence IDs,
+- a claim that references missing evidence,
+- evidence that references a missing source.
+
+This gives Phase 2 its first citation-quality gate: a report claim is not
+considered grounded unless it can be traced to concrete evidence and a concrete
+source.

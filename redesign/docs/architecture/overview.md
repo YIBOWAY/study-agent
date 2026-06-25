@@ -42,4 +42,12 @@ Phase 1 adds:
 - trajectory regression helpers,
 - the first Agent Kernel course chapter, lab, and solution.
 
+Phase 2 adds:
+
+- research domain entities,
+- deterministic source ingestion,
+- fake retrieval for offline tests and future evals,
+- claim-source mapping helpers,
+- data model docs.
+
 Product APIs, web UI, memory, skills, delegation, and retrieval are introduced by their approved phase plans.

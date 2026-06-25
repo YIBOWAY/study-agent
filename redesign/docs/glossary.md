@@ -41,6 +41,46 @@ instead of relying only on final answers.
 It catches behavioral drift in the agent loop, including tool calls and error
 paths.
 
+## Project
+
+A research workspace boundary containing related runs, sources, evidence,
+reports, and later memory.
+
+## ResearchRun
+
+One research task inside a `Project`, with a question and lifecycle status.
+
+## Source
+
+An ingested local or external material item that can support evidence.
+
+## Evidence
+
+A quoted support item extracted from a `Source`.
+
+## Claim
+
+A verifiable report statement that references supporting evidence IDs.
+
+## Report
+
+A research output made of a title, summary, and ordered claims.
+
+## SourceIngestor
+
+A deterministic local ingestor that converts `SourceInput` records into
+`Source` objects with stable IDs.
+
+## FakeRetriever
+
+An offline token/phrase search fixture over ingested sources.
+It supports repeatable research tests without API keys or network access.
+
+## ClaimSourceLink
+
+A stable record that connects one report claim to one evidence item and the
+source behind that evidence.
+
 ## Research Agent Workbench
 
 The final product interface for projects, research runs, delegation, evidence, reports, memory, skills, and evals.

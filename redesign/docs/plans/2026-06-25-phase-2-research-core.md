@@ -257,23 +257,23 @@ Expected: tests pass and ruff reports `All checks passed!`.
 - Modify: `redesign/docs/progress/phases/phase-2.md`
 - Modify: `redesign/docs/plans/2026-06-25-redesign-execution-roadmap.md`
 
-- [ ] **Step 1: Add data model docs**
+- [x] **Step 1: Add data model docs**
 
 Document Project, ResearchRun, Source, Evidence, Claim, Report, fake retrieval, ingestion, and claim-source mapping.
 
-- [ ] **Step 2: Update overview and runtime architecture**
+- [x] **Step 2: Update overview and runtime architecture**
 
 Record that Phase 2 adds the research data layer while runtime remains independent from product apps and providers.
 
-- [ ] **Step 3: Update glossary and root docs**
+- [x] **Step 3: Update glossary and root docs**
 
 Add concise definitions for Phase 2 concepts and update current scope.
 
-- [ ] **Step 4: Update progress**
+- [x] **Step 4: Update progress**
 
 Mark Phase 2 complete only after final verification passes.
 
-- [ ] **Step 5: Verify docs**
+- [x] **Step 5: Verify docs**
 
 Run:
 
@@ -290,7 +290,7 @@ Expected: Phase 2 concepts are discoverable from docs, architecture, glossary, a
 - Modify: `redesign/docs/progress/overall.md`
 - Modify: `redesign/docs/progress/phases/phase-2.md`
 
-- [ ] **Step 1: Run full verification**
+- [x] **Step 1: Run full verification**
 
 Run:
 
@@ -308,25 +308,25 @@ All checks passed!
 No whitespace errors.
 ```
 
-- [ ] **Step 2: Clean generated side effects**
+- [x] **Step 2: Clean generated side effects**
 
 Remove generated `redesign/.venv`, `redesign/.ruff_cache`, `redesign/.pytest_cache`, `redesign/uv.lock`, and any `__pycache__` directories unless an approved plan adds them as tracked artifacts.
 
-- [ ] **Step 3: Commit and push**
+- [x] **Step 3: Commit and push**
 
 Commit with a message that records the Phase 2 deliverables and verification commands. Push branch `codex/redesign-phase-1`.
 
 ## Phase 2 Completion Checklist
 
-- [ ] Research entities are implemented and exported.
-- [ ] Research entity tests pass.
-- [ ] Source ingestion and fake retrieval are implemented and exported.
-- [ ] Retrieval tests pass.
-- [ ] Claim-source mapping helpers are implemented and exported.
-- [ ] Claim-source mapping tests pass.
-- [ ] `redesign/docs/architecture/data-model.md` documents Phase 2 contracts.
-- [ ] `redesign/docs/progress/overall.md` and `phase-2.md` are updated.
-- [ ] `cd redesign && uv run pytest -q` passes.
-- [ ] `cd redesign && uv run ruff check .` passes.
-- [ ] `git diff --check` is clean.
-- [ ] No legacy `app/`, `frontend/`, root `tests/`, or root `eval/` files are modified.
+- [x] Research entities are implemented and exported.
+- [x] Research entity tests pass.
+- [x] Source ingestion and fake retrieval are implemented and exported.
+- [x] Retrieval tests pass.
+- [x] Claim-source mapping helpers are implemented and exported.
+- [x] Claim-source mapping tests pass.
+- [x] `redesign/docs/architecture/data-model.md` documents Phase 2 contracts.
+- [x] `redesign/docs/progress/overall.md` and `phase-2.md` are updated.
+- [x] `cd redesign && uv run pytest -q` passes.
+- [x] `cd redesign && uv run ruff check .` passes.
+- [x] `git diff --check` is clean.
+- [x] No legacy `app/`, `frontend/`, root `tests/`, or root `eval/` files are modified.

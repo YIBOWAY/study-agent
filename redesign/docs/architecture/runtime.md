@@ -70,3 +70,14 @@ Phase 1 adds the first executable kernel:
 ## Fake Provider Boundary
 
 `FakeModel` is part of the testing surface. It records calls and returns scripted responses so labs, trajectory tests, and product smoke checks can run without API keys.
+
+## Research Data Boundary
+
+Phase 2 adds `research_core.research` as the first domain layer above the runtime
+contracts. It defines `Project`, `ResearchRun`, `Source`, `Evidence`, `Claim`,
+and `Report`, plus deterministic `SourceIngestor`, `FakeRetriever`, and
+claim-source mapping helpers.
+
+The runtime package remains independent from the research package. Research
+contracts may reuse runtime immutability helpers, but `research_core.runtime`
+must not import research entities.

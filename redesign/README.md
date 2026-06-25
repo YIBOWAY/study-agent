@@ -26,7 +26,13 @@ Phase 1 adds the first Agent Kernel course spine:
 - Deterministic model/tool/event tests.
 - Chapter 01, Lab 01, and Solution 01 under `course/`.
 
-Fake search and retrieval fixtures arrive with the Research Core phase.
+Phase 2 adds the first Research Core contracts:
+
+- `Project`, `ResearchRun`, `Source`, `Evidence`, `Claim`, and `Report`.
+- Deterministic `SourceIngestor` and offline `FakeRetriever`.
+- Claim-source mapping helpers for citation-quality tests.
+
+Product APIs, memory, skills, delegation, and real retrieval adapters arrive in later phases.
 
 ## Commands
 
@@ -50,4 +56,4 @@ uv run pytest -q
 uv run ruff check .
 ```
 
-The pytest suite should include runtime message, event, and fake provider tests.
+The pytest suite should include runtime message, event, fake provider, and research core tests.
