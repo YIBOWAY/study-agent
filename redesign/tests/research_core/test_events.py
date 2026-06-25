@@ -10,10 +10,15 @@ def test_run_event_type_values() -> None:
         "tool_call",
         "tool_result",
         "skill_load",
+        "skill_step",
         "memory_recall",
         "memory_write",
         "delegate_start",
+        "delegate_event",
         "delegate_finish",
+        "compaction_start",
+        "compaction_finish",
+        "eval_result",
         "error",
     ]
 

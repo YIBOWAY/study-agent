@@ -194,7 +194,7 @@ Expected: tests pass and ruff reports `All checks passed!`.
 - Create: `redesign/tests/research_core/test_memory_skill_evals.py`
 - Modify: `redesign/docs/progress/phases/phase-3.md`
 
-- [ ] **Step 1: Write failing tests**
+- [x] **Step 1: Write failing tests**
 
 Update event tests to expect `skill_step`, `delegate_event`, `compaction_start`, `compaction_finish`, and `eval_result`.
 
@@ -203,7 +203,7 @@ Create eval tests for:
 - memory pollution rejection through `MemoryWritePolicy`;
 - explicit skill reference loading through `SkillRuntime`.
 
-- [ ] **Step 2: Run tests to verify they fail**
+- [x] **Step 2: Run tests to verify they fail**
 
 Run:
 
@@ -213,11 +213,11 @@ cd redesign && uv run pytest tests/research_core/test_events.py tests/research_c
 
 Expected: failure because new event enum values and eval module behavior are not complete yet.
 
-- [ ] **Step 3: Implement event enum alignment**
+- [x] **Step 3: Implement event enum alignment**
 
 Add the missing event enum values while preserving existing values and JSON record behavior.
 
-- [ ] **Step 4: Verify**
+- [x] **Step 4: Verify**
 
 Run:
 

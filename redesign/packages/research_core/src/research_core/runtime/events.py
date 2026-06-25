@@ -14,10 +14,15 @@ class RunEventType(StrEnum):
     TOOL_CALL = "tool_call"
     TOOL_RESULT = "tool_result"
     SKILL_LOAD = "skill_load"
+    SKILL_STEP = "skill_step"
     MEMORY_RECALL = "memory_recall"
     MEMORY_WRITE = "memory_write"
     DELEGATE_START = "delegate_start"
+    DELEGATE_EVENT = "delegate_event"
     DELEGATE_FINISH = "delegate_finish"
+    COMPACTION_START = "compaction_start"
+    COMPACTION_FINISH = "compaction_finish"
+    EVAL_RESULT = "eval_result"
     ERROR = "error"
 
 
