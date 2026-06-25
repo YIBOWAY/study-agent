@@ -29,7 +29,7 @@ Exit criteria:
 - `cd redesign && uv run pytest -q` passes.
 - `cd redesign && uv run ruff check .` passes.
 - `redesign/README.md`, `redesign/AGENTS.md`, and architecture docs explain the new boundary.
-- Fake search and retrieval fixtures are deferred to Phase 2, where retrieval contracts are introduced.
+- Fake search and retrieval fixtures were deferred out of Phase 0 and introduced by Phase 2.
 
 ### Phase 1: Agent Kernel Course Spine
 

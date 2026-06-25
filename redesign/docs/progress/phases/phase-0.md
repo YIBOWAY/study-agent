@@ -37,6 +37,6 @@ Recorded result on 2026-06-25:
 
 ## Notes For Agents
 
-- Fake search/retrieval is intentionally deferred to Phase 2.
+- Fake search/retrieval was intentionally deferred out of Phase 0 and delivered in Phase 2.
 - Do not import from legacy `app/` or `frontend/`.
 - Continue new work under `redesign/` unless an approved phase plan says otherwise.

@@ -50,7 +50,7 @@ Build the first executable agent kernel spine: tool runtime, context builder, ag
 
 ## Next Focus
 
-Phase 2 planning: Research Core entities, fake retrieval, source ingestion, and claim-source mapping tests.
+Phase 2 is complete. Current next focus is Phase 3 planning: memory recall/write policies, skill runtime, and memory/skill eval cases.
 
 ## Verification Target
 
