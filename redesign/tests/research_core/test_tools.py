@@ -2,7 +2,13 @@ import json
 from dataclasses import FrozenInstanceError
 
 from research_core.runtime.messages import AgentMessage, MessageRole
-from research_core.runtime.tools import ToolCall, ToolDefinition, ToolResult, ToolRuntime
+from research_core.runtime.tools import (
+    ToolCall,
+    ToolDefinition,
+    ToolResult,
+    ToolRuntime,
+    UnknownToolError,
+)
 
 
 def test_tool_call_rejects_blank_id_and_name() -> None:
@@ -217,10 +223,10 @@ def test_tool_runtime_invoke_raises_key_error_for_unknown_tool() -> None:
 
     try:
         runtime.invoke(ToolCall(id="call_1", name="missing", arguments={}))
-    except KeyError as exc:
+    except UnknownToolError as exc:
         assert "missing" in str(exc)
     else:
-        raise AssertionError("Expected unknown tool to raise KeyError")
+        raise AssertionError("Expected unknown tool to raise UnknownToolError")
 
 
 def test_tool_call_rejects_non_json_compatible_arguments() -> None:

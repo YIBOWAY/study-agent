@@ -9,6 +9,10 @@ from research_core.runtime.immutability import freeze_json_value, thaw_json_valu
 from research_core.runtime.messages import AgentMessage, MessageRole
 
 
+class UnknownToolError(KeyError):
+    pass
+
+
 @dataclass(frozen=True, slots=True)
 class ToolCall:
     id: str
@@ -83,7 +87,7 @@ class ToolRuntime:
         try:
             tool = self._tools[call.name]
         except KeyError as exc:
-            raise KeyError(f"unknown tool {call.name!r}") from exc
+            raise UnknownToolError(f"unknown tool {call.name!r}") from exc
         return ToolResult(
             call_id=call.id,
             name=call.name,

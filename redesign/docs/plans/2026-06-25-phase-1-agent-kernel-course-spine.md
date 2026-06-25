@@ -253,7 +253,7 @@ Expected: tests pass and ruff reports `All checks passed!`.
 - Modify: `redesign/packages/research_core/src/research_core/runtime/__init__.py`
 - Create: `redesign/tests/research_core/test_runner.py`
 
-- [ ] **Step 1: Write failing tests**
+- [x] **Step 1: Write failing tests**
 
 Create tests for:
 
@@ -301,7 +301,7 @@ def test_agent_runner_executes_tool_call_then_returns_final_answer() -> None:
     ]
 ```
 
-- [ ] **Step 2: Run tests to verify they fail**
+- [x] **Step 2: Run tests to verify they fail**
 
 Run:
 
@@ -311,7 +311,7 @@ cd redesign && uv run pytest tests/research_core/test_runner.py -q
 
 Expected: failure because `research_core.runtime.runner` does not exist.
 
-- [ ] **Step 3: Implement runner**
+- [x] **Step 3: Implement runner**
 
 Create:
 
@@ -321,11 +321,11 @@ Create:
 
 Use deterministic message IDs and event IDs based on counters inside one run.
 
-- [ ] **Step 4: Export runner**
+- [x] **Step 4: Export runner**
 
 Update `runtime/__init__.py` to export `AgentRunner` and `AgentRunResult`.
 
-- [ ] **Step 5: Verify**
+- [x] **Step 5: Verify**
 
 Run:
 
@@ -488,12 +488,12 @@ Commit with a message that records the Phase 1 deliverables and verification com
 
 ## Phase 1 Completion Checklist
 
-- [ ] `ToolRuntime` tests pass.
-- [ ] `ContextBuilder` tests pass.
-- [ ] `AgentRunner` tests pass.
+- [x] `ToolRuntime` tests pass.
+- [x] `ContextBuilder` tests pass.
+- [x] `AgentRunner` tests pass.
 - [ ] trajectory regression helper tests pass.
 - [ ] Course chapter, lab, and solution exist.
-- [ ] `redesign/docs/progress/overall.md` and `phase-1.md` are updated.
+- [x] `redesign/docs/progress/overall.md` and `phase-1.md` are updated.
 - [ ] `cd redesign && uv run pytest -q` passes.
 - [ ] `cd redesign && uv run ruff check .` passes.
 - [ ] No legacy `app/`, `frontend/`, root `tests/`, or root `eval/` files are modified.
