@@ -7,7 +7,7 @@ Last updated: 2026-06-25
 - Active branch: `codex/redesign-phase-1`
 - Active phase: Phase 1 - Agent Kernel Course Spine
 - Completed phases: 1 of 8
-- Current verification baseline: Phase 1 partial passed with full redesign suite `75 passed`; `ruff check .` clean through the Tool Runtime, Context Builder, and AgentRunner slices.
+- Current verification baseline: Phase 1 partial passed with full redesign suite `78 passed`; `ruff check .` clean through the Tool Runtime, Context Builder, AgentRunner, and trajectory helper slices.
 
 ## Phase Index
 

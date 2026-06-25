@@ -344,7 +344,7 @@ Expected: tests pass and ruff reports `All checks passed!`.
 - Modify: `redesign/packages/research_core/src/research_core/runtime/__init__.py`
 - Create: `redesign/tests/research_core/test_trajectory.py`
 
-- [ ] **Step 1: Write failing tests**
+- [x] **Step 1: Write failing tests**
 
 Create tests for:
 
@@ -352,7 +352,7 @@ Create tests for:
 - `event_type_sequence(events)` returns a list of event type strings;
 - mutating returned records does not mutate source events.
 
-- [ ] **Step 2: Run tests to verify they fail**
+- [x] **Step 2: Run tests to verify they fail**
 
 Run:
 
@@ -362,15 +362,15 @@ cd redesign && uv run pytest tests/research_core/test_trajectory.py -q
 
 Expected: failure because `research_core.runtime.trajectory` does not exist.
 
-- [ ] **Step 3: Implement helpers**
+- [x] **Step 3: Implement helpers**
 
 Create `events_to_records(events: Sequence[RunEvent]) -> list[dict[str, Any]]` and `event_type_sequence(events: Sequence[RunEvent]) -> list[str]`.
 
-- [ ] **Step 4: Export helpers**
+- [x] **Step 4: Export helpers**
 
 Update `runtime/__init__.py` to export both functions.
 
-- [ ] **Step 5: Verify**
+- [x] **Step 5: Verify**
 
 Run:
 
@@ -491,7 +491,7 @@ Commit with a message that records the Phase 1 deliverables and verification com
 - [x] `ToolRuntime` tests pass.
 - [x] `ContextBuilder` tests pass.
 - [x] `AgentRunner` tests pass.
-- [ ] trajectory regression helper tests pass.
+- [x] trajectory regression helper tests pass.
 - [ ] Course chapter, lab, and solution exist.
 - [x] `redesign/docs/progress/overall.md` and `phase-1.md` are updated.
 - [ ] `cd redesign && uv run pytest -q` passes.

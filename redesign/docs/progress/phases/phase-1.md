@@ -28,6 +28,7 @@ Build the first executable agent kernel spine: tool runtime, context builder, ag
 | 2026-06-25 | Tool Runtime delivered in `d390cd2`: immutable tool calls/results/definitions, duplicate registration checks, invocation path, JSON-compatible validation, and runtime exports. Verification: `15 passed` for tool tests, full redesign suite `48 passed`, scoped `ruff` clean. |
 | 2026-06-25 | Context Builder delivered in `624c71e`: deterministic system prompt insertion, caller system-message rejection, latest-message windowing, runtime exports, and AgentMessage role normalization hardening. Verification: context/message tests `18 passed`, full redesign suite `59 passed`, scoped `ruff` clean. |
 | 2026-06-25 | AgentRunner delivered and review-hardened: deterministic model/tool loop, final assistant responses, model/tool events, max-step budget, malformed JSON tool-call handling, unknown-tool separation, and error-event attachment for model/tool failures. Verification: runner/tools tests `31 passed`, full redesign suite `75 passed`, `ruff check .` clean. |
+| 2026-06-25 | Trajectory regression helpers delivered: stable event records, event type sequences, independent record copies, and integration coverage against real AgentRunner events. Verification: trajectory tests `3 passed`, full redesign suite `78 passed`, `ruff check .` clean. |
 
 ## Delivered Files
 
@@ -35,14 +36,16 @@ Build the first executable agent kernel spine: tool runtime, context builder, ag
 - `packages/research_core/src/research_core/runtime/context.py`
 - `packages/research_core/src/research_core/runtime/messages.py`
 - `packages/research_core/src/research_core/runtime/runner.py`
+- `packages/research_core/src/research_core/runtime/trajectory.py`
 - `tests/research_core/test_tools.py`
 - `tests/research_core/test_context.py`
 - `tests/research_core/test_messages.py`
 - `tests/research_core/test_runner.py`
+- `tests/research_core/test_trajectory.py`
 
 ## Current Focus
 
-Next implementation slice: trajectory regression helpers for stable event records and exact event type sequence assertions.
+Next implementation slice: course chapter, lab, and solution for Agent Kernel Foundations.
 
 ## Verification Target
 
