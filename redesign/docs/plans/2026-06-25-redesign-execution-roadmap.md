@@ -51,13 +51,21 @@ Exit criteria:
 
 ### Phase 2: Research Core
 
+Plan: `redesign/docs/plans/2026-06-25-phase-2-research-core.md`
+
 Purpose:
 
 - Add research domain entities: Project, ResearchRun, Source, Evidence, Claim, Report.
 - Add fake retrieval and source ingestion.
 - Add claim-source mapping tests.
 
-Plan document should be created after Phase 1 contracts are stable.
+Exit criteria:
+
+- `cd redesign && uv run pytest -q` passes.
+- `cd redesign && uv run ruff check .` passes.
+- `docs/architecture/data-model.md` explains Project, ResearchRun, Source, Evidence, Claim, Report, fake retrieval, ingestion, and claim-source mapping.
+- `docs/glossary.md` defines the Phase 2 research concepts.
+- Claim-source mapping rejects missing evidence and missing source references.
 
 ### Phase 3: Memory and Skills
 
