@@ -15,6 +15,32 @@ It is the unit that event streams, timelines, replay, and evals build on.
 
 A deterministic offline model used for tests and labs.
 
+## ToolRuntime
+
+The local tool registry and invocation boundary.
+It stores `ToolDefinition` objects, accepts `ToolCall` requests, returns
+`ToolResult` objects, and raises `UnknownToolError` for missing registrations.
+
+## ContextBuilder
+
+The runtime component that owns the model context boundary.
+It inserts the single reserved system prompt and rejects caller-provided system
+messages so instruction ownership remains explicit.
+
+## AgentRunner
+
+The minimal Phase 1 agent loop.
+It builds context, calls the model, emits runtime events, executes JSON tool
+calls through `ToolRuntime`, appends tool observations, and returns the final
+assistant message.
+
+## Trajectory Regression
+
+A test strategy that compares stable event records and event type sequences
+instead of relying only on final answers.
+It catches behavioral drift in the agent loop, including tool calls and error
+paths.
+
 ## Research Agent Workbench
 
 The final product interface for projects, research runs, delegation, evidence, reports, memory, skills, and evals.

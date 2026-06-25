@@ -41,6 +41,14 @@ Purpose:
 - Add the first course chapters and labs for Agent foundations.
 - Add trajectory regression tests.
 
+Exit criteria:
+
+- `cd redesign && uv run pytest -q` passes.
+- `cd redesign && uv run ruff check .` passes.
+- `docs/architecture/runtime.md` explains the Phase 1 loop.
+- `docs/glossary.md` defines ToolRuntime, ContextBuilder, AgentRunner, and Trajectory Regression.
+- `course/chapters/01-agent-kernel-foundations.md`, `course/labs/01-agent-runner-lab.md`, and `course/solutions/01-agent-runner-solution.md` exist.
+
 ### Phase 2: Research Core
 
 Purpose:

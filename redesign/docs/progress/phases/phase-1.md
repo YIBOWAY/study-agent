@@ -1,9 +1,9 @@
 # Phase 1 Progress: Agent Kernel Course Spine
 
-Status: In progress
+Status: Complete
 
 Started: 2026-06-25
-Completed: Not completed
+Completed: 2026-06-25
 Branch: `codex/redesign-phase-1`
 
 ## Goal
@@ -30,6 +30,7 @@ Build the first executable agent kernel spine: tool runtime, context builder, ag
 | 2026-06-25 | AgentRunner delivered and review-hardened: deterministic model/tool loop, final assistant responses, model/tool events, max-step budget, malformed JSON tool-call handling, unknown-tool separation, and error-event attachment for model/tool failures. Verification: runner/tools tests `31 passed`, full redesign suite `75 passed`, `ruff check .` clean. |
 | 2026-06-25 | Trajectory regression helpers delivered: stable event records, event type sequences, independent record copies, and integration coverage against real AgentRunner events. Verification: trajectory tests `3 passed`, full redesign suite `78 passed`, `ruff check .` clean. |
 | 2026-06-25 | Course Chapter/Lab/Solution 01 delivered for Agent Kernel Foundations. Verification: course reference grep passed and solution snippets executed successfully with `PYTHONPATH=packages/research_core/src uv run python`. |
+| 2026-06-25 | Phase 1 final docs synchronized: runtime architecture, glossary, docs index, roadmap, root README, and AGENTS instructions now reflect the Agent Kernel Course Spine. Final verification: `uv run pytest -q` -> `78 passed`; `uv run ruff check .` -> `All checks passed!`; `git diff --check` clean. |
 
 ## Delivered Files
 
@@ -47,9 +48,9 @@ Build the first executable agent kernel spine: tool runtime, context builder, ag
 - `course/labs/01-agent-runner-lab.md`
 - `course/solutions/01-agent-runner-solution.md`
 
-## Current Focus
+## Next Focus
 
-Next implementation slice: architecture, glossary, roadmap, and final Phase 1 progress synchronization.
+Phase 2 planning: Research Core entities, fake retrieval, source ingestion, and claim-source mapping tests.
 
 ## Verification Target
 
@@ -60,4 +61,8 @@ uv run pytest -q
 uv run ruff check .
 ```
 
-Phase 1 is complete only when those commands pass and this progress file records the delivered files and verification result.
+Recorded final result on 2026-06-25:
+
+- `78 passed`
+- `All checks passed!`
+- `git diff --check` clean

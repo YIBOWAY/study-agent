@@ -10,15 +10,21 @@ The redesign is both a course and a product reference:
 - Product layer: build a professional Research Agent Workbench.
 - Shared core: keep runtime contracts testable, offline-first, and framework-independent.
 
-## Phase 0 Scope
+## Current Scope
 
-Phase 0 creates the scaffold:
+Phase 0 created the scaffold:
 
 - Python package boundary under `packages/research_core`.
 - Minimal runtime message and event contracts.
 - Fake model fixture baseline.
 - Offline pytest and ruff baseline.
 - Architecture docs and glossary.
+
+Phase 1 adds the first Agent Kernel course spine:
+
+- `ToolRuntime`, `ContextBuilder`, `AgentRunner`, and trajectory helpers.
+- Deterministic model/tool/event tests.
+- Chapter 01, Lab 01, and Solution 01 under `course/`.
 
 Fake search and retrieval fixtures arrive with the Research Core phase.
 
@@ -35,7 +41,7 @@ uv run ruff check .
 
 Legacy code remains outside this folder. New redesign work should live under `redesign/` unless an approved phase plan explicitly says otherwise.
 
-## Phase 0 Verification
+## Verification
 
 Expected local checks:
 

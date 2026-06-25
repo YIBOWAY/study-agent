@@ -24,7 +24,7 @@ without making either one depend on the other's implementation details.
 - `course` may use `research_core` contracts for product integration labs.
 - `research_core` must not depend on apps, course chapters, provider SDKs, or databases.
 
-## Phase 0 Boundary
+## Current Boundary
 
 Phase 0 only creates:
 
@@ -33,5 +33,13 @@ Phase 0 only creates:
 - fake model provider baseline,
 - tests,
 - docs.
+
+Phase 1 adds:
+
+- local tool runtime contracts,
+- deterministic context building,
+- the minimal agent runner loop,
+- trajectory regression helpers,
+- the first Agent Kernel course chapter, lab, and solution.
 
 Product APIs, web UI, memory, skills, delegation, and retrieval are introduced by their approved phase plans.

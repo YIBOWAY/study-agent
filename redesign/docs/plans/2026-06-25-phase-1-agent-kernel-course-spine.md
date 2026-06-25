@@ -427,7 +427,7 @@ Expected: chapter, lab, and solution reference the public Phase 1 contracts.
 - Modify: `redesign/docs/progress/phases/phase-1.md`
 - Modify: `redesign/docs/plans/2026-06-25-redesign-execution-roadmap.md`
 
-- [ ] **Step 1: Update runtime architecture**
+- [x] **Step 1: Update runtime architecture**
 
 Add a Phase 1 section describing the loop:
 
@@ -435,15 +435,15 @@ Add a Phase 1 section describing the loop:
 ContextBuilder -> model_request -> model_response -> optional tool_call/tool_result -> final assistant message.
 ```
 
-- [ ] **Step 2: Update glossary**
+- [x] **Step 2: Update glossary**
 
 Add `ToolRuntime`, `ContextBuilder`, `AgentRunner`, and `Trajectory Regression`.
 
-- [ ] **Step 3: Update progress**
+- [x] **Step 3: Update progress**
 
 Mark Phase 1 delivered files, verification result, and commit hash after commit.
 
-- [ ] **Step 4: Verify docs**
+- [x] **Step 4: Verify docs**
 
 Run:
 
@@ -460,7 +460,7 @@ Expected: architecture, glossary, progress, and roadmap mention Phase 1 contract
 - Modify: `redesign/docs/progress/overall.md`
 - Modify: `redesign/docs/progress/phases/phase-1.md`
 
-- [ ] **Step 1: Run full verification**
+- [x] **Step 1: Run full verification**
 
 Run:
 
@@ -478,11 +478,11 @@ All checks passed!
 No whitespace errors.
 ```
 
-- [ ] **Step 2: Clean generated side effects**
+- [x] **Step 2: Clean generated side effects**
 
 Remove generated `redesign/.venv`, `redesign/.ruff_cache`, `redesign/.pytest_cache`, `redesign/uv.lock`, and any `__pycache__` directories unless an approved plan adds them as tracked artifacts.
 
-- [ ] **Step 3: Commit and push**
+- [x] **Step 3: Commit and push**
 
 Commit with a message that records the Phase 1 deliverables and verification commands. Push branch `codex/redesign-phase-1`.
 
@@ -494,6 +494,6 @@ Commit with a message that records the Phase 1 deliverables and verification com
 - [x] trajectory regression helper tests pass.
 - [x] Course chapter, lab, and solution exist.
 - [x] `redesign/docs/progress/overall.md` and `phase-1.md` are updated.
-- [ ] `cd redesign && uv run pytest -q` passes.
-- [ ] `cd redesign && uv run ruff check .` passes.
-- [ ] No legacy `app/`, `frontend/`, root `tests/`, or root `eval/` files are modified.
+- [x] `cd redesign && uv run pytest -q` passes.
+- [x] `cd redesign && uv run ruff check .` passes.
+- [x] No legacy `app/`, `frontend/`, root `tests/`, or root `eval/` files are modified.

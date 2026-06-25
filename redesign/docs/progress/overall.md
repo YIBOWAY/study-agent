@@ -5,16 +5,16 @@ Last updated: 2026-06-25
 ## Current State
 
 - Active branch: `codex/redesign-phase-1`
-- Active phase: Phase 1 - Agent Kernel Course Spine
-- Completed phases: 1 of 8
-- Current verification baseline: Phase 1 partial passed with full redesign suite `78 passed`; `ruff check .` clean through the Tool Runtime, Context Builder, AgentRunner, and trajectory helper slices.
+- Active phase: Phase 1 complete; next phase is Phase 2 - Research Core
+- Completed phases: 2 of 8
+- Current verification baseline: Phase 1 final passed with full redesign suite `78 passed`; `ruff check .` clean.
 
 ## Phase Index
 
 | Phase | Status | Progress File | Exit Signal |
 | --- | --- | --- | --- |
 | Phase 0: Redesign Scaffold | Complete | `phases/phase-0.md` | Scaffold, runtime contracts, fake model baseline, docs, and tests landed. |
-| Phase 1: Agent Kernel Course Spine | In progress | `phases/phase-1.md` | Agent runner, tool runtime, context builder, trajectory tests, and first course spine. |
+| Phase 1: Agent Kernel Course Spine | Complete | `phases/phase-1.md` | Agent runner, tool runtime, context builder, trajectory tests, and first course spine. |
 | Phase 2: Research Core | Pending | `phases/phase-2.md` | Research entities, fake retrieval, source ingestion, and claim-source tests. |
 | Phase 3: Memory and Skills | Pending | `phases/phase-3.md` | Memory engine, skill runtime, and memory/skill eval cases. |
 | Phase 4: Multi-Agent and Delegation | Pending | `phases/phase-4.md` | Delegation runtime, isolated child contexts, budget accounting, and merge contract. |
