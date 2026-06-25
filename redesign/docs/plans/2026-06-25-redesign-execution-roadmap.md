@@ -6,6 +6,10 @@ This roadmap indexes the executable phase plans for the `redesign/` version of t
 
 Each phase must produce working, testable software or durable documentation. A phase is not complete unless its tests, docs, and verification commands are recorded in its own plan.
 
+## Progress Rule
+
+Each phase must update `redesign/docs/progress/overall.md` and its matching `redesign/docs/progress/phases/phase-N.md` file when the phase starts, when key tasks land, and when the phase completes.
+
 ## Phase Sequence
 
 ### Phase 0: Redesign Scaffold
@@ -29,13 +33,13 @@ Exit criteria:
 
 ### Phase 1: Agent Kernel Course Spine
 
+Plan: `redesign/docs/plans/2026-06-25-phase-1-agent-kernel-course-spine.md`
+
 Purpose:
 
 - Implement AgentMessage, RunEvent, AgentRunner, ToolRuntime, and ContextBuilder.
 - Add the first course chapters and labs for Agent foundations.
 - Add trajectory regression tests.
-
-Plan document should be created after Phase 0 is complete, using the tested Phase 0 file layout.
 
 ### Phase 2: Research Core
 
