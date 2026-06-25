@@ -25,6 +25,21 @@ Build the first executable agent kernel spine: tool runtime, context builder, ag
 | Date | Update |
 | --- | --- |
 | 2026-06-25 | Phase 1 started after Phase 0 branch push. Progress dashboard created before kernel implementation. |
+| 2026-06-25 | Tool Runtime delivered in `d390cd2`: immutable tool calls/results/definitions, duplicate registration checks, invocation path, JSON-compatible validation, and runtime exports. Verification: `15 passed` for tool tests, full redesign suite `48 passed`, scoped `ruff` clean. |
+| 2026-06-25 | Context Builder delivered in `624c71e`: deterministic system prompt insertion, caller system-message rejection, latest-message windowing, runtime exports, and AgentMessage role normalization hardening. Verification: context/message tests `18 passed`, full redesign suite `59 passed`, scoped `ruff` clean. |
+
+## Delivered Files
+
+- `packages/research_core/src/research_core/runtime/tools.py`
+- `packages/research_core/src/research_core/runtime/context.py`
+- `packages/research_core/src/research_core/runtime/messages.py`
+- `tests/research_core/test_tools.py`
+- `tests/research_core/test_context.py`
+- `tests/research_core/test_messages.py`
+
+## Current Focus
+
+Next implementation slice: `AgentRunner` for deterministic model request/response events, JSON tool-call execution, tool result observation, and final assistant responses.
 
 ## Verification Target
 

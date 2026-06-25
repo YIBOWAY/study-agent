@@ -98,15 +98,15 @@ Trajectory helpers convert `RunEvent` objects into stable plain records and asse
 - Modify: `redesign/docs/README.md`
 - Modify: `redesign/docs/plans/2026-06-25-redesign-execution-roadmap.md`
 
-- [ ] **Step 1: Add progress dashboard files**
+- [x] **Step 1: Add progress dashboard files**
 
 Create the progress files with Phase 0 marked complete, Phase 1 marked in progress, and Phases 2-7 marked pending.
 
-- [ ] **Step 2: Add this Phase 1 plan**
+- [x] **Step 2: Add this Phase 1 plan**
 
 Save this plan at `redesign/docs/plans/2026-06-25-phase-1-agent-kernel-course-spine.md`.
 
-- [ ] **Step 3: Verify docs are indexed**
+- [x] **Step 3: Verify docs are indexed**
 
 Run:
 
@@ -124,7 +124,7 @@ Expected: the progress folder and Phase 1 plan are discoverable from the docs in
 - Modify: `redesign/packages/research_core/src/research_core/runtime/__init__.py`
 - Create: `redesign/tests/research_core/test_tools.py`
 
-- [ ] **Step 1: Write failing tests**
+- [x] **Step 1: Write failing tests**
 
 Create `redesign/tests/research_core/test_tools.py` with tests for:
 
@@ -156,7 +156,7 @@ def test_tool_runtime_invokes_registered_tool() -> None:
     assert result.content == {"text": "hello"}
 ```
 
-- [ ] **Step 2: Run tests to verify they fail**
+- [x] **Step 2: Run tests to verify they fail**
 
 Run:
 
@@ -166,15 +166,15 @@ cd redesign && uv run pytest tests/research_core/test_tools.py -q
 
 Expected: failure because `research_core.runtime.tools` does not exist.
 
-- [ ] **Step 3: Implement tool runtime**
+- [x] **Step 3: Implement tool runtime**
 
 Create `tools.py` with `ToolCall`, `ToolResult`, `ToolDefinition`, and `ToolRuntime`. Reuse `freeze_json_value` and `thaw_json_value` for JSON-compatible argument/result contracts.
 
-- [ ] **Step 4: Export tool runtime contracts**
+- [x] **Step 4: Export tool runtime contracts**
 
 Update `runtime/__init__.py` to export `ToolCall`, `ToolDefinition`, `ToolResult`, and `ToolRuntime`.
 
-- [ ] **Step 5: Verify**
+- [x] **Step 5: Verify**
 
 Run:
 
@@ -193,7 +193,7 @@ Expected: tests pass and ruff reports `All checks passed!`.
 - Modify: `redesign/packages/research_core/src/research_core/runtime/__init__.py`
 - Create: `redesign/tests/research_core/test_context.py`
 
-- [ ] **Step 1: Write failing tests**
+- [x] **Step 1: Write failing tests**
 
 Create tests for:
 
@@ -216,7 +216,7 @@ def test_context_builder_inserts_system_prompt() -> None:
     assert context[0].content == "You are careful."
 ```
 
-- [ ] **Step 2: Run tests to verify they fail**
+- [x] **Step 2: Run tests to verify they fail**
 
 Run:
 
@@ -226,15 +226,15 @@ cd redesign && uv run pytest tests/research_core/test_context.py -q
 
 Expected: failure because `research_core.runtime.context` does not exist.
 
-- [ ] **Step 3: Implement context builder**
+- [x] **Step 3: Implement context builder**
 
 Create `ContextBuilder` as a small class with `__init__(max_messages: int | None = None)` and `build(system_prompt: str, messages: Sequence[AgentMessage]) -> list[AgentMessage]`.
 
-- [ ] **Step 4: Export context builder**
+- [x] **Step 4: Export context builder**
 
 Update `runtime/__init__.py` to export `ContextBuilder`.
 
-- [ ] **Step 5: Verify**
+- [x] **Step 5: Verify**
 
 Run:
 
