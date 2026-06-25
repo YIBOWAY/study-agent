@@ -146,7 +146,7 @@ Expected: tests pass and ruff reports `All checks passed!`.
 - Create: `redesign/tests/research_core/test_skill_runtime.py`
 - Modify: `redesign/docs/progress/phases/phase-3.md`
 
-- [ ] **Step 1: Write failing tests**
+- [x] **Step 1: Write failing tests**
 
 Create tests for:
 
@@ -156,7 +156,7 @@ Create tests for:
 - `read_reference()` reads only files under `references/`;
 - path traversal and files outside the skill root are rejected.
 
-- [ ] **Step 2: Run tests to verify they fail**
+- [x] **Step 2: Run tests to verify they fail**
 
 Run:
 
@@ -166,15 +166,15 @@ cd redesign && uv run pytest tests/research_core/test_skill_runtime.py -q
 
 Expected: failure because `research_core.skills` does not exist.
 
-- [ ] **Step 3: Implement skill runtime**
+- [x] **Step 3: Implement skill runtime**
 
 Create `SkillPackage` and `SkillRuntime` with pathlib-based path validation and simple YAML-frontmatter extraction for `name` and `description`.
 
-- [ ] **Step 4: Export skill contracts**
+- [x] **Step 4: Export skill contracts**
 
 Update `research_core.skills.__init__`.
 
-- [ ] **Step 5: Verify**
+- [x] **Step 5: Verify**
 
 Run:
 
