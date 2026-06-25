@@ -68,3 +68,10 @@ The mapper rejects:
 This gives Phase 2 its first citation-quality gate: a report claim is not
 considered grounded unless it can be traced to concrete evidence and a concrete
 source.
+
+## Deferred Research Workflow
+
+Research planning and report synthesis are not implemented by Phase 2. They
+need memory policy, skill policy, and richer eval fixtures before they become
+useful product workflows. Until that slice lands, Phase 2 should be treated as
+the stable data contract layer for later planning and synthesis work.

@@ -67,6 +67,14 @@ Exit criteria:
 - `docs/glossary.md` defines the Phase 2 research concepts.
 - Claim-source mapping rejects missing evidence and missing source references.
 
+Follow-up:
+
+- Research planning and report synthesis remain part of the larger Research Core
+  milestone from the comprehensive spec, but they are intentionally deferred to
+  the Knowledge and Deep Research slice after memory and skills policies exist.
+  They should not be treated as delivered by Phase 2's entity/retrieval contract
+  work.
+
 ### Phase 3: Memory and Skills
 
 Purpose:

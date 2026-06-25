@@ -50,6 +50,14 @@ Add research domain entities, fake retrieval, source ingestion, and claim-source
 
 Phase 3 planning: memory recall/write policies, skill runtime, and memory/skill eval cases.
 
+## Deferred From The Larger Research Core Milestone
+
+The comprehensive redesign spec also names research planning and report
+synthesis under the larger Research Core milestone. Phase 2 delivered the
+entity, ingestion, fake retrieval, and claim-source mapping contracts only.
+Planning and synthesis should be handled in a later Knowledge and Deep Research
+slice after Phase 3 memory and skill policies are available.
+
 ## Verification
 
 Run from `redesign/`:
