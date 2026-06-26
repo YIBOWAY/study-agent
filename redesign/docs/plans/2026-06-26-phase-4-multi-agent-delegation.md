@@ -104,7 +104,7 @@ Expected: the Phase 4 plan and active progress state are discoverable from the d
 - Create: `redesign/tests/research_core/test_delegation_contracts.py`
 - Modify: `redesign/docs/progress/phases/phase-4.md`
 
-- [ ] **Step 1: Write failing tests**
+- [x] **Step 1: Write failing tests**
 
 Create tests for:
 
@@ -114,7 +114,7 @@ Create tests for:
 - metadata and sequence fields are copied and immutable;
 - merge results preserve child task order and expose failed child results as unresolved conflicts.
 
-- [ ] **Step 2: Run tests to verify they fail**
+- [x] **Step 2: Run tests to verify they fail**
 
 Run:
 
@@ -124,15 +124,15 @@ cd redesign && uv run pytest tests/research_core/test_delegation_contracts.py -q
 
 Expected: failure because `research_core.delegation` does not exist.
 
-- [ ] **Step 3: Implement contracts**
+- [x] **Step 3: Implement contracts**
 
 Create immutable dataclasses and enums in `contracts.py`. Reuse runtime immutability helpers for metadata and event record copies.
 
-- [ ] **Step 4: Export contracts**
+- [x] **Step 4: Export contracts**
 
 Update `research_core.delegation.__init__` to export all public Phase 4 delegation contracts.
 
-- [ ] **Step 5: Verify**
+- [x] **Step 5: Verify**
 
 Run:
 
@@ -152,7 +152,7 @@ Expected: tests pass and ruff reports `All checks passed!`.
 - Modify: `redesign/packages/research_core/src/research_core/delegation/__init__.py`
 - Modify: `redesign/docs/progress/phases/phase-4.md`
 
-- [ ] **Step 1: Write failing tests**
+- [x] **Step 1: Write failing tests**
 
 Create tests for:
 
@@ -162,7 +162,7 @@ Create tests for:
 - child failures are returned as failed results with observable error and finish events;
 - `run_many()` rejects too many child tasks and total child step budget overruns.
 
-- [ ] **Step 2: Run tests to verify they fail**
+- [x] **Step 2: Run tests to verify they fail**
 
 Run:
 
@@ -172,15 +172,15 @@ cd redesign && uv run pytest tests/research_core/test_delegation_runtime.py -q
 
 Expected: failure because delegation runtime behavior is not implemented.
 
-- [ ] **Step 3: Implement runtime**
+- [x] **Step 3: Implement runtime**
 
 Create `DelegationRuntime` around a child runner factory protocol. Use existing `AgentRunResult`, `RunEvent`, `RunEventType`, and trajectory records.
 
-- [ ] **Step 4: Export runtime**
+- [x] **Step 4: Export runtime**
 
 Update `research_core.delegation.__init__`.
 
-- [ ] **Step 5: Verify**
+- [x] **Step 5: Verify**
 
 Run:
 

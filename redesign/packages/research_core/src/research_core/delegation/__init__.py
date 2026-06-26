@@ -6,12 +6,14 @@ from research_core.delegation.contracts import (
     DelegationStatus,
     DelegationTask,
 )
+from research_core.delegation.runtime import DelegationRuntime
 
 __all__ = [
     "AgentRolePolicy",
     "DelegationBudget",
     "DelegationMergeResult",
     "DelegationResult",
+    "DelegationRuntime",
     "DelegationStatus",
     "DelegationTask",
 ]
