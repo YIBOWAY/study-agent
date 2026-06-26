@@ -30,6 +30,7 @@ Add the FastAPI product API and React workbench that expose research run timelin
 | --- | --- |
 | 2026-06-26 | Phase 5 started from the Phase 4 post-audit baseline. Verification before changes: `uv run pytest -q` -> `160 passed`; `uv run ruff check .` -> `All checks passed!`. |
 | 2026-06-26 | Task 2 added pure `research_core.product` workbench snapshot contracts and deterministic demo data. Red check: focused pytest failed with `ModuleNotFoundError: No module named 'research_core.product'`; green checks: `tests/research_core/test_workbench_snapshot.py -q` -> `8 passed`, targeted `ruff check` -> `All checks passed!`. |
+| 2026-06-26 | Task 3 added the FastAPI workbench API under `apps/api`. Red check: focused pytest failed with `ModuleNotFoundError: No module named 'fastapi'`; green checks: `tests/apps/test_workbench_api.py -q` -> `5 passed`, targeted `ruff check apps/api/src tests/apps/test_workbench_api.py` -> `All checks passed!`. |
 
 ## Verification Target
 

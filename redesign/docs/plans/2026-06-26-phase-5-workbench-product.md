@@ -174,7 +174,7 @@ Expected: tests pass and ruff reports `All checks passed!`.
 - Modify: `redesign/pyproject.toml`
 - Modify: `redesign/docs/progress/phases/phase-5.md`
 
-- [ ] **Step 1: Write failing tests**
+- [x] **Step 1: Write failing tests**
 
 Create tests for:
 
@@ -184,7 +184,7 @@ Create tests for:
 - OpenAPI includes `Workbench` tags for the product endpoints;
 - API responses are JSON serializable and do not expose Python tuple/repr artifacts.
 
-- [ ] **Step 2: Run tests to verify they fail**
+- [x] **Step 2: Run tests to verify they fail**
 
 Run:
 
@@ -194,7 +194,7 @@ cd redesign && uv run pytest tests/apps/test_workbench_api.py -q
 
 Expected: failure because `research_api` and FastAPI dependencies are not wired.
 
-- [ ] **Step 3: Add dependencies and app code**
+- [x] **Step 3: Add dependencies and app code**
 
 Update `pyproject.toml`:
 
@@ -204,7 +204,7 @@ Update `pyproject.toml`:
 
 Implement `create_app()` and module-level `app` in `research_api.main`.
 
-- [ ] **Step 4: Verify**
+- [x] **Step 4: Verify**
 
 Run:
 
