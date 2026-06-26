@@ -15,6 +15,7 @@ from research_core.runtime import (
     AgentRunner,
     ToolDefinition,
     ToolRuntime,
+    UnknownToolError,
     event_type_sequence,
     events_to_records,
 )
@@ -138,7 +139,7 @@ try:
         system_prompt="You are careful.",
         user_message="Say hello through a missing tool.",
     )
-except KeyError as exc:
+except UnknownToolError as exc:
     error_events = exc.events
 else:
     raise AssertionError("Expected missing tool to raise KeyError")

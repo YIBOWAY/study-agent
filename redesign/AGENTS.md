@@ -17,6 +17,7 @@ These instructions apply to files under `redesign/`.
 - Use `DelegationRuntime` and `A2AAdapterStub` for deterministic delegation tests; do not add real A2A transport without an approved later-phase plan.
 - Add or update docs when a runtime concept is introduced.
 - Keep learner-facing course docs beginner-ready: include prerequisites, plain-language mental model, runnable offline examples, failure inspection, eval gate, and solution notes.
+- When a phase introduces a new learner-facing runtime concept, update `course/README.md`, `docs/course/roadmap.md`, and the relevant chapter/lab/solution files in the same phase or record an explicit deferral.
 - Do not import from the legacy root `app/` or `frontend/` directories.
 - Store redesign specs and plans under `redesign/docs/`.
 - Keep runner failures observable: model, tool, malformed-call, unknown-tool, and budget errors should append `RunEventType.ERROR` before raising.

@@ -21,6 +21,15 @@ For learners who know some Python but are new to Agent engineering:
 7. `../../course/chapters/01-agent-kernel-foundations.md`
 8. `../../course/labs/01-agent-runner-lab.md`
 9. `../../course/solutions/01-agent-runner-solution.md`
+10. `../../course/chapters/02-research-core-foundations.md`
+11. `../../course/labs/02-source-evidence-claim-lab.md`
+12. `../../course/solutions/02-source-evidence-claim-solution.md`
+13. `../../course/chapters/03-memory-and-skills.md`
+14. `../../course/labs/03-memory-skill-runtime-lab.md`
+15. `../../course/solutions/03-memory-skill-runtime-solution.md`
+16. `../../course/chapters/04-multi-agent-delegation.md`
+17. `../../course/labs/04-delegation-runtime-lab.md`
+18. `../../course/solutions/04-delegation-runtime-solution.md`
 
 ### Engineer Track
 
@@ -28,7 +37,8 @@ For readers already comfortable with Python projects, pytest, and basic Agent te
 
 1. Skim `../../course/reference/agent-kernel-glossary.md`.
 2. Start at `../../course/chapters/01-agent-kernel-foundations.md`.
-3. Use labs and solutions as runnable verification material.
+3. Continue through Chapters 02-04 when reading Phase 2-4 source modules.
+4. Use labs and solutions as runnable verification material.
 
 ## Shape
 
@@ -71,9 +81,19 @@ Early scaffold chapters may start as a spine, but they must be backfilled before
 - `../../course/chapters/01-agent-kernel-foundations.md`: first-principles Agent kernel chapter.
 - `../../course/labs/01-agent-runner-lab.md`: hands-on AgentRunner trajectory lab.
 - `../../course/solutions/01-agent-runner-solution.md`: annotated lab solution.
+- `../../course/chapters/02-research-core-foundations.md`: source/evidence/claim/report evidence-chain chapter.
+- `../../course/labs/02-source-evidence-claim-lab.md`: hands-on Research Core lab.
+- `../../course/solutions/02-source-evidence-claim-solution.md`: annotated Research Core solution.
+- `../../course/chapters/03-memory-and-skills.md`: memory policy and skill progressive-disclosure chapter.
+- `../../course/labs/03-memory-skill-runtime-lab.md`: hands-on MemoryEngine and SkillRuntime lab.
+- `../../course/solutions/03-memory-skill-runtime-solution.md`: annotated memory/skill solution.
+- `../../course/chapters/04-multi-agent-delegation.md`: child context isolation, budget, and delegation-event chapter.
+- `../../course/labs/04-delegation-runtime-lab.md`: hands-on DelegationRuntime lab.
+- `../../course/solutions/04-delegation-runtime-solution.md`: annotated delegation solution.
 
 ## Near-Term Course Work
 
-- Add a Memory and Skills chapter after Phase 3 runtime contracts.
+- Keep future phase plans honest: if a phase introduces a new learner-facing runtime concept, the phase plan must either add course material or explicitly defer it in this roadmap.
 - Add a Knowledge and Deep Research slice for research planning and report synthesis now that initial memory and skill policies are available.
+- Add Phase 5 product/workbench lessons only after product APIs and UI surfaces exist.
 - Add framework comparisons only when they teach a real tradeoff, keeping framework code out of the product runtime path.

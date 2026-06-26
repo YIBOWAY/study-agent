@@ -204,10 +204,11 @@ class AgentRunner:
         return content
 
     def _parse_tool_call(self, content: str) -> ToolCall | None:
-        if not content.lstrip().startswith("{"):
+        stripped_content = content.lstrip()
+        if not stripped_content.startswith("{"):
             return None
 
-        parsed = json.loads(content)
+        parsed = json.loads(stripped_content)
         if not isinstance(parsed, Mapping):
             return None
         if "tool_call" not in parsed:

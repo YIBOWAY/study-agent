@@ -23,6 +23,12 @@
 5. 读 `chapters/01-agent-kernel-foundations.md`。
 6. 做 `labs/01-agent-runner-lab.md`。
 7. 对答案时看 `solutions/01-agent-runner-solution.md`，不要一开始就看。
+8. 读 `chapters/02-research-core-foundations.md`，理解 source、evidence、claim、report 的证据链。
+9. 做 `labs/02-source-evidence-claim-lab.md`，再看 `solutions/02-source-evidence-claim-solution.md`。
+10. 读 `chapters/03-memory-and-skills.md`，理解 memory policy 和 skill progressive disclosure。
+11. 做 `labs/03-memory-skill-runtime-lab.md`，再看 `solutions/03-memory-skill-runtime-solution.md`。
+12. 读 `chapters/04-multi-agent-delegation.md`，理解 child context isolation 和 budget accounting。
+13. 做 `labs/04-delegation-runtime-lab.md`，再看 `solutions/04-delegation-runtime-solution.md`。
 
 ## Engineer Track
 
@@ -30,11 +36,13 @@
 
 ## How To Run Commands
 
-所有课程命令默认从 `redesign/` 目录运行：
+所有课程命令默认从 `redesign/` 目录运行。如果你在仓库根目录，先进入 redesign 子项目：
 
 ```bash
-cd /Users/sunyibo/programs/study-agent/redesign
+cd redesign
 ```
+
+如果你从别的目录打开终端，就先 `cd` 到本仓库，再进入 `redesign/`。
 
 测试整个 redesign 项目：
 
@@ -86,5 +94,27 @@ Current beginner-ready materials:
 - `chapters/01-agent-kernel-foundations.md`
 - `labs/01-agent-runner-lab.md`
 - `solutions/01-agent-runner-solution.md`
+- `chapters/02-research-core-foundations.md`
+- `labs/02-source-evidence-claim-lab.md`
+- `solutions/02-source-evidence-claim-solution.md`
+- `chapters/03-memory-and-skills.md`
+- `labs/03-memory-skill-runtime-lab.md`
+- `solutions/03-memory-skill-runtime-solution.md`
+- `chapters/04-multi-agent-delegation.md`
+- `labs/04-delegation-runtime-lab.md`
+- `solutions/04-delegation-runtime-solution.md`
+
+## Implementation Coverage
+
+| Runtime phase | Code status | Course status |
+| --- | --- | --- |
+| Phase 0: Scaffold | Complete | Chapter 00, Lab 00, Solution 00 |
+| Phase 1: Agent Kernel | Complete | Chapter 01, Lab 01, Solution 01 |
+| Phase 2: Research Core | Complete | Chapter 02, Lab 02, Solution 02 |
+| Phase 3: Memory and Skills | Complete | Chapter 03, Lab 03, Solution 03 |
+| Phase 4: Multi-Agent Delegation | Complete | Chapter 04, Lab 04, Solution 04 |
+| Phase 5: Workbench Product | Pending | Pending until product APIs and UI exist |
+| Phase 6: Framework Comparisons | Pending | Pending until comparison tasks exist |
+| Phase 7: Production Readiness | Pending | Pending until production contracts exist |
 
 Future chapters should keep the same promise: explain the idea in plain language, show the smallest runnable version, inspect the event trail, break it deliberately, and give the learner a concrete checkpoint.

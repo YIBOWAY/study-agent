@@ -4,7 +4,7 @@ Status: Complete
 
 Started: 2026-06-25
 Completed: 2026-06-25
-Branch: `codex/redesign-phase-1`
+Branch: `codex/redesign-phase-2`
 
 ## Goal
 
@@ -48,7 +48,7 @@ Add research domain entities, fake retrieval, source ingestion, and claim-source
 
 ## Next Focus
 
-Phase 4 is complete. Current next focus is Phase 5 planning: FastAPI product API, React workbench, runtime timeline, delegation tree, source/evidence panels, report editor, memory, skills, and eval panels.
+See `../overall.md` for the current redesign next focus. This phase record is kept as the historical Phase 2 delivery log.
 
 ## Deferred From The Larger Research Core Milestone
 

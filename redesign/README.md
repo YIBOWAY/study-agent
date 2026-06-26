@@ -51,6 +51,14 @@ Product APIs, persistence, real retrieval adapters, async delegation, and real A
 
 Start at `course/README.md`. New learners should follow the Beginner Track before Chapter 01; experienced engineers can skim the glossary and jump to the Agent Kernel lab.
 
+Current course coverage now follows the implemented runtime phases:
+
+- Chapter/Lab/Solution 00: learner setup and pre-kernel mental model.
+- Chapter/Lab/Solution 01: Agent Kernel.
+- Chapter/Lab/Solution 02: Research Core.
+- Chapter/Lab/Solution 03: Memory and Skills.
+- Chapter/Lab/Solution 04: Multi-Agent Delegation.
+
 ## Commands
 
 Run from this directory:

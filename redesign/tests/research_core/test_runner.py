@@ -1,6 +1,6 @@
 import json
 
-from research_core.runtime import AgentRunner, AgentRunResult
+from research_core.runtime import AgentRunner, AgentRunResult, UnknownToolError
 from research_core.runtime.events import RunEvent
 from research_core.runtime.messages import AgentMessage, MessageRole
 from research_core.runtime.tools import ToolCall, ToolDefinition, ToolResult, ToolRuntime
@@ -121,6 +121,100 @@ def test_agent_runner_executes_tool_call_then_returns_final_answer() -> None:
         "user_1",
         "assistant_1",
         "tool_call_1",
+    ]
+
+
+def test_agent_runner_executes_multiple_tool_calls_before_final_answer() -> None:
+    model = FakeModel(
+        [
+            FakeModelResponse(
+                content=(
+                    '{"tool_call": {"id": "call_1", "name": "echo", '
+                    '"arguments": {"text": "first"}}}'
+                )
+            ),
+            FakeModelResponse(
+                content=(
+                    '{"tool_call": {"id": "call_2", "name": "echo", '
+                    '"arguments": {"text": "second"}}}'
+                )
+            ),
+            FakeModelResponse(content="final answer"),
+        ]
+    )
+    tools = ToolRuntime()
+    tools.register(
+        ToolDefinition(
+            name="echo",
+            description="Echo text.",
+            handler=lambda arguments: {"text": arguments["text"]},
+        )
+    )
+
+    result = AgentRunner(model=model, tools=tools, max_steps=3).run(
+        run_id="run_1",
+        system_prompt="You are careful.",
+        user_message="hello",
+    )
+
+    assert result.final_message.content == "final answer"
+    assert _event_types(result) == [
+        "model_request",
+        "model_response",
+        "tool_call",
+        "tool_result",
+        "model_request",
+        "model_response",
+        "tool_call",
+        "tool_result",
+        "model_request",
+        "model_response",
+    ]
+    assert [message.id for message in model.calls[2]] == [
+        "system_1",
+        "user_1",
+        "assistant_1",
+        "tool_call_1",
+        "assistant_2",
+        "tool_call_2",
+    ]
+
+
+def test_agent_runner_can_finish_on_exact_max_steps_boundary() -> None:
+    model = FakeModel(
+        [
+            FakeModelResponse(
+                content=(
+                    '{"tool_call": {"id": "call_1", "name": "echo", '
+                    '"arguments": {"text": "hello"}}}'
+                )
+            ),
+            FakeModelResponse(content="final answer"),
+        ]
+    )
+    tools = ToolRuntime()
+    tools.register(
+        ToolDefinition(
+            name="echo",
+            description="Echo text.",
+            handler=lambda arguments: {"text": arguments["text"]},
+        )
+    )
+
+    result = AgentRunner(model=model, tools=tools, max_steps=2).run(
+        run_id="run_1",
+        system_prompt="You are careful.",
+        user_message="hello",
+    )
+
+    assert result.final_message.content == "final answer"
+    assert _event_types(result) == [
+        "model_request",
+        "model_response",
+        "tool_call",
+        "tool_result",
+        "model_request",
+        "model_response",
     ]
 
 
@@ -458,7 +552,7 @@ def test_agent_runner_emits_error_event_before_raising_for_unknown_tool() -> Non
             system_prompt="You are careful.",
             user_message="hello",
         )
-    except KeyError as exc:
+    except UnknownToolError as exc:
         assert "missing" in str(exc)
         events = _exception_events(exc)
     else:

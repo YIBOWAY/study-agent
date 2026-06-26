@@ -73,6 +73,7 @@ Chapter 01 的重点不是让 Agent 变聪明，而是让 Agent 变得可观察�
 | `ToolResult` | 工具执行结果 | 把工具输出变成可记录、可追加回对话的结构 |
 | `ToolRuntime` | 工具管理器 | 注册工具、查找工具、执行工具 |
 | `AgentRunner` | Agent loop | 把 context、model、tool、event 串起来 |
+| `AgentRunResult` | 一次运行的结果包 | 同时保存 final message、messages 和 events |
 
 ## Response Shape
 

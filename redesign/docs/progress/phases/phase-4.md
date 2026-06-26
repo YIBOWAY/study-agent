@@ -37,7 +37,8 @@ Add delegation runtime, isolated child context, role policies, budget accounting
 | 2026-06-26 | Task 3 exception-property hardening added after final re-review. Red check: `uv run pytest tests/research_core/test_delegation_runtime.py::test_run_task_ignores_exception_events_properties_that_raise -q` failed because reading a broken `exc.events` property masked the original child failure. Green check: exception-event regressions passed, `uv run pytest tests/research_core/test_delegation_runtime.py -q` -> `14 passed`, and scoped `ruff` was clean. |
 | 2026-06-26 | Task 4 A2A stub and multi-agent eval cases added with TDD. Red check: `uv run pytest tests/research_core/test_delegation_a2a.py tests/research_core/test_multi_agent_evals.py -q` -> collection error, `ImportError: cannot import name 'A2AAdapterStub' from 'research_core.delegation'`. Green check: same targeted pytest -> `5 passed`; `uv run ruff check packages/research_core/src/research_core/delegation tests/research_core/test_delegation_a2a.py tests/research_core/test_multi_agent_evals.py` -> `All checks passed!`; `git diff --check` -> clean. |
 | 2026-06-26 | Task 4 A2A/eval review fixes added with TDD. Red check: `uv run pytest tests/research_core/test_delegation_a2a.py tests/research_core/test_multi_agent_evals.py -q` -> `5 failed, 3 passed` for missing A2A schema fields, duplicate context-message ID acceptance, and task metadata leakage. Green check: same targeted pytest -> `8 passed`; review-fix verification: `uv run ruff check packages/research_core/src/research_core/delegation tests/research_core/test_delegation_a2a.py tests/research_core/test_multi_agent_evals.py` -> `All checks passed!`; `git diff --check` -> clean. |
-| 2026-06-26 | Phase 4 docs synchronized: runtime architecture, data model, glossary, docs index, root README, AGENTS instructions, roadmap, and progress docs now reflect Multi-Agent and Delegation. Final verification: `uv run pytest -q` -> `152 passed`; `uv run ruff check .` -> `All checks passed!`; `git diff --check` clean. |
+| 2026-06-26 | Phase 4 docs synchronized: runtime architecture, data model, glossary, docs index, root README, AGENTS instructions, roadmap, and progress docs now reflect Multi-Agent and Delegation. Initial Phase 4 verification: `uv run pytest -q` -> `152 passed`; `uv run ruff check .` -> `All checks passed!`; `git diff --check` clean. |
+| 2026-06-26 | Post-phase audit catch-up added Chapter/Lab/Solution 02-04 so Research Core, Memory and Skills, and Multi-Agent Delegation are no longer code-only phases. It also fixed the Phase 2 branch-name docs error, added direct immutability tests, added AgentRunner multi-tool and exact-budget tests, added A2A envelope validation tests, exported `UnknownToolError`, clarified legacy vs redesign phase tables, and removed the temporary audit document. Verification: `uv run pytest -q` -> `160 passed`; `uv run ruff check .` -> `All checks passed!`; `git diff --check` clean. |
 
 ## Delivered Files
 
@@ -65,6 +66,6 @@ uv run ruff check .
 
 Recorded final result on 2026-06-26:
 
-- `152 passed`
+- `160 passed`
 - `All checks passed!`
 - `git diff --check` clean

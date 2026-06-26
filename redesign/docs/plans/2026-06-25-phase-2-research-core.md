@@ -314,7 +314,7 @@ Remove generated `redesign/.venv`, `redesign/.ruff_cache`, `redesign/.pytest_cac
 
 - [x] **Step 3: Commit and push**
 
-Commit with a message that records the Phase 2 deliverables and verification commands. Push branch `codex/redesign-phase-1`.
+Commit with a message that records the Phase 2 deliverables and verification commands. Push branch `codex/redesign-phase-2`.
 
 ## Phase 2 Completion Checklist
 

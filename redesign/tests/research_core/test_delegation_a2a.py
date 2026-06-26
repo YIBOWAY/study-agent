@@ -95,6 +95,50 @@ def test_a2a_envelope_rejects_duplicate_context_message_ids() -> None:
         )
 
 
+def test_a2a_envelope_rejects_blank_required_fields_and_invalid_sequences() -> None:
+    required_field_cases = [
+        {"task_id": ""},
+        {"parent_run_id": " "},
+        {"child_run_id": ""},
+        {"role_id": ""},
+        {"role_name": ""},
+        {"objective": ""},
+    ]
+
+    for overrides in required_field_cases:
+        values = {
+            "task_id": "task_1",
+            "parent_run_id": "parent_run",
+            "child_run_id": "child_run_1",
+            "role_id": "role_reviewer",
+            "role_name": "Reviewer",
+            "objective": "Summarize the delegated evidence.",
+        }
+        values.update(overrides)
+        with pytest.raises(ValueError, match="must not be empty"):
+            A2AEnvelope(**values)
+
+    invalid_sequence_cases = [
+        {"tool_names": "search"},
+        {"skill_names": ("summarize", "")},
+        {"memory_kinds": {"episodic": True}},
+        {"context_message_ids": ("msg_1", " ")},
+    ]
+
+    for overrides in invalid_sequence_cases:
+        values = {
+            "task_id": "task_1",
+            "parent_run_id": "parent_run",
+            "child_run_id": "child_run_1",
+            "role_id": "role_reviewer",
+            "role_name": "Reviewer",
+            "objective": "Summarize the delegated evidence.",
+        }
+        values.update(overrides)
+        with pytest.raises(ValueError):
+            A2AEnvelope(**values)
+
+
 def test_a2a_adapter_stub_exports_task_as_deterministic_envelope() -> None:
     task = _task()
     adapter = A2AAdapterStub()

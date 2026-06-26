@@ -7,8 +7,8 @@ Last updated: 2026-06-26
 - Active branch: `codex/redesign-phase-4`
 - Active phase: Phase 4 complete; next phase is Phase 5 - Workbench Product
 - Completed phases: 5 of 8
-- Current verification baseline: Phase 4 final pass on 2026-06-26: full redesign suite `152 passed`, `ruff check .` clean, and `git diff --check` clean.
-- Course documentation now includes a beginner-ready entrypoint, primer/reference pages, Chapter 00, Lab 00, and rewritten Chapter/Lab/Solution 01.
+- Current verification baseline: post-audit Phase 4 pass on 2026-06-26: full redesign suite `160 passed`, `ruff check .` clean, and `git diff --check` clean.
+- Course documentation now includes a beginner-ready entrypoint, primer/reference pages, and Chapter/Lab/Solution 00-04 covering scaffold, Agent Kernel, Research Core, Memory and Skills, and Multi-Agent Delegation.
 
 ## Phase Index
 

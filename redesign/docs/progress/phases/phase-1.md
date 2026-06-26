@@ -57,7 +57,7 @@ Build the first executable agent kernel spine: tool runtime, context builder, ag
 
 ## Next Focus
 
-Phase 4 is complete. Current next focus is Phase 5 planning: FastAPI product API, React workbench, runtime timeline, delegation tree, source/evidence panels, report editor, memory, skills, and eval panels.
+See `../overall.md` for the current redesign next focus. This phase record is kept as the historical Phase 1 delivery log.
 
 ## Verification Target
 

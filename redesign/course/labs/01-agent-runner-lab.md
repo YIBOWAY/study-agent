@@ -19,6 +19,8 @@
 PYTHONPATH=packages/research_core/src uv run python
 ```
 
+保持这个 shell 打开，后面的练习会复用前面创建的 `tools` 和 `result`。
+
 先粘贴 imports：
 
 ```python
@@ -26,6 +28,7 @@ from research_core.runtime import (
     AgentRunner,
     ToolDefinition,
     ToolRuntime,
+    UnknownToolError,
     event_type_sequence,
     events_to_records,
 )
@@ -195,7 +198,7 @@ try:
         system_prompt="You are careful.",
         user_message="Say hello through a missing tool.",
     )
-except KeyError as exc:
+except UnknownToolError as exc:
     error_events = exc.events
     print(type(exc).__name__)
     print(event_type_sequence(error_events))

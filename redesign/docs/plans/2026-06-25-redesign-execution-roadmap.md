@@ -110,7 +110,7 @@ Purpose:
 
 Exit criteria:
 
-- `cd redesign && uv run pytest -q` passes. Completed on 2026-06-26 with `152 passed`.
+- `cd redesign && uv run pytest -q` passes. Completed on 2026-06-26 with `152 passed`; post-audit course/test catch-up raised the current baseline to `160 passed`.
 - `cd redesign && uv run ruff check .` passes. Completed on 2026-06-26 with `All checks passed!`.
 - `DelegationRuntime` emits `delegate_start`, `delegate_event`, and `delegate_finish`. Completed.
 - Child contexts are isolated from parent history. Completed.
@@ -129,7 +129,7 @@ Purpose:
 - Add React + TypeScript workbench.
 - Surface research run timeline, delegation tree, source/evidence panels, memory, skills, and evals.
 
-Plan document should be created after Phase 4 runtime events are stable.
+Next action: create the Phase 5 executable plan from the stable Phase 4 runtime event and delegation contracts.
 
 ### Phase 6: Framework Comparisons
 

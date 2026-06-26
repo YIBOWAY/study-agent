@@ -42,6 +42,15 @@ This directory is the canonical archive for the redesign version of the project.
 - `../course/chapters/01-agent-kernel-foundations.md`: first-principles Agent Kernel chapter.
 - `../course/labs/01-agent-runner-lab.md`: hands-on AgentRunner lab.
 - `../course/solutions/01-agent-runner-solution.md`: expected lab solution.
+- `../course/chapters/02-research-core-foundations.md`: Research Core evidence-chain chapter.
+- `../course/labs/02-source-evidence-claim-lab.md`: Source/Evidence/Claim lab.
+- `../course/solutions/02-source-evidence-claim-solution.md`: expected Research Core lab solution.
+- `../course/chapters/03-memory-and-skills.md`: Memory policy and SkillRuntime chapter.
+- `../course/labs/03-memory-skill-runtime-lab.md`: Memory/Skill lab.
+- `../course/solutions/03-memory-skill-runtime-solution.md`: expected Memory/Skill lab solution.
+- `../course/chapters/04-multi-agent-delegation.md`: Multi-Agent Delegation chapter.
+- `../course/labs/04-delegation-runtime-lab.md`: DelegationRuntime lab.
+- `../course/solutions/04-delegation-runtime-solution.md`: expected DelegationRuntime lab solution.
 
 ## Rule
 

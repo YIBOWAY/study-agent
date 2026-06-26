@@ -30,7 +30,9 @@ flowchart LR
     Memory --> Files[(JSON Files)]
 ```
 
-## 已实现能力
+## 已实现能力（legacy 根项目）
+
+下表描述的是仓库根目录的原有 FastAPI/Streamlit 项目，不是 `redesign/` clean-room 子项目的阶段表。`redesign/` 的阶段以 `redesign/docs/plans/2026-06-25-redesign-execution-roadmap.md` 为准；其中 Multi-Agent Delegation 已在 redesign Phase 4 落地。
 
 | Phase | 内容 |
 |------|------|
