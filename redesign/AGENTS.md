@@ -14,6 +14,7 @@ These instructions apply to files under `redesign/`.
 - Use `SourceIngestor` and `FakeRetriever` for deterministic offline research tests.
 - Use `MemoryEngine` and `SkillRuntime` for deterministic memory/skill tests.
 - Add or update docs when a runtime concept is introduced.
+- Keep learner-facing course docs beginner-ready: include prerequisites, plain-language mental model, runnable offline examples, failure inspection, eval gate, and solution notes.
 - Do not import from the legacy root `app/` or `frontend/` directories.
 - Store redesign specs and plans under `redesign/docs/`.
 - Keep runner failures observable: model, tool, malformed-call, unknown-tool, and budget errors should append `RunEventType.ERROR` before raising.

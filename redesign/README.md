@@ -24,7 +24,7 @@ Phase 1 adds the first Agent Kernel course spine:
 
 - `ToolRuntime`, `ContextBuilder`, `AgentRunner`, and trajectory helpers.
 - Deterministic model/tool/event tests.
-- Chapter 01, Lab 01, and Solution 01 under `course/`.
+- Beginner-ready course entrypoint, reference primers, Chapter 00, Lab 00, Chapter 01, Lab 01, and solutions under `course/`.
 
 Phase 2 adds the first Research Core contracts:
 
@@ -39,6 +39,10 @@ Phase 3 adds the first stateful-agent contracts:
 - Memory pollution and skill loading eval cases.
 
 Product APIs, delegation, persistence, and real retrieval adapters arrive in later phases.
+
+## Course Entry
+
+Start at `course/README.md`. New learners should follow the Beginner Track before Chapter 01; experienced engineers can skim the glossary and jump to the Agent Kernel lab.
 
 ## Commands
 

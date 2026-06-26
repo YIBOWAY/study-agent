@@ -31,6 +31,7 @@ Build the first executable agent kernel spine: tool runtime, context builder, ag
 | 2026-06-25 | Trajectory regression helpers delivered: stable event records, event type sequences, independent record copies, and integration coverage against real AgentRunner events. Verification: trajectory tests `3 passed`, full redesign suite `78 passed`, `ruff check .` clean. |
 | 2026-06-25 | Course Chapter/Lab/Solution 01 delivered for Agent Kernel Foundations. Verification: course reference grep passed and solution snippets executed successfully with `PYTHONPATH=packages/research_core/src uv run python`. |
 | 2026-06-25 | Phase 1 final docs synchronized: runtime architecture, glossary, docs index, roadmap, root README, and AGENTS instructions now reflect the Agent Kernel Course Spine. Final verification: `uv run pytest -q` -> `78 passed`; `uv run ruff check .` -> `All checks passed!`; `git diff --check` clean. |
+| 2026-06-26 | Post-phase course beginner-readiness pass added on `codex/redesign-phase-3`: course entrypoint, Python/terminal primer, plain-language Agent kernel glossary, Chapter 00, Lab 00, annotated solution, and rewritten Chapter/Lab/Solution 01 for step-by-step learning. Verification: course snippets passed; `uv run pytest -q` -> `116 passed`; `uv run ruff check .` -> `All checks passed!`; `git diff --check` clean. |
 
 ## Delivered Files
 
@@ -44,6 +45,12 @@ Build the first executable agent kernel spine: tool runtime, context builder, ag
 - `tests/research_core/test_messages.py`
 - `tests/research_core/test_runner.py`
 - `tests/research_core/test_trajectory.py`
+- `course/README.md`
+- `course/reference/python-terminal-primer.md`
+- `course/reference/agent-kernel-glossary.md`
+- `course/chapters/00-before-agent-kernel.md`
+- `course/labs/00-environment-check.md`
+- `course/solutions/00-environment-check-solution.md`
 - `course/chapters/01-agent-kernel-foundations.md`
 - `course/labs/01-agent-runner-lab.md`
 - `course/solutions/01-agent-runner-solution.md`
@@ -61,8 +68,15 @@ uv run pytest -q
 uv run ruff check .
 ```
 
-Recorded final result on 2026-06-25:
+Recorded final implementation result on 2026-06-25:
 
 - `78 passed`
+- `All checks passed!`
+- `git diff --check` clean
+
+Recorded beginner-readiness documentation pass on 2026-06-26:
+
+- Course snippets passed
+- `116 passed`
 - `All checks passed!`
 - `git diff --check` clean

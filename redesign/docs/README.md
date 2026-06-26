@@ -8,6 +8,7 @@ This directory is the canonical archive for the redesign version of the project.
 - `plans/`: executable phase plans.
 - `progress/`: total and per-phase progress records.
 - `architecture/`: stable architecture notes.
+- `course/`: course roadmap and chapter authoring template.
 - `glossary.md`: redesign terminology.
 
 ## Document Index
@@ -23,7 +24,7 @@ This directory is the canonical archive for the redesign version of the project.
 - `architecture/runtime.md`: runtime contracts, Phase 1 agent loop, and fake provider boundary.
 - `architecture/data-model.md`: research entities, memory records, skill package model, fake retrieval, ingestion, and claim-source mapping.
 - `course/roadmap.md`: 24-week course domain map and current chapter index.
-- `course/chapter-template.md`: required structure for future full course chapters.
+- `course/chapter-template.md`: beginner-ready structure for future full course chapters.
 - `product/workbench.md`: product boundary and first workbench screen expectations.
 - `adr/README.md`: architecture decision record folder and format.
 - `living-landscape.md`: dated framework/protocol landscape notes.
@@ -31,6 +32,12 @@ This directory is the canonical archive for the redesign version of the project.
 
 ## Course Index
 
+- `../course/README.md`: learner entrypoint, track selection, commands, and common stuck points.
+- `../course/reference/python-terminal-primer.md`: terminal and Python primer for course readers.
+- `../course/reference/agent-kernel-glossary.md`: plain-language Agent kernel glossary.
+- `../course/chapters/00-before-agent-kernel.md`: pre-kernel mental model.
+- `../course/labs/00-environment-check.md`: local environment readiness lab.
+- `../course/solutions/00-environment-check-solution.md`: expected environment-check outputs.
 - `../course/chapters/01-agent-kernel-foundations.md`: first-principles Agent Kernel chapter.
 - `../course/labs/01-agent-runner-lab.md`: hands-on AgentRunner lab.
 - `../course/solutions/01-agent-runner-solution.md`: expected lab solution.

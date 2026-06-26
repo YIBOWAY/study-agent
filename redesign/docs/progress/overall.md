@@ -7,7 +7,8 @@ Last updated: 2026-06-26
 - Active branch: `codex/redesign-phase-3`
 - Active phase: Phase 3 complete; next phase is Phase 4 - Multi-Agent and Delegation
 - Completed phases: 4 of 8
-- Current verification baseline: Phase 3 final passed with full redesign suite `116 passed`; `ruff check .` clean.
+- Current verification baseline: Course beginner-readiness pass on 2026-06-26 passed course snippets, full redesign suite `116 passed`, `ruff check .` clean, and `git diff --check` clean.
+- Course documentation now includes a beginner-ready entrypoint, primer/reference pages, Chapter 00, Lab 00, and rewritten Chapter/Lab/Solution 01.
 
 ## Phase Index
 

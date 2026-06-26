@@ -1,12 +1,14 @@
 # Solution 01: Agent Runner Lab
 
-Run these snippets from a Python shell started in `redesign/`:
+这份 solution 用来对答案。建议你先自己完成 lab，再看这里。
+
+所有 snippets 都从 `redesign/` 的 Python shell 运行：
 
 ```bash
 PYTHONPATH=packages/research_core/src uv run python
 ```
 
-## Exercise 1
+## Imports
 
 ```python
 from research_core.runtime import (
@@ -17,8 +19,13 @@ from research_core.runtime import (
     events_to_records,
 )
 from research_core.testing import FakeModel, FakeModelResponse
+```
 
+## Exercise 1 Solution
+
+```python
 model = FakeModel([FakeModelResponse(content="final answer")])
+
 result = AgentRunner(model=model).run(
     run_id="lab_plain",
     system_prompt="You are careful.",
@@ -33,7 +40,13 @@ assert events_to_records(result.events)[0]["payload"]["message_ids"] == [
 ]
 ```
 
-## Exercise 2
+What this proves:
+
+- `ContextBuilder` inserted `system_1`.
+- The user message became `user_1`.
+- A plain model response ends the run immediately.
+
+## Exercise 2 Solution
 
 ```python
 model = FakeModel(
@@ -71,7 +84,14 @@ assert event_type_sequence(result.events) == [
 ]
 ```
 
-## Exercise 3
+What this proves:
+
+- JSON model output was parsed as a `ToolCall`.
+- `ToolRuntime` found and executed the registered `echo` tool.
+- The tool result was appended before the second model request.
+- The second model response became the final answer.
+
+## Exercise 3 Solution
 
 ```python
 records = events_to_records(result.events)
@@ -95,7 +115,13 @@ records[3]["payload"]["tool_result"]["content"]["text"] = "mutated"
 assert result.events[3].payload["tool_result"]["content"]["text"] == "hello"
 ```
 
-## Exercise 4
+What this proves:
+
+- The event trail contains enough detail to debug the tool step.
+- `events_to_records` returns plain records for inspection.
+- Mutating those records does not mutate the original `RunEvent` payload.
+
+## Exercise 4 Solution
 
 ```python
 model = FakeModel(
@@ -126,5 +152,20 @@ assert event_type_sequence(error_events) == [
 assert error_events[-1].payload["error"]["kind"] == "unknown_tool"
 ```
 
-The final snippet is the behavior to remember: a failed agent run is still a
-structured runtime artifact.
+What this proves:
+
+- Missing tools are not ignored.
+- The runner emits an `error` event before raising.
+- The exception carries `exc.events`, so failed runs are still inspectable.
+
+## Final Takeaway
+
+The most important lesson is not “how to write an echo tool”.
+
+The important lesson is:
+
+```text
+An agent runtime should make its path visible.
+```
+
+When the run succeeds, inspect the event sequence. When the run fails, inspect the event sequence. That habit is what turns Agent work from prompt guessing into engineering.
