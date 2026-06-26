@@ -201,7 +201,7 @@ Expected: tests pass and ruff reports `All checks passed!`.
 - Modify: `redesign/packages/research_core/src/research_core/delegation/__init__.py`
 - Modify: `redesign/docs/progress/phases/phase-4.md`
 
-- [ ] **Step 1: Write failing tests**
+- [x] **Step 1: Write failing tests**
 
 Create tests for:
 
@@ -210,7 +210,7 @@ Create tests for:
 - isolation eval catches accidental parent-history leakage;
 - merge eval keeps failed child results as unresolved conflicts.
 
-- [ ] **Step 2: Run tests to verify they fail**
+- [x] **Step 2: Run tests to verify they fail**
 
 Run:
 
@@ -220,11 +220,11 @@ cd redesign && uv run pytest tests/research_core/test_delegation_a2a.py tests/re
 
 Expected: failure because A2A and eval behavior are not implemented.
 
-- [ ] **Step 3: Implement A2A stub and eval helpers**
+- [x] **Step 3: Implement A2A stub and eval helpers**
 
 Keep the adapter local and deterministic. Do not add network transport or protocol dependencies.
 
-- [ ] **Step 4: Verify**
+- [x] **Step 4: Verify**
 
 Run:
 
