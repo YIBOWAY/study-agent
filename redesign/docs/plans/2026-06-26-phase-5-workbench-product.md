@@ -108,7 +108,7 @@ Expected: Phase 5 plan and active progress state are discoverable from docs inde
 - Create: `redesign/tests/research_core/test_workbench_snapshot.py`
 - Modify: `redesign/docs/progress/phases/phase-5.md`
 
-- [ ] **Step 1: Write failing tests**
+- [x] **Step 1: Write failing tests**
 
 Create tests for:
 
@@ -119,7 +119,7 @@ Create tests for:
 - returned records are plain copies, so mutating them does not mutate the snapshot;
 - invalid blank IDs/titles and non-JSON-compatible metadata are rejected.
 
-- [ ] **Step 2: Run tests to verify they fail**
+- [x] **Step 2: Run tests to verify they fail**
 
 Run:
 
@@ -129,7 +129,7 @@ cd redesign && uv run pytest tests/research_core/test_workbench_snapshot.py -q
 
 Expected: failure because `research_core.product` does not exist.
 
-- [ ] **Step 3: Implement snapshot contracts**
+- [x] **Step 3: Implement snapshot contracts**
 
 Implement frozen dataclasses and a deterministic `build_demo_workbench_snapshot()` helper.
 
@@ -149,11 +149,11 @@ Required contract names:
 
 Use existing `research_core.runtime`, `research_core.research`, `research_core.memory`, `research_core.skills`, and `research_core.delegation` record shapes where useful. Keep the module free of FastAPI, React, database, provider, and network imports.
 
-- [ ] **Step 4: Export contracts**
+- [x] **Step 4: Export contracts**
 
 Update `research_core.product.__init__` to export the public Phase 5 product contracts.
 
-- [ ] **Step 5: Verify**
+- [x] **Step 5: Verify**
 
 Run:
 
