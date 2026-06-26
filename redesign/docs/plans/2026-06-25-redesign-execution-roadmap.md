@@ -100,13 +100,26 @@ Follow-up:
 
 ### Phase 4: Multi-Agent and Delegation
 
+Plan: `redesign/docs/plans/2026-06-26-phase-4-multi-agent-delegation.md`
+
 Purpose:
 
 - Add delegation runtime, child context isolation, role policies, budget accounting, and merge contract.
 - Add multi-agent eval cases.
 - Add an A2A adapter stub.
 
-Plan document should be created next, now that Phase 3 memory and skill policies are stable.
+Exit criteria:
+
+- `cd redesign && uv run pytest -q` passes.
+- `cd redesign && uv run ruff check .` passes.
+- `DelegationRuntime` emits `delegate_start`, `delegate_event`, and `delegate_finish`.
+- Child contexts are isolated from parent history.
+- Budget accounting and merge eval cases pass.
+- `A2AAdapterStub` serializes delegation tasks and rejects remote sends with an explicit not-implemented error.
+
+Follow-up:
+
+- True async execution, cancellation propagation, remote A2A transport, and product delegation-tree UI are deferred to later phases.
 
 ### Phase 5: Workbench Product
 
