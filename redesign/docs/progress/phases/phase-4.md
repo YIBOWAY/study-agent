@@ -29,6 +29,8 @@ Add delegation runtime, isolated child context, role policies, budget accounting
 | Date | Update |
 | --- | --- |
 | 2026-06-26 | Phase 4 started from Phase 3 baseline. Verification before changes: `uv run pytest -q` -> `116 passed`; `uv run ruff check .` -> `All checks passed!`. |
+| 2026-06-26 | Task 2 delegation contracts added with TDD. Red check: `uv run pytest tests/research_core/test_delegation_contracts.py -q` -> import error, `ModuleNotFoundError: No module named 'research_core.delegation'`. Green check: `uv run pytest tests/research_core/test_delegation_contracts.py -q` -> `9 passed`; `uv run ruff check packages/research_core/src/research_core/delegation tests/research_core/test_delegation_contracts.py` -> `All checks passed!`. |
+| 2026-06-26 | Task 2 review fixes added with TDD. Red check: `uv run pytest tests/research_core/test_delegation_contracts.py -q` -> `5 failed, 9 passed` for scoped sequence validation, message metadata validation, event run-id validation, and incomplete merge conflicts. Green check: `uv run pytest tests/research_core/test_delegation_contracts.py -q` -> `14 passed`; `uv run ruff check packages/research_core/src/research_core/delegation tests/research_core/test_delegation_contracts.py` -> `All checks passed!`. |
 
 ## Verification Target
 
