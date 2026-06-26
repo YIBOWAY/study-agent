@@ -229,7 +229,7 @@ Expected: tests pass and ruff reports `All checks passed!`.
 - Create: `redesign/apps/web/src/types.ts`
 - Modify: `redesign/docs/progress/phases/phase-5.md`
 
-- [ ] **Step 1: Create the app shell**
+- [x] **Step 1: Create the app shell**
 
 Use Vite + React + TypeScript. The first viewport must be the actual workbench, not a marketing landing page.
 
@@ -245,11 +245,11 @@ Required first-screen regions:
 - skills panel;
 - eval panel.
 
-- [ ] **Step 2: Implement data loading**
+- [x] **Step 2: Implement data loading**
 
 `App.tsx` should fetch `/api/workbench/snapshot` and fall back to a deterministic local fixture when the API is unavailable. The fallback must use the same TypeScript `WorkbenchSnapshot` shape as the API.
 
-- [ ] **Step 3: Implement polished operational layout**
+- [x] **Step 3: Implement polished operational layout**
 
 Use dense, scan-friendly product UI:
 
@@ -261,7 +261,7 @@ Use dense, scan-friendly product UI:
 - stable dimensions for timeline, panels, and navigation;
 - responsive layout for desktop and mobile.
 
-- [ ] **Step 4: Verify**
+- [x] **Step 4: Verify**
 
 Run:
 
