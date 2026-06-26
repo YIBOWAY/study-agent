@@ -123,13 +123,22 @@ Follow-up:
 
 ### Phase 5: Workbench Product
 
+Plan: `redesign/docs/plans/2026-06-26-phase-5-workbench-product.md`
+
 Purpose:
 
 - Add FastAPI product API.
 - Add React + TypeScript workbench.
 - Surface research run timeline, delegation tree, source/evidence panels, memory, skills, and evals.
 
-Next action: create the Phase 5 executable plan from the stable Phase 4 runtime event and delegation contracts.
+Exit criteria:
+
+- `cd redesign && uv run pytest -q` passes.
+- `cd redesign && uv run ruff check .` passes.
+- `cd redesign/apps/web && npm run build` passes.
+- Workbench snapshot contracts cover project, run, timeline, delegation, sources, report, memory, skills, and eval panels.
+- FastAPI exposes health, snapshot, and timeline endpoints.
+- React first screen is an operational workbench, not a landing page.
 
 ### Phase 6: Framework Comparisons
 
