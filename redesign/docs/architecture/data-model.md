@@ -108,3 +108,25 @@ discovered resource paths.
 - discover `references/`, `scripts/`, and `assets/` paths,
 - read reference content only through explicit `read_reference()` calls,
 - reject path traversal and non-reference reads.
+
+## Delegation Model
+
+Phase 4 introduces the first multi-agent contracts under
+`packages/research_core/src/research_core/delegation/`.
+
+`AgentRolePolicy` defines a child agent role: role ID, display name, system
+prompt, scoped tool names, scoped skill names, scoped memory kinds, and max
+steps. `DelegationTask` assigns one child objective from a parent run to a child
+run and includes only explicit non-system context messages.
+
+`DelegationBudget` records local limits for child count, per-child steps, and
+total steps. `DelegationResult` stores the task, status, final child message,
+child events, parent delegation events, error message, and derived step count.
+`DelegationMergeResult` preserves child result order and treats every
+non-completed child as unresolved until the parent reviews it.
+
+`A2AEnvelope` is a versioned task-delegation export record for future remote
+agent protocols. It includes task/run IDs, role identity, objective, scoped
+tool/skill/memory names, context message IDs, schema version, and message type.
+It does not export parent-private task metadata. `A2AAdapterStub` can export this
+record but does not implement remote send transport.

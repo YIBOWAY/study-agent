@@ -23,7 +23,7 @@ This directory is the canonical archive for the redesign version of the project.
 - `progress/overall.md`: phase status dashboard for humans and agents.
 - `architecture/overview.md`: double-layer repository and dependency direction.
 - `architecture/runtime.md`: runtime contracts, Phase 1 agent loop, and fake provider boundary.
-- `architecture/data-model.md`: research entities, memory records, skill package model, fake retrieval, ingestion, and claim-source mapping.
+- `architecture/data-model.md`: research entities, memory records, skill package model, delegation contracts, fake retrieval, ingestion, and claim-source mapping.
 - `course/roadmap.md`: 24-week course domain map and current chapter index.
 - `course/chapter-template.md`: beginner-ready structure for future full course chapters.
 - `product/workbench.md`: product boundary and first workbench screen expectations.

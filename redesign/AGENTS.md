@@ -11,8 +11,10 @@ These instructions apply to files under `redesign/`.
 - Use `FakeModel` and public `research_core.runtime` contracts for offline runtime tests and labs.
 - Keep `research_core.research` independent from product apps, databases, provider SDKs, embeddings, and legacy root code.
 - Keep `research_core.memory` and `research_core.skills` offline-first and independent from product apps, databases, provider SDKs, embeddings, and legacy root code.
+- Keep `research_core.delegation` deterministic, offline-first, and independent from product apps, provider SDKs, network transport, and legacy root code.
 - Use `SourceIngestor` and `FakeRetriever` for deterministic offline research tests.
 - Use `MemoryEngine` and `SkillRuntime` for deterministic memory/skill tests.
+- Use `DelegationRuntime` and `A2AAdapterStub` for deterministic delegation tests; do not add real A2A transport without an approved later-phase plan.
 - Add or update docs when a runtime concept is introduced.
 - Keep learner-facing course docs beginner-ready: include prerequisites, plain-language mental model, runnable offline examples, failure inspection, eval gate, and solution notes.
 - Do not import from the legacy root `app/` or `frontend/` directories.
@@ -37,5 +39,6 @@ The runtime should follow these boundaries:
 - Phase 1 runtime flow is `ContextBuilder -> AgentRunner -> ToolRuntime -> RunEvent`.
 - Phase 2 research flow is `SourceInput -> SourceIngestor -> FakeRetriever -> Evidence -> Claim -> Report -> ClaimSourceLink`.
 - Phase 3 stateful flow is `MemoryWritePolicy -> MemoryEngine -> MemoryRecallPolicy` and `SkillRuntime -> SKILL.md -> explicit references`.
+- Phase 4 delegation flow is `DelegationTask -> DelegationRuntime -> delegate_* RunEvent records -> DelegationResult -> DelegationMergeResult`, with `A2AAdapterStub` limited to deterministic export stubs.
 - Provider adapters convert at the boundary.
 - Fake model providers are first-class testing infrastructure.

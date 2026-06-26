@@ -46,7 +46,7 @@ Add memory recall/write policies, skill runtime, and memory/skill eval cases.
 
 ## Next Focus
 
-Phase 4 planning: delegation runtime, isolated child contexts, role policies, budget accounting, and merge contracts.
+Phase 5 planning: FastAPI product API, React workbench, runtime timeline, delegation tree, source/evidence panels, report editor, memory, skills, and eval panels.
 
 ## Verification
 

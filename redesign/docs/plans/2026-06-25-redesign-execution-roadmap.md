@@ -110,12 +110,12 @@ Purpose:
 
 Exit criteria:
 
-- `cd redesign && uv run pytest -q` passes.
-- `cd redesign && uv run ruff check .` passes.
-- `DelegationRuntime` emits `delegate_start`, `delegate_event`, and `delegate_finish`.
-- Child contexts are isolated from parent history.
-- Budget accounting and merge eval cases pass.
-- `A2AAdapterStub` serializes delegation tasks and rejects remote sends with an explicit not-implemented error.
+- `cd redesign && uv run pytest -q` passes. Completed on 2026-06-26 with `152 passed`.
+- `cd redesign && uv run ruff check .` passes. Completed on 2026-06-26 with `All checks passed!`.
+- `DelegationRuntime` emits `delegate_start`, `delegate_event`, and `delegate_finish`. Completed.
+- Child contexts are isolated from parent history. Completed.
+- Budget accounting and merge eval cases pass. Completed.
+- `A2AAdapterStub` serializes delegation tasks and rejects remote sends with an explicit not-implemented error. Completed.
 
 Follow-up:
 

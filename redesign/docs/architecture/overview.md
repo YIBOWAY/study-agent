@@ -50,4 +50,18 @@ Phase 2 adds:
 - claim-source mapping helpers,
 - data model docs.
 
-Product APIs, web UI, memory, skills, delegation, and retrieval are introduced by their approved phase plans.
+Phase 3 adds:
+
+- deterministic in-process memory records and policies,
+- folder-based skill loading with progressive disclosure,
+- memory pollution and skill loading eval cases.
+
+Phase 4 adds:
+
+- delegation role, task, budget, result, and merge contracts,
+- deterministic `DelegationRuntime` orchestration,
+- parent `delegate_start`, `delegate_event`, and `delegate_finish` event records,
+- child context isolation and budget accounting eval cases,
+- a local `A2AAdapterStub` export boundary without network transport.
+
+Product APIs, web UI, async delegation, real A2A transport, persistence, and real retrieval adapters are introduced by later approved phase plans.

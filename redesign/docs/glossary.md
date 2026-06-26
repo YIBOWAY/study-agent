@@ -112,6 +112,51 @@ entrypoint and discovered resource paths.
 The Phase 3 loader for folder-based skills.
 It loads `SKILL.md` first and reads references only when explicitly requested.
 
+## AgentRolePolicy
+
+The Phase 4 child-agent role boundary.
+It owns the child system prompt, scoped tool names, scoped skill names, scoped
+memory kinds, and max-step limit.
+
+## DelegationTask
+
+A parent-to-child assignment with parent and child run IDs, an objective, a role
+policy, and explicit non-system context messages.
+
+## DelegationBudget
+
+The local Phase 4 accounting policy for maximum child runs, maximum steps per
+child, and maximum total child steps.
+
+## DelegationRuntime
+
+The deterministic Phase 4 orchestration layer.
+It runs child tasks through a child runner, emits parent `delegate_*` events,
+preserves child events, and returns `DelegationResult` records.
+
+## DelegationResult
+
+The result of one delegated child task.
+It records status, final child message, child events, parent delegation events,
+error message, and derived step count.
+
+## DelegationMergeResult
+
+The merge record for child results.
+It preserves child task order and keeps failed, cancelled, planned, or running
+children in unresolved conflicts until parent review.
+
+## A2AEnvelope
+
+The Phase 4 versioned task-delegation export record for future remote-agent
+protocols. It is local and deterministic, not a full A2A wire implementation.
+
+## A2AAdapterStub
+
+The Phase 4 local adapter stub that exports `DelegationTask` values to
+`A2AEnvelope` records and rejects send attempts because remote transport is not
+implemented yet.
+
 ## Research Agent Workbench
 
 The final product interface for projects, research runs, delegation, evidence, reports, memory, skills, and evals.

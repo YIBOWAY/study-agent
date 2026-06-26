@@ -7,7 +7,8 @@ This folder is the redesign progress dashboard for humans and agents.
 - `overall.md`: phase index, completion state, and current verification baseline.
 - `phases/phase-0.md`: Redesign Scaffold progress.
 - `phases/phase-1.md`: Agent Kernel Course Spine progress.
-- `phases/phase-2.md` through `phases/phase-7.md`: reserved progress records for later phases.
+- `phases/phase-2.md` through `phases/phase-4.md`: completed progress records for Research Core, Memory and Skills, and Multi-Agent Delegation.
+- `phases/phase-5.md` through `phases/phase-7.md`: reserved progress records for later phases.
 
 ## Maintenance Rule
 

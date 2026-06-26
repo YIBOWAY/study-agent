@@ -98,3 +98,43 @@ embedding search yet. Skills load `SKILL.md` first and only read files under
 The event enum now includes the comprehensive stream values needed by later
 phases: `skill_step`, `delegate_event`, `compaction_start`,
 `compaction_finish`, and `eval_result`.
+
+## Phase 4 Delegation Boundary
+
+Phase 4 adds `research_core.delegation` as the first multi-agent layer above the
+single-agent kernel. The runtime is deterministic and sequential in this phase;
+true async execution, cancellation propagation, remote transport, and product UI
+surfaces are deferred.
+
+The Phase 4 delegation loop is:
+
+```text
+DelegationTask -> DelegationRuntime -> child runner -> DelegationResult -> DelegationMergeResult
+```
+
+`AgentRolePolicy` owns the child system prompt and scoped tool, skill, and
+memory names. `DelegationTask` owns the parent run ID, child run ID, objective,
+role policy, and explicit child context messages. System messages are rejected
+from child context; the role policy is the only child system prompt source.
+
+`DelegationRuntime.run_task()` emits parent events:
+
+- `delegate_start`: task/run IDs, role ID, scoped tools/skills/memory, and budget.
+- `delegate_event`: one wrapper around each child `RunEvent.to_record()`.
+- `delegate_finish`: status, step count, final child message or error.
+
+Child events keep the child run ID and are embedded in parent events as records
+instead of being merged into parent messages. This keeps child context isolated
+and makes the parent timeline replayable.
+
+Budget accounting is local and deterministic:
+
+- `max_child_runs` rejects too many child tasks before running.
+- `max_steps_per_child` rejects over-scoped roles before running and marks a
+  child result failed if observed child events exceed the allowed step count.
+- `max_total_steps` prevents launching a child when the remaining budget cannot
+  cover that task's allowed steps.
+
+`A2AAdapterStub` exports a versioned task-delegation record for future remote
+agent work. It deliberately omits parent-private task metadata, carries only
+context message IDs, and raises `NotImplementedError` on send attempts.

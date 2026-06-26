@@ -48,7 +48,7 @@ Add research domain entities, fake retrieval, source ingestion, and claim-source
 
 ## Next Focus
 
-Phase 3 is complete. Current next focus is Phase 4 planning: delegation runtime, isolated child contexts, role policies, budget accounting, and merge contracts.
+Phase 4 is complete. Current next focus is Phase 5 planning: FastAPI product API, React workbench, runtime timeline, delegation tree, source/evidence panels, report editor, memory, skills, and eval panels.
 
 ## Deferred From The Larger Research Core Milestone
 
