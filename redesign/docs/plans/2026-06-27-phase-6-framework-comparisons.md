@@ -181,11 +181,11 @@ Expected: tests pass, ruff reports `All checks passed!`, and whitespace check is
 - Modify: `redesign/docs/README.md`
 - Modify: `redesign/docs/progress/phases/phase-6.md`
 
-- [ ] **Step 1: Add framework comparison reports**
+- [x] **Step 1: Add framework comparison reports**
 
 Write reports that explain the shared echo-tool task, the state/resume-heavy task, the matrix criteria, and the recommendation results. Be explicit that Phase 6 compares framework fit without importing frameworks.
 
-- [ ] **Step 2: Add learner-facing Chapter/Lab/Solution 06**
+- [x] **Step 2: Add learner-facing Chapter/Lab/Solution 06**
 
 Chapter 06 must explain:
 
@@ -201,11 +201,11 @@ Lab 06 should ask learners to:
 - print the recommendation matrix;
 - deliberately change task weights and observe the recommendation change.
 
-- [ ] **Step 3: Update course indexes**
+- [x] **Step 3: Update course indexes**
 
 Update course entrypoint, docs course roadmap, and docs index so Chapter/Lab/Solution 06 and comparison reports are discoverable.
 
-- [ ] **Step 4: Verify docs**
+- [x] **Step 4: Verify docs**
 
 Run:
 

@@ -56,6 +56,11 @@ This directory is the canonical archive for the redesign version of the project.
 - `../course/chapters/05-workbench-product.md`: Workbench Product integration chapter.
 - `../course/labs/05-workbench-product-lab.md`: WorkbenchSnapshot, API, and web build lab.
 - `../course/solutions/05-workbench-product-solution.md`: expected Workbench Product lab solution.
+- `../course/chapters/06-framework-comparisons.md`: framework comparison method chapter.
+- `../course/labs/06-framework-comparisons-lab.md`: recommendation matrix lab.
+- `../course/solutions/06-framework-comparisons-solution.md`: expected Framework Comparisons lab solution.
+- `../course/framework_comparisons/reports/echo-tool-task.md`: shared echo-tool task report.
+- `../course/framework_comparisons/reports/recommendation-matrix.md`: current framework recommendation matrix.
 
 ## Rule
 
