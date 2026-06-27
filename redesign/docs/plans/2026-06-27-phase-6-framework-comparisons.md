@@ -228,11 +228,11 @@ Expected: Phase 6 concepts are discoverable from course, reports, docs index, an
 - Modify: `redesign/docs/progress/phases/phase-6.md`
 - Modify: `redesign/docs/plans/2026-06-25-redesign-execution-roadmap.md`
 
-- [ ] **Step 1: Update architecture and glossary**
+- [x] **Step 1: Update architecture and glossary**
 
 Document the Phase 6 comparison boundary and define `ComparisonTask`, `FrameworkProfile`, `FrameworkRecommendation`, and recommendation matrix.
 
-- [ ] **Step 2: Update living landscape and root guidance**
+- [x] **Step 2: Update living landscape and root guidance**
 
 Record the 2026-06-27 framework-comparison baseline in `docs/living-landscape.md`, update root README current scope, and update AGENTS rules so future agents keep framework code under `course/framework_comparisons/`.
 
@@ -240,7 +240,7 @@ Record the 2026-06-27 framework-comparison baseline in `docs/living-landscape.md
 
 Mark Phase 6 complete only after final verification passes.
 
-- [ ] **Step 4: Verify docs**
+- [x] **Step 4: Verify docs**
 
 Run:
 

@@ -52,7 +52,13 @@ Phase 5 adds the first Workbench Product surface:
 - React + TypeScript + Vite Workbench under `apps/web`, with API loading and deterministic fallback fixture.
 - Product integration course material in Chapter/Lab/Solution 05.
 
-Persistence, real retrieval adapters, async delegation, streaming, auth, and real A2A transport arrive in later phases.
+Phase 6 adds controlled Framework Comparisons:
+
+- `course/framework_comparisons` contains shared comparison tasks, handwritten runner baselines, deterministic framework profiles, and recommendation reports.
+- Course Chapter/Lab/Solution 06 teaches how to compare frameworks using the same task, fake fixtures, trajectory checks, and task weights.
+- Framework code remains course material and does not enter `research_core`, `apps/api`, or `apps/web`.
+
+Persistence, real retrieval adapters, async delegation, streaming, auth, real A2A transport, and live framework adapters arrive in later phases.
 
 ## Course Entry
 
@@ -66,6 +72,7 @@ Current course coverage now follows the implemented runtime phases:
 - Chapter/Lab/Solution 03: Memory and Skills.
 - Chapter/Lab/Solution 04: Multi-Agent Delegation.
 - Chapter/Lab/Solution 05: Workbench Product.
+- Chapter/Lab/Solution 06: Framework Comparisons.
 
 ## Commands
 

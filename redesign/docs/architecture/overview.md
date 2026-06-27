@@ -71,5 +71,14 @@ Phase 5 adds:
 - a React + TypeScript + Vite workbench under `apps/web`,
 - Course Chapter/Lab/Solution 05 for product integration.
 
-Async delegation, real A2A transport, persistence, streaming, auth, and real
-retrieval adapters are introduced by later approved phase plans.
+Phase 6 adds:
+
+- offline framework comparison contracts under `course/framework_comparisons/`,
+- a real handwritten `AgentRunner` echo-tool baseline for shared comparison tasks,
+- deterministic framework profiles and recommendation-matrix reports,
+- Course Chapter/Lab/Solution 06 for framework comparison literacy.
+
+Framework comparison code is course material, not a product runtime dependency.
+Async delegation, real A2A transport, persistence, streaming, auth, real
+retrieval adapters, and live framework adapters are introduced only by later
+approved phase plans.

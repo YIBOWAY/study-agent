@@ -189,3 +189,31 @@ that makes agent behavior inspectable and repeatable.
 An orchestrator assigning scoped tasks to child agents with isolated context, budget, tool scope, skill scope, and merge contracts.
 Delegation is only considered real when child work has boundaries, accounting,
 and a merge path; role-prompt theater is not enough.
+
+## ComparisonTask
+
+The Phase 6 course contract for a shared framework-comparison task. It fixes the
+prompt, fake model responses, tool fixture, expected event sequence, required
+capabilities, and scoring weights so frameworks are compared on the same work.
+
+## TaskRunSummary
+
+The executable handwritten-runner result for a `ComparisonTask`, including final
+answer, event sequence, tool-call count, and error count.
+
+## FrameworkProfile
+
+A deterministic Phase 6 comparison record for a framework candidate. It scores
+inspectability, offline testing, typed contracts, state/resume fit, multi-agent
+fit, product-boundary fit, and team cost without importing the actual framework.
+
+## FrameworkRecommendation
+
+One task/profile recommendation row with a normalized score, strengths, and
+tradeoffs. It is a teaching and planning artifact, not a framework adapter.
+
+## Recommendation Matrix
+
+The Phase 6 report that compares framework profiles across shared tasks. It
+keeps framework choice tied to task weights instead of treating one framework as
+a permanent winner.
