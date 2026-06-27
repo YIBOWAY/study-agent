@@ -8,7 +8,8 @@ This folder is the redesign progress dashboard for humans and agents.
 - `phases/phase-0.md`: Redesign Scaffold progress.
 - `phases/phase-1.md`: Agent Kernel Course Spine progress.
 - `phases/phase-2.md` through `phases/phase-5.md`: completed progress records for Research Core, Memory and Skills, Multi-Agent Delegation, and Workbench Product.
-- `phases/phase-6.md` through `phases/phase-7.md`: reserved progress records for later phases.
+- `phases/phase-6.md`: active progress record for Framework Comparisons.
+- `phases/phase-7.md`: reserved progress record for Production Readiness.
 
 ## Maintenance Rule
 

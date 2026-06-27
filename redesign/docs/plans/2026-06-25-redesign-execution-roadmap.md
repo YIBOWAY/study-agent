@@ -143,12 +143,20 @@ Exit criteria:
 
 ### Phase 6: Framework Comparisons
 
+Plan: `redesign/docs/plans/2026-06-27-phase-6-framework-comparisons.md`
+
 Purpose:
 
 - Compare handwritten runner against selected frameworks on the same tasks.
 - Keep framework code in `course/framework_comparisons/`, not in the product runtime path.
 
-Plan document should be created after Phase 5 has enough product flows to compare against.
+Exit criteria:
+
+- `cd redesign && uv run pytest -q` passes.
+- `cd redesign && uv run ruff check .` passes.
+- `cd redesign/apps/web && npm run build` passes.
+- Shared comparison tasks, handwritten runner baseline, framework profiles, recommendation matrix, and comparison reports live under `course/framework_comparisons/`.
+- Course Chapter/Lab/Solution 06 teaches the comparison workflow.
 
 ### Phase 7: Production Readiness
 
