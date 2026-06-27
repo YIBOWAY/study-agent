@@ -41,6 +41,7 @@ Create or update these files:
 - Create: `redesign/course/framework_comparisons/reports/recommendation-matrix.md`
 - Create: `redesign/course/framework_comparisons/reports/echo-tool-task.md`
 - Create: `redesign/tests/course/test_framework_comparisons.py`
+- Modify: `redesign/pyproject.toml`
 - Create: `redesign/course/chapters/06-framework-comparisons.md`
 - Create: `redesign/course/labs/06-framework-comparisons-lab.md`
 - Create: `redesign/course/solutions/06-framework-comparisons-solution.md`
@@ -122,9 +123,10 @@ Expected: Phase 6 plan and active progress state are discoverable from docs inde
 - Create: `redesign/course/framework_comparisons/__init__.py`
 - Create: `redesign/course/framework_comparisons/common.py`
 - Create: `redesign/tests/course/test_framework_comparisons.py`
+- Modify: `redesign/pyproject.toml`
 - Modify: `redesign/docs/progress/phases/phase-6.md`
 
-- [ ] **Step 1: Write failing tests**
+- [x] **Step 1: Write failing tests**
 
 Create tests for:
 
@@ -135,7 +137,7 @@ Create tests for:
 - the recommendation matrix is JSON-compatible, deterministic, and recommends `handwritten` for the simple echo-tool task;
 - `langgraph` is recommended for a state/resume-heavy task because the task weights state/resume above local inspectability.
 
-- [ ] **Step 2: Run tests to verify they fail**
+- [x] **Step 2: Run tests to verify they fail**
 
 Run:
 
@@ -145,15 +147,15 @@ cd redesign && uv run pytest tests/course/test_framework_comparisons.py -q
 
 Expected: failure because `course.framework_comparisons` does not expose the comparison contracts.
 
-- [ ] **Step 3: Implement comparison harness**
+- [x] **Step 3: Implement comparison harness**
 
 Implement frozen dataclasses and deterministic helpers in `course/framework_comparisons/common.py`. Keep all records JSON-compatible. Use the real `AgentRunner`, `FakeModel`, and `ToolRuntime` only for the handwritten baseline.
 
-- [ ] **Step 4: Export comparison contracts**
+- [x] **Step 4: Export comparison contracts**
 
 Update `course/framework_comparisons/__init__.py`.
 
-- [ ] **Step 5: Verify**
+- [x] **Step 5: Verify**
 
 Run:
 

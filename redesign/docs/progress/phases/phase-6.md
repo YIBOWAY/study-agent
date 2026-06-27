@@ -30,3 +30,4 @@ Compare the handwritten runner against selected agent frameworks on the same tas
 | Date | Update |
 | --- | --- |
 | 2026-06-27 | Phase 6 started from Phase 5 baseline. Verification before changes: `uv run pytest -q` -> `173 passed`; `uv run ruff check .` -> `All checks passed!`; `npm install && npm run build` in `apps/web` -> Vite build passed with `46 modules transformed`. |
+| 2026-06-27 | Task 2 added the offline framework comparison harness under `course/framework_comparisons/` with a real handwritten `AgentRunner` echo-tool baseline, deterministic framework profiles, and recommendation-matrix helpers. Red check: `uv run pytest tests/course/test_framework_comparisons.py -q` failed with `ModuleNotFoundError: No module named 'course'`, then exposed recommendation contract fixes. Green checks: focused pytest -> `6 passed`; `uv run ruff check course/framework_comparisons tests/course/test_framework_comparisons.py pyproject.toml` -> `All checks passed!`. |
