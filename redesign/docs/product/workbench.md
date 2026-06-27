@@ -51,7 +51,7 @@ rows, eval rows, and delegation nodes into the shape the API and UI need.
 - Memory panel
 - Skill panel
 - Eval panel
-- Delegation tree after the multi-agent phase lands
+- Delegation tree
 
 Phase 5 renders all of these as first-screen panels in `apps/web`.
 

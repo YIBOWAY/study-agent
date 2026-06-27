@@ -1,9 +1,9 @@
 # Phase 5 Progress: Workbench Product
 
-Status: In Progress
+Status: Complete
 
 Started: 2026-06-26
-Completed: Not completed
+Completed: 2026-06-27
 Branch: `codex/redesign-phase-5`
 
 ## Goal
@@ -33,6 +33,7 @@ Add the FastAPI product API and React workbench that expose research run timelin
 | 2026-06-26 | Task 3 added the FastAPI workbench API under `apps/api`. Red check: focused pytest failed with `ModuleNotFoundError: No module named 'fastapi'`; green checks: `tests/apps/test_workbench_api.py -q` -> `5 passed`, targeted `ruff check apps/api/src tests/apps/test_workbench_api.py` -> `All checks passed!`. |
 | 2026-06-26 | Task 4 added the Vite + React + TypeScript workbench under `apps/web` with API snapshot loading and a deterministic fallback fixture. Verification: `npm install` -> `added 25 packages`; `npm run build` -> TypeScript and Vite build passed with `46 modules transformed`; browser check at `http://127.0.0.1:5173/` with FastAPI on `127.0.0.1:8000` -> desktop/mobile rendered 8 panels, data source `api`, no horizontal overflow, no console warnings or errors. |
 | 2026-06-27 | Task 5 added Course Chapter/Lab/Solution 05 for Workbench Product and synchronized learner/product docs. The lesson now explains `WorkbenchSnapshot`, why product adapters sit between `research_core` and FastAPI/React, how API/UI can be tested without real providers, and how to inspect timeline, delegation, evidence, report, memory, skills, and eval panels. Verification: course/docs/root grep for Phase 5 product concepts passed; focused workbench pytest -> `13 passed`; targeted `ruff check` -> `All checks passed!`; `npm install && npm run build` -> Vite build passed with `46 modules transformed`; `git diff --check` clean. |
+| 2026-06-27 | Phase 5 completed after neat-freak docs reconciliation. Final verification: `uv run pytest -q` -> `173 passed`; `uv run ruff check .` -> `All checks passed!`; `npm install && npm run build` in `apps/web` -> Vite build passed with `46 modules transformed`; `git diff --check` clean. Generated `.venv`, caches, `uv.lock`, `node_modules`, `dist`, TypeScript build info, and Python `__pycache__` outputs were removed before final commit. |
 
 ## Verification Target
 

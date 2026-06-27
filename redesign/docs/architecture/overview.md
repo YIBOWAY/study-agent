@@ -64,4 +64,12 @@ Phase 4 adds:
 - child context isolation and budget accounting eval cases,
 - a local `A2AAdapterStub` export boundary without network transport.
 
-Product APIs, web UI, async delegation, real A2A transport, persistence, and real retrieval adapters are introduced by later approved phase plans.
+Phase 5 adds:
+
+- `research_core.product` workbench snapshot contracts,
+- a FastAPI read API under `apps/api`,
+- a React + TypeScript + Vite workbench under `apps/web`,
+- Course Chapter/Lab/Solution 05 for product integration.
+
+Async delegation, real A2A transport, persistence, streaming, auth, and real
+retrieval adapters are introduced by later approved phase plans.

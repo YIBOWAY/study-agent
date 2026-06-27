@@ -138,3 +138,21 @@ Budget accounting is local and deterministic:
 `A2AAdapterStub` exports a versioned task-delegation record for future remote
 agent work. It deliberately omits parent-private task metadata, carries only
 context message IDs, and raises `NotImplementedError` on send attempts.
+
+## Phase 5 Product Boundary
+
+Phase 5 does not change the runtime loop. Instead, it adapts runtime and domain
+records into `research_core.product.WorkbenchSnapshot` so product surfaces can
+inspect a run without depending on raw internals.
+
+The Phase 5 product flow is:
+
+```text
+RunEvent / research / memory / skills / delegation records
+  -> WorkbenchSnapshot.to_record()
+  -> research_api FastAPI endpoints
+  -> apps/web React panels
+```
+
+The API and web layers read product records. They do not own runtime state,
+provider calls, memory policy, skill loading, or delegation execution.

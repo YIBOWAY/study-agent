@@ -130,3 +130,29 @@ agent protocols. It includes task/run IDs, role identity, objective, scoped
 tool/skill/memory names, context message IDs, schema version, and message type.
 It does not export parent-private task metadata. `A2AAdapterStub` can export this
 record but does not implement remote send transport.
+
+## Workbench Product Model
+
+Phase 5 introduces `research_core.product` as the first product-shaped data
+contract layer. Its core object is `WorkbenchSnapshot`, a frozen dataclass that
+collects product panel records for:
+
+- project,
+- run,
+- timeline,
+- delegation,
+- sources and evidence,
+- report and claim-source links,
+- memory,
+- skills,
+- evals.
+
+`WorkbenchSnapshot.to_record()` returns independent JSON-compatible plain
+records for FastAPI and React. This is not raw runtime state and not a database
+model. It is the stable adapter between internal contracts and the Workbench
+product surface.
+
+The product layer may adapt `RunEvent`, `Source`, `Evidence`, `Report`,
+`ClaimSourceLink`, `MemoryRecord`, and delegation records, but it must remain
+independent from FastAPI, React, provider SDKs, network transport, and
+persistence.

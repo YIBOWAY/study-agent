@@ -327,7 +327,7 @@ Expected: Phase 5 product concepts are discoverable from course, docs, and root 
 - Modify: `redesign/docs/progress/phases/phase-5.md`
 - Modify: `redesign/docs/plans/2026-06-26-phase-5-workbench-product.md`
 
-- [ ] **Step 1: Run full verification**
+- [x] **Step 1: Run full verification**
 
 Run:
 
@@ -347,25 +347,25 @@ Vite build succeeds.
 No whitespace errors.
 ```
 
-- [ ] **Step 2: Clean generated side effects**
+- [x] **Step 2: Clean generated side effects**
 
 Remove generated `redesign/.venv`, `redesign/.ruff_cache`, `redesign/.pytest_cache`, `redesign/uv.lock`, Python `__pycache__`, and frontend `node_modules`/`dist` build output unless a file is an intentional source or lock artifact. Keep `apps/web/package-lock.json` if `npm install` creates it.
 
-- [ ] **Step 3: Commit and push**
+- [x] **Step 3: Commit and push**
 
 Commit with a message that records Phase 5 deliverables and verification commands. Push branch `codex/redesign-phase-5`.
 
 ## Phase 5 Completion Checklist
 
-- [ ] Workbench snapshot contracts are implemented and exported.
-- [ ] Snapshot records cover project, run, timeline, delegation, sources, report, memory, skills, and eval panels.
-- [ ] FastAPI API exposes health, snapshot, and timeline endpoints.
-- [ ] React workbench first screen is an operational workspace, not a landing page.
-- [ ] Web build passes.
-- [ ] Course Chapter/Lab/Solution 05 exists.
-- [ ] Product docs, architecture docs, README, AGENTS, roadmap, and progress docs are updated.
-- [ ] `cd redesign && uv run pytest -q` passes.
-- [ ] `cd redesign && uv run ruff check .` passes.
-- [ ] `cd redesign/apps/web && npm run build` passes.
-- [ ] `git diff --check` is clean.
-- [ ] No legacy root `app/`, `frontend/`, root `tests/`, or root `eval/` files are modified.
+- [x] Workbench snapshot contracts are implemented and exported.
+- [x] Snapshot records cover project, run, timeline, delegation, sources, report, memory, skills, and eval panels.
+- [x] FastAPI API exposes health, snapshot, and timeline endpoints.
+- [x] React workbench first screen is an operational workspace, not a landing page.
+- [x] Web build passes.
+- [x] Course Chapter/Lab/Solution 05 exists.
+- [x] Product docs, architecture docs, README, AGENTS, roadmap, and progress docs are updated.
+- [x] `cd redesign && uv run pytest -q` passes.
+- [x] `cd redesign && uv run ruff check .` passes.
+- [x] `cd redesign/apps/web && npm run build` passes.
+- [x] `git diff --check` is clean.
+- [x] No legacy root `app/`, `frontend/`, root `tests/`, or root `eval/` files are modified.

@@ -118,4 +118,6 @@ Eval gate 是每章结束时用来证明“这个机制还正常”的检查。C
 
 ## Workbench
 
-Workbench 是未来的产品界面。现在先没有 UI，但 Chapter 01 的 `RunEvent` 会成为以后 timeline、tool inspector、failure diagnostics 的数据来源。
+Workbench 是这个项目的产品界面。Phase 5 已经有第一个本地版本：FastAPI 提供 `/api/workbench/snapshot`，React/Vite 在 `apps/web` 渲染 timeline、delegation、evidence、report、memory、skills 和 eval panels。
+
+Chapter 01 的 `RunEvent` 仍然是 Workbench timeline 的底层来源；Chapter 05 会解释它如何被 `WorkbenchSnapshot` 转成 API/UI 能消费的 record。

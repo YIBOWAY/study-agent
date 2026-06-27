@@ -44,7 +44,7 @@ paths.
 ## Project
 
 A research workspace boundary containing related runs, sources, evidence,
-reports, and later memory.
+reports, memory, skills, evals, and product workbench views.
 
 ## ResearchRun
 
@@ -159,7 +159,20 @@ implemented yet.
 
 ## Research Agent Workbench
 
-The final product interface for projects, research runs, delegation, evidence, reports, memory, skills, and evals.
+The product interface for projects, research runs, delegation, evidence,
+reports, memory, skills, and evals. Phase 5 implements the first local Workbench
+with FastAPI read endpoints and a React/Vite UI.
+
+## WorkbenchSnapshot
+
+The Phase 5 product adapter record that gathers project, run, timeline,
+delegation, sources, report, memory, skills, and eval panel data into a
+JSON-compatible shape for API and UI consumers.
+
+## WorkbenchTimelineItem
+
+A product-facing timeline row adapted from `RunEvent`, with an event type plus
+UI-oriented title, summary, timestamp, and metadata.
 
 ## Skill
 
