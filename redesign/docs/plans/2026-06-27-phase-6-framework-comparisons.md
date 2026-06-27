@@ -236,7 +236,7 @@ Document the Phase 6 comparison boundary and define `ComparisonTask`, `Framework
 
 Record the 2026-06-27 framework-comparison baseline in `docs/living-landscape.md`, update root README current scope, and update AGENTS rules so future agents keep framework code under `course/framework_comparisons/`.
 
-- [ ] **Step 3: Update progress**
+- [x] **Step 3: Update progress**
 
 Mark Phase 6 complete only after final verification passes.
 
@@ -258,7 +258,7 @@ Expected: Phase 6 boundary and framework-comparison concepts are discoverable fr
 - Modify: `redesign/docs/progress/phases/phase-6.md`
 - Modify: `redesign/docs/plans/2026-06-27-phase-6-framework-comparisons.md`
 
-- [ ] **Step 1: Run full verification**
+- [x] **Step 1: Run full verification**
 
 Run:
 
@@ -278,25 +278,25 @@ Vite build succeeds.
 No whitespace errors.
 ```
 
-- [ ] **Step 2: Clean generated side effects**
+- [x] **Step 2: Clean generated side effects**
 
 Remove generated `redesign/.venv`, `redesign/.ruff_cache`, `redesign/.pytest_cache`, `redesign/uv.lock`, Python `__pycache__`, frontend `node_modules`, frontend `dist`, and TypeScript build info unless a file is an intentional source or lock artifact. Keep `apps/web/package-lock.json`.
 
-- [ ] **Step 3: Commit and push**
+- [x] **Step 3: Commit and push**
 
 Commit with a message that records Phase 6 deliverables and verification commands. Push branch `codex/redesign-phase-6`.
 
 ## Phase 6 Completion Checklist
 
-- [ ] Phase 6 plan and progress records are active and indexed.
-- [ ] Offline comparison harness is implemented under `course/framework_comparisons/`.
-- [ ] Handwritten runner baseline executes the shared echo-tool task through `AgentRunner`.
-- [ ] Framework profiles and recommendation matrix are deterministic and JSON-compatible.
-- [ ] Comparison reports exist under `course/framework_comparisons/reports/`.
-- [ ] Course Chapter/Lab/Solution 06 exists.
-- [ ] Course docs, architecture docs, glossary, README, AGENTS, roadmap, and progress docs are updated.
-- [ ] `cd redesign && uv run pytest -q` passes.
-- [ ] `cd redesign && uv run ruff check .` passes.
-- [ ] `cd redesign/apps/web && npm run build` passes.
-- [ ] `git diff --check` is clean.
-- [ ] No legacy root `app/`, `frontend/`, root `tests/`, or root `eval/` files are modified.
+- [x] Phase 6 plan and progress records are active and indexed.
+- [x] Offline comparison harness is implemented under `course/framework_comparisons/`.
+- [x] Handwritten runner baseline executes the shared echo-tool task through `AgentRunner`.
+- [x] Framework profiles and recommendation matrix are deterministic and JSON-compatible.
+- [x] Comparison reports exist under `course/framework_comparisons/reports/`.
+- [x] Course Chapter/Lab/Solution 06 exists.
+- [x] Course docs, architecture docs, glossary, README, AGENTS, roadmap, and progress docs are updated.
+- [x] `cd redesign && uv run pytest -q` passes.
+- [x] `cd redesign && uv run ruff check .` passes.
+- [x] `cd redesign/apps/web && npm run build` passes.
+- [x] `git diff --check` is clean.
+- [x] No legacy root `app/`, `frontend/`, root `tests/`, or root `eval/` files are modified.
