@@ -7,8 +7,8 @@ Last updated: 2026-06-26
 - Active branch: `codex/redesign-phase-5`
 - Active phase: Phase 5 - Workbench Product
 - Completed phases: 5 of 8
-- Current verification baseline: post-audit Phase 4 pass on 2026-06-26: full redesign suite `160 passed`, `ruff check .` clean, and `git diff --check` clean.
-- Course documentation now includes a beginner-ready entrypoint, primer/reference pages, and Chapter/Lab/Solution 00-04 covering scaffold, Agent Kernel, Research Core, Memory and Skills, and Multi-Agent Delegation.
+- Current verification baseline: Phase 5 product/UI baseline on 2026-06-26: full redesign suite `173 passed`, `ruff check .` clean, `apps/web` Vite build clean, and `git diff --check` clean.
+- Course documentation now includes a beginner-ready entrypoint, primer/reference pages, and Chapter/Lab/Solution 00-05 covering scaffold, Agent Kernel, Research Core, Memory and Skills, Multi-Agent Delegation, and Workbench Product.
 
 ## Phase Index
 

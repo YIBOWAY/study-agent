@@ -12,6 +12,9 @@ These instructions apply to files under `redesign/`.
 - Keep `research_core.research` independent from product apps, databases, provider SDKs, embeddings, and legacy root code.
 - Keep `research_core.memory` and `research_core.skills` offline-first and independent from product apps, databases, provider SDKs, embeddings, and legacy root code.
 - Keep `research_core.delegation` deterministic, offline-first, and independent from product apps, provider SDKs, network transport, and legacy root code.
+- Keep `research_core.product` independent from FastAPI, React, databases, provider SDKs, and network transport. Product contracts should expose JSON-compatible `to_record()` data for API/UI layers.
+- Keep `apps/api` as a transport layer over `research_core.product`; do not put domain logic, provider calls, or persistence shortcuts there without an approved later-phase plan.
+- Keep `apps/web` consuming the Workbench API record shape or a matching deterministic fallback fixture; do not let React components invent a separate product data model.
 - Use `SourceIngestor` and `FakeRetriever` for deterministic offline research tests.
 - Use `MemoryEngine` and `SkillRuntime` for deterministic memory/skill tests.
 - Use `DelegationRuntime` and `A2AAdapterStub` for deterministic delegation tests; do not add real A2A transport without an approved later-phase plan.
@@ -31,6 +34,12 @@ uv run pytest -q
 uv run ruff check .
 ```
 
+For changes that touch `apps/web`, also run:
+
+```bash
+cd apps/web && npm run build
+```
+
 ## Architecture Direction
 
 The runtime should follow these boundaries:
@@ -41,5 +50,6 @@ The runtime should follow these boundaries:
 - Phase 2 research flow is `SourceInput -> SourceIngestor -> FakeRetriever -> Evidence -> Claim -> Report -> ClaimSourceLink`.
 - Phase 3 stateful flow is `MemoryWritePolicy -> MemoryEngine -> MemoryRecallPolicy` and `SkillRuntime -> SKILL.md -> explicit references`.
 - Phase 4 delegation flow is `DelegationTask -> DelegationRuntime -> delegate_* RunEvent records -> DelegationResult -> DelegationMergeResult`, with `A2AAdapterStub` limited to deterministic export stubs.
+- Phase 5 product flow is `runtime/research/memory/skills/delegation objects -> WorkbenchSnapshot.to_record() -> research_api FastAPI endpoints -> apps/web React panels`.
 - Provider adapters convert at the boundary.
 - Fake model providers are first-class testing infrastructure.

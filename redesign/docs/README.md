@@ -52,6 +52,9 @@ This directory is the canonical archive for the redesign version of the project.
 - `../course/chapters/04-multi-agent-delegation.md`: Multi-Agent Delegation chapter.
 - `../course/labs/04-delegation-runtime-lab.md`: DelegationRuntime lab.
 - `../course/solutions/04-delegation-runtime-solution.md`: expected DelegationRuntime lab solution.
+- `../course/chapters/05-workbench-product.md`: Workbench Product integration chapter.
+- `../course/labs/05-workbench-product-lab.md`: WorkbenchSnapshot, API, and web build lab.
+- `../course/solutions/05-workbench-product-solution.md`: expected Workbench Product lab solution.
 
 ## Rule
 

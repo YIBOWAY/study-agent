@@ -139,6 +139,7 @@ Exit criteria:
 - Workbench snapshot contracts cover project, run, timeline, delegation, sources, report, memory, skills, and eval panels.
 - FastAPI exposes health, snapshot, and timeline endpoints.
 - React first screen is an operational workbench, not a landing page.
+- Course Chapter/Lab/Solution 05 teaches the product integration layer.
 
 ### Phase 6: Framework Comparisons
 

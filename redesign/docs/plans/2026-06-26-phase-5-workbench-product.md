@@ -287,7 +287,7 @@ Expected: Vite TypeScript build succeeds.
 - Modify: `redesign/AGENTS.md`
 - Modify: `redesign/docs/progress/phases/phase-5.md`
 
-- [ ] **Step 1: Add learner-facing product integration material**
+- [x] **Step 1: Add learner-facing product integration material**
 
 Chapter 05 must explain:
 
@@ -296,7 +296,7 @@ Chapter 05 must explain:
 - how the API and UI can be tested without real providers;
 - how to inspect timeline, delegation, evidence, memory, skills, and eval panels.
 
-- [ ] **Step 2: Add a hands-on lab and solution**
+- [x] **Step 2: Add a hands-on lab and solution**
 
 Lab 05 should ask learners to:
 
@@ -305,11 +305,11 @@ Lab 05 should ask learners to:
 - run the web build;
 - deliberately mutate a returned snapshot record and verify the product contract remains stable.
 
-- [ ] **Step 3: Update docs and progress**
+- [x] **Step 3: Update docs and progress**
 
 Update course index, docs index, product boundary docs, root README, AGENTS rules, and progress logs.
 
-- [ ] **Step 4: Verify**
+- [x] **Step 4: Verify**
 
 Run:
 

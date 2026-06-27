@@ -45,7 +45,14 @@ Phase 4 adds the first multi-agent delegation contracts:
 - `A2AAdapterStub` for a local, non-network remote-agent boundary.
 - Child context isolation, budget accounting, A2A export, and merge eval cases.
 
-Product APIs, persistence, real retrieval adapters, async delegation, and real A2A transport arrive in later phases.
+Phase 5 adds the first Workbench Product surface:
+
+- `research_core.product.WorkbenchSnapshot` and panel contracts for project, run, timeline, delegation, sources, report, memory, skills, and evals.
+- FastAPI read API under `apps/api` with `/health`, `/api/workbench/snapshot`, and `/api/workbench/timeline`.
+- React + TypeScript + Vite Workbench under `apps/web`, with API loading and deterministic fallback fixture.
+- Product integration course material in Chapter/Lab/Solution 05.
+
+Persistence, real retrieval adapters, async delegation, streaming, auth, and real A2A transport arrive in later phases.
 
 ## Course Entry
 
@@ -58,6 +65,7 @@ Current course coverage now follows the implemented runtime phases:
 - Chapter/Lab/Solution 02: Research Core.
 - Chapter/Lab/Solution 03: Memory and Skills.
 - Chapter/Lab/Solution 04: Multi-Agent Delegation.
+- Chapter/Lab/Solution 05: Workbench Product.
 
 ## Commands
 
@@ -66,6 +74,7 @@ Run from this directory:
 ```bash
 uv run pytest -q
 uv run ruff check .
+cd apps/web && npm install && npm run build
 ```
 
 ## Boundaries
@@ -79,6 +88,7 @@ Expected local checks:
 ```bash
 uv run pytest -q
 uv run ruff check .
+cd apps/web && npm run build
 ```
 
-The pytest suite should include runtime, fake provider, research core, memory, skill, and delegation tests.
+The pytest suite should include runtime, fake provider, research core, memory, skill, delegation, product snapshot, and API tests. The web build should pass when `apps/web` dependencies are installed.
