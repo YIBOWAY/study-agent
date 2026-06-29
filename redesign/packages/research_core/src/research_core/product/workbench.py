@@ -178,7 +178,7 @@ class WorkbenchDelegationNode:
 
 
 @dataclass(frozen=True, slots=True)
-class _WorkbenchEvidenceItem:
+class WorkbenchEvidenceItem:
     id: str
     source_id: str
     quote: str
@@ -204,7 +204,7 @@ class _WorkbenchEvidenceItem:
         evidence: Evidence,
         *,
         claim_ids: Sequence[str] = (),
-    ) -> _WorkbenchEvidenceItem:
+    ) -> WorkbenchEvidenceItem:
         if not isinstance(evidence, Evidence):
             raise ValueError("evidence must be an Evidence object")
         return cls(
@@ -235,7 +235,7 @@ class WorkbenchSourceItem:
     title: str
     uri: str
     summary: str = ""
-    evidence: Sequence[_WorkbenchEvidenceItem] = ()
+    evidence: Sequence[WorkbenchEvidenceItem] = ()
     metadata: Mapping[str, Any] = field(default_factory=dict)
 
     def __post_init__(self) -> None:
@@ -245,7 +245,7 @@ class WorkbenchSourceItem:
         object.__setattr__(
             self,
             "evidence",
-            _tuple_of_objects("evidence", self.evidence, _WorkbenchEvidenceItem),
+            _tuple_of_objects("evidence", self.evidence, WorkbenchEvidenceItem),
         )
         object.__setattr__(self, "metadata", _freeze_metadata(self.metadata))
 
@@ -269,7 +269,7 @@ class WorkbenchSourceItem:
             uri=source.uri,
             summary=summary,
             evidence=tuple(
-                _WorkbenchEvidenceItem.from_evidence(
+                WorkbenchEvidenceItem.from_evidence(
                     evidence_item,
                     claim_ids=claim_ids_by_evidence_id.get(evidence_item.id, ()),
                 )
@@ -549,6 +549,7 @@ class WorkbenchSnapshot:
             "evals",
             _tuple_of_objects("evals", self.evals, WorkbenchEvalItem),
         )
+        _validate_snapshot_references(self)
 
     def to_record(self) -> dict[str, Any]:
         return {
@@ -784,6 +785,85 @@ def _tuple_of_objects(
     if any(not isinstance(value, expected_type) for value in result):
         raise ValueError(f"{name} must contain {expected_type.__name__} objects")
     return result
+
+
+def _validate_snapshot_references(snapshot: WorkbenchSnapshot) -> None:
+    if snapshot.run.project_id != snapshot.project.id:
+        raise ValueError("run project_id must match project id")
+    if any(item.run_id != snapshot.run.id for item in snapshot.timeline):
+        raise ValueError("timeline run_id must match run id")
+    if snapshot.report is not None and snapshot.report.run_id != snapshot.run.id:
+        raise ValueError("report run_id must match run id")
+
+    _validate_delegation_references(snapshot.delegation)
+    evidence_by_id = _validate_source_references(snapshot.sources)
+    if snapshot.report is not None:
+        _validate_report_links(snapshot.report, evidence_by_id)
+
+
+def _validate_delegation_references(
+    delegation: Sequence[WorkbenchDelegationNode],
+) -> None:
+    nodes = tuple(_iter_delegation_nodes(delegation))
+    node_ids = {node.id for node in nodes}
+    if len(node_ids) != len(nodes):
+        raise ValueError("delegation node ids must be unique")
+
+    for node in nodes:
+        if node.parent_id and (node.parent_id not in node_ids or node.parent_id == node.id):
+            raise ValueError("delegation parent_id must reference another delegation node")
+
+    _validate_delegation_nesting(delegation, parent_id="")
+
+
+def _iter_delegation_nodes(
+    nodes: Sequence[WorkbenchDelegationNode],
+) -> tuple[WorkbenchDelegationNode, ...]:
+    result: list[WorkbenchDelegationNode] = []
+    for node in nodes:
+        result.append(node)
+        result.extend(_iter_delegation_nodes(node.children))
+    return tuple(result)
+
+
+def _validate_delegation_nesting(
+    nodes: Sequence[WorkbenchDelegationNode],
+    *,
+    parent_id: str,
+) -> None:
+    for node in nodes:
+        if node.parent_id != parent_id:
+            if parent_id:
+                raise ValueError("delegation child parent_id must match parent node id")
+            raise ValueError("delegation root parent_id must be empty")
+        _validate_delegation_nesting(node.children, parent_id=node.id)
+
+
+def _validate_source_references(
+    sources: Sequence[WorkbenchSourceItem],
+) -> dict[str, WorkbenchEvidenceItem]:
+    evidence_by_id: dict[str, WorkbenchEvidenceItem] = {}
+    for source in sources:
+        for evidence in source.evidence:
+            if evidence.source_id != source.id:
+                raise ValueError("source evidence source_id must match source id")
+            evidence_by_id[evidence.id] = evidence
+    return evidence_by_id
+
+
+def _validate_report_links(
+    report: WorkbenchReport,
+    evidence_by_id: Mapping[str, WorkbenchEvidenceItem],
+) -> None:
+    for link in report.claim_source_links:
+        try:
+            evidence = evidence_by_id[link.evidence_id]
+        except KeyError as exc:
+            raise ValueError(
+                "report claim_source_links evidence_id must reference snapshot evidence"
+            ) from exc
+        if link.source_id != evidence.source_id:
+            raise ValueError("report claim_source_links source_id must match evidence source_id")
 
 
 def _require_score(name: str, value: float) -> None:

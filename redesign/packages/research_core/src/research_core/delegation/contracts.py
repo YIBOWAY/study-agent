@@ -200,6 +200,13 @@ class DelegationMergeResult:
                 "unresolved_conflicts",
                 self.unresolved_conflicts,
             )
+            if any(
+                result.status is DelegationStatus.COMPLETED
+                for result in unresolved_conflicts
+            ):
+                raise ValueError("unresolved_conflicts must not contain completed results")
+            if any(result not in decisions for result in unresolved_conflicts):
+                raise ValueError("unresolved_conflicts must be drawn from decisions")
         object.__setattr__(self, "decisions", decisions)
         object.__setattr__(self, "unresolved_conflicts", unresolved_conflicts)
         object.__setattr__(self, "metadata", _freeze_metadata(self.metadata))

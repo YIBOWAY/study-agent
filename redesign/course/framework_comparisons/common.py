@@ -274,13 +274,21 @@ def build_state_resume_task() -> ComparisonTask:
 def run_handwritten_task(task: ComparisonTask) -> TaskRunSummary:
     model = FakeModel(FakeModelResponse(content=response) for response in task.model_responses)
     tools = ToolRuntime()
+
+    def handle_tool(arguments: Mapping[str, Any]) -> Mapping[str, Any]:
+        try:
+            value = arguments[task.tool_argument_name]
+        except KeyError as exc:
+            raise ValueError(
+                f"tool arguments must include {task.tool_argument_name!r}"
+            ) from exc
+        return {task.tool_argument_name: value}
+
     tools.register(
         ToolDefinition(
             name=task.tool_name,
             description=task.tool_description,
-            handler=lambda arguments: {
-                task.tool_argument_name: arguments[task.tool_argument_name]
-            },
+            handler=handle_tool,
         )
     )
 

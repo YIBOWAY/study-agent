@@ -1,13 +1,13 @@
 # Redesign Overall Progress
 
-Last updated: 2026-06-27
+Last updated: 2026-06-29
 
 ## Current State
 
 - Active branch: `codex/redesign-phase-6`
 - Active phase: None; next planned phase is Phase 7 - Production Readiness.
 - Completed phases: 7 of 8
-- Current verification baseline: Phase 6 completion on 2026-06-27: full redesign suite `179 passed`, `ruff check .` clean, `apps/web` Vite build clean with `46 modules transformed`, and `git diff --check` clean.
+- Current verification baseline: post-Phase 4/5/6 review remediation on 2026-06-29: full redesign suite `185 passed`, `ruff check .` clean, and `apps/web` Vite build clean with `46 modules transformed`.
 - Course documentation now includes a beginner-ready entrypoint, primer/reference pages, and Chapter/Lab/Solution 00-06 covering scaffold, Agent Kernel, Research Core, Memory and Skills, Multi-Agent Delegation, Workbench Product, and Framework Comparisons.
 
 ## Phase Index

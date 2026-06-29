@@ -1,6 +1,7 @@
 import json
 from dataclasses import FrozenInstanceError
 
+import pytest
 from research_core.delegation import (
     AgentRolePolicy,
     DelegationBudget,
@@ -361,3 +362,43 @@ def test_delegation_merge_result_preserves_task_order_and_exposes_failed_conflic
         "task_3",
     ]
     assert json.loads(json.dumps(record, allow_nan=False)) == record
+
+
+def test_delegation_merge_result_rejects_completed_explicit_conflicts() -> None:
+    completed = DelegationResult(
+        task=_task(id="task_completed", child_run_id="child_run_completed"),
+        status=DelegationStatus.COMPLETED,
+    )
+
+    with pytest.raises(
+        ValueError,
+        match="unresolved_conflicts must not contain completed results",
+    ):
+        DelegationMergeResult(
+            decisions=[completed],
+            summary="A completed child is already resolved.",
+            unresolved_conflicts=[completed],
+        )
+
+
+def test_delegation_merge_result_rejects_conflicts_outside_decisions() -> None:
+    failed = DelegationResult(
+        task=_task(id="task_failed", child_run_id="child_run_failed"),
+        status=DelegationStatus.FAILED,
+        error_message="child failed",
+    )
+    unrelated = DelegationResult(
+        task=_task(id="task_unrelated", child_run_id="child_run_unrelated"),
+        status=DelegationStatus.FAILED,
+        error_message="unrelated child failed",
+    )
+
+    with pytest.raises(
+        ValueError,
+        match="unresolved_conflicts must be drawn from decisions",
+    ):
+        DelegationMergeResult(
+            decisions=[failed],
+            summary="Only failed decisions from this merge may stay unresolved.",
+            unresolved_conflicts=[unrelated],
+        )

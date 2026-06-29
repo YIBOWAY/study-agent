@@ -1,4 +1,7 @@
 import json
+from dataclasses import replace
+
+import pytest
 
 from course.framework_comparisons import (
     ComparisonTask,
@@ -105,6 +108,10 @@ def test_framework_profile_and_task_contracts_reject_invalid_values() -> None:
             "inspectability must be a number between 0 and 1",
         ),
         (
+            lambda: replace(build_echo_tool_task(), model_responses=()),
+            "model_responses must not be empty",
+        ),
+        (
             lambda: ComparisonTask(
                 id="bad_task",
                 title="Bad task",
@@ -129,6 +136,25 @@ def test_framework_profile_and_task_contracts_reject_invalid_values() -> None:
             assert expected_message in str(exc)
         else:
             raise AssertionError(f"Expected invalid comparison contract: {expected_message}")
+
+
+def test_handwritten_runner_reports_missing_tool_argument_with_error_event() -> None:
+    task = replace(
+        build_echo_tool_task(),
+        model_responses=(
+            '{"tool_call": {"id": "call_1", "name": "echo", "arguments": {"wrong": "hello"}}}',
+        ),
+    )
+
+    with pytest.raises(ValueError, match="tool arguments must include 'text'") as exc_info:
+        run_handwritten_task(task)
+
+    events = exc_info.value.events  # type: ignore[attr-defined]
+    assert [event.type.value for event in events][-1] == "error"
+    assert events[-1].payload["error"] == {
+        "kind": "tool_error",
+        "message": "tool arguments must include 'text'",
+    }
 
 
 def test_recommendation_matrix_is_json_compatible_and_prefers_handwritten_for_echo() -> None:

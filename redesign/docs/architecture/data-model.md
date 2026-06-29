@@ -123,7 +123,9 @@ run and includes only explicit non-system context messages.
 total steps. `DelegationResult` stores the task, status, final child message,
 child events, parent delegation events, error message, and derived step count.
 `DelegationMergeResult` preserves child result order and treats every
-non-completed child as unresolved until the parent reviews it.
+non-completed child as unresolved until the parent reviews it. When callers pass
+an explicit `unresolved_conflicts` list, it must be drawn from the same
+`decisions` sequence and must not contain completed results.
 
 `A2AEnvelope` is a versioned task-delegation export record for future remote
 agent protocols. It includes task/run IDs, role identity, objective, scoped
@@ -146,6 +148,13 @@ collects product panel records for:
 - memory,
 - skills,
 - evals.
+
+Evidence rows are public `WorkbenchEvidenceItem` records nested under
+`WorkbenchSourceItem`. Snapshot construction validates cross-field references:
+the run must belong to the project, timeline and report run IDs must match the
+snapshot run, source evidence must point back to its source, report links must
+reference snapshot evidence, and delegation tree IDs/parent IDs must be
+consistent.
 
 `WorkbenchSnapshot.to_record()` returns independent JSON-compatible plain
 records for FastAPI and React. This is not raw runtime state and not a database

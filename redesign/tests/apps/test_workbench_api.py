@@ -3,7 +3,11 @@ from typing import Any
 
 from fastapi.testclient import TestClient
 from research_api.main import create_app
-from research_core.product import build_demo_workbench_snapshot
+from research_core.product import (
+    WorkbenchSnapshot,
+    WorkbenchTimelineItem,
+    build_demo_workbench_snapshot,
+)
 
 
 def test_health_returns_service_status() -> None:
@@ -38,6 +42,44 @@ def test_workbench_timeline_returns_snapshot_timeline_in_order() -> None:
     assert [item["id"] for item in response.json()] == [
         item["id"] for item in snapshot_record["timeline"]
     ]
+
+
+def test_workbench_endpoints_share_one_app_snapshot_instance() -> None:
+    provider_calls = 0
+
+    def snapshot_provider() -> WorkbenchSnapshot:
+        nonlocal provider_calls
+        provider_calls += 1
+        snapshot = build_demo_workbench_snapshot()
+        return WorkbenchSnapshot(
+            project=snapshot.project,
+            run=snapshot.run,
+            timeline=(
+                WorkbenchTimelineItem(
+                    id=f"evt_dynamic_{provider_calls}",
+                    run_id=snapshot.run.id,
+                    type="model_request",
+                    title="Dynamic event",
+                ),
+            ),
+            delegation=snapshot.delegation,
+            sources=snapshot.sources,
+            report=snapshot.report,
+            memory=snapshot.memory,
+            skills=snapshot.skills,
+            evals=snapshot.evals,
+        )
+
+    client = TestClient(create_app(snapshot_provider=snapshot_provider))
+
+    snapshot_response = client.get("/api/workbench/snapshot")
+    timeline_response = client.get("/api/workbench/timeline")
+
+    assert provider_calls == 1
+    assert snapshot_response.status_code == 200
+    assert timeline_response.status_code == 200
+    assert timeline_response.json() == snapshot_response.json()["timeline"]
+    assert timeline_response.json()[0]["id"] == "evt_dynamic_1"
 
 
 def test_openapi_tags_workbench_product_endpoints() -> None:

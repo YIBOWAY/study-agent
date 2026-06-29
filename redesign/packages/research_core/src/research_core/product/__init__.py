@@ -3,6 +3,7 @@
 from research_core.product.workbench import (
     WorkbenchDelegationNode,
     WorkbenchEvalItem,
+    WorkbenchEvidenceItem,
     WorkbenchMemoryItem,
     WorkbenchProject,
     WorkbenchReport,
@@ -16,6 +17,7 @@ from research_core.product.workbench import (
 
 __all__ = [
     "WorkbenchDelegationNode",
+    "WorkbenchEvidenceItem",
     "WorkbenchEvalItem",
     "WorkbenchMemoryItem",
     "WorkbenchProject",

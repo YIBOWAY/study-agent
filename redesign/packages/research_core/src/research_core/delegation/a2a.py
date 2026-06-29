@@ -79,6 +79,8 @@ class A2AEnvelope:
 
 class A2AAdapterStub:
     def export_task(self, task: DelegationTask) -> A2AEnvelope:
+        # Task metadata can contain parent-only trace or private history; the stub
+        # exports only the explicit child scope until a real transport policy exists.
         return A2AEnvelope(
             task_id=task.id,
             parent_run_id=task.parent_run_id,

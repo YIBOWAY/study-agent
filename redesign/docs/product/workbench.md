@@ -40,6 +40,12 @@ This record is not raw runtime state. It is a product-shaped snapshot that
 combines runtime events, research evidence, report links, memory rows, skill
 rows, eval rows, and delegation nodes into the shape the API and UI need.
 
+The snapshot is also a reference boundary, not just a serializer. It rejects
+cross-field mismatches such as a run attached to the wrong project, timeline or
+report rows for another run, source evidence that points at another source,
+claim-source links that reference missing evidence, and malformed delegation
+parent/child relationships.
+
 ## Primary Screens
 
 - Workspace navigation
@@ -67,7 +73,9 @@ Current read endpoints:
 
 The API must remain a transport layer. It should call product contracts and
 return JSON records; it should not become the home for research logic, provider
-calls, or UI-only data transformations.
+calls, or UI-only data transformations. The local demo app builds one
+`WorkbenchSnapshot` for the app instance and derives both `/snapshot` and
+`/timeline` responses from that same snapshot so read endpoints stay consistent.
 
 ## Runtime Dependencies
 
