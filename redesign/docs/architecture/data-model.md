@@ -165,3 +165,23 @@ The product layer may adapt `RunEvent`, `Source`, `Evidence`, `Report`,
 `ClaimSourceLink`, `MemoryRecord`, and delegation records, but it must remain
 independent from FastAPI, React, provider SDKs, network transport, and
 persistence.
+
+## Production Readiness Model
+
+Phase 7 introduces `research_core.production` as an offline production-readiness
+contract layer.
+
+`RunDiagnostics` summarizes a single-run event trajectory with event counts,
+event-type counts, and error summaries. It rejects empty event lists and mixed
+`run_id` input so observability summaries do not blur multiple runs together.
+
+`JsonlRunEventStore` persists `RunEvent` records as append-only, schema-versioned
+JSONL. It creates parent directories, preserves append order, reads events back
+by `run_id`, and rejects unsupported schema versions.
+
+`ApprovalPolicy` and `ApprovalRule` produce `ApprovalDecision` records for tool
+or action subjects. Decisions are `allow`, `require_approval`, or `deny`.
+
+`SandboxPolicy` produces `SandboxDecision` records for path and network access.
+Blocked paths take priority over readable or writable roots, and unknown access
+names fail at the boundary.

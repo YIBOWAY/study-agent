@@ -78,7 +78,16 @@ Phase 6 adds:
 - deterministic framework profiles and recommendation-matrix reports,
 - Course Chapter/Lab/Solution 06 for framework comparison literacy.
 
+Phase 7 adds:
+
+- offline production-readiness contracts under `research_core.production`,
+- run diagnostics over `RunEvent` trajectories,
+- append-only JSONL event persistence,
+- approval and sandbox policy decisions,
+- docs freshness checks and local readiness docs,
+- Course Chapter/Lab/Solution 07 for production-readiness literacy.
+
 Framework comparison code is course material, not a product runtime dependency.
-Async delegation, real A2A transport, persistence, streaming, auth, real
-retrieval adapters, and live framework adapters are introduced only by later
-approved phase plans.
+Async delegation, real A2A transport, database persistence, streaming, real
+auth, real cloud deployment, real retrieval adapters, and live framework adapters
+are introduced only by later approved phase plans.

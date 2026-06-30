@@ -13,6 +13,7 @@ These instructions apply to files under `redesign/`.
 - Keep `research_core.memory` and `research_core.skills` offline-first and independent from product apps, databases, provider SDKs, embeddings, and legacy root code.
 - Keep `research_core.delegation` deterministic, offline-first, and independent from product apps, provider SDKs, network transport, and legacy root code.
 - Keep `research_core.product` independent from FastAPI, React, databases, provider SDKs, and network transport. Product contracts should expose JSON-compatible `to_record()` data for API/UI layers.
+- Keep `research_core.production` offline-first and independent from FastAPI, React, provider SDKs, databases, cloud services, and real auth. Production-readiness contracts should be inspectable policy/diagnostic/storage boundaries before real infrastructure adapters exist.
 - Keep framework comparison code under `course/framework_comparisons/`; do not import third-party agent frameworks into `research_core`, `apps/api`, or `apps/web` without an approved later-phase plan.
 - Keep `apps/api` as a transport layer over `research_core.product`; do not put domain logic, provider calls, or persistence shortcuts there without an approved later-phase plan.
 - Keep `apps/web` consuming the Workbench API record shape or a matching deterministic fallback fixture; do not let React components invent a separate product data model.
@@ -53,5 +54,6 @@ The runtime should follow these boundaries:
 - Phase 4 delegation flow is `DelegationTask -> DelegationRuntime -> delegate_* RunEvent records -> DelegationResult -> DelegationMergeResult`, with `A2AAdapterStub` limited to deterministic export stubs.
 - Phase 5 product flow is `runtime/research/memory/skills/delegation objects -> WorkbenchSnapshot.to_record() -> research_api FastAPI endpoints -> apps/web React panels`.
 - Phase 6 comparison flow is `ComparisonTask -> handwritten AgentRunner baseline -> FrameworkProfile -> FrameworkRecommendation matrix`, all under `course/framework_comparisons/`.
+- Phase 7 production-readiness flow is `RunEvent -> RunDiagnostics`, `RunEvent -> JsonlRunEventStore`, and tool/path/network subjects -> approval/sandbox decisions, all offline and testable.
 - Provider adapters convert at the boundary.
 - Fake model providers are first-class testing infrastructure.

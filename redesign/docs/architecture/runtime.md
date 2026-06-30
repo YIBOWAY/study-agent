@@ -156,3 +156,21 @@ RunEvent / research / memory / skills / delegation records
 
 The API and web layers read product records. They do not own runtime state,
 provider calls, memory policy, skill loading, or delegation execution.
+
+## Phase 7 Production Readiness Boundary
+
+Phase 7 keeps production readiness local and inspectable. It does not add cloud
+logging, OAuth, database migrations, provider SDKs, or real sandbox execution.
+Instead, it adds contracts that later infrastructure can wrap:
+
+```text
+RunEvent trajectory -> RunDiagnostics
+RunEvent records -> JsonlRunEventStore
+tool subject -> ApprovalPolicy -> ApprovalDecision
+path/network subject -> SandboxPolicy -> SandboxDecision
+```
+
+`RunDiagnostics` summarizes event counts and error details for one run.
+`JsonlRunEventStore` appends schema-versioned event records and reads them back
+by `run_id`. `ApprovalPolicy` and `SandboxPolicy` return typed decision records
+so permissions are explicit before any tool or infrastructure adapter runs.

@@ -217,3 +217,28 @@ tradeoffs. It is a teaching and planning artifact, not a framework adapter.
 The Phase 6 report that compares framework profiles across shared tasks. It
 keeps framework choice tied to task weights instead of treating one framework as
 a permanent winner.
+
+## RunDiagnostics
+
+The Phase 7 observability summary for one run's `RunEvent` trajectory. It counts
+events by type and extracts error summaries without replacing the raw event log.
+
+## JsonlRunEventStore
+
+The Phase 7 append-only local event store. It writes schema-versioned `RunEvent`
+records to JSONL and reads them back by `run_id`.
+
+## ApprovalPolicy
+
+The Phase 7 policy contract for deciding whether a tool or action subject is
+allowed, denied, or requires human approval.
+
+## SandboxPolicy
+
+The Phase 7 policy contract for deciding whether local path or network access is
+allowed before an action runs.
+
+## Docs Freshness
+
+The Phase 7 gate that checks indexed Markdown paths in course and docs surfaces
+still point at real files.

@@ -36,6 +36,9 @@ For learners who know some Python but are new to Agent engineering:
 22. `../../course/chapters/06-framework-comparisons.md`
 23. `../../course/labs/06-framework-comparisons-lab.md`
 24. `../../course/solutions/06-framework-comparisons-solution.md`
+25. `../../course/chapters/07-production-readiness.md`
+26. `../../course/labs/07-production-readiness-lab.md`
+27. `../../course/solutions/07-production-readiness-solution.md`
 
 ### Engineer Track
 
@@ -44,7 +47,8 @@ For readers already comfortable with Python projects, pytest, and basic Agent te
 1. Skim `../../course/reference/agent-kernel-glossary.md`.
 2. Start at `../../course/chapters/01-agent-kernel-foundations.md`.
 3. Continue through Chapters 02-06 when reading Phase 2-6 source modules.
-4. Use labs and solutions as runnable verification material.
+4. Read Chapter 07 when evaluating production-readiness contracts.
+5. Use labs and solutions as runnable verification material.
 
 ## Shape
 
@@ -102,6 +106,9 @@ Early scaffold chapters may start as a spine, but they must be backfilled before
 - `../../course/chapters/06-framework-comparisons.md`: framework comparison method chapter.
 - `../../course/labs/06-framework-comparisons-lab.md`: hands-on recommendation matrix lab.
 - `../../course/solutions/06-framework-comparisons-solution.md`: annotated framework comparison solution.
+- `../../course/chapters/07-production-readiness.md`: production-readiness contracts chapter.
+- `../../course/labs/07-production-readiness-lab.md`: hands-on diagnostics, persistence, approval, and sandbox lab.
+- `../../course/solutions/07-production-readiness-solution.md`: annotated production-readiness solution.
 - `../../course/framework_comparisons/reports/echo-tool-task.md`: shared echo-tool task report.
 - `../../course/framework_comparisons/reports/recommendation-matrix.md`: current recommendation matrix report.
 
@@ -111,3 +118,4 @@ Early scaffold chapters may start as a spine, but they must be backfilled before
 - Add a Knowledge and Deep Research slice for research planning and report synthesis now that initial memory and skill policies are available.
 - Keep Phase 5 product/workbench lessons aligned with `WorkbenchSnapshot`, `research_api`, and `apps/web` as the product surface evolves.
 - Keep Phase 6 framework comparisons tied to real task tradeoffs, keeping framework code out of the product runtime path.
+- Keep Phase 7 production readiness local-first until real infrastructure has a separate approved plan.

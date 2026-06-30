@@ -9,6 +9,7 @@ This directory is the canonical archive for the redesign version of the project.
 - `progress/`: total and per-phase progress records.
 - `architecture/`: stable architecture notes.
 - `course/`: course roadmap and chapter authoring template.
+- `operations/`: production-readiness and local deployment notes.
 - `glossary.md`: redesign terminology.
 
 ## Document Index
@@ -30,6 +31,8 @@ This directory is the canonical archive for the redesign version of the project.
 - `course/roadmap.md`: 24-week course domain map and current chapter index.
 - `course/chapter-template.md`: beginner-ready structure for future full course chapters.
 - `product/workbench.md`: product boundary and first workbench screen expectations.
+- `operations/production-readiness.md`: local production-readiness boundary and verification notes.
+- `../infra/local-readiness-checklist.md`: local milestone verification and cleanup checklist.
 - `adr/README.md`: architecture decision record folder and format.
 - `living-landscape.md`: dated framework/protocol landscape notes.
 - `glossary.md`: core redesign vocabulary, including Workbench Product terms.
@@ -60,6 +63,9 @@ This directory is the canonical archive for the redesign version of the project.
 - `../course/chapters/06-framework-comparisons.md`: framework comparison method chapter.
 - `../course/labs/06-framework-comparisons-lab.md`: recommendation matrix lab.
 - `../course/solutions/06-framework-comparisons-solution.md`: expected Framework Comparisons lab solution.
+- `../course/chapters/07-production-readiness.md`: production-readiness contracts chapter.
+- `../course/labs/07-production-readiness-lab.md`: production diagnostics, persistence, approval, and sandbox lab.
+- `../course/solutions/07-production-readiness-solution.md`: expected Production Readiness lab solution.
 - `../course/framework_comparisons/reports/echo-tool-task.md`: shared echo-tool task report.
 - `../course/framework_comparisons/reports/recommendation-matrix.md`: current framework recommendation matrix.
 

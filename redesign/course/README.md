@@ -34,6 +34,8 @@
 16. 做 `labs/05-workbench-product-lab.md`，再看 `solutions/05-workbench-product-solution.md`。
 17. 读 `chapters/06-framework-comparisons.md`，理解如何用同一任务和指标比较框架。
 18. 做 `labs/06-framework-comparisons-lab.md`，再看 `solutions/06-framework-comparisons-solution.md`。
+19. 读 `chapters/07-production-readiness.md`，理解 observability、persistence、approval、sandbox 和 docs freshness 的生产边界。
+20. 做 `labs/07-production-readiness-lab.md`，再看 `solutions/07-production-readiness-solution.md`。
 
 ## Engineer Track
 
@@ -114,6 +116,9 @@ Current beginner-ready materials:
 - `chapters/06-framework-comparisons.md`
 - `labs/06-framework-comparisons-lab.md`
 - `solutions/06-framework-comparisons-solution.md`
+- `chapters/07-production-readiness.md`
+- `labs/07-production-readiness-lab.md`
+- `solutions/07-production-readiness-solution.md`
 - `framework_comparisons/reports/echo-tool-task.md`
 - `framework_comparisons/reports/recommendation-matrix.md`
 
@@ -128,6 +133,6 @@ Current beginner-ready materials:
 | Phase 4: Multi-Agent Delegation | Complete | Chapter 04, Lab 04, Solution 04 |
 | Phase 5: Workbench Product | Complete | Chapter 05, Lab 05, Solution 05 |
 | Phase 6: Framework Comparisons | Complete | Chapter 06, Lab 06, Solution 06, and comparison reports |
-| Phase 7: Production Readiness | Pending | Pending until production contracts exist |
+| Phase 7: Production Readiness | In progress | Chapter 07, Lab 07, Solution 07 |
 
 Future chapters should keep the same promise: explain the idea in plain language, show the smallest runnable version, inspect the event trail, break it deliberately, and give the learner a concrete checkpoint.
