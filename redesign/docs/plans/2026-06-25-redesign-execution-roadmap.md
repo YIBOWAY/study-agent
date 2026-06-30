@@ -160,8 +160,19 @@ Exit criteria:
 
 ### Phase 7: Production Readiness
 
+Plan: `redesign/docs/plans/2026-06-30-phase-7-production-readiness.md`
+
 Purpose:
 
 - Add observability, persistence hardening, approval policy, sandbox policy, deployment docs, and docs freshness checks.
 
-Plan document should be created after Phase 5 and Phase 6 have produced stable runtime and product contracts.
+Exit criteria:
+
+- `cd redesign && uv run pytest -q` passes.
+- `cd redesign && uv run ruff check .` passes.
+- `cd redesign/apps/web && npm install && npm run build` passes.
+- Production-readiness contracts remain offline-first and independent from real
+  cloud, auth, database, provider, or network transport dependencies.
+- Docs freshness checks validate course/docs index paths.
+- Course Chapter/Lab/Solution 07 teaches production readiness as inspectable
+  contracts.

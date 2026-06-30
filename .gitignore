@@ -34,6 +34,8 @@ Thumbs.db
 .firecrawl/
 .superpowers/
 .understand-anything/
+.codegraph/
+.claude/
 
 # Qdrant local data
 qdrant_storage/

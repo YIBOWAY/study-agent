@@ -20,19 +20,20 @@
 2. 读 `reference/agent-kernel-glossary.md`，先把课程里的高频词看一遍。
 3. 读 `chapters/00-before-agent-kernel.md`，建立第一张心智地图。
 4. 做 `labs/00-environment-check.md`，确认本机环境可以跑。
-5. 读 `chapters/01-agent-kernel-foundations.md`。
-6. 做 `labs/01-agent-runner-lab.md`。
-7. 对答案时看 `solutions/01-agent-runner-solution.md`，不要一开始就看。
-8. 读 `chapters/02-research-core-foundations.md`，理解 source、evidence、claim、report 的证据链。
-9. 做 `labs/02-source-evidence-claim-lab.md`，再看 `solutions/02-source-evidence-claim-solution.md`。
-10. 读 `chapters/03-memory-and-skills.md`，理解 memory policy 和 skill progressive disclosure。
-11. 做 `labs/03-memory-skill-runtime-lab.md`，再看 `solutions/03-memory-skill-runtime-solution.md`。
-12. 读 `chapters/04-multi-agent-delegation.md`，理解 child context isolation 和 budget accounting。
-13. 做 `labs/04-delegation-runtime-lab.md`，再看 `solutions/04-delegation-runtime-solution.md`。
-14. 读 `chapters/05-workbench-product.md`，理解 product adapter、FastAPI API 和 React Workbench 的边界。
-15. 做 `labs/05-workbench-product-lab.md`，再看 `solutions/05-workbench-product-solution.md`。
-16. 读 `chapters/06-framework-comparisons.md`，理解如何用同一任务和指标比较框架。
-17. 做 `labs/06-framework-comparisons-lab.md`，再看 `solutions/06-framework-comparisons-solution.md`。
+5. 对答案时看 `solutions/00-environment-check-solution.md`，不要一开始就看。
+6. 读 `chapters/01-agent-kernel-foundations.md`。
+7. 做 `labs/01-agent-runner-lab.md`。
+8. 对答案时看 `solutions/01-agent-runner-solution.md`，不要一开始就看。
+9. 读 `chapters/02-research-core-foundations.md`，理解 source、evidence、claim、report 的证据链。
+10. 做 `labs/02-source-evidence-claim-lab.md`，再看 `solutions/02-source-evidence-claim-solution.md`。
+11. 读 `chapters/03-memory-and-skills.md`，理解 memory policy 和 skill progressive disclosure。
+12. 做 `labs/03-memory-skill-runtime-lab.md`，再看 `solutions/03-memory-skill-runtime-solution.md`。
+13. 读 `chapters/04-multi-agent-delegation.md`，理解 child context isolation 和 budget accounting。
+14. 做 `labs/04-delegation-runtime-lab.md`，再看 `solutions/04-delegation-runtime-solution.md`。
+15. 读 `chapters/05-workbench-product.md`，理解 product adapter、FastAPI API 和 React Workbench 的边界。
+16. 做 `labs/05-workbench-product-lab.md`，再看 `solutions/05-workbench-product-solution.md`。
+17. 读 `chapters/06-framework-comparisons.md`，理解如何用同一任务和指标比较框架。
+18. 做 `labs/06-framework-comparisons-lab.md`，再看 `solutions/06-framework-comparisons-solution.md`。
 
 ## Engineer Track
 
