@@ -5,11 +5,11 @@ Last updated: 2026-07-01
 ## Current State
 
 - Active branch: `codex/redesign-course-r1`
-- Active phase: Phase R1 - Course Teaching Redesign, Part 1 restructuring remains in progress until final verification completes.
+- Active phase: None. Phase R1 is complete; Phase R2 should start from a new approved plan when the Part 2 teaching rewrite begins.
 - Completed runtime/product phases: 8 of 8
-- Course teaching redesign: Phase R1 in progress; R2-R9 planned.
-- Current verification baseline: Phase 7 completion on 2026-06-30: full redesign suite `199 passed`, `ruff check .` clean, `apps/web` Vite build clean with `46 modules transformed`, and `git diff --check` clean.
-- Course documentation now has a complete v1 baseline. Phase R1 Tasks 1-8 have landed for the learner entrypoint and Part 1 project-driven 本地论文研究助手 narrative; Task 9 synced docs/progress, and final verification is next. Parts 2-7 remain current v1 material until R2-R7 rewrites land.
+- Course teaching redesign: Phase R1 complete; R2-R9 planned.
+- Current verification baseline: Phase R1 completion on 2026-07-01: `codegraph status .` up to date with 65 files, 1,001 nodes, and 2,751 edges; full redesign suite `199 passed`; `ruff check .` clean; docs freshness `3 passed`; `apps/web` Vite build clean with `46 modules transformed`; `git diff --check` clean.
+- Course documentation now has a complete v1 baseline and a project-driven R1 learner entrypoint. Phase R1 completed the learner guide, roadmap, Part 1 chapters/lab/solution, reusable Part template, and Capstone placeholder for the 本地论文研究助手 narrative. Parts 2-7 remain current v1 material until R2-R7 rewrites land.
 
 ## Phase Index
 
@@ -23,7 +23,7 @@ Last updated: 2026-07-01
 | Phase 5: Workbench Product | Complete | `phases/phase-5.md` | Workbench snapshot contracts, FastAPI API, React workbench, Course 05, docs sync, and final verification landed. |
 | Phase 6: Framework Comparisons | Complete | `phases/phase-6.md` | Offline comparison harness, handwritten runner baseline, framework profiles, recommendation reports, Course 06, docs sync, and final verification landed. |
 | Phase 7: Production Readiness | Complete | `phases/phase-7.md` | Offline production-readiness contracts, docs freshness gate, local readiness docs, Course 07, docs sync, and final verification landed. |
-| Phase R1: Course Teaching Redesign - Part 1 | In Progress | `phases/phase-r1.md` | Tasks 1-8 have landed; Task 9 docs/progress sync is complete, and final verification is next before R1 completion. |
+| Phase R1: Course Teaching Redesign - Part 1 | Complete | `phases/phase-r1.md` | Learner entrypoint, Part 1 teaching materials, roadmap/template/index, Capstone placeholder, docs sync, subagent reviews, and final verification landed. |
 
 ## Update Checklist
 

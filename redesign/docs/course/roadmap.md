@@ -12,12 +12,12 @@ The course should teach Agent engineering through a single, growing project: a �
 
 For learners who know some Python but are new to Agent engineering, the path is Part-based. Parts 1-7 build on each other and end with the Capstone; do not treat later Parts as independent one-off chapters.
 
-R1 is the current teaching-redesign pass for the learner entrypoint and Part 1. Parts 2-7 are still current v1 material until their planned R2-R7 rewrites land.
+R1 completed the teaching-redesign pass for the learner entrypoint and Part 1. Parts 2-7 are still current v1 material until their planned R2-R7 rewrites land.
 
 | Step | File to read/do | What capability the assistant gains |
 |------|-----------------|--------------------------------------|
 | 0 | Read [course/README.md](../../course/README.md), [python-terminal-primer.md](../../course/reference/python-terminal-primer.md), and [agent-kernel-glossary.md](../../course/reference/agent-kernel-glossary.md).<br>Do [00-environment-check.md](../../course/labs/00-environment-check.md), then compare with [00-environment-check-solution.md](../../course/solutions/00-environment-check-solution.md). | The learner gets the offline setup and vocabulary. The assistant has not gained a runtime capability yet. |
-| 1 | Read Part 1 Section 1 in [00-before-agent-kernel.md](../../course/chapters/00-before-agent-kernel.md), then Sections 2-5 in [01-agent-kernel-foundations.md](../../course/chapters/01-agent-kernel-foundations.md).<br>Do [01-agent-runner-lab.md](../../course/labs/01-agent-runner-lab.md), then compare with [01-agent-runner-solution.md](../../course/solutions/01-agent-runner-solution.md). | Part 1: Agent Kernel — the assistant gains the smallest think-act-observe loop and an inspectable event trail. This is the current R1 rewrite target. |
+| 1 | Read Part 1 Section 1 in [00-before-agent-kernel.md](../../course/chapters/00-before-agent-kernel.md), then Sections 2-5 in [01-agent-kernel-foundations.md](../../course/chapters/01-agent-kernel-foundations.md).<br>Do [01-agent-runner-lab.md](../../course/labs/01-agent-runner-lab.md), then compare with [01-agent-runner-solution.md](../../course/solutions/01-agent-runner-solution.md). | Part 1: Agent Kernel — the assistant gains the smallest think-act-observe loop and an inspectable event trail. This is the completed R1 rewrite material. |
 | 2 | Read [02-research-core-foundations.md](../../course/chapters/02-research-core-foundations.md).<br>Do [02-source-evidence-claim-lab.md](../../course/labs/02-source-evidence-claim-lab.md), then compare with [02-source-evidence-claim-solution.md](../../course/solutions/02-source-evidence-claim-solution.md). | Part 2: Research Core — the assistant gains a source -> evidence -> claim -> report evidence chain. This remains current v1 material until the planned R2 rewrite. |
 | 3 | Read [03-memory-and-skills.md](../../course/chapters/03-memory-and-skills.md).<br>Do [03-memory-skill-runtime-lab.md](../../course/labs/03-memory-skill-runtime-lab.md), then compare with [03-memory-skill-runtime-solution.md](../../course/solutions/03-memory-skill-runtime-solution.md). | Part 3: Memory and Skills — the assistant gains persistent memory policies and skill loading. This remains current v1 material until the planned R3 rewrite. |
 | 4 | Read [04-multi-agent-delegation.md](../../course/chapters/04-multi-agent-delegation.md).<br>Do [04-delegation-runtime-lab.md](../../course/labs/04-delegation-runtime-lab.md), then compare with [04-delegation-runtime-solution.md](../../course/solutions/04-delegation-runtime-solution.md). | Part 4: Multi-Agent Delegation — the assistant gains child context isolation and budget accounting. This remains current v1 material until the planned R4 rewrite. |
@@ -71,12 +71,12 @@ Current means the file exists in the tree now. It does not mean every file has a
 
 - [2026-06-25-study-agent-comprehensive-redesign.md](../specs/2026-06-25-study-agent-comprehensive-redesign.md): approved redesign spec for the broader runtime/product/course direction.
 - [2026-06-30-course-teaching-redesign.md](../specs/2026-06-30-course-teaching-redesign.md): approved teaching-redesign spec for the project-driven course and R1-R9 plan.
-- [2026-06-30-phase-r1-course-teaching-redesign.md](../plans/2026-06-30-phase-r1-course-teaching-redesign.md): current R1 implementation plan.
+- [2026-06-30-phase-r1-course-teaching-redesign.md](../plans/2026-06-30-phase-r1-course-teaching-redesign.md): completed R1 implementation plan.
 - [course/README.md](../../course/README.md): learner entrypoint, track selection, commands, and common stuck points.
 - [python-terminal-primer.md](../../course/reference/python-terminal-primer.md): minimal terminal and Python concepts needed for the course.
 - [agent-kernel-glossary.md](../../course/reference/agent-kernel-glossary.md): plain-language Agent kernel vocabulary.
 - Setup material: [00-environment-check.md](../../course/labs/00-environment-check.md), [00-environment-check-solution.md](../../course/solutions/00-environment-check-solution.md).
-- Part 1 / R1 target material: [00-before-agent-kernel.md](../../course/chapters/00-before-agent-kernel.md), [01-agent-kernel-foundations.md](../../course/chapters/01-agent-kernel-foundations.md), [01-agent-runner-lab.md](../../course/labs/01-agent-runner-lab.md), [01-agent-runner-solution.md](../../course/solutions/01-agent-runner-solution.md).
+- Part 1 / R1 completed material: [00-before-agent-kernel.md](../../course/chapters/00-before-agent-kernel.md), [01-agent-kernel-foundations.md](../../course/chapters/01-agent-kernel-foundations.md), [01-agent-runner-lab.md](../../course/labs/01-agent-runner-lab.md), [01-agent-runner-solution.md](../../course/solutions/01-agent-runner-solution.md).
 - Part 2 current v1 material: [02-research-core-foundations.md](../../course/chapters/02-research-core-foundations.md), [02-source-evidence-claim-lab.md](../../course/labs/02-source-evidence-claim-lab.md), [02-source-evidence-claim-solution.md](../../course/solutions/02-source-evidence-claim-solution.md).
 - Part 3 current v1 material: [03-memory-and-skills.md](../../course/chapters/03-memory-and-skills.md), [03-memory-skill-runtime-lab.md](../../course/labs/03-memory-skill-runtime-lab.md), [03-memory-skill-runtime-solution.md](../../course/solutions/03-memory-skill-runtime-solution.md).
 - Part 4 current v1 material: [04-multi-agent-delegation.md](../../course/chapters/04-multi-agent-delegation.md), [04-delegation-runtime-lab.md](../../course/labs/04-delegation-runtime-lab.md), [04-delegation-runtime-solution.md](../../course/solutions/04-delegation-runtime-solution.md).
@@ -89,7 +89,7 @@ Current means the file exists in the tree now. It does not mean every file has a
 
 ## Near-Term Course Work
 
-- Phase R1 (current / in progress): restructure the learner entrypoint and Part 1 around the 本地论文研究助手 narrative, add the Part contract, update the roadmap/template/index, and add the Capstone placeholder.
+- Phase R1 (complete): restructured the learner entrypoint and Part 1 around the 本地论文研究助手 narrative, added the Part contract, updated the roadmap/template/index, and added the Capstone placeholder.
 - Phase R2 (planned): rewrite Part 2 so Research Core teaches the source -> evidence -> claim -> report chain through the assistant's citation problem.
 - Phase R3 (planned): rewrite Part 3 so Memory and Skills teach persistent memory policies and skill loading through repeated research sessions.
 - Phase R4 (planned): rewrite Part 4 so Multi-Agent Delegation teaches child context isolation and budget accounting through divided research work.

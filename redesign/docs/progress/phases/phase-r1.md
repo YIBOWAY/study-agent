@@ -1,9 +1,9 @@
 # Phase R1 Progress: Course Teaching Redesign - Part 1
 
-Status: In Progress
+Status: Complete
 
 Started: 2026-06-30
-Completed: Not complete
+Completed: 2026-07-01
 Branch: `codex/redesign-course-r1`
 
 ## Goal
@@ -40,14 +40,14 @@ Turn the learner entrypoint and Part 1 from technically correct module documenta
 - [x] Task 7: Rewrite Solution 01 with design rationale.
 - [x] Task 8: Rewrite Course README as the project-driven learning guide.
 - [x] Task 9: Update docs index and progress tracking.
-- [ ] Task 10: Final verification and cleanup.
+- [x] Task 10: Final verification and cleanup.
 
 ## Exit Signal
 
 - [x] Tasks 1-8 landed for the learner entrypoint, Part 1 materials, roadmap, template, and Capstone placeholder.
 - [x] Docs index and progress tracking synced for Task 9.
-- [ ] Task 10 final verification and cleanup complete.
-- [ ] Phase R1 marked complete only after fresh verification results are recorded.
+- [x] Task 10 final verification and cleanup complete.
+- [x] Phase R1 marked complete after fresh verification results were recorded.
 
 ## Progress Log
 
@@ -59,16 +59,20 @@ Turn the learner entrypoint and Part 1 from technically correct module documenta
 | 2026-06-30 | Task 5 rewrote `course/chapters/01-agent-kernel-foundations.md` as Part 1 Sections 2-5. Review fixed the Break/Fix repair path so it remains runnable after changing `missing` back to `echo`, added L3 `tool_values == [7, 14]` causal assertions, completed the L3 feedback loop, and tightened the Part 1 closer to avoid implying real paper retrieval already exists. Focused snippet verification confirmed the unknown-tool failure path, fixed six-event tool path, and two-tool calculator event trail. |
 | 2026-07-01 | Tasks 6-7 rewrote `course/labs/01-agent-runner-lab.md` and `course/solutions/01-agent-runner-solution.md` as the new Part 1 practice loop. Review confirmed the old missing-tool lab/solution mismatch is gone, all four lab exercises include feedback, L3 checks all four registered tools plus `tool_values == [7, 14]`, and the solution now explains both what each assertion proves and why the design matters for later evidence chains, Workbench timeline UI, and production diagnostics. |
 | 2026-07-01 | Task 8 rewrote `course/README.md` as the project-driven learner entrypoint. Review confirmed the Beginner Track, Engineer Track, command instructions, Part study workflow, stuck-point table, R1/R2-R9 boundary, and Capstone placeholder language are clear; path-orientation polish now reminds learners that links are relative to `course/` but commands run from `redesign/`. |
-| 2026-07-01 | Task 9 synced `docs/README.md`, `docs/progress/overall.md`, and this phase file after Tasks 1-8 landed. The docs index now points to the R1 plan, describes the project-driven teaching redesign, frames Part 1 as rewritten material, and keeps Parts 2-7 labeled as current v1 material until R2-R7. Phase R1 remains in progress; Task 10 final verification is still pending. |
+| 2026-07-01 | Task 9 synced `docs/README.md`, `docs/progress/overall.md`, and this phase file after Tasks 1-8 landed. The docs index now points to the R1 plan, describes the project-driven teaching redesign, frames Part 1 as rewritten material, and keeps Parts 2-7 labeled as current v1 material until R2-R7. This Task 9 checkpoint intentionally kept Phase R1 open until Task 10 could record fresh verification. |
+| 2026-07-01 | Task 10 completed final verification and cleanup. Codegraph reported an up-to-date index with 65 files, 1,001 nodes, and 2,751 edges. Fresh verification from `redesign/`: `PYTHONPATH=packages/research_core/src uv run pytest -q` -> `199 passed`; `PYTHONPATH=packages/research_core/src uv run ruff check .` -> `All checks passed!`; `PYTHONPATH=packages/research_core/src uv run pytest tests/course/test_docs_freshness.py -q` -> `3 passed`; `git diff --check` clean; `cd apps/web && npm ci && npm run build` passed with Vite `46 modules transformed`. Two independent subagent reviews passed: spec/progress consistency and beginner teaching quality. |
 
-## Verification Target
+## Verification Results
 
-Run from `redesign/` unless noted:
+Run from `redesign/` unless noted. Results recorded on 2026-07-01.
 
-```bash
-uv run pytest -q
-uv run ruff check .
-git diff --check
-```
-
-The web build is not expected to change in Phase R1, but it should be rerun before final completion if docs freshness or package metadata changes create uncertainty.
+| Check | Result |
+| --- | --- |
+| `codegraph status .` | Up to date; 65 files, 1,001 nodes, 2,751 edges. |
+| `PYTHONPATH=packages/research_core/src uv run pytest -q` | `199 passed` |
+| `PYTHONPATH=packages/research_core/src uv run ruff check .` | `All checks passed!` |
+| `PYTHONPATH=packages/research_core/src uv run pytest tests/course/test_docs_freshness.py -q` | `3 passed` |
+| `git diff --check` | Clean |
+| `cd apps/web && npm ci && npm run build` | Passed; Vite built `46 modules transformed`. |
+| Subagent review: spec/progress consistency | PASS |
+| Subagent review: beginner teaching quality | PASS |

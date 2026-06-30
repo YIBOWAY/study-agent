@@ -66,13 +66,20 @@ Phase 7 adds the first Production Readiness contracts:
 - `infra/docs_freshness.py` keeps course/docs indexes honest.
 - Course Chapter/Lab/Solution 07 teaches production readiness as local contracts.
 
+Phase R1 adds the first project-driven course teaching rewrite:
+
+- The learner entrypoint now frames the course as building a 本地论文研究助手.
+- Part 1 Chapter/Lab/Solution materials now teach the Agent Kernel through mental models, event-trail inspection, break/fix loops, three-tier exercises, and design rationale.
+- `docs/course/roadmap.md` and `docs/course/chapter-template.md` define the Part-based teaching contract for R2-R9.
+- `course/capstone/README.md` previews the full offline Capstone without claiming it is implemented yet.
+
 Real retrieval adapters, async delegation, streaming, real auth, real cloud deployment, real A2A transport, and live framework adapters arrive in later phases.
 
 ## Course Entry
 
 Start at `course/README.md`. New learners should follow the Beginner Track before Chapter 01; experienced engineers can skim the glossary and jump to the Agent Kernel lab.
 
-Current course coverage now follows the implemented runtime phases:
+Current course coverage follows the implemented runtime phases. Phase R1 has rewritten only the learner entrypoint and Part 1 into the project-driven teaching style; Parts 2-7 remain current v1 course material until their planned R2-R7 rewrites.
 
 - Chapter/Lab/Solution 00: learner setup and pre-kernel mental model.
 - Chapter/Lab/Solution 01: Agent Kernel.

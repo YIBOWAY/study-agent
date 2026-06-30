@@ -176,3 +176,27 @@ Exit criteria:
 - Docs freshness checks validate course/docs index paths.
 - Course Chapter/Lab/Solution 07 teaches production readiness as inspectable
   contracts.
+
+### Phase R1: Course Teaching Redesign - Part 1
+
+Plan: `redesign/docs/plans/2026-06-30-phase-r1-course-teaching-redesign.md`
+
+Purpose:
+
+- Reframe the learner entrypoint around a single project: a 本地论文研究助手.
+- Rewrite Part 1 so Chapter 00, Chapter 01, Lab 01, and Solution 01 teach the Agent Kernel through plain-language mental models, event-trail inspection, break/fix loops, three-tier exercises, and design rationale.
+- Add the reusable Part teaching template, project-driven roadmap, and Capstone placeholder.
+
+Exit criteria:
+
+- `cd redesign && PYTHONPATH=packages/research_core/src uv run pytest -q` passes with `199 passed`.
+- `cd redesign && PYTHONPATH=packages/research_core/src uv run ruff check .` passes.
+- `cd redesign && PYTHONPATH=packages/research_core/src uv run pytest tests/course/test_docs_freshness.py -q` passes.
+- `cd redesign/apps/web && npm ci && npm run build` passes.
+- Independent subagent reviews pass for spec/progress consistency and beginner teaching quality.
+
+Follow-up:
+
+- R2-R7 should rewrite Parts 2-7 with the same project-driven teaching method.
+- R8 should build the full Capstone materials under `course/capstone/`.
+- R9 should add support references such as troubleshooting, design-decision indexes, discussion prompts, and glossary updates.

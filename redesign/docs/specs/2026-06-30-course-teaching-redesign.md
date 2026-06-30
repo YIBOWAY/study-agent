@@ -1,6 +1,6 @@
 # Course Teaching Redesign: From Module Docs to Project-Driven Learning
 
-> **Status:** Design approved; Phase R1 implementation in progress
+> **Status:** Design approved; Phase R1 complete; R2-R9 planned
 > **Date:** 2026-06-30
 > **Branch:** codex/redesign-course-r1
 
