@@ -52,9 +52,9 @@ This directory is the canonical archive for the redesign version of the project.
 - `../course/chapters/01-agent-kernel-foundations.md`: Part 1 Sections 2-5 build, inspect, break, fix, and gate loop.
 - `../course/labs/01-agent-runner-lab.md`: Part 1 L1/L2/L3 AgentRunner practice with feedback loops.
 - `../course/solutions/01-agent-runner-solution.md`: Part 1 L1/L2/L3 rationale and why-correct explanations.
-- `../course/chapters/02-research-core-foundations.md`: Part 2 Research Core evidence-chain material currently being rewritten in R2.
-- `../course/labs/02-source-evidence-claim-lab.md`: Part 2 Source/Evidence/Claim lab currently being rewritten in R2.
-- `../course/solutions/02-source-evidence-claim-solution.md`: Part 2 Research Core solution currently being rewritten in R2.
+- `../course/chapters/02-research-core-foundations.md`: Part 2 R2 Research Core evidence-chain material.
+- `../course/labs/02-source-evidence-claim-lab.md`: Part 2 R2 Source/Evidence/Claim lab with L1/L2/L3 exercises.
+- `../course/solutions/02-source-evidence-claim-solution.md`: Part 2 R2 Research Core solution with design rationale.
 - `../course/chapters/03-memory-and-skills.md`: Part 3 current v1 Memory policy and SkillRuntime material until R3.
 - `../course/labs/03-memory-skill-runtime-lab.md`: Part 3 current v1 Memory/Skill lab until R3.
 - `../course/solutions/03-memory-skill-runtime-solution.md`: Part 3 current v1 Memory/Skill solution until R3.
