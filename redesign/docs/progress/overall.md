@@ -5,11 +5,11 @@ Last updated: 2026-07-01
 ## Current State
 
 - Active branch: `codex/redesign-course-r2`
-- Active phase: Phase R2 - Course Teaching Redesign Part 2.
+- Active phase: None. Phase R2 is complete; Phase R3 should start from a new approved plan when the Part 3 teaching rewrite begins.
 - Completed runtime/product phases: 8 of 8
-- Course teaching redesign: Phase R1 complete; R2 in progress; R3-R9 planned.
-- Current verification baseline: Phase R1 completion on 2026-07-01: `codegraph status .` up to date with 65 files, 1,001 nodes, and 2,751 edges; full redesign suite `199 passed`; `ruff check .` clean; docs freshness `3 passed`; `apps/web` Vite build clean with `46 modules transformed`; `git diff --check` clean.
-- Course documentation now has a complete v1 baseline plus project-driven R1 and R2 teaching material. Phase R1 completed the learner guide, roadmap, Part 1 chapters/lab/solution, reusable Part template, and Capstone placeholder for the 本地论文研究助手 narrative. Phase R2 has landed the Part 2 chapter/lab/solution content rewrite and is waiting on final verification. Parts 3-7 remain current v1 material until R3-R7 rewrites land.
+- Course teaching redesign: Phase R1 and R2 complete; R3-R9 planned.
+- Current verification baseline: Phase R2 completion on 2026-07-01: `codegraph status .` up to date with 65 files, 1,001 nodes, and 2,751 edges; full redesign suite `199 passed`; `ruff check .` clean; docs freshness `3 passed`; `apps/web` Vite build clean with `46 modules transformed`; `git diff --check` clean.
+- Course documentation now has a complete v1 baseline plus project-driven R1 and R2 teaching material. Phase R1 completed the learner guide, roadmap, Part 1 chapters/lab/solution, reusable Part template, and Capstone placeholder for the 本地论文研究助手 narrative. Phase R2 completed the Part 2 Research Core chapter/lab/solution rewrite around the citation problem. Parts 3-7 remain current v1 material until R3-R7 rewrites land.
 
 ## Phase Index
 
@@ -24,7 +24,7 @@ Last updated: 2026-07-01
 | Phase 6: Framework Comparisons | Complete | `phases/phase-6.md` | Offline comparison harness, handwritten runner baseline, framework profiles, recommendation reports, Course 06, docs sync, and final verification landed. |
 | Phase 7: Production Readiness | Complete | `phases/phase-7.md` | Offline production-readiness contracts, docs freshness gate, local readiness docs, Course 07, docs sync, and final verification landed. |
 | Phase R1: Course Teaching Redesign - Part 1 | Complete | `phases/phase-r1.md` | Learner entrypoint, Part 1 teaching materials, roadmap/template/index, Capstone placeholder, docs sync, subagent reviews, and final verification landed. |
-| Phase R2: Course Teaching Redesign - Part 2 | In Progress | `phases/phase-r2.md` | Part 2 Research Core chapter/lab/solution rewrite landed; final verification pending. |
+| Phase R2: Course Teaching Redesign - Part 2 | Complete | `phases/phase-r2.md` | Part 2 Research Core chapter/lab/solution, docs sync, final verification, cleanup, and neat-freak reconciliation landed. |
 
 ## Update Checklist
 

@@ -197,7 +197,7 @@ Exit criteria:
 
 Follow-up:
 
-- R2-R7 should rewrite Parts 2-7 with the same project-driven teaching method.
+- R2 completed the Part 2 teaching rewrite; R3-R7 should rewrite Parts 3-7 with the same project-driven teaching method.
 - R8 should build the full Capstone materials under `course/capstone/`.
 - R9 should add support references such as troubleshooting, design-decision indexes, discussion prompts, and glossary updates.
 
@@ -213,12 +213,12 @@ Purpose:
 
 Exit criteria:
 
-- Chapter/Lab/Solution 02 are rewritten using the R1 teaching contract.
-- `course/README.md`, `docs/course/roadmap.md`, `docs/README.md`, and `docs/progress/` describe Part 2 as R2 rewritten.
-- `cd redesign && PYTHONPATH=packages/research_core/src uv run pytest -q` passes.
-- `cd redesign && PYTHONPATH=packages/research_core/src uv run ruff check .` passes.
-- `cd redesign && PYTHONPATH=packages/research_core/src uv run pytest tests/course/test_docs_freshness.py -q` passes.
-- `cd redesign/apps/web && npm ci && npm run build` passes.
+- Chapter/Lab/Solution 02 are rewritten using the R1 teaching contract. Completed on 2026-07-01.
+- `course/README.md`, `docs/course/roadmap.md`, `docs/README.md`, and `docs/progress/` describe Part 2 as R2 rewritten. Completed on 2026-07-01.
+- `cd redesign && PYTHONPATH=packages/research_core/src uv run pytest -q` passes. Completed on 2026-07-01 with `199 passed`.
+- `cd redesign && PYTHONPATH=packages/research_core/src uv run ruff check .` passes. Completed on 2026-07-01 with `All checks passed!`.
+- `cd redesign && PYTHONPATH=packages/research_core/src uv run pytest tests/course/test_docs_freshness.py -q` passes. Completed on 2026-07-01 with `3 passed`.
+- `cd redesign/apps/web && npm ci && npm run build` passes. Completed on 2026-07-01 with Vite `46 modules transformed`.
 
 Follow-up:
 

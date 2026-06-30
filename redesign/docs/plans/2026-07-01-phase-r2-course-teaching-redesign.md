@@ -65,19 +65,19 @@ Modify:
 - Modify: `docs/progress/overall.md`
 - Modify: `docs/plans/2026-06-25-redesign-execution-roadmap.md`
 
-- [ ] **Step 1: Add this plan**
+- [x] **Step 1: Add this plan**
 
 Save this plan under `docs/plans/`.
 
-- [ ] **Step 2: Start progress tracking**
+- [x] **Step 2: Start progress tracking**
 
 Create `docs/progress/phases/phase-r2.md` with R2 scope, task checklist, verification target, and a start log dated `2026-07-01`.
 
-- [ ] **Step 3: Update indexes**
+- [x] **Step 3: Update indexes**
 
 Update docs/progress indexes so R2 is visible as active, without marking rewritten course content complete.
 
-- [ ] **Step 4: Verify indexed docs paths**
+- [x] **Step 4: Verify indexed docs paths**
 
 Run:
 
@@ -87,7 +87,7 @@ cd redesign && PYTHONPATH=packages/research_core/src uv run pytest tests/course/
 
 Expected: docs freshness passes.
 
-- [ ] **Step 5: Commit and push**
+- [x] **Step 5: Commit and push**
 
 Commit the plan/progress kickoff and push `codex/redesign-course-r2`.
 
@@ -98,23 +98,23 @@ Commit the plan/progress kickoff and push `codex/redesign-course-r2`.
 - Modify: `course/chapters/02-research-core-foundations.md`
 - Modify: `docs/progress/phases/phase-r2.md`
 
-- [ ] **Step 1: Rewrite opener and learner contract**
+- [x] **Step 1: Rewrite opener and learner contract**
 
 Turn Chapter 02 into "Part 2: Research Core" and start from the problem: the assistant can produce text, but researchers cannot trust claims without traceable evidence.
 
-- [ ] **Step 2: Add architecture and data-flow diagrams**
+- [x] **Step 2: Add architecture and data-flow diagrams**
 
 Include an architecture map showing Part 2 in the full local paper research assistant and a data-flow diagram from `SourceInput` to `ClaimSourceLink`.
 
-- [ ] **Step 3: Build the evidence chain**
+- [x] **Step 3: Build the evidence chain**
 
 Use a local paper fixture about RAG evaluation and citation mapping. Show `SourceIngestor`, `FakeRetriever`, `Evidence`, `Claim`, `Report`, and `build_claim_source_links` in a runnable snippet.
 
-- [ ] **Step 4: Inspect, modify, break, fix, reflect**
+- [x] **Step 4: Inspect, modify, break, fix, reflect**
 
 Teach learners to inspect source IDs, retrieval scores, link records, and explicit error messages. Include unsupported-claim and missing-evidence failure paths.
 
-- [ ] **Step 5: Add product connection and eval gate**
+- [x] **Step 5: Add product connection and eval gate**
 
 Explain how Workbench source/evidence/report panels use the records and list exact pytest/ruff commands.
 
@@ -125,15 +125,15 @@ Explain how Workbench source/evidence/report panels use the records and list exa
 - Modify: `course/labs/02-source-evidence-claim-lab.md`
 - Modify: `docs/progress/phases/phase-r2.md`
 
-- [ ] **Step 1: Convert lab to L1/L2/L3**
+- [x] **Step 1: Convert lab to L1/L2/L3**
 
 L1 builds the smallest evidence chain. L2 changes the fixture or query and predicts how ranking/link records change. L3 asks the learner to design a new local paper fixture and evidence-backed report.
 
-- [ ] **Step 2: Add feedback loops**
+- [x] **Step 2: Add feedback loops**
 
 Every exercise must include Common Errors, Failure Output Interpretation, Where To Go Back, and Why Correct Answer Is Correct.
 
-- [ ] **Step 3: Add break/fix checks**
+- [x] **Step 3: Add break/fix checks**
 
 Include unsupported claim, missing evidence, and missing source scenarios with expected error interpretation.
 
@@ -144,15 +144,15 @@ Include unsupported claim, missing evidence, and missing source scenarios with e
 - Modify: `course/solutions/02-source-evidence-claim-solution.md`
 - Modify: `docs/progress/phases/phase-r2.md`
 
-- [ ] **Step 1: Provide runnable answers**
+- [x] **Step 1: Provide runnable answers**
 
 Include complete L1/L2/L3 solution snippets and assertions.
 
-- [ ] **Step 2: Explain why answers are correct**
+- [x] **Step 2: Explain why answers are correct**
 
 For each exercise, explain what the assertions prove and which misunderstanding they rule out.
 
-- [ ] **Step 3: Connect design decisions forward**
+- [x] **Step 3: Connect design decisions forward**
 
 Explain why the evidence chain matters for Memory, Delegation, Workbench, and Production Diagnostics.
 
@@ -166,11 +166,11 @@ Explain why the evidence chain matters for Memory, Delegation, Workbench, and Pr
 - Modify: `docs/progress/overall.md`
 - Modify: `docs/progress/phases/phase-r2.md`
 
-- [ ] **Step 1: Mark Part 2 as R2 rewritten**
+- [x] **Step 1: Mark Part 2 as R2 rewritten**
 
 After Tasks 2-4 land, update course indexes to describe Part 2 as completed R2 material. Keep Parts 3-7 as current v1 material.
 
-- [ ] **Step 2: Verify docs freshness**
+- [x] **Step 2: Verify docs freshness**
 
 Run:
 
@@ -187,7 +187,7 @@ Expected: `3 passed`.
 - Modify: `docs/progress/overall.md`
 - Modify: `docs/progress/phases/phase-r2.md`
 
-- [ ] **Step 1: Run final verification**
+- [x] **Step 1: Run final verification**
 
 Run from `redesign/`:
 
@@ -199,15 +199,15 @@ git diff --check
 cd apps/web && npm ci && npm run build
 ```
 
-- [ ] **Step 2: Clean generated artifacts**
+- [x] **Step 2: Clean generated artifacts**
 
 Remove generated `.venv`, `.pytest_cache`, `.ruff_cache`, `uv.lock`, `apps/web/node_modules`, `apps/web/dist`, `apps/web/tsconfig.tsbuildinfo`, and `__pycache__` outputs unless already tracked.
 
-- [ ] **Step 3: Run final docs reconciliation**
+- [x] **Step 3: Run final docs reconciliation**
 
 Use the neat-freak workflow to verify docs/progress/README/AGENTS alignment.
 
-- [ ] **Step 4: Mark R2 complete and push**
+- [x] **Step 4: Mark R2 complete and push**
 
 Only after fresh verification, mark R2 complete, commit the final docs sync, and push the branch.
 
