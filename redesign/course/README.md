@@ -133,6 +133,6 @@ Current beginner-ready materials:
 | Phase 4: Multi-Agent Delegation | Complete | Chapter 04, Lab 04, Solution 04 |
 | Phase 5: Workbench Product | Complete | Chapter 05, Lab 05, Solution 05 |
 | Phase 6: Framework Comparisons | Complete | Chapter 06, Lab 06, Solution 06, and comparison reports |
-| Phase 7: Production Readiness | In progress | Chapter 07, Lab 07, Solution 07 |
+| Phase 7: Production Readiness | Complete | Chapter 07, Lab 07, Solution 07 |
 
 Future chapters should keep the same promise: explain the idea in plain language, show the smallest runnable version, inspect the event trail, break it deliberately, and give the learner a concrete checkpoint.

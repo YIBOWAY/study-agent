@@ -5,10 +5,10 @@ Last updated: 2026-06-29
 ## Current State
 
 - Active branch: `codex/redesign-phase-6`
-- Active phase: Phase 7 - Production Readiness.
-- Completed phases: 7 of 8
-- Current verification baseline: post-Phase 4/5/6 review remediation on 2026-06-29: full redesign suite `185 passed`, `ruff check .` clean, and `apps/web` Vite build clean with `46 modules transformed`.
-- Course documentation now includes a beginner-ready entrypoint, primer/reference pages, and Chapter/Lab/Solution 00-06 covering scaffold, Agent Kernel, Research Core, Memory and Skills, Multi-Agent Delegation, Workbench Product, and Framework Comparisons.
+- Active phase: None; Phase 7 - Production Readiness is complete.
+- Completed phases: 8 of 8
+- Current verification baseline: Phase 7 completion on 2026-06-30: full redesign suite `199 passed`, `ruff check .` clean, `apps/web` Vite build clean with `46 modules transformed`, and `git diff --check` clean.
+- Course documentation now includes a beginner-ready entrypoint, primer/reference pages, and Chapter/Lab/Solution 00-07 covering scaffold, Agent Kernel, Research Core, Memory and Skills, Multi-Agent Delegation, Workbench Product, Framework Comparisons, and Production Readiness.
 
 ## Phase Index
 
@@ -21,7 +21,7 @@ Last updated: 2026-06-29
 | Phase 4: Multi-Agent and Delegation | Complete | `phases/phase-4.md` | Delegation runtime, isolated child contexts, budget accounting, merge contract, and A2A stub. |
 | Phase 5: Workbench Product | Complete | `phases/phase-5.md` | Workbench snapshot contracts, FastAPI API, React workbench, Course 05, docs sync, and final verification landed. |
 | Phase 6: Framework Comparisons | Complete | `phases/phase-6.md` | Offline comparison harness, handwritten runner baseline, framework profiles, recommendation reports, Course 06, docs sync, and final verification landed. |
-| Phase 7: Production Readiness | In progress | `phases/phase-7.md` | Production-readiness plan started with a course-mission audit and code graph architecture review. |
+| Phase 7: Production Readiness | Complete | `phases/phase-7.md` | Offline production-readiness contracts, docs freshness gate, local readiness docs, Course 07, docs sync, and final verification landed. |
 
 ## Update Checklist
 
