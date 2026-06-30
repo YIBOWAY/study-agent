@@ -15,6 +15,7 @@ This directory is the canonical archive for the redesign version of the project.
 ## Document Index
 
 - `specs/2026-06-25-study-agent-comprehensive-redesign.md`: comprehensive redesign spec.
+- `specs/2026-06-30-course-teaching-redesign.md`: course teaching methodology redesign — from module docs to project-driven learning.
 - `plans/2026-06-25-redesign-execution-roadmap.md`: phase index and sequencing.
 - `plans/2026-06-25-phase-0-redesign-scaffold.md`: first executable implementation plan.
 - `plans/2026-06-25-phase-1-agent-kernel-course-spine.md`: Agent Kernel course spine implementation plan.
