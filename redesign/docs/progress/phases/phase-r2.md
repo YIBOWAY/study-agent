@@ -29,7 +29,7 @@ Rewrite Part 2 so Research Core teaches the source -> evidence -> claim -> repor
 ## Task Checklist
 
 - [x] Task 1: Start R2 plan and progress.
-- [ ] Task 2: Rewrite Chapter 02 as project-driven Part 2 material.
+- [x] Task 2: Rewrite Chapter 02 as project-driven Part 2 material.
 - [ ] Task 3: Rewrite Lab 02 with L1/L2/L3 exercises and feedback loops.
 - [ ] Task 4: Rewrite Solution 02 with design rationale and why-correct explanations.
 - [ ] Task 5: Sync course indexes and progress after content lands.
@@ -49,6 +49,7 @@ Rewrite Part 2 so Research Core teaches the source -> evidence -> claim -> repor
 | Date | Update |
 | --- | --- |
 | 2026-07-01 | Phase R2 started after a first-principles review of `redesign/docs`: Phase R1 is complete, Parts 2-7 remain current v1 material, and the next coherent phase is the Part 2 Research Core teaching rewrite. Scope is teaching-layer only; no runtime/product code changes are planned. Codegraph is already initialized and up to date, so direct docs/source reading is sufficient. |
+| 2026-07-01 | Task 2 rewrote `course/chapters/02-research-core-foundations.md` as Part 2 Research Core teaching material. The chapter now starts from the citation problem, uses the detective-story evidence-chain framing, adds architecture/data-flow diagrams, teaches `SourceInput -> Source -> Evidence -> Claim -> Report -> ClaimSourceLink`, includes inspect/modify/break/fix loops, and connects link records to Workbench panels. |
 
 ## Verification Target
 
