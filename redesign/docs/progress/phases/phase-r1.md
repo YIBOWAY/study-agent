@@ -34,8 +34,8 @@ Turn the learner entrypoint and Part 1 from technically correct module documenta
 - [x] Task 1: Create Capstone placeholder.
 - [x] Task 2: Replace chapter template with the Part authoring template.
 - [x] Task 3: Update course roadmap for project-driven Parts and R1-R9.
-- [ ] Task 4: Rewrite Chapter 00 as Part 1 Section 1.
-- [ ] Task 5: Rewrite Chapter 01 as Part 1 Sections 2-5.
+- [x] Task 4: Rewrite Chapter 00 as Part 1 Section 1.
+- [x] Task 5: Rewrite Chapter 01 as Part 1 Sections 2-5.
 - [ ] Task 6: Rewrite Lab 01 with three-tier exercises and feedback.
 - [ ] Task 7: Rewrite Solution 01 with design rationale.
 - [ ] Task 8: Rewrite Course README as the project-driven learning guide.
@@ -48,6 +48,8 @@ Turn the learner entrypoint and Part 1 from technically correct module documenta
 | --- | --- |
 | 2026-06-30 | Phase R1 started with a first-principles review of the course-teaching plan. The plan direction was accepted, with corrections: R1 is explicitly limited to the learner entrypoint and Part 1, verification gates cannot be pre-marked as passing, milestone commits must push, and commit templates must not include inaccurate co-author trailers. |
 | 2026-06-30 | Tasks 1-3 landed as the foundation: `course/capstone/README.md` previews the offline capstone without overclaiming, `docs/course/chapter-template.md` defines the reusable Part format, and `docs/course/roadmap.md` now separates R1 current work from R2-R9 planned course rewrites. Subagent spec/quality review found and fixed the ch00/ch01 Part 1 boundary in both capstone and roadmap. |
+| 2026-06-30 | Task 4 rewrote `course/chapters/00-before-agent-kernel.md` as Part 1 Section 1. Review fixed the explicit `User` / `user_message` term boundary, reduced the first-contact architecture map, and clarified that event trail and final answer are sibling outputs from `AgentRunner`. |
+| 2026-06-30 | Task 5 rewrote `course/chapters/01-agent-kernel-foundations.md` as Part 1 Sections 2-5. Review fixed the Break/Fix repair path so it remains runnable after changing `missing` back to `echo`, added L3 `tool_values == [7, 14]` causal assertions, completed the L3 feedback loop, and tightened the Part 1 closer to avoid implying real paper retrieval already exists. Focused snippet verification confirmed the unknown-tool failure path, fixed six-event tool path, and two-tool calculator event trail. |
 
 ## Verification Target
 
