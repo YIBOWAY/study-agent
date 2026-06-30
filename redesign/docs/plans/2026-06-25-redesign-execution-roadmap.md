@@ -200,3 +200,26 @@ Follow-up:
 - R2-R7 should rewrite Parts 2-7 with the same project-driven teaching method.
 - R8 should build the full Capstone materials under `course/capstone/`.
 - R9 should add support references such as troubleshooting, design-decision indexes, discussion prompts, and glossary updates.
+
+### Phase R2: Course Teaching Redesign - Part 2
+
+Plan: `redesign/docs/plans/2026-07-01-phase-r2-course-teaching-redesign.md`
+
+Purpose:
+
+- Rewrite Part 2 so Research Core starts from the local paper research assistant's citation problem.
+- Teach `SourceInput`, `SourceIngestor`, `FakeRetriever`, `Evidence`, `Claim`, `Report`, and `ClaimSourceLink` through a source -> evidence -> claim -> report data flow.
+- Add L1/L2/L3 lab exercises with feedback loops and a solution that explains why the assertions prove the evidence chain.
+
+Exit criteria:
+
+- Chapter/Lab/Solution 02 are rewritten using the R1 teaching contract.
+- `course/README.md`, `docs/course/roadmap.md`, `docs/README.md`, and `docs/progress/` describe Part 2 as R2 rewritten.
+- `cd redesign && PYTHONPATH=packages/research_core/src uv run pytest -q` passes.
+- `cd redesign && PYTHONPATH=packages/research_core/src uv run ruff check .` passes.
+- `cd redesign && PYTHONPATH=packages/research_core/src uv run pytest tests/course/test_docs_freshness.py -q` passes.
+- `cd redesign/apps/web && npm ci && npm run build` passes.
+
+Follow-up:
+
+- R3 should rewrite Part 3 with the same project-driven teaching method while keeping Part 2 as the evidence-chain foundation.

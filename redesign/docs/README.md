@@ -26,6 +26,7 @@ This directory is the canonical archive for the redesign version of the project.
 - `plans/2026-06-27-phase-6-framework-comparisons.md`: Framework Comparisons implementation plan.
 - `plans/2026-06-30-phase-7-production-readiness.md`: Production Readiness implementation plan.
 - `plans/2026-06-30-phase-r1-course-teaching-redesign.md`: Phase R1 implementation plan for the learner entrypoint and Part 1 teaching rewrite.
+- `plans/2026-07-01-phase-r2-course-teaching-redesign.md`: Phase R2 implementation plan for the Part 2 Research Core teaching rewrite.
 - `progress/overall.md`: phase status dashboard for humans and agents.
 - `architecture/overview.md`: double-layer repository and dependency direction.
 - `architecture/runtime.md`: runtime contracts, Phase 1 agent loop, fake provider boundary, delegation events, and Phase 5 product boundary.
@@ -51,9 +52,9 @@ This directory is the canonical archive for the redesign version of the project.
 - `../course/chapters/01-agent-kernel-foundations.md`: Part 1 Sections 2-5 build, inspect, break, fix, and gate loop.
 - `../course/labs/01-agent-runner-lab.md`: Part 1 L1/L2/L3 AgentRunner practice with feedback loops.
 - `../course/solutions/01-agent-runner-solution.md`: Part 1 L1/L2/L3 rationale and why-correct explanations.
-- `../course/chapters/02-research-core-foundations.md`: Part 2 current v1 Research Core evidence-chain material until R2.
-- `../course/labs/02-source-evidence-claim-lab.md`: Part 2 current v1 Source/Evidence/Claim lab until R2.
-- `../course/solutions/02-source-evidence-claim-solution.md`: Part 2 current v1 Research Core solution until R2.
+- `../course/chapters/02-research-core-foundations.md`: Part 2 Research Core evidence-chain material currently being rewritten in R2.
+- `../course/labs/02-source-evidence-claim-lab.md`: Part 2 Source/Evidence/Claim lab currently being rewritten in R2.
+- `../course/solutions/02-source-evidence-claim-solution.md`: Part 2 Research Core solution currently being rewritten in R2.
 - `../course/chapters/03-memory-and-skills.md`: Part 3 current v1 Memory policy and SkillRuntime material until R3.
 - `../course/labs/03-memory-skill-runtime-lab.md`: Part 3 current v1 Memory/Skill lab until R3.
 - `../course/solutions/03-memory-skill-runtime-solution.md`: Part 3 current v1 Memory/Skill solution until R3.

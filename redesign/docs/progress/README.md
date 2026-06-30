@@ -9,6 +9,7 @@ This folder is the redesign progress dashboard for humans and agents.
 - `phases/phase-1.md`: Agent Kernel Course Spine progress.
 - `phases/phase-2.md` through `phases/phase-7.md`: completed progress records for Research Core, Memory and Skills, Multi-Agent Delegation, Workbench Product, Framework Comparisons, and Production Readiness.
 - `phases/phase-r1.md`: completed progress record for the course teaching redesign of the learner entrypoint and Part 1.
+- `phases/phase-r2.md`: active progress record for the course teaching redesign of Part 2.
 
 ## Maintenance Rule
 
