@@ -38,7 +38,7 @@ Turn the learner entrypoint and Part 1 from technically correct module documenta
 - [x] Task 5: Rewrite Chapter 01 as Part 1 Sections 2-5.
 - [x] Task 6: Rewrite Lab 01 with three-tier exercises and feedback.
 - [x] Task 7: Rewrite Solution 01 with design rationale.
-- [ ] Task 8: Rewrite Course README as the project-driven learning guide.
+- [x] Task 8: Rewrite Course README as the project-driven learning guide.
 - [ ] Task 9: Update docs index and progress tracking.
 - [ ] Task 10: Final verification and cleanup.
 
@@ -51,6 +51,7 @@ Turn the learner entrypoint and Part 1 from technically correct module documenta
 | 2026-06-30 | Task 4 rewrote `course/chapters/00-before-agent-kernel.md` as Part 1 Section 1. Review fixed the explicit `User` / `user_message` term boundary, reduced the first-contact architecture map, and clarified that event trail and final answer are sibling outputs from `AgentRunner`. |
 | 2026-06-30 | Task 5 rewrote `course/chapters/01-agent-kernel-foundations.md` as Part 1 Sections 2-5. Review fixed the Break/Fix repair path so it remains runnable after changing `missing` back to `echo`, added L3 `tool_values == [7, 14]` causal assertions, completed the L3 feedback loop, and tightened the Part 1 closer to avoid implying real paper retrieval already exists. Focused snippet verification confirmed the unknown-tool failure path, fixed six-event tool path, and two-tool calculator event trail. |
 | 2026-07-01 | Tasks 6-7 rewrote `course/labs/01-agent-runner-lab.md` and `course/solutions/01-agent-runner-solution.md` as the new Part 1 practice loop. Review confirmed the old missing-tool lab/solution mismatch is gone, all four lab exercises include feedback, L3 checks all four registered tools plus `tool_values == [7, 14]`, and the solution now explains both what each assertion proves and why the design matters for later evidence chains, Workbench timeline UI, and production diagnostics. |
+| 2026-07-01 | Task 8 rewrote `course/README.md` as the project-driven learner entrypoint. Review confirmed the Beginner Track, Engineer Track, command instructions, Part study workflow, stuck-point table, R1/R2-R9 boundary, and Capstone placeholder language are clear; path-orientation polish now reminds learners that links are relative to `course/` but commands run from `redesign/`. |
 
 ## Verification Target
 

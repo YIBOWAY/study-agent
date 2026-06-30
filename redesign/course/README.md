@@ -1,55 +1,69 @@
-# Course Start Here
+# 本地论文研究助手 — 从零构建一个可观察的 Agent 系统
 
-这套课程的目标不是让你背 Agent 名词，而是让你亲手做出一个能观察、能测试、能失败后复盘的研究型 Agent 系统。你会从一个最小的离线 Agent loop 开始，慢慢走到 memory、skills、delegation、workbench product 和 production readiness。
+这门课不是让你先背一堆 Agent 名词，再猜它们有什么用。你会从零构建一个完全离线的本地论文研究助手：它能接收研究问题，按步骤运行，留下可检查的 event trail，并逐步长出证据链、记忆、委派、Workbench 和生产边界。
+
+现在先把范围说清楚：Phase R1 已经把课程入口和 Part 1 改成项目驱动学习。Parts 2-7 仍是当前 v1 材料，等 R2-R7 继续改写后，才会完整符合新的 Part 教学结构。Capstone 现在还是占位页，完整项目练习会在 R8 补齐。也就是说，R1 让你看清“终点是什么”和“Part 1 怎么学”，不是在宣称整套课程已经全部重写完成。
+
+Part 1 还不会真的检索论文，也不会产出真实引用报告。它先训练最底层的能力：让助手跑一次，调用工具，留下轨迹，并让你能解释每一步发生了什么。后面的论文检索、证据抽取、记忆和界面，都会接在这条轨迹上。
+
+```text
+Setup
+  -> Part 1: Agent Kernel, inspectable event trail
+  -> Part 2: Research Core, evidence chain
+  -> Part 3: Memory and Skills
+  -> Part 4: Delegation
+  -> Part 5: Workbench Product
+  -> Part 6: Framework Comparisons
+  -> Part 7: Production Readiness
+  -> Capstone: complete offline paper research assistant (planned R8)
+```
 
 ## Who This Is For
 
-这份课程适合三类读者：
+这份课程适合这些读者：
 
 - 你会一点 Python，但还没有系统做过 Agent 工程。
 - 你用过 ChatGPT、Claude 或 Codex，但不清楚一个 Agent runtime 内部怎么跑。
-- 你已经会写业务代码，想把 Agent 从 demo 做成可测试、可维护、可上线的系统。
+- 你已经会写业务代码，想把 Agent 从 demo 做成可测试、可维护、可观察的系统。
+- 你想要一个完整、可演示的项目，而不是零散概念、单点脚本或只会聊天的玩具 demo。
 
-如果你是完全零基础，也可以读，但请先走 Beginner Track。遇到 Python、terminal、pytest、JSON 这些词不要硬扛，先看参考页。
+如果你是完全零基础，也可以读，但请先走 Beginner Track。遇到 Python、terminal、pytest、JSON、dict/list 这些词不要硬扛，先回看 reference 材料。
 
 ## Beginner Track
 
-推荐顺序：
+按 Part 学，不要跳着把后面的章节当成互不相关的文章。每个 Part 都是在给同一个本地论文研究助手加能力。
 
-1. 读 `reference/python-terminal-primer.md`，弄清楚 terminal、`uv`、Python shell、`PYTHONPATH` 是什么。
-2. 读 `reference/agent-kernel-glossary.md`，先把课程里的高频词看一遍。
-3. 读 `chapters/00-before-agent-kernel.md`，建立第一张心智地图。
-4. 做 `labs/00-environment-check.md`，确认本机环境可以跑。
-5. 对答案时看 `solutions/00-environment-check-solution.md`，不要一开始就看。
-6. 读 `chapters/01-agent-kernel-foundations.md`。
-7. 做 `labs/01-agent-runner-lab.md`。
-8. 对答案时看 `solutions/01-agent-runner-solution.md`，不要一开始就看。
-9. 读 `chapters/02-research-core-foundations.md`，理解 source、evidence、claim、report 的证据链。
-10. 做 `labs/02-source-evidence-claim-lab.md`，再看 `solutions/02-source-evidence-claim-solution.md`。
-11. 读 `chapters/03-memory-and-skills.md`，理解 memory policy 和 skill progressive disclosure。
-12. 做 `labs/03-memory-skill-runtime-lab.md`，再看 `solutions/03-memory-skill-runtime-solution.md`。
-13. 读 `chapters/04-multi-agent-delegation.md`，理解 child context isolation 和 budget accounting。
-14. 做 `labs/04-delegation-runtime-lab.md`，再看 `solutions/04-delegation-runtime-solution.md`。
-15. 读 `chapters/05-workbench-product.md`，理解 product adapter、FastAPI API 和 React Workbench 的边界。
-16. 做 `labs/05-workbench-product-lab.md`，再看 `solutions/05-workbench-product-solution.md`。
-17. 读 `chapters/06-framework-comparisons.md`，理解如何用同一任务和指标比较框架。
-18. 做 `labs/06-framework-comparisons-lab.md`，再看 `solutions/06-framework-comparisons-solution.md`。
-19. 读 `chapters/07-production-readiness.md`，理解 observability、persistence、approval、sandbox 和 docs freshness 的生产边界。
-20. 做 `labs/07-production-readiness-lab.md`，再看 `solutions/07-production-readiness-solution.md`。
+| Step | Content | 你的助手获得的能力 |
+| --- | --- | --- |
+| Setup | 先读 [reference/python-terminal-primer.md](reference/python-terminal-primer.md) 和 [reference/agent-kernel-glossary.md](reference/agent-kernel-glossary.md)。再做 [labs/00-environment-check.md](labs/00-environment-check.md)，做完后对照 [solutions/00-environment-check-solution.md](solutions/00-environment-check-solution.md)。 | 你获得运行环境、命令行和术语准备；助手本身还没有新增 runtime 能力。 |
+| Part 1: Agent Kernel, R1 rewritten | 先读 [chapters/00-before-agent-kernel.md](chapters/00-before-agent-kernel.md)，再读 [chapters/01-agent-kernel-foundations.md](chapters/01-agent-kernel-foundations.md)。然后做 [labs/01-agent-runner-lab.md](labs/01-agent-runner-lab.md)，尝试后再看 [solutions/01-agent-runner-solution.md](solutions/01-agent-runner-solution.md)。 | 助手获得最小 think-act-observe loop：能接收问题、请求工具、记录 `model_request` / `tool_call` / `tool_result` / `error` 等 event，并让你检查这次 run 到底怎么发生。 |
+| Part 2: Research Core, current v1 until R2 | 读 [chapters/02-research-core-foundations.md](chapters/02-research-core-foundations.md)。做 [labs/02-source-evidence-claim-lab.md](labs/02-source-evidence-claim-lab.md)，再对照 [solutions/02-source-evidence-claim-solution.md](solutions/02-source-evidence-claim-solution.md)。 | 助手开始理解 source -> evidence -> claim -> report 的证据链。注意：这是当前 v1 材料，还没有完成 R2 的项目驱动重写。 |
+| Part 3: Memory and Skills, current v1 until R3 | 读 [chapters/03-memory-and-skills.md](chapters/03-memory-and-skills.md)。做 [labs/03-memory-skill-runtime-lab.md](labs/03-memory-skill-runtime-lab.md)，再对照 [solutions/03-memory-skill-runtime-solution.md](solutions/03-memory-skill-runtime-solution.md)。 | 助手获得 memory policy 和 skill loading 的基础能力。注意：这是当前 v1 材料，还没有完成 R3 的项目驱动重写。 |
+| Part 4: Multi-Agent Delegation, current v1 until R4 | 读 [chapters/04-multi-agent-delegation.md](chapters/04-multi-agent-delegation.md)。做 [labs/04-delegation-runtime-lab.md](labs/04-delegation-runtime-lab.md)，再对照 [solutions/04-delegation-runtime-solution.md](solutions/04-delegation-runtime-solution.md)。 | 助手获得 child context isolation 和 budget accounting 的基础。注意：这是当前 v1 材料，还没有完成 R4 的项目驱动重写。 |
+| Part 5: Workbench Product, current v1 until R5 | 读 [chapters/05-workbench-product.md](chapters/05-workbench-product.md)。做 [labs/05-workbench-product-lab.md](labs/05-workbench-product-lab.md)，再对照 [solutions/05-workbench-product-solution.md](solutions/05-workbench-product-solution.md)。 | 助手开始有 product adapter、FastAPI API 和 React Workbench 边界。注意：这是当前 v1 材料，还没有完成 R5 的项目驱动重写。 |
+| Part 6: Framework Comparisons, current v1 until R6 | 读 [chapters/06-framework-comparisons.md](chapters/06-framework-comparisons.md)。做 [labs/06-framework-comparisons-lab.md](labs/06-framework-comparisons-lab.md)，再对照 [solutions/06-framework-comparisons-solution.md](solutions/06-framework-comparisons-solution.md)。 | 你获得用同一任务和指标比较框架的方法。注意：这是当前 v1 材料，还没有完成 R6 的项目驱动重写。 |
+| Part 7: Production Readiness, current v1 until R7 | 读 [chapters/07-production-readiness.md](chapters/07-production-readiness.md)。做 [labs/07-production-readiness-lab.md](labs/07-production-readiness-lab.md)，再对照 [solutions/07-production-readiness-solution.md](solutions/07-production-readiness-solution.md)。 | 助手获得 observability、persistence、approval、sandbox 和 docs freshness 等生产边界。注意：这是当前 v1 材料，还没有完成 R7 的项目驱动重写。 |
+| Capstone: placeholder, planned R8 | 读 [capstone/README.md](capstone/README.md)，只把它当作课程终点预告。 | 当前只是完整项目的说明和占位，不是 starter、rubric 或参考答案。R8 会补齐完整本地论文研究助手 Capstone。 |
 
 ## Engineer Track
 
-如果你已经熟悉 Python 项目、pytest 和基础 Agent 概念，可以直接从 Chapter 01 开始。建议仍然扫一眼 glossary，因为本项目里的词有明确边界：`AgentMessage` 不是 provider message，`RunEvent` 不是普通 log，`FakeModel` 也不是 mock 的随手替代品。
+如果你已经熟悉 Python 项目、pytest 和基础 Agent 概念，可以这样走：
+
+1. 扫一遍 [reference/agent-kernel-glossary.md](reference/agent-kernel-glossary.md)，确认课程里的词边界。
+2. 读 [chapters/00-before-agent-kernel.md](chapters/00-before-agent-kernel.md) 的项目叙事和心智模型。
+3. 从 [chapters/01-agent-kernel-foundations.md](chapters/01-agent-kernel-foundations.md) 开始跑 Part 1。
+4. 做 [labs/01-agent-runner-lab.md](labs/01-agent-runner-lab.md)，只在自己试过以后看 [solutions/01-agent-runner-solution.md](solutions/01-agent-runner-solution.md)。
+5. 继续 Parts 2-7 时，记住它们还是 current v1 材料；不要把它们误读成已经完成 R1 风格重写。
 
 ## How To Run Commands
 
-所有课程命令默认从 `redesign/` 目录运行。如果你在仓库根目录，先进入 redesign 子项目：
+这份 README 放在 `redesign/course/`，但所有课程命令默认从它的上一级 `redesign/` 目录运行。如果你在仓库根目录，先进入 redesign 子项目：
 
 ```bash
 cd redesign
 ```
 
-如果你从别的目录打开终端，就先 `cd` 到本仓库，再进入 `redesign/`。
+如果你从别的目录打开终端，就先 `cd` 到本仓库，再进入 `redesign/`。可以用 `pwd` 确认当前路径最后一段是 `redesign`。
 
 测试整个 redesign 项目：
 
@@ -66,16 +80,20 @@ PYTHONPATH=packages/research_core/src uv run python
 
 为什么要写 `PYTHONPATH`？因为 `pytest` 会从 `pyproject.toml` 读取 package path，但普通 `uv run python` 不会自动继承这份 pytest 配置。课程里所有 Python shell 示例都显式写出来，避免新手卡在 import 上。
 
-## How To Study One Chapter
+## How To Study One Part
 
-每章都按这个节奏学：
+每个 Part 都按 Build -> Inspect -> Break -> Fix -> Reflect 的节奏学。不要只读完文字，也不要只跑到 final answer。
 
-1. 先看目标，知道这一章要解决什么问题。
-2. 再看“人话版心智模型”，不要急着背类名。
-3. 跑最小例子，只确认它能动。
-4. 打印 event sequence，看系统实际发生了什么。
-5. 故意弄坏一次，观察错误事件。
-6. 最后看 solution，用答案检查你的理解。
+1. **Orient**：先看这个 Part 给本地论文研究助手增加什么能力，以及它现在是 R1 rewritten 还是 current v1。
+2. **Build**：从最小可运行例子开始，照着代码跑一遍，不要先改。
+3. **Inspect**：打印 `event_type_sequence(...)`，确认这次 run 的步骤是不是你预期的步骤。
+4. **Inspect deeper**：用 `events_to_records(...)` 看 payload，特别是 `tool_call`、`tool_result`、`error` 里的具体值。
+5. **Break**：故意弄坏一个地方，比如工具名、JSON 形状、handler 逻辑或预期 sequence。
+6. **Diagnose**：先读 event trail，再读异常。判断问题发生在 model response、tool-call parsing、tool registry、handler，还是 final model response。
+7. **Fix**：只修一个最小原因，然后重新运行同一个检查。
+8. **Practice**：做 lab 的 L1 Follow、L2 Modify、L3 Design。L3 要自己设计，不要只复制参考形状。
+9. **Compare**：自己尝试后再看 solution。solution 是用来校准理解的，不是用来跳过练习的。
+10. **Reflect**：用自己的话写下：这个 Part 让助手多会了什么，哪些中间证据证明它真的发生了，final answer 单独不能证明什么。
 
 这套课里“失败”不是坏事。失败后还能留下清楚的事件轨迹，才是可维护 Agent 系统的起点。
 
@@ -85,54 +103,54 @@ PYTHONPATH=packages/research_core/src uv run python
 | --- | --- | --- |
 | `ModuleNotFoundError: No module named 'research_core'` | Python shell 没找到本地 package | 从 `redesign/` 运行，并使用 `PYTHONPATH=packages/research_core/src uv run python` |
 | `zsh: command not found: uv` | 本机没有可用的 `uv` 命令 | 先安装或修复 `uv`，再继续课程 |
-| `AssertionError` | 你的实际结果和课程期望不一致 | 打印变量，看 event sequence 哪一步不同 |
-| `unknown tool 'echo'` | 模型请求了一个没有注册的 tool | 先注册 `ToolDefinition(name="echo", ...)` |
-| Python shell 里粘贴多行代码乱了 | 交互模式不适合大段代码 | 使用 lab 里的 one-shot command，或把代码放进临时 `.py` 文件 |
+| `AssertionError` | 你的实际结果和课程期望不一致 | 不要只看报错行；打印变量和 event sequence，找是哪一步不同 |
+| `unknown tool 'echo'` 或 `unknown_tool` | model 请求了一个没有注册的 tool，或 JSON 里的工具名和注册表不一致 | 检查 `ToolDefinition(name=...)` 和 JSON 里的 `"name"` 是否完全一样，并确认 `AgentRunner(model=model, tools=tools)` 用的是同一个 `ToolRuntime` |
+| Python shell 里粘贴多行代码乱了 | 交互模式不适合大段代码，或缩进被破坏 | 使用 lab 里的 one-shot command，或把代码放进临时 `.py` 文件 |
+| final answer 是对的，但 L3 还是不该算通过 | final answer 可能只是 scripted response，不能证明中间工具真的跑了 | 同时检查 event sequence、`tool_result` payload 和中间值，例如 `tool_values == [7, 14]` |
+| L3 calculator 看起来跑通，但题目仍然不通过 | 你可能只注册了 happy-path 会用到的 `add` 和 `multiply` | 题目要求完整 tool surface，就注册并断言 `add`、`subtract`、`multiply`、`divide` 四个工具 |
+| `tool_values` 不对，但 sequence 是对的 | 工具调用顺序对了，但参数或 handler 逻辑不对 | 检查第二次 tool-call JSON 是否真的用了第一次结果，例如 `{"a": 7, "b": 2}` |
+| `'dict' object has no attribute 'payload'` | 你把 `events_to_records(...)` 返回的 dict record 当成了 `RunEvent` | record 用 `records[3]["payload"]` |
+| `'RunEvent' object is not subscriptable` | 你把原始 `RunEvent` 当成了 dict | 原始 event 用 `result.events[3].payload` |
+| 只看到两个 events | model 返回了普通文本，runtime 没有进入工具流程 | 检查第一条 `FakeModelResponse(content=...)` 是否是 tool-call JSON 字符串，并且顶层 key 是 `"tool_call"` |
 
 ## Course Map
 
-Current beginner-ready materials:
+### Part 1: R1 Project-Driven Entry
 
-- `reference/python-terminal-primer.md`
-- `reference/agent-kernel-glossary.md`
-- `chapters/00-before-agent-kernel.md`
-- `labs/00-environment-check.md`
-- `solutions/00-environment-check-solution.md`
-- `chapters/01-agent-kernel-foundations.md`
-- `labs/01-agent-runner-lab.md`
-- `solutions/01-agent-runner-solution.md`
-- `chapters/02-research-core-foundations.md`
-- `labs/02-source-evidence-claim-lab.md`
-- `solutions/02-source-evidence-claim-solution.md`
-- `chapters/03-memory-and-skills.md`
-- `labs/03-memory-skill-runtime-lab.md`
-- `solutions/03-memory-skill-runtime-solution.md`
-- `chapters/04-multi-agent-delegation.md`
-- `labs/04-delegation-runtime-lab.md`
-- `solutions/04-delegation-runtime-solution.md`
-- `chapters/05-workbench-product.md`
-- `labs/05-workbench-product-lab.md`
-- `solutions/05-workbench-product-solution.md`
-- `chapters/06-framework-comparisons.md`
-- `labs/06-framework-comparisons-lab.md`
-- `solutions/06-framework-comparisons-solution.md`
-- `chapters/07-production-readiness.md`
-- `labs/07-production-readiness-lab.md`
-- `solutions/07-production-readiness-solution.md`
-- `framework_comparisons/reports/echo-tool-task.md`
-- `framework_comparisons/reports/recommendation-matrix.md`
+- [chapters/00-before-agent-kernel.md](chapters/00-before-agent-kernel.md): Part 1 Section 1，先建立本地论文研究助手的心智模型。
+- [chapters/01-agent-kernel-foundations.md](chapters/01-agent-kernel-foundations.md): Part 1 Sections 2-5，构建、检查、打坏、修复最小 Agent loop。
+- [labs/01-agent-runner-lab.md](labs/01-agent-runner-lab.md): Part 1 动手练习。
+- [solutions/01-agent-runner-solution.md](solutions/01-agent-runner-solution.md): Part 1 参考答案和设计解释。
 
-## Implementation Coverage
+### Parts 2-7: Current v1 Materials
 
-| Runtime phase | Code status | Course status |
-| --- | --- | --- |
-| Phase 0: Scaffold | Complete | Chapter 00, Lab 00, Solution 00 |
-| Phase 1: Agent Kernel | Complete | Chapter 01, Lab 01, Solution 01 |
-| Phase 2: Research Core | Complete | Chapter 02, Lab 02, Solution 02 |
-| Phase 3: Memory and Skills | Complete | Chapter 03, Lab 03, Solution 03 |
-| Phase 4: Multi-Agent Delegation | Complete | Chapter 04, Lab 04, Solution 04 |
-| Phase 5: Workbench Product | Complete | Chapter 05, Lab 05, Solution 05 |
-| Phase 6: Framework Comparisons | Complete | Chapter 06, Lab 06, Solution 06, and comparison reports |
-| Phase 7: Production Readiness | Complete | Chapter 07, Lab 07, Solution 07 |
+这些文件现在可以读、可以做，但还没有完成 R2-R7 的项目驱动重写。
 
-Future chapters should keep the same promise: explain the idea in plain language, show the smallest runnable version, inspect the event trail, break it deliberately, and give the learner a concrete checkpoint.
+- Part 2: [chapters/02-research-core-foundations.md](chapters/02-research-core-foundations.md), [labs/02-source-evidence-claim-lab.md](labs/02-source-evidence-claim-lab.md), [solutions/02-source-evidence-claim-solution.md](solutions/02-source-evidence-claim-solution.md)
+- Part 3: [chapters/03-memory-and-skills.md](chapters/03-memory-and-skills.md), [labs/03-memory-skill-runtime-lab.md](labs/03-memory-skill-runtime-lab.md), [solutions/03-memory-skill-runtime-solution.md](solutions/03-memory-skill-runtime-solution.md)
+- Part 4: [chapters/04-multi-agent-delegation.md](chapters/04-multi-agent-delegation.md), [labs/04-delegation-runtime-lab.md](labs/04-delegation-runtime-lab.md), [solutions/04-delegation-runtime-solution.md](solutions/04-delegation-runtime-solution.md)
+- Part 5: [chapters/05-workbench-product.md](chapters/05-workbench-product.md), [labs/05-workbench-product-lab.md](labs/05-workbench-product-lab.md), [solutions/05-workbench-product-solution.md](solutions/05-workbench-product-solution.md)
+- Part 6: [chapters/06-framework-comparisons.md](chapters/06-framework-comparisons.md), [labs/06-framework-comparisons-lab.md](labs/06-framework-comparisons-lab.md), [solutions/06-framework-comparisons-solution.md](solutions/06-framework-comparisons-solution.md)
+- Part 7: [chapters/07-production-readiness.md](chapters/07-production-readiness.md), [labs/07-production-readiness-lab.md](labs/07-production-readiness-lab.md), [solutions/07-production-readiness-solution.md](solutions/07-production-readiness-solution.md)
+
+### Capstone
+
+- [capstone/README.md](capstone/README.md): 当前 Capstone 占位页。它说明最终项目会是什么，但现在不要把它当成已经完成的 starter、rubric 或 solution。完整 Capstone 计划在 R8 补齐。
+
+### Framework Reports
+
+- [framework_comparisons/reports/echo-tool-task.md](framework_comparisons/reports/echo-tool-task.md): echo-tool shared task report。
+- [framework_comparisons/reports/recommendation-matrix.md](framework_comparisons/reports/recommendation-matrix.md): framework recommendation matrix。
+
+## Current Rewrite Status
+
+实现状态和教学重写状态不是一回事。很多 runtime/product 代码已经存在，Parts 2-7 也有 current v1 学习材料；但新的项目驱动教学法会继续通过 R2-R9 完成。
+
+| Phase | Teaching status |
+| --- | --- |
+| R1 | 当前入口页、roadmap、template、Capstone placeholder，以及 Part 1 项目驱动材料 |
+| R2-R7 | 计划继续把 Parts 2-7 改成同一套 Build -> Inspect -> Break -> Fix -> Reflect 学习结构 |
+| R8 | 计划补齐完整 Capstone：fixtures、starter、solution、rubric、trajectory、report、reflection |
+| R9 | 计划补齐参考材料、troubleshooting、设计决策索引、讨论题和 glossary 更新 |
+
+学习时用一个简单判断：如果你正在 Part 1，就按 R1 新结构认真做完整循环；如果你正在 Parts 2-7，就把它们当作有效的 current v1 材料，同时知道后续还会被重新组织成更强的项目驱动版本。
