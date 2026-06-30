@@ -1,14 +1,15 @@
 # Redesign Overall Progress
 
-Last updated: 2026-06-29
+Last updated: 2026-06-30
 
 ## Current State
 
-- Active branch: `codex/redesign-phase-6`
-- Active phase: None; Phase 7 - Production Readiness is complete.
-- Completed phases: 8 of 8
+- Active branch: `codex/redesign-course-r1`
+- Active phase: Phase R1 - Course Teaching Redesign, Part 1 restructuring.
+- Completed runtime/product phases: 8 of 8
+- Course teaching redesign: Phase R1 in progress; R2-R9 planned.
 - Current verification baseline: Phase 7 completion on 2026-06-30: full redesign suite `199 passed`, `ruff check .` clean, `apps/web` Vite build clean with `46 modules transformed`, and `git diff --check` clean.
-- Course documentation now includes a beginner-ready entrypoint, primer/reference pages, and Chapter/Lab/Solution 00-07 covering scaffold, Agent Kernel, Research Core, Memory and Skills, Multi-Agent Delegation, Workbench Product, Framework Comparisons, and Production Readiness.
+- Course documentation now has a complete v1 baseline. Phase R1 is rewriting the learner entrypoint and Part 1 around a project-driven 本地论文研究助手 narrative; Parts 2-7 remain current v1 material until R2-R7 rewrites land.
 
 ## Phase Index
 
@@ -22,6 +23,7 @@ Last updated: 2026-06-29
 | Phase 5: Workbench Product | Complete | `phases/phase-5.md` | Workbench snapshot contracts, FastAPI API, React workbench, Course 05, docs sync, and final verification landed. |
 | Phase 6: Framework Comparisons | Complete | `phases/phase-6.md` | Offline comparison harness, handwritten runner baseline, framework profiles, recommendation reports, Course 06, docs sync, and final verification landed. |
 | Phase 7: Production Readiness | Complete | `phases/phase-7.md` | Offline production-readiness contracts, docs freshness gate, local readiness docs, Course 07, docs sync, and final verification landed. |
+| Phase R1: Course Teaching Redesign - Part 1 | In Progress | `phases/phase-r1.md` | Capstone placeholder, Part authoring template, and project-driven roadmap landed; Part 1 chapter/lab/solution rewrites are next. |
 
 ## Update Checklist
 
