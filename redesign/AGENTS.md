@@ -42,6 +42,12 @@ For changes that touch `apps/web`, also run:
 cd apps/web && npm run build
 ```
 
+For course markdown changes that include runnable Python examples, also run:
+
+```bash
+PYTHONPATH=packages/research_core/src uv run pytest tests/course/test_markdown_python_blocks.py -q
+```
+
 ## Architecture Direction
 
 The runtime should follow these boundaries:

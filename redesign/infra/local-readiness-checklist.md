@@ -43,6 +43,21 @@ Expected result:
 - indexed course/docs Markdown paths all exist,
 - missing paths fail with `missing indexed docs paths`.
 
+## Markdown Python Blocks
+
+The full pytest suite also executes selected fenced Python examples from course
+Markdown. To run just that gate:
+
+```bash
+cd redesign
+PYTHONPATH=packages/research_core/src uv run pytest tests/course/test_markdown_python_blocks.py -q
+```
+
+Expected result:
+
+- selected course Python blocks execute against the local `research_core` API,
+- marked `Expected output:` text fences match captured stdout.
+
 ## Cleanup
 
 Remove generated artifacts before final status checks:
@@ -59,4 +74,3 @@ Then check:
 git status --short --branch
 git diff --check
 ```
-

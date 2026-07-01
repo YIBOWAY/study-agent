@@ -279,7 +279,7 @@ Expected: passes with all indexed paths resolved.
 - Modify: `docs/progress/overall.md`
 - Modify: `docs/progress/phases/phase-r3.md`
 
-- [ ] **Step 1: Run final verification**
+- [x] **Step 1: Run final verification**
 
 Run from `redesign/`:
 
@@ -292,19 +292,19 @@ git diff --check
 cd apps/web && npm ci && npm run build
 ```
 
-- [ ] **Step 2: Run the markdown Python block gate**
+- [x] **Step 2: Run the markdown Python block gate**
 
 Run the pytest-backed markdown Python block gate for Chapter 03, Lab 03, and Solution 03. Manually inspect only snippets that are intentionally outside the selected executable file list. This replaces the R1/R2 copy/paste-only discipline with an automated check for changed Part 3 examples.
 
-- [ ] **Step 3: Clean generated artifacts**
+- [x] **Step 3: Clean generated artifacts**
 
 Remove generated `.venv`, `.pytest_cache`, `.ruff_cache`, `uv.lock`, `apps/web/node_modules`, `apps/web/dist`, `apps/web/tsconfig.tsbuildinfo`, and `__pycache__` outputs unless already tracked.
 
-- [ ] **Step 4: Run final docs reconciliation**
+- [x] **Step 4: Run final docs reconciliation**
 
 Use the neat-freak workflow to verify docs/progress/README/AGENTS alignment.
 
-- [ ] **Step 5: Mark R3 complete**
+- [x] **Step 5: Mark R3 complete**
 
 Only after fresh verification, mark R3 complete and commit the final docs sync.
 

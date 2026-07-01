@@ -238,8 +238,8 @@ Exit criteria:
 
 - Chapter/Lab/Solution 03 are rewritten using the R1/R2 teaching contract. Completed on 2026-07-01.
 - `course/README.md`, `docs/course/roadmap.md`, `docs/README.md`, and `docs/progress/` describe Part 3 as R3 rewritten. Completed on 2026-07-01.
-- `cd redesign && PYTHONPATH=packages/research_core/src uv run pytest -q` passes. Pending.
-- `cd redesign && PYTHONPATH=packages/research_core/src uv run ruff check .` passes. Pending.
-- `cd redesign && PYTHONPATH=packages/research_core/src uv run pytest tests/course/test_docs_freshness.py -q` passes. Pending.
-- `cd redesign && PYTHONPATH=packages/research_core/src uv run pytest tests/course/test_markdown_python_blocks.py -q` passes. Pending.
-- `cd redesign/apps/web && npm ci && npm run build` passes. Pending.
+- `cd redesign && PYTHONPATH=packages/research_core/src uv run pytest -q` passes. Completed on 2026-07-01 with `203 passed`.
+- `cd redesign && PYTHONPATH=packages/research_core/src uv run ruff check .` passes. Completed on 2026-07-01 with `All checks passed!`.
+- `cd redesign && PYTHONPATH=packages/research_core/src uv run pytest tests/course/test_docs_freshness.py -q` passes. Completed on 2026-07-01 with `3 passed`.
+- `cd redesign && PYTHONPATH=packages/research_core/src uv run pytest tests/course/test_markdown_python_blocks.py -q` passes. Completed on 2026-07-01 with `4 passed`.
+- `cd redesign/apps/web && npm ci && npm run build` passes. Completed on 2026-07-01 with Vite `46 modules transformed`.

@@ -93,7 +93,7 @@ Current means the file exists in the tree now. It does not mean every file has a
 
 - Phase R1 (complete): restructured the learner entrypoint and Part 1 around the 本地论文研究助手 narrative, added the Part contract, updated the roadmap/template/index, and added the Capstone placeholder.
 - Phase R2 (complete): rewrote Part 2 so Research Core teaches the source -> evidence -> claim -> report chain through the assistant's citation problem.
-- Phase R3 (content landed): rewrote Part 3 so Memory and Skills teach persistent memory policies and skill loading through repeated research sessions, plus added markdown Python block verification for changed course examples.
+- Phase R3 (complete): rewrote Part 3 so Memory and Skills teach persistent memory policies and skill loading through repeated research sessions, plus added markdown Python block verification for changed course examples.
 - Phase R4 (planned): rewrite Part 4 so Multi-Agent Delegation teaches child context isolation and budget accounting through divided research work.
 - Phase R5 (planned): rewrite Part 5 so Workbench Product teaches the product adapter, FastAPI API, and React workbench through a researcher-facing interface.
 - Phase R6 (planned): rewrite Part 6 so Framework Comparisons teach how to compare frameworks on the same task without moving framework code into the product runtime.
