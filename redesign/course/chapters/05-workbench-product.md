@@ -252,11 +252,30 @@ model_request
 
 第一行证明 `from_source` 把 evidence 翻成了 `WorkbenchEvidenceItem`，并把它连到的 claim id 一起挂上；第二行证明 `from_event` 保留了原 `RunEvent` 的类型。
 
+上面的 `from_source(...)` 内部替你批量调了 `from_evidence`——但它本身也是五个 `from_*` 翻译口之一，可以直接对单条 evidence 用：
+
+```python
+from research_core.product import WorkbenchEvidenceItem
+
+evidence_item = WorkbenchEvidenceItem.from_evidence(evidence, claim_ids=(claim.id,))
+print(evidence_item.source_id)
+print(evidence_item.claim_ids)
+```
+
+Expected output:
+
+```text
+source_ragas
+('claim_faithfulness',)
+```
+
+`from_evidence` 直接接住 Part 2 的 `Evidence`，把 `source_id` 原样带过来，再挂上你指定的 claim id。刚才 `from_source(source, evidence=[evidence], claim_ids_by_evidence_id=...)` 做的就是把这个 `from_evidence` 调用替每条 evidence 批处理一遍。
+
 > [TRAP] **常见误解**：不要为了组装快照去手写一个 `WorkbenchEvidenceItem(...)` 而绕过 `from_*`。`from_evidence` / `from_source` / `from_event` / `from_report` / `from_memory_record` 才是唯一保证字段和原件对齐的翻译口。手搓面板项，就是在悄悄发明第二套数据模型——正是我们要避开的失败 1。
 
 ### Build: 组装成一页 snapshot
 
-剩下三个面板项（delegation / skill / eval）没有独立 domain 原件，直接用产品契约构造。然后把九个槽拼成 `WorkbenchSnapshot`：
+剩下三个面板项（delegation / skill / eval）没有独立 domain 原件，直接用产品契约构造。delegation 之所以直接构造、没有 `from_delegation`，是因为 Part 4 产出的是一棵结果**树**而不是单条记录，没有单一 domain 源可翻译。然后把九个槽拼成 `WorkbenchSnapshot`：
 
 ```python
 project = WorkbenchProject(id="project_rag_eval", title="RAG Evaluation Survey")
@@ -616,6 +635,8 @@ cd apps/web && npm run build
 ```
 
 核心自查：
+
+> 这段自查沿用本章前面同一个 Python shell session 的 `snapshot` 和 `record` 等变量；如果你另开了新 shell，先把 Section 2、Section 3 的 setup 重新跑一遍再执行。
 
 ```python
 assert sorted(snapshot.to_record().keys()) == [
