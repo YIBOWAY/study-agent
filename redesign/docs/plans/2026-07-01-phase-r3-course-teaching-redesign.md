@@ -217,15 +217,15 @@ Include at least one tradeoff question, for example: why does `MemoryRecallPolic
 - Modify: `course/labs/03-memory-skill-runtime-lab.md`
 - Modify: `docs/progress/phases/phase-r3.md`
 
-- [ ] **Step 1: Convert lab to L1/L2/L3**
+- [x] **Step 1: Convert lab to L1/L2/L3**
 
 L1 Follow: write and recall a minimal memory set, then load a skill and explicitly read one reference (follows the existing Exercise 1 and Exercise 3/4 shape). L2 Modify: predict-then-verify changes such as adding a `WORKING` memory and filtering it out via `allowed_kinds`, or tightening `max_content_chars` and watching a previously-valid record get rejected. L3 Design: no skeleton; the learner designs a new `MemoryWritePolicy`/`MemoryRecallPolicy` pair for a stated requirement (for example: pinned rules must always outrank session drafts, and drafts must never be recalled after the session ends) and a new skill folder (for example `citation-style`) with at least one reference and one script, then explicitly reads one reference. State that L3 has multiple valid designs, but every valid answer must satisfy the named invariants.
 
-- [ ] **Step 2: Add feedback loops**
+- [x] **Step 2: Add feedback loops**
 
 Every exercise must include Common Errors, Failure Output Interpretation, Where To Go Back, and Why Correct Answer Is Correct, matching the Lab 01/02 shape exactly.
 
-- [ ] **Step 3: Add break/fix checks**
+- [x] **Step 3: Add break/fix checks**
 
 Include forbidden-phrase, `max_content_chars`, and `kind not allowed` scenarios for memory; path-traversal and missing-reference-file scenarios for skills, each with expected error text and a diagnosis question before the fix. Add a short Failure Output Interpretation note explaining that a multi-violation record reports the earliest failing write-policy boundary.
 
