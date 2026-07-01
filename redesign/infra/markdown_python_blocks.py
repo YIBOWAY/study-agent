@@ -125,7 +125,8 @@ def _fences(markdown_path: Path) -> tuple[_Fence, ...]:
             else:
                 in_fence = True
                 language = stripped.removeprefix("```").strip()
-                fence_language = language.split(maxsplit=1)[0].casefold()
+                language_parts = language.split(maxsplit=1)
+                fence_language = language_parts[0].casefold() if language_parts else ""
                 fence_start_line = line_number
                 fence_previous_non_empty_line = previous_non_empty_line
             previous_non_empty_line = stripped
