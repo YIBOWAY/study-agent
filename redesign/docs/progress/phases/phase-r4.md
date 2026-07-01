@@ -1,9 +1,9 @@
 # Phase R4 Progress: Course Teaching Redesign - Part 4
 
-Status: In Progress
+Status: Complete
 
 Started: 2026-07-01
-Completed: TBD
+Completed: 2026-07-01
 Branch: `codex/redesign-course-r4`
 
 ## Goal
@@ -38,19 +38,19 @@ Rewrite Part 4 so Multi-Agent Delegation teaches child-context isolation, budget
 - [x] Task 4: Rewrite Lab 04 with L1/L2/L3 exercises and feedback loops.
 - [x] Task 5: Rewrite Solution 04 with runnable assertions and design rationale.
 - [x] Task 6: Sync course indexes and progress after content lands.
-- [ ] Task 7: Final verification, cleanup, and neat-freak docs reconciliation.
+- [x] Task 7: Final verification, cleanup, and neat-freak docs reconciliation.
 
 ## Exit Signal
 
-- [ ] Chapter/Lab/Solution 04 are rewritten around the "delegate without leaking context, overspending budget, or hiding failures" problem.
-- [ ] Part 4 has at least two ASCII diagrams and at least three `[DD]` / `[TRAP]` / `[CHECK]` / `[BIG]` / `[DEEP]` callouts.
-- [ ] Chapter 04 teaches the delegation mental model: role badge, task sheet, budget, parent receipt trail, single-child result, and unresolved-conflict list.
-- [ ] Chapter/Lab/Solution 04 exercise `run_task`, `run_many`, `max_total_steps` accounting, duplicate id rejection, `DelegationMergeResult.from_results`, context isolation via `compile_child_prompt`, and parent `delegate_*` events.
-- [ ] Lab 04 includes L1 Follow, L2 Modify, and L3 Design exercises with feedback loops.
-- [ ] Solution 04 provides runnable L1/L2 answers plus one valid L3 reference design and required invariants.
-- [ ] Markdown Python block gate covers Parts 1-4.
-- [ ] Docs index, course roadmap, course README, and overall progress are synced.
-- [ ] Fresh verification results are recorded.
+- [x] Chapter/Lab/Solution 04 are rewritten around the "delegate without leaking context, overspending budget, or hiding failures" problem.
+- [x] Part 4 has at least two ASCII diagrams and at least three `[DD]` / `[TRAP]` / `[CHECK]` / `[BIG]` / `[DEEP]` callouts.
+- [x] Chapter 04 teaches the delegation mental model: role badge, task sheet, budget, parent receipt trail, single-child result, and unresolved-conflict list.
+- [x] Chapter/Lab/Solution 04 exercise `run_task`, `run_many`, `max_total_steps` accounting, duplicate id rejection, `DelegationMergeResult.from_results`, context isolation via `compile_child_prompt`, and parent `delegate_*` events.
+- [x] Lab 04 includes L1 Follow, L2 Modify, and L3 Design exercises with feedback loops.
+- [x] Solution 04 provides runnable L1/L2 answers plus one valid L3 reference design and required invariants.
+- [x] Markdown Python block gate covers Parts 1-4.
+- [x] Docs index, course roadmap, course README, and overall progress are synced.
+- [x] Fresh verification results are recorded.
 
 ## Progress Log
 
@@ -63,8 +63,10 @@ Rewrite Part 4 so Multi-Agent Delegation teaches child-context isolation, budget
 | 2026-07-01 | Task 3 completed. Chapter 04 now starts from the delegated-review failure story, teaches delegation as role badge + task sheet + budget + receipt trail + unresolved-conflict list, shows delegation flow and budget diagrams, covers `run_task`, `run_many`, context isolation, observed over-budget failures, preflight policy failures, duplicate child IDs, and merge conflict visibility. |
 | 2026-07-01 | Task 4 completed. Lab 04 now has L1 Follow, L2 Modify/Break-Fix, and L3 Design exercises with Common Errors, Failure Output Interpretation, Where To Go Back, and Why Correct Answer Is Correct feedback for every tier. |
 | 2026-07-01 | Task 5 completed. Solution 04 now provides runnable L1/L2 answers, one valid L3 reference design, required invariants, assert-based self-verification, and forward connections to Part 5 context/timeline panels, Part 7 diagnostics, and Part 3 memory boundaries. |
-| 2026-07-01 | Task 6 content-status sync started. Course README, docs README, roadmap, execution roadmap, redesign README, and overall progress now describe Part 4 as R4 rewritten material while keeping Phase R4 final verification in progress. |
+| 2026-07-01 | Task 6 content-status sync started. Course README, docs README, roadmap, execution roadmap, redesign README, and overall progress were updated to describe Part 4 as R4 rewritten material before the final verification pass. |
 | 2026-07-01 | Task 6 completed. Docs freshness passed after course/docs index sync, and stale Part 4 status language was removed from the indexed surfaces. |
+| 2026-07-01 | Task 7 completed final verification, cleanup, and neat-freak docs reconciliation. Final checks from `redesign/`: full pytest `203 passed`; ruff `All checks passed!`; docs freshness `3 passed`; markdown Python block gate `4 passed`; `codegraph status .` up to date with 65 files, 1,001 nodes, and 2,751 edges; Part 4 stdout audit passed; `git diff --check` clean; `apps/web` Vite build passed with `46 modules transformed`. |
+| 2026-07-01 | Neat-freak reconciliation updated `AGENTS.md` and `infra/local-readiness-checklist.md` so future course markdown example changes explicitly know the markdown Python block gate now covers setup material plus Parts 1-4 chapter/lab/solution files. Generated `.venv`, caches, `uv.lock`, `node_modules`, `dist`, TypeScript build info, and Python `__pycache__` outputs were removed before final status checks. |
 
 ## Verification Target
 
@@ -95,3 +97,12 @@ Run from `redesign/` unless noted.
 | `PYTHONPATH=packages/research_core/src uv run python -m infra.markdown_python_blocks course/solutions/04-delegation-runtime-solution.md --project-root .` on 2026-07-01 | Checked 12 Python blocks; no expected output text fences. |
 | `PYTHONPATH=packages/research_core/src uv run pytest tests/course/test_docs_freshness.py -q` after Task 6 on 2026-07-01 | `3 passed` |
 | `PYTHONPATH=packages/research_core/src uv run pytest tests/course/test_markdown_python_blocks.py -q` after Task 6 on 2026-07-01 | `4 passed` |
+| `codegraph status .` final on 2026-07-01 | Up to date; 65 files, 1,001 nodes, 2,751 edges. |
+| `PYTHONPATH=packages/research_core/src uv run pytest -q` final on 2026-07-01 | `203 passed` |
+| `PYTHONPATH=packages/research_core/src uv run ruff check .` final on 2026-07-01 | `All checks passed!` |
+| `PYTHONPATH=packages/research_core/src uv run pytest tests/course/test_docs_freshness.py -q` final on 2026-07-01 | `3 passed` |
+| `PYTHONPATH=packages/research_core/src uv run pytest tests/course/test_markdown_python_blocks.py -q` final on 2026-07-01 | `4 passed` |
+| Part 4 stdout audit on 2026-07-01 | Passed; every printing Python block in Chapter/Lab/Solution 04 has an adjacent `Expected output:` fence. |
+| `git diff --check` final on 2026-07-01 | Clean |
+| `cd apps/web && npm ci && npm run build` final on 2026-07-01 | Passed; Vite built `46 modules transformed`. |
+| Neat-freak docs audit on 2026-07-01 | PASS: README, course README, AGENTS, local readiness checklist, docs index, roadmap, execution roadmap, overall progress, and phase progress are aligned for R4. |

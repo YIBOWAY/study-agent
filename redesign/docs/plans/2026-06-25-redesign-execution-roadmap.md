@@ -267,3 +267,11 @@ Exit criteria:
 - `cd redesign && PYTHONPATH=packages/research_core/src uv run pytest tests/course/test_docs_freshness.py -q` passes.
 - `cd redesign && PYTHONPATH=packages/research_core/src uv run pytest tests/course/test_markdown_python_blocks.py -q` passes for Parts 1-4.
 - `cd redesign/apps/web && npm ci && npm run build` passes.
+
+Completion notes:
+
+- `cd redesign && PYTHONPATH=packages/research_core/src uv run pytest -q` passed on 2026-07-01 with `203 passed`.
+- `cd redesign && PYTHONPATH=packages/research_core/src uv run ruff check .` passed on 2026-07-01 with `All checks passed!`.
+- `cd redesign && PYTHONPATH=packages/research_core/src uv run pytest tests/course/test_docs_freshness.py -q` passed on 2026-07-01 with `3 passed`.
+- `cd redesign && PYTHONPATH=packages/research_core/src uv run pytest tests/course/test_markdown_python_blocks.py -q` passed on 2026-07-01 with `4 passed`.
+- `cd redesign/apps/web && npm ci && npm run build` passed on 2026-07-01 with Vite `46 modules transformed`.

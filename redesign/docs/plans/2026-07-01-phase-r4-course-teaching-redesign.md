@@ -279,7 +279,7 @@ Expected: passes with all indexed paths resolved.
 - Modify: `docs/progress/overall.md`
 - Modify: `docs/progress/phases/phase-r4.md`
 
-- [ ] **Step 1: Run final verification**
+- [x] **Step 1: Run final verification**
 
 Run from `redesign/`:
 
@@ -292,19 +292,19 @@ git diff --check
 cd apps/web && npm ci && npm run build
 ```
 
-- [ ] **Step 2: Manually re-run every new/changed course code block**
+- [x] **Step 2: Manually re-run every new/changed course code block**
 
 Even with the markdown gate, paste every changed code block in Chapter 04, Lab 04, and Solution 04 into a real `PYTHONPATH=packages/research_core/src uv run python` shell and confirm the output matches the documented output exactly, the same way R1-R3 were verified. The gate compares stdout only for blocks with an adjacent `Expected output:` fence; blocks without one are execution-only, so a manual pass still catches output text that the gate does not compare.
 
-- [ ] **Step 3: Clean generated artifacts**
+- [x] **Step 3: Clean generated artifacts**
 
 Remove generated `.venv`, `.pytest_cache`, `.ruff_cache`, `uv.lock`, `apps/web/node_modules`, `apps/web/dist`, `apps/web/tsconfig.tsbuildinfo`, and `__pycache__` outputs unless already tracked.
 
-- [ ] **Step 4: Run final docs reconciliation**
+- [x] **Step 4: Run final docs reconciliation**
 
 Use the neat-freak workflow to verify docs/progress/README/AGENTS alignment, including the markdown-gate scope note now that it covers Parts 1-4.
 
-- [ ] **Step 5: Mark R4 complete**
+- [x] **Step 5: Mark R4 complete**
 
 Only after fresh verification, mark R4 complete and commit the final docs sync.
 

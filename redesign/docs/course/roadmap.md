@@ -74,7 +74,7 @@ Current means the file exists in the tree now. It does not mean every file has a
 - [2026-06-30-phase-r1-course-teaching-redesign.md](../plans/2026-06-30-phase-r1-course-teaching-redesign.md): completed R1 implementation plan.
 - [2026-07-01-phase-r2-course-teaching-redesign.md](../plans/2026-07-01-phase-r2-course-teaching-redesign.md): completed R2 implementation plan.
 - [2026-07-01-phase-r3-course-teaching-redesign.md](../plans/2026-07-01-phase-r3-course-teaching-redesign.md): completed R3 implementation plan.
-- [2026-07-01-phase-r4-course-teaching-redesign.md](../plans/2026-07-01-phase-r4-course-teaching-redesign.md): active R4 implementation plan with content landed and final verification in progress.
+- [2026-07-01-phase-r4-course-teaching-redesign.md](../plans/2026-07-01-phase-r4-course-teaching-redesign.md): completed R4 implementation plan.
 - [course/README.md](../../course/README.md): learner entrypoint, track selection, commands, and common stuck points.
 - [python-terminal-primer.md](../../course/reference/python-terminal-primer.md): minimal terminal and Python concepts needed for the course.
 - [agent-kernel-glossary.md](../../course/reference/agent-kernel-glossary.md): plain-language Agent kernel vocabulary.
@@ -95,7 +95,7 @@ Current means the file exists in the tree now. It does not mean every file has a
 - Phase R1 (complete): restructured the learner entrypoint and Part 1 around the 本地论文研究助手 narrative, added the Part contract, updated the roadmap/template/index, and added the Capstone placeholder.
 - Phase R2 (complete): rewrote Part 2 so Research Core teaches the source -> evidence -> claim -> report chain through the assistant's citation problem.
 - Phase R3 (complete): rewrote Part 3 so Memory and Skills teach persistent memory policies and skill loading through repeated research sessions, plus added markdown Python block verification for changed course examples.
-- Phase R4 (content landed; final verification in progress): rewrote Part 4 so Multi-Agent Delegation teaches child context isolation, budget accounting, parent event trails, and unresolved-conflict visibility through divided research work.
+- Phase R4 (complete): rewrote Part 4 so Multi-Agent Delegation teaches child context isolation, budget accounting, parent event trails, and unresolved-conflict visibility through divided research work.
 - Phase R5 (planned): rewrite Part 5 so Workbench Product teaches the product adapter, FastAPI API, and React workbench through a researcher-facing interface.
 - Phase R6 (planned): rewrite Part 6 so Framework Comparisons teach how to compare frameworks on the same task without moving framework code into the product runtime.
 - Phase R7 (planned): rewrite Part 7 so Production Readiness teaches diagnostics, persistence, approval, and sandbox policies as local-first deployment boundaries.

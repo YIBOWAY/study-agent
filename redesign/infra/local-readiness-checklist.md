@@ -45,8 +45,8 @@ Expected result:
 
 ## Markdown Python Blocks
 
-The full pytest suite also executes selected fenced Python examples from course
-Markdown. To run just that gate:
+The full pytest suite also executes fenced Python examples from setup material
+plus Parts 1-4 chapter/lab/solution Markdown. To run just that gate:
 
 ```bash
 cd redesign

@@ -48,6 +48,10 @@ For course markdown changes that include runnable Python examples, also run:
 PYTHONPATH=packages/research_core/src uv run pytest tests/course/test_markdown_python_blocks.py -q
 ```
 
+This gate currently covers setup material plus Parts 1-4 chapter/lab/solution
+files, and it compares stdout for blocks followed by an `Expected output:` text
+fence.
+
 ## Architecture Direction
 
 The runtime should follow these boundaries:
