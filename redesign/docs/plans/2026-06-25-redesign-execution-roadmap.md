@@ -310,7 +310,7 @@ Completion notes:
 
 Plan: `redesign/docs/plans/2026-07-01-phase-r6-course-teaching-redesign.md`
 
-Status: In progress (started 2026-07-01).
+Status: Complete (2026-07-01).
 
 Purpose:
 
@@ -327,3 +327,11 @@ Exit criteria:
 - `cd redesign && PYTHONPATH=packages/research_core/src uv run pytest tests/course/test_docs_freshness.py -q` passes.
 - `cd redesign && PYTHONPATH=packages/research_core/src uv run pytest tests/course/test_markdown_python_blocks.py -q` passes for Parts 1-6.
 - `cd redesign/apps/web && npm ci && npm run build` passes.
+
+Completion notes:
+
+- `cd redesign && PYTHONPATH=packages/research_core/src uv run pytest -q` passed on 2026-07-01 with `204 passed`.
+- `cd redesign && PYTHONPATH=packages/research_core/src uv run ruff check .` passed on 2026-07-01 with `All checks passed!`.
+- `cd redesign && PYTHONPATH=packages/research_core/src uv run pytest tests/course/test_docs_freshness.py -q` passed on 2026-07-01 with `3 passed`.
+- `cd redesign && PYTHONPATH=packages/research_core/src uv run pytest tests/course/test_markdown_python_blocks.py -q` passed on 2026-07-01 with `5 passed` (Parts 0-6).
+- `cd redesign/apps/web && npm ci && npm run build` passed on 2026-07-01.

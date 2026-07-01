@@ -1,8 +1,9 @@
 # Phase R6 Progress: Course Teaching Redesign - Part 6
 
-Status: In Progress
+Status: Complete
 
 Started: 2026-07-01
+Completed: 2026-07-01
 Branch: `codex/redesign-course-r6`
 
 ## Goal
@@ -28,7 +29,7 @@ R6 has no infra/gate code change (a deliberate contrast with R5's `apps/api/src`
 - [x] Task 3: Rewrite Lab 06 with L1/L2/L3 exercises and feedback loops.
 - [x] Task 4: Rewrite Solution 06 with runnable assertions and design rationale.
 - [x] Task 5: Add Part 6 files to the gate and sync course indexes and progress.
-- [ ] Task 6: Final verification, cleanup, whole-branch review, and docs reconciliation.
+- [x] Task 6: Final verification, cleanup, whole-branch review, and docs reconciliation.
 
 ## Exit Signal
 
@@ -51,6 +52,7 @@ R6 has no infra/gate code change (a deliberate contrast with R5's `apps/api/src`
 | 2026-07-01 | Task 3 landed (commits `8563bc1` write, `b1aa488` fix): Lab 06 rewritten with L1 Follow, L2 Modify (raise `state_resume` weight, predict-then-verify the winner flip, by-hand `total_score` check) plus five self-caught breaks, and an open-ended L3 Design whose self-check is a non-executed text block. Four-part feedback on each tier. Gate self-check 15 blocks / 11 matched. Task reviewer approved; a false-positive "missing Solution section" finding was resolved (the runnable L3 reference lives in the separate `course/solutions/06` file), and two Minor L2 weight-shift wording nits were fixed by the coordinator. |
 | 2026-07-01 | Task 4 landed (commit `608ea30`): Solution 06 rewritten with runnable assert-based L1/L2/L3 answers (including a manual `total_score` reproduction and a runnable L3 reference design where langgraph beats the crewai decoy), What This Proves / Why This Design per tier, Forward Connections, and Final Takeaway. Gate self-check 12 blocks, all asserts pass. Task reviewer approved with one Minor note recorded. |
 | 2026-07-01 | Task 5 landed: Part 6 chapter/lab/solution added to `COURSE_MARKDOWN_PATHS` (markdown gate now covers Parts 0-6, `5 passed`; direct run 41 Part-6 blocks / 25 expected outputs matched). Course README, redesign README, roadmap, execution roadmap, and progress indexes now describe Part 6 as R6 rewritten while Part 7 stays v1. |
+| 2026-07-01 | Task 6 completed final verification and whole-branch review. Coordinator verification: full `pytest -q` `204 passed`; `ruff check .` clean; docs freshness + markdown gate `8 passed`; `git diff --check` clean; `apps/web` `npm ci && npm run build` clean. A whole-branch code-reviewer returned READY WITH MINOR FOLLOW-UPS with no Critical/Important findings; the two recorded Minor notes (the empty-weights Break rationale wording, consistent across all three files; and Solution Break E reusing the L1 `matrix` under the shared-namespace model) were both triaged acceptable-as-is. Generated artifacts were removed before final status checks. |
 
 ## Verification Target
 
@@ -67,4 +69,15 @@ cd apps/web && npm ci && npm run build
 
 ## Verification Results
 
-Recorded during Task 6.
+Run from `redesign/` on 2026-07-01.
+
+| Check | Result |
+| --- | --- |
+| `PYTHONPATH=packages/research_core/src uv run pytest -q` | `204 passed` |
+| `PYTHONPATH=packages/research_core/src uv run ruff check .` | `All checks passed!` |
+| `PYTHONPATH=packages/research_core/src uv run pytest tests/course/test_docs_freshness.py -q` | `3 passed` |
+| `PYTHONPATH=packages/research_core/src uv run pytest tests/course/test_markdown_python_blocks.py -q` | `5 passed` (Parts 0-6) |
+| Part 6 direct gate run (`python -m infra.markdown_python_blocks` on the 3 files) | Checked 41 Python blocks; 25 expected outputs matched. |
+| `git diff --check` | Clean |
+| `cd apps/web && npm ci && npm run build` | Passed; Vite built successfully. |
+| Whole-branch code review | READY WITH MINOR FOLLOW-UPS; no Critical/Important; two Minor notes triaged acceptable-as-is. |
