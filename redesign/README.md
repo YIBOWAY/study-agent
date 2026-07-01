@@ -85,19 +85,25 @@ Phase R3 adds the third project-driven course teaching rewrite:
 - Lab 03 now uses L1 Follow, L2 Modify, Memory/Skill Break/Fix checks, and an open-ended L3 Design exercise graded by invariants.
 - `infra/markdown_python_blocks.py` and `tests/course/test_markdown_python_blocks.py` execute fenced Python course examples against the local `research_core` API.
 
+Phase R4 adds the fourth project-driven course teaching rewrite:
+
+- Part 4 Chapter/Lab/Solution materials now teach Multi-Agent Delegation through the delegated-review problem: child context isolation, step-budget accounting, parent delegation event trails, and unresolved-conflict visibility.
+- Lab 04 now uses L1 Follow, L2 Modify/Break-Fix checks, and an open-ended L3 Design exercise graded by delegation invariants.
+- The markdown Python block gate now covers setup material plus Parts 1-4 chapter/lab/solution files.
+
 Real retrieval adapters, async delegation, streaming, real auth, real cloud deployment, real A2A transport, and live framework adapters arrive in later phases.
 
 ## Course Entry
 
 Start at `course/README.md`. New learners should follow the Beginner Track before Chapter 01; experienced engineers can skim the glossary and jump to the Agent Kernel lab.
 
-Current course coverage follows the implemented runtime phases. Phase R1 rewrote the learner entrypoint and Part 1 into the project-driven teaching style; Phase R2 rewrote Part 2; Phase R3 rewrote Part 3. Parts 4-7 remain current v1 course material until their planned R4-R7 rewrites.
+Current course coverage follows the implemented runtime phases. Phase R1 rewrote the learner entrypoint and Part 1 into the project-driven teaching style; Phase R2 rewrote Part 2; Phase R3 rewrote Part 3; Phase R4 rewrote Part 4. Parts 5-7 remain current v1 course material until their planned R5-R7 rewrites.
 
 - Chapter/Lab/Solution 00: learner setup and pre-kernel mental model.
 - Chapter/Lab/Solution 01: Agent Kernel.
 - Chapter/Lab/Solution 02: Research Core, R2 project-driven rewrite.
 - Chapter/Lab/Solution 03: Memory and Skills, R3 project-driven rewrite.
-- Chapter/Lab/Solution 04: Multi-Agent Delegation.
+- Chapter/Lab/Solution 04: Multi-Agent Delegation, R4 project-driven rewrite.
 - Chapter/Lab/Solution 05: Workbench Product.
 - Chapter/Lab/Solution 06: Framework Comparisons.
 - Chapter/Lab/Solution 07: Production Readiness.

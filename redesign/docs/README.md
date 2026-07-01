@@ -60,9 +60,9 @@ This directory is the canonical archive for the redesign version of the project.
 - `../course/chapters/03-memory-and-skills.md`: Part 3 R3 Memory notebook and Skill package material.
 - `../course/labs/03-memory-skill-runtime-lab.md`: Part 3 R3 Memory/Skill lab with L1/L2/L3 exercises.
 - `../course/solutions/03-memory-skill-runtime-solution.md`: Part 3 R3 Memory/Skill solution with reference design and invariants.
-- `../course/chapters/04-multi-agent-delegation.md`: Part 4 current v1 Multi-Agent Delegation material while R4 is active.
-- `../course/labs/04-delegation-runtime-lab.md`: Part 4 current v1 DelegationRuntime lab while R4 is active.
-- `../course/solutions/04-delegation-runtime-solution.md`: Part 4 current v1 DelegationRuntime solution while R4 is active.
+- `../course/chapters/04-multi-agent-delegation.md`: Part 4 R4 Multi-Agent Delegation material.
+- `../course/labs/04-delegation-runtime-lab.md`: Part 4 R4 DelegationRuntime lab with L1/L2/L3 exercises.
+- `../course/solutions/04-delegation-runtime-solution.md`: Part 4 R4 DelegationRuntime solution with reference design and invariants.
 - `../course/chapters/05-workbench-product.md`: Part 5 current v1 Workbench Product integration material until R5.
 - `../course/labs/05-workbench-product-lab.md`: Part 5 current v1 WorkbenchSnapshot, API, and web build lab until R5.
 - `../course/solutions/05-workbench-product-solution.md`: Part 5 current v1 Workbench Product solution until R5.

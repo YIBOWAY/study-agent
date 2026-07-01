@@ -37,7 +37,7 @@ Rewrite Part 4 so Multi-Agent Delegation teaches child-context isolation, budget
 - [x] Task 3: Rewrite Chapter 04 as project-driven Part 4 material.
 - [x] Task 4: Rewrite Lab 04 with L1/L2/L3 exercises and feedback loops.
 - [x] Task 5: Rewrite Solution 04 with runnable assertions and design rationale.
-- [ ] Task 6: Sync course indexes and progress after content lands.
+- [x] Task 6: Sync course indexes and progress after content lands.
 - [ ] Task 7: Final verification, cleanup, and neat-freak docs reconciliation.
 
 ## Exit Signal
@@ -63,6 +63,8 @@ Rewrite Part 4 so Multi-Agent Delegation teaches child-context isolation, budget
 | 2026-07-01 | Task 3 completed. Chapter 04 now starts from the delegated-review failure story, teaches delegation as role badge + task sheet + budget + receipt trail + unresolved-conflict list, shows delegation flow and budget diagrams, covers `run_task`, `run_many`, context isolation, observed over-budget failures, preflight policy failures, duplicate child IDs, and merge conflict visibility. |
 | 2026-07-01 | Task 4 completed. Lab 04 now has L1 Follow, L2 Modify/Break-Fix, and L3 Design exercises with Common Errors, Failure Output Interpretation, Where To Go Back, and Why Correct Answer Is Correct feedback for every tier. |
 | 2026-07-01 | Task 5 completed. Solution 04 now provides runnable L1/L2 answers, one valid L3 reference design, required invariants, assert-based self-verification, and forward connections to Part 5 context/timeline panels, Part 7 diagnostics, and Part 3 memory boundaries. |
+| 2026-07-01 | Task 6 content-status sync started. Course README, docs README, roadmap, execution roadmap, redesign README, and overall progress now describe Part 4 as R4 rewritten material while keeping Phase R4 final verification in progress. |
+| 2026-07-01 | Task 6 completed. Docs freshness passed after course/docs index sync, and stale Part 4 status language was removed from the indexed surfaces. |
 
 ## Verification Target
 
@@ -91,3 +93,5 @@ Run from `redesign/` unless noted.
 | `PYTHONPATH=packages/research_core/src uv run python -m infra.markdown_python_blocks course/chapters/04-multi-agent-delegation.md --project-root .` on 2026-07-01 | Checked 12 Python blocks; 9 expected outputs matched. |
 | `PYTHONPATH=packages/research_core/src uv run python -m infra.markdown_python_blocks course/labs/04-delegation-runtime-lab.md --project-root .` on 2026-07-01 | Checked 14 Python blocks; 8 expected outputs matched. |
 | `PYTHONPATH=packages/research_core/src uv run python -m infra.markdown_python_blocks course/solutions/04-delegation-runtime-solution.md --project-root .` on 2026-07-01 | Checked 12 Python blocks; no expected output text fences. |
+| `PYTHONPATH=packages/research_core/src uv run pytest tests/course/test_docs_freshness.py -q` after Task 6 on 2026-07-01 | `3 passed` |
+| `PYTHONPATH=packages/research_core/src uv run pytest tests/course/test_markdown_python_blocks.py -q` after Task 6 on 2026-07-01 | `4 passed` |

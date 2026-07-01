@@ -258,11 +258,11 @@ Explain why context isolation matters for Part 5's context inspector (the produc
 - Modify: `docs/progress/overall.md`
 - Modify: `docs/progress/phases/phase-r4.md`
 
-- [ ] **Step 1: Mark Part 4 as R4 rewritten**
+- [x] **Step 1: Mark Part 4 as R4 rewritten**
 
 After Tasks 2-5 land, update course indexes to describe Part 4 as completed R4 material. Keep Parts 5-7 as current v1 material.
 
-- [ ] **Step 2: Verify docs freshness**
+- [x] **Step 2: Verify docs freshness**
 
 Run:
 
