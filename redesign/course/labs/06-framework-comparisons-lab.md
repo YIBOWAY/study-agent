@@ -147,7 +147,7 @@ assert recommend_profile(matrix, task_id="state_resume_workflow").profile_id == 
 
 ### Step 1: Raise the state_resume weight (predict-then-verify)
 
-复制 echo fixture，只把 `state_resume` 权重从 0.03 抬到 0.38，其它调低。先**预测**：echo task 原本是 handwritten 赢，现在把最看重的维度换成 state/resume，谁会翻盘？用加权公式想一想——handwritten 的 state_resume 只有 0.25，langgraph 却有 0.95。
+复制 echo fixture，只把 `state_resume` 权重从 0.03 抬到 0.38，其余维度相应压低以腾出权重（`multi_agent` 仍保持 0.02）。先**预测**：echo task 原本是 handwritten 赢，现在把最看重的维度换成 state/resume，谁会翻盘？用加权公式想一想——handwritten 的 state_resume 只有 0.25，langgraph 却有 0.95。
 
 ```python
 from course.framework_comparisons import ComparisonTask
@@ -195,7 +195,7 @@ llamaindex-workflows 0.608
 crewai 0.4895
 ```
 
-验证了预测：**没有换考生，只换了考卷的权重**，赢家从 handwritten 翻成 langgraph。handwritten 从 0.854 掉到 0.634，因为它最弱的两科（state_resume、multi_agent）现在占了较大权重。这条排序也正是 `recommend_profile` 内部的确定性 tie-break：`sorted(matches, key=lambda i: (-i.total_score, i.profile_id))[0]`。
+验证了预测：**没有换考生，只换了考卷的权重**，赢家从 handwritten 翻成 langgraph。handwritten 从 0.854 掉到 0.634，因为这次把权重压在了 `state_resume` 上（从 echo 考卷的 0.03 提到 0.38），而 handwritten 在 `state_resume` 上恰恰最弱（0.25）；langgraph 的 `state_resume` 是 0.95，所以反超。这条排序也正是 `recommend_profile` 内部的确定性 tie-break：`sorted(matches, key=lambda i: (-i.total_score, i.profile_id))[0]`。
 
 Self-check:
 
