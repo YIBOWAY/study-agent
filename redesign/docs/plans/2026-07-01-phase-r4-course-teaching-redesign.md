@@ -236,15 +236,15 @@ Include system-message rejection, observed step-budget overflow, role-too-large 
 - Modify: `course/solutions/04-delegation-runtime-solution.md`
 - Modify: `docs/progress/phases/phase-r4.md`
 
-- [ ] **Step 1: Provide runnable answers**
+- [x] **Step 1: Provide runnable answers**
 
 Include complete L1/L2/L3 solution snippets and assertions, covering every case introduced in Lab 04. Use `assert`-based self-verification for solution blocks (as Solution 03 does) so the markdown gate executes and checks them.
 
-- [ ] **Step 2: Explain why answers are correct**
+- [x] **Step 2: Explain why answers are correct**
 
 For each exercise, add a "What This Proves" and a "Why This Design" section, matching the Solution 02/03 shape. For the open-ended L3, provide one reference design plus the required invariants rather than a single canonical answer.
 
-- [ ] **Step 3: Connect design decisions forward**
+- [x] **Step 3: Connect design decisions forward**
 
 Explain why context isolation matters for Part 5's context inspector (the product must show what a child actually received), why the parent event trail matters for Part 7 production diagnostics (auditing what a delegated run did), and why keeping unresolved conflicts visible matters for trustworthy multi-agent output. Tie the context-isolation boundary back to Part 3's memory recall boundary.
 
