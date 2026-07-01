@@ -305,3 +305,25 @@ Completion notes:
 - `cd redesign && PYTHONPATH=packages/research_core/src uv run pytest tests/course/test_docs_freshness.py -q` passed on 2026-07-01 with `3 passed`.
 - `cd redesign && PYTHONPATH=packages/research_core/src uv run pytest tests/course/test_markdown_python_blocks.py -q` passed on 2026-07-01 with `5 passed` (Parts 0-5 plus the `apps/api/src` path test).
 - `cd redesign/apps/web && npm ci && npm run build` passed on 2026-07-01.
+
+### Phase R6: Course Teaching Redesign - Part 6
+
+Plan: `redesign/docs/plans/2026-07-01-phase-r6-course-teaching-redesign.md`
+
+Status: In progress (started 2026-07-01).
+
+Purpose:
+
+- Rewrite Part 6 so Framework Comparisons starts from the build-vs-adopt "why not just use LangChain/CrewAI?" decision problem.
+- Teach the `course.framework_comparisons` harness through a transparent weighted score: `ComparisonTask` weights x `FrameworkProfile` scores -> `FrameworkRecommendation`, with the `>=0.8` strengths / `<0.55` tradeoffs derivation and the deterministic tie-break.
+- Add the three Part 6 files to the markdown Python block gate (no gate helper change is needed; `course.framework_comparisons` already imports under the gate).
+
+Exit criteria:
+
+- Chapter/Lab/Solution 06 are rewritten using the R1-R5 teaching contract.
+- `course/README.md`, `README.md`, `docs/course/roadmap.md`, `docs/README.md`, and `docs/progress/` describe Part 6 as R6 rewritten after content lands.
+- `cd redesign && PYTHONPATH=packages/research_core/src uv run pytest -q` passes.
+- `cd redesign && PYTHONPATH=packages/research_core/src uv run ruff check .` passes.
+- `cd redesign && PYTHONPATH=packages/research_core/src uv run pytest tests/course/test_docs_freshness.py -q` passes.
+- `cd redesign && PYTHONPATH=packages/research_core/src uv run pytest tests/course/test_markdown_python_blocks.py -q` passes for Parts 1-6.
+- `cd redesign/apps/web && npm ci && npm run build` passes.

@@ -4,10 +4,10 @@ Last updated: 2026-07-01
 
 ## Current State
 
-- Active branch: `codex/redesign-course-r5`
-- Active phase: None. Phase R5 is complete; Phase R6 should start from a new approved plan when the Part 6 teaching rewrite begins.
+- Active branch: `codex/redesign-course-r6`
+- Active phase: Phase R6 (Part 6 Framework Comparisons teaching rewrite) in progress.
 - Completed runtime/product phases: 8 of 8
-- Course teaching redesign: Phase R1, R2, R3, R4, and R5 complete; R6-R9 planned.
+- Course teaching redesign: Phase R1, R2, R3, R4, and R5 complete; R6 in progress; R7-R9 planned.
 - Current verification baseline: Phase R5 completion on 2026-07-01: full redesign suite `204 passed`; `ruff check .` clean; docs freshness `3 passed`; markdown Python block gate `5 passed` (now covering Parts 0-5 plus the `apps/api/src` path test); `apps/web` Vite build clean; `git diff --check` clean.
 - Course documentation now has a complete v1 baseline plus project-driven R1, R2, R3, R4, and R5 teaching material. Phase R1 completed the learner guide, roadmap, Part 1 chapters/lab/solution, reusable Part template, and Capstone placeholder for the 本地论文研究助手 narrative. Phase R2 completed the Part 2 Research Core chapter/lab/solution rewrite around the citation problem. Phase R3 completed the Part 3 Memory and Skills chapter/lab/solution rewrite around the repeated-session notebook problem. Phase R4 completed the Part 4 Multi-Agent Delegation chapter/lab/solution rewrite around delegated-review isolation, budgets, event trails, and unresolved conflicts. Phase R5 completed the Part 5 Workbench Product chapter/lab/solution rewrite around the product-adapter boundary (`from_*` adapters, `summary_row()` projections, `WorkbenchSnapshot` referential-integrity validation, and the downward-only core -> FastAPI -> React boundary), and extended the markdown gate to run `apps/api/src` blocks and cover Part 5. Parts 6-7 remain current v1 material until R6-R7 rewrites land.
 
@@ -28,6 +28,7 @@ Last updated: 2026-07-01
 | Phase R3: Course Teaching Redesign - Part 3 | Complete | `phases/phase-r3.md` | Part 3 Memory and Skills chapter/lab/solution, markdown Python block gate, docs sync, final verification, cleanup, and neat-freak reconciliation landed. |
 | Phase R4: Course Teaching Redesign - Part 4 | Complete | `phases/phase-r4.md` | Part 4 Multi-Agent Delegation chapter/lab/solution, markdown Python block gate expansion to Parts 1-4, docs sync, final verification, cleanup, and neat-freak reconciliation landed. |
 | Phase R5: Course Teaching Redesign - Part 5 | Complete | `phases/phase-r5.md` | Part 5 Workbench Product chapter/lab/solution rewrite around the product-adapter boundary, markdown gate `apps/api/src` path support plus Part 5 coverage, docs sync, final verification, and whole-branch review landed. |
+| Phase R6: Course Teaching Redesign - Part 6 | In Progress | `phases/phase-r6.md` | Part 6 Framework Comparisons chapter/lab/solution rewrite around the build-vs-adopt decision with transparent weighted scoring, Part 6 gate coverage, docs sync, and final verification. |
 
 ## Update Checklist
 

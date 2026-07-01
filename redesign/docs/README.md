@@ -30,6 +30,7 @@ This directory is the canonical archive for the redesign version of the project.
 - `plans/2026-07-01-phase-r3-course-teaching-redesign.md`: Phase R3 implementation plan for the Part 3 Memory and Skills teaching rewrite.
 - `plans/2026-07-01-phase-r4-course-teaching-redesign.md`: Phase R4 implementation plan for the Part 4 Multi-Agent Delegation teaching rewrite.
 - `plans/2026-07-01-phase-r5-course-teaching-redesign.md`: Phase R5 implementation plan for the Part 5 Workbench Product teaching rewrite.
+- `plans/2026-07-01-phase-r6-course-teaching-redesign.md`: Phase R6 implementation plan for the Part 6 Framework Comparisons teaching rewrite.
 - `progress/overall.md`: phase status dashboard for humans and agents.
 - `architecture/overview.md`: double-layer repository and dependency direction.
 - `architecture/runtime.md`: runtime contracts, Phase 1 agent loop, fake provider boundary, delegation events, and Phase 5 product boundary.
