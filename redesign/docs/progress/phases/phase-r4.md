@@ -34,7 +34,7 @@ Rewrite Part 4 so Multi-Agent Delegation teaches child-context isolation, budget
 
 - [x] Task 1: Start R4 plan and progress.
 - [x] Task 2: Extend markdown Python block gate to Parts 1-4.
-- [ ] Task 3: Rewrite Chapter 04 as project-driven Part 4 material.
+- [x] Task 3: Rewrite Chapter 04 as project-driven Part 4 material.
 - [ ] Task 4: Rewrite Lab 04 with L1/L2/L3 exercises and feedback loops.
 - [ ] Task 5: Rewrite Solution 04 with runnable assertions and design rationale.
 - [ ] Task 6: Sync course indexes and progress after content lands.
@@ -60,6 +60,7 @@ Rewrite Part 4 so Multi-Agent Delegation teaches child-context isolation, budget
 | 2026-07-01 | The R4 plan was refined to match the standing workflow: commit and push every milestone with detailed commit messages. |
 | 2026-07-01 | R4 kickoff docs indexes were synced and verified with `PYTHONPATH=packages/research_core/src uv run pytest tests/course/test_docs_freshness.py -q` -> `3 passed`. |
 | 2026-07-01 | Task 2 completed. `tests/course/test_markdown_python_blocks.py` now covers setup material plus Parts 1-4 chapter/lab/solution files. The first TDD run exposed one R2 L3 lab self-check that depended on learner-created variables; it was relabeled as a text self-check template while the executable reference remains in the solution. |
+| 2026-07-01 | Task 3 completed. Chapter 04 now starts from the delegated-review failure story, teaches delegation as role badge + task sheet + budget + receipt trail + unresolved-conflict list, shows delegation flow and budget diagrams, covers `run_task`, `run_many`, context isolation, observed over-budget failures, preflight policy failures, duplicate child IDs, and merge conflict visibility. |
 
 ## Verification Target
 
@@ -85,3 +86,4 @@ Run from `redesign/` unless noted.
 | `PYTHONPATH=packages/research_core/src uv run pytest tests/course/test_docs_freshness.py -q` on 2026-07-01 | `3 passed` |
 | `PYTHONPATH=packages/research_core/src uv run pytest tests/course/test_markdown_python_blocks.py -q` on 2026-07-01 | `4 passed` |
 | `PYTHONPATH=packages/research_core/src uv run python -m infra.markdown_python_blocks ... --project-root .` for setup and Parts 1-4 on 2026-07-01 | Checked 95 Python blocks in 15 files; 15 expected outputs matched. |
+| `PYTHONPATH=packages/research_core/src uv run python -m infra.markdown_python_blocks course/chapters/04-multi-agent-delegation.md --project-root .` on 2026-07-01 | Checked 12 Python blocks; 9 expected outputs matched. |

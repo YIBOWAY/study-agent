@@ -174,39 +174,39 @@ Expected: passes for all included files.
 - Modify: `course/chapters/04-multi-agent-delegation.md`
 - Modify: `docs/progress/phases/phase-r4.md`
 
-- [ ] **Step 1: Rewrite opener and learner contract**
+- [x] **Step 1: Rewrite opener and learner contract**
 
 Turn Chapter 04 into "Part 4: Multi-Agent Delegation" with a Learner Contract block (Who this is for / Before you start / You will build / You will be able to explain / You will prove it works by running / Offline guarantee), matching the Chapter 02/03 shape, and update the project progress tracker so Part 3 is `[x]` and Part 4 is `[*]`.
 
-- [ ] **Step 2: Open with the problem hook**
+- [x] **Step 2: Open with the problem hook**
 
 Start from the researcher delegating a sub-task (for example "让一个 reviewer child 只核对这批证据"). Show the three failures that motivate the Part: the child sees parent-only context it should not, the child runs more steps than the budget allows, and a failed child is silently dropped from the final summary. Name these before introducing any object.
 
-- [ ] **Step 3: Introduce the mental model**
+- [x] **Step 3: Introduce the mental model**
 
 Delegation = 把一小块活外包给一个专注的下属。Use a story-role table like Chapter 02/03 mapping `AgentRolePolicy` (工牌/角色边界), `DelegationTask` (任务单，只给该看的资料), `DelegationBudget` (预算), parent `delegate_*` events (回执/轨迹), `DelegationResult` (单个下属的结果), and `DelegationMergeResult` (汇总 + 未结清清单).
 
-- [ ] **Step 4: Add architecture and flow diagrams**
+- [x] **Step 4: Add architecture and flow diagrams**
 
 Add at least two ASCII diagrams: (a) a delegation flow (`DelegationTask -> DelegationRuntime.run_task -> DELEGATE_START / DELEGATE_EVENT* / DELEGATE_FINISH -> DelegationResult`), and (b) a budget/step-accounting diagram showing how `step_count` (child `MODEL_REQUEST` count) is compared against `role.max_steps`, `max_steps_per_child`, and `max_total_steps`.
 
-- [ ] **Step 5: Build the single-delegation example and inspect it**
+- [x] **Step 5: Build the single-delegation example and inspect it**
 
 Keep a deterministic `FixedChildRunner` as the base case. Show `run_task` returning a `COMPLETED` result, then Inspect: print `result.status`, `result.step_count`, and `[e.type.value for e in result.parent_events]` so learners see the `delegate_start / delegate_event / delegate_finish` trail. Add a context-isolation Inspect step that prints `compile_child_prompt(task)` to prove parent `metadata` never reaches the child, tying back to the Part 3 memory boundary.
 
-- [ ] **Step 6: Build the multi-task budget example**
+- [x] **Step 6: Build the multi-task budget example**
 
 Extend to `run_many` with two tasks and a `max_total_steps` ceiling. Show sequential step accounting consuming the total budget, and build a `DelegationMergeResult` (via `from_results`) so learners see `unresolved_conflicts` auto-derived from any non-`COMPLETED` result.
 
-- [ ] **Step 7: Break and fix**
+- [x] **Step 7: Break and fix**
 
 Cover at least: a `SYSTEM` message in `context_messages` (`context_messages must not include system messages`), an observed step-budget overflow that returns a `FAILED` result with `child step count N exceeds allowed max steps M`, a role budget that is too large (`role max_steps ... exceeds max_steps_per_child ...`), and a `run_many` duplicate `child_run_id` (`duplicate child_run_id: ...`). Frame each as Break -> diagnose from the message -> Fix, consistent with Part 1-3 framing, and note which failures raise up front versus which are recorded as a `FAILED` result.
 
-- [ ] **Step 8: Add product connection and eval gate**
+- [x] **Step 8: Add product connection and eval gate**
 
 Explain how the Workbench delegation timeline panel and unresolved-conflicts view (Part 5) depend on the parent event trail and merge result staying inspectable now. List the exact pytest/ruff commands for the existing delegation tests plus `tests/course/test_markdown_python_blocks.py`.
 
-- [ ] **Step 9: Add reflection questions**
+- [x] **Step 9: Add reflection questions**
 
 Include at least one tradeoff question, for example: why does an over-budget child produce a `FAILED` result instead of raising, while a role that is misconfigured too large raises before running — what is the difference between a policy error and an observed-runtime overflow?
 
