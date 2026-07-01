@@ -223,3 +223,23 @@ Exit criteria:
 Follow-up:
 
 - R3 should rewrite Part 3 with the same project-driven teaching method while keeping Part 2 as the evidence-chain foundation.
+
+### Phase R3: Course Teaching Redesign - Part 3
+
+Plan: `redesign/docs/plans/2026-07-01-phase-r3-course-teaching-redesign.md`
+
+Purpose:
+
+- Rewrite Part 3 so Memory and Skills start from the local paper research assistant's repeated-session problem.
+- Teach `MemoryRecord`, `MemoryKind`, `MemoryWritePolicy`, `MemoryRecallPolicy`, `MemoryEngine`, `SkillPackage`, and `SkillRuntime` through notebook and skill-package mental models.
+- Add a markdown Python block verification gate so changed course examples run against the real local API instead of relying only on manual copy/paste checks.
+
+Exit criteria:
+
+- Chapter/Lab/Solution 03 are rewritten using the R1/R2 teaching contract. Pending.
+- `course/README.md`, `docs/course/roadmap.md`, `docs/README.md`, and `docs/progress/` describe Part 3 as R3 rewritten. Pending.
+- `cd redesign && PYTHONPATH=packages/research_core/src uv run pytest -q` passes. Pending.
+- `cd redesign && PYTHONPATH=packages/research_core/src uv run ruff check .` passes. Pending.
+- `cd redesign && PYTHONPATH=packages/research_core/src uv run pytest tests/course/test_docs_freshness.py -q` passes. Pending.
+- `cd redesign && PYTHONPATH=packages/research_core/src uv run pytest tests/course/test_markdown_python_blocks.py -q` passes. Pending.
+- `cd redesign/apps/web && npm ci && npm run build` passes. Pending.

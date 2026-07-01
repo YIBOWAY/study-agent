@@ -27,6 +27,7 @@ This directory is the canonical archive for the redesign version of the project.
 - `plans/2026-06-30-phase-7-production-readiness.md`: Production Readiness implementation plan.
 - `plans/2026-06-30-phase-r1-course-teaching-redesign.md`: Phase R1 implementation plan for the learner entrypoint and Part 1 teaching rewrite.
 - `plans/2026-07-01-phase-r2-course-teaching-redesign.md`: Phase R2 implementation plan for the Part 2 Research Core teaching rewrite.
+- `plans/2026-07-01-phase-r3-course-teaching-redesign.md`: Phase R3 implementation plan for the Part 3 Memory and Skills teaching rewrite.
 - `progress/overall.md`: phase status dashboard for humans and agents.
 - `architecture/overview.md`: double-layer repository and dependency direction.
 - `architecture/runtime.md`: runtime contracts, Phase 1 agent loop, fake provider boundary, delegation events, and Phase 5 product boundary.

@@ -12,14 +12,14 @@ The course should teach Agent engineering through a single, growing project: a �
 
 For learners who know some Python but are new to Agent engineering, the path is Part-based. Parts 1-7 build on each other and end with the Capstone; do not treat later Parts as independent one-off chapters.
 
-R1 completed the teaching-redesign pass for the learner entrypoint and Part 1. R2 completed the Part 2 Research Core rewrite. Parts 3-7 are still current v1 material until their planned R3-R7 rewrites land.
+R1 completed the teaching-redesign pass for the learner entrypoint and Part 1. R2 completed the Part 2 Research Core rewrite. R3 is actively rewriting Part 3 Memory and Skills. Parts 4-7 are still current v1 material until their planned R4-R7 rewrites land.
 
 | Step | File to read/do | What capability the assistant gains |
 |------|-----------------|--------------------------------------|
 | 0 | Read [course/README.md](../../course/README.md), [python-terminal-primer.md](../../course/reference/python-terminal-primer.md), and [agent-kernel-glossary.md](../../course/reference/agent-kernel-glossary.md).<br>Do [00-environment-check.md](../../course/labs/00-environment-check.md), then compare with [00-environment-check-solution.md](../../course/solutions/00-environment-check-solution.md). | The learner gets the offline setup and vocabulary. The assistant has not gained a runtime capability yet. |
 | 1 | Read Part 1 Section 1 in [00-before-agent-kernel.md](../../course/chapters/00-before-agent-kernel.md), then Sections 2-5 in [01-agent-kernel-foundations.md](../../course/chapters/01-agent-kernel-foundations.md).<br>Do [01-agent-runner-lab.md](../../course/labs/01-agent-runner-lab.md), then compare with [01-agent-runner-solution.md](../../course/solutions/01-agent-runner-solution.md). | Part 1: Agent Kernel — the assistant gains the smallest think-act-observe loop and an inspectable event trail. This is the completed R1 rewrite material. |
 | 2 | Read [02-research-core-foundations.md](../../course/chapters/02-research-core-foundations.md).<br>Do [02-source-evidence-claim-lab.md](../../course/labs/02-source-evidence-claim-lab.md), then compare with [02-source-evidence-claim-solution.md](../../course/solutions/02-source-evidence-claim-solution.md). | Part 2: Research Core — the assistant gains a source -> evidence -> claim -> report evidence chain. This is the R2 rewritten material. |
-| 3 | Read [03-memory-and-skills.md](../../course/chapters/03-memory-and-skills.md).<br>Do [03-memory-skill-runtime-lab.md](../../course/labs/03-memory-skill-runtime-lab.md), then compare with [03-memory-skill-runtime-solution.md](../../course/solutions/03-memory-skill-runtime-solution.md). | Part 3: Memory and Skills — the assistant gains persistent memory policies and skill loading. This remains current v1 material until the planned R3 rewrite. |
+| 3 | Read [03-memory-and-skills.md](../../course/chapters/03-memory-and-skills.md).<br>Do [03-memory-skill-runtime-lab.md](../../course/labs/03-memory-skill-runtime-lab.md), then compare with [03-memory-skill-runtime-solution.md](../../course/solutions/03-memory-skill-runtime-solution.md). | Part 3: Memory and Skills — the assistant gains persistent memory policies and skill loading. R3 is active, so this row should not be treated as complete R3 material until the phase closes. |
 | 4 | Read [04-multi-agent-delegation.md](../../course/chapters/04-multi-agent-delegation.md).<br>Do [04-delegation-runtime-lab.md](../../course/labs/04-delegation-runtime-lab.md), then compare with [04-delegation-runtime-solution.md](../../course/solutions/04-delegation-runtime-solution.md). | Part 4: Multi-Agent Delegation — the assistant gains child context isolation and budget accounting. This remains current v1 material until the planned R4 rewrite. |
 | 5 | Read [05-workbench-product.md](../../course/chapters/05-workbench-product.md).<br>Do [05-workbench-product-lab.md](../../course/labs/05-workbench-product-lab.md), then compare with [05-workbench-product-solution.md](../../course/solutions/05-workbench-product-solution.md). | Part 5: Workbench Product — the assistant gains a product adapter, FastAPI API, and React workbench. This remains current v1 material until the planned R5 rewrite. |
 | 6 | Read [06-framework-comparisons.md](../../course/chapters/06-framework-comparisons.md).<br>Do [06-framework-comparisons-lab.md](../../course/labs/06-framework-comparisons-lab.md), then compare with [06-framework-comparisons-solution.md](../../course/solutions/06-framework-comparisons-solution.md). | Part 6: Framework Comparisons — the learner gains a method for comparing frameworks on the same task. This remains current v1 material until the planned R6 rewrite. |
@@ -32,7 +32,7 @@ For readers already comfortable with Python projects, pytest, and basic Agent te
 
 1. Skim [agent-kernel-glossary.md](../../course/reference/agent-kernel-glossary.md).
 2. Skim [00-before-agent-kernel.md](../../course/chapters/00-before-agent-kernel.md) for the Part 1 narrative and mental model, then start the build loop at [01-agent-kernel-foundations.md](../../course/chapters/01-agent-kernel-foundations.md).
-3. Continue through Part 2 as R2 rewritten material, then Parts 3-7 as current v1 material until R3-R7.
+3. Continue through Part 2 as R2 rewritten material, then treat Part 3 as the active R3 rewrite surface and Parts 4-7 as current v1 material until R4-R7.
 4. Read [07-production-readiness.md](../../course/chapters/07-production-readiness.md) when evaluating production-readiness contracts.
 5. Use labs and solutions as runnable verification material.
 
@@ -49,7 +49,7 @@ The target course shape is:
 7. Part 7: Production Readiness — diagnostics, persistence, approval, and sandbox policies
 8. Capstone — integrate all Parts into a complete 本地论文研究助手
 
-R1 makes this shape visible and rewrites Part 1. R2 rewrites Part 2. R3-R9 are planned follow-up phases, so this target shape should not be read as a claim that every Part already follows the new teaching method.
+R1 makes this shape visible and rewrites Part 1. R2 rewrites Part 2. R3 is active. R4-R9 are planned follow-up phases, so this target shape should not be read as a claim that every Part already follows the new teaching method.
 
 ## Part Contract
 
@@ -63,7 +63,7 @@ Every rewritten Part should include:
 - an eval gate with concrete commands or checks,
 - reflection questions that ask the learner to explain tradeoffs, not just recall names.
 
-Part 2 now follows this contract after R2. Parts 3-7 must satisfy it after their R3-R7 rewrites. Until then, they remain valid v1 learning material, not finished examples of the new Part contract.
+Part 2 now follows this contract after R2. Part 3 must satisfy it before R3 closes. Parts 4-7 must satisfy it after their R4-R7 rewrites. Until then, they remain valid v1 learning material, not finished examples of the new Part contract.
 
 ## Current Materials
 
@@ -73,6 +73,7 @@ Current means the file exists in the tree now. It does not mean every file has a
 - [2026-06-30-course-teaching-redesign.md](../specs/2026-06-30-course-teaching-redesign.md): approved teaching-redesign spec for the project-driven course and R1-R9 plan.
 - [2026-06-30-phase-r1-course-teaching-redesign.md](../plans/2026-06-30-phase-r1-course-teaching-redesign.md): completed R1 implementation plan.
 - [2026-07-01-phase-r2-course-teaching-redesign.md](../plans/2026-07-01-phase-r2-course-teaching-redesign.md): completed R2 implementation plan.
+- [2026-07-01-phase-r3-course-teaching-redesign.md](../plans/2026-07-01-phase-r3-course-teaching-redesign.md): active R3 implementation plan.
 - [course/README.md](../../course/README.md): learner entrypoint, track selection, commands, and common stuck points.
 - [python-terminal-primer.md](../../course/reference/python-terminal-primer.md): minimal terminal and Python concepts needed for the course.
 - [agent-kernel-glossary.md](../../course/reference/agent-kernel-glossary.md): plain-language Agent kernel vocabulary.
@@ -92,7 +93,7 @@ Current means the file exists in the tree now. It does not mean every file has a
 
 - Phase R1 (complete): restructured the learner entrypoint and Part 1 around the 本地论文研究助手 narrative, added the Part contract, updated the roadmap/template/index, and added the Capstone placeholder.
 - Phase R2 (complete): rewrote Part 2 so Research Core teaches the source -> evidence -> claim -> report chain through the assistant's citation problem.
-- Phase R3 (planned): rewrite Part 3 so Memory and Skills teach persistent memory policies and skill loading through repeated research sessions.
+- Phase R3 (active): rewrite Part 3 so Memory and Skills teach persistent memory policies and skill loading through repeated research sessions, plus add markdown Python block verification for changed course examples.
 - Phase R4 (planned): rewrite Part 4 so Multi-Agent Delegation teaches child context isolation and budget accounting through divided research work.
 - Phase R5 (planned): rewrite Part 5 so Workbench Product teaches the product adapter, FastAPI API, and React workbench through a researcher-facing interface.
 - Phase R6 (planned): rewrite Part 6 so Framework Comparisons teach how to compare frameworks on the same task without moving framework code into the product runtime.
