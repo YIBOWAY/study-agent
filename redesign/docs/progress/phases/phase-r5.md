@@ -1,8 +1,9 @@
 # Phase R5 Progress: Course Teaching Redesign - Part 5
 
-Status: In Progress
+Status: Complete
 
 Started: 2026-07-01
+Completed: 2026-07-01
 Branch: `codex/redesign-course-r5`
 
 ## Goal
@@ -29,19 +30,19 @@ To keep every commit's gate green, the `apps/api/src` path extension lands in Ta
 - [x] Task 4: Rewrite Lab 05 with L1/L2/L3 exercises and feedback loops.
 - [x] Task 5: Rewrite Solution 05 with runnable assertions and design rationale.
 - [x] Task 6: Add Part 5 files to the gate and sync course indexes and progress.
-- [ ] Task 7: Final verification, cleanup, and neat-freak docs reconciliation.
+- [x] Task 7: Final verification, cleanup, and neat-freak docs reconciliation.
 
 ## Exit Signal
 
-- [ ] Chapter/Lab/Solution 05 are rewritten around the inspectable-workbench problem.
-- [ ] Part 5 has at least two ASCII diagrams and at least three `[DD]` / `[TRAP]` / `[CHECK]` / `[BIG]` / `[DEEP]` callouts.
-- [ ] Chapter 05 teaches the mental model: dashboard + stable snapshot contract + `from_*` adapters + referential validation + downward-only three-layer boundary.
-- [ ] Chapter/Lab/Solution 05 exercise the `from_*` adapters, `summary_row()` projections, referential-integrity failures, and the FastAPI transport/React fallback boundary.
-- [ ] Lab 05 includes L1 Follow, L2 Modify, and L3 Design exercises with feedback loops.
-- [ ] Solution 05 provides runnable L1/L2 answers plus one valid L3 reference design and required invariants.
-- [ ] The markdown Python block gate covers Part 5 (or API blocks are explicitly documented as gate-excluded and covered by `tests/apps/test_workbench_api.py`).
-- [ ] Docs index, course roadmap, course README, and overall progress are synced.
-- [ ] Fresh verification results are recorded.
+- [x] Chapter/Lab/Solution 05 are rewritten around the inspectable-workbench problem.
+- [x] Part 5 has at least two ASCII diagrams and at least three `[DD]` / `[TRAP]` / `[CHECK]` / `[BIG]` / `[DEEP]` callouts.
+- [x] Chapter 05 teaches the mental model: dashboard + stable snapshot contract + `from_*` adapters + referential validation + downward-only three-layer boundary.
+- [x] Chapter/Lab/Solution 05 exercise the `from_*` adapters, `summary_row()` projections, referential-integrity failures, and the FastAPI transport/React fallback boundary.
+- [x] Lab 05 includes L1 Follow, L2 Modify, and L3 Design exercises with feedback loops.
+- [x] Solution 05 provides runnable L1/L2 answers plus one valid L3 reference design and required invariants.
+- [x] The markdown Python block gate covers Part 5 (or API blocks are explicitly documented as gate-excluded and covered by `tests/apps/test_workbench_api.py`).
+- [x] Docs index, course roadmap, course README, and overall progress are synced.
+- [x] Fresh verification results are recorded.
 
 ## Progress Log
 
@@ -54,6 +55,7 @@ To keep every commit's gate green, the `apps/api/src` path extension lands in Ta
 | 2026-07-01 | Task 4 landed (commit `2ca02bf`): Lab 05 rewritten with L1 Follow, L2 Modify/Break-Fix (all five referential errors + copy safety), and an open-ended L3 Design whose self-check is a non-executed text block. Four-part feedback on each tier. Gate self-check 14 blocks / 10 matched. Task reviewer approved with two Minor notes recorded. |
 | 2026-07-01 | Task 5 landed (commit `282e80a`): Solution 05 rewritten with runnable assert-based L1/L2/L3 answers, What This Proves / Why This Design per tier, Forward Connections mapping all four earlier Parts to panels, and Final Takeaway. Gate self-check 12 blocks, all asserts pass. Task reviewer approved with one Minor note recorded. |
 | 2026-07-01 | Task 6 landed: Part 5 chapter/lab/solution added to `COURSE_MARKDOWN_PATHS` (markdown gate now covers Parts 0-5, `5 passed`; direct run 42 Part-5 blocks / 24 expected outputs matched). Course README, redesign README, roadmap, execution roadmap, and progress indexes now describe Part 5 as R5 rewritten while Parts 6-7 stay v1. Docs freshness + markdown gate `8 passed`. |
+| 2026-07-01 | Task 7 completed final verification and whole-branch review. Coordinator verification: full `pytest -q` `204 passed`; `ruff check .` clean; docs freshness + markdown gate `8 passed`; `git diff --check` clean; `apps/web` `npm ci && npm run build` clean. A final whole-branch code-reviewer subagent returned READY WITH MINOR FOLLOW-UPS: the only blocker was this Task-7 progress closeout (now landed), and all four recorded per-task Minor findings were triaged acceptable-as-is. Generated `.venv`, `uv.lock`, `node_modules`, `dist`, TypeScript build info, and `__pycache__` outputs were removed before final status checks. |
 
 ## Verification Target
 
@@ -70,4 +72,15 @@ cd apps/web && npm ci && npm run build
 
 ## Verification Results
 
-Recorded during Task 7.
+Run from `redesign/` on 2026-07-01.
+
+| Check | Result |
+| --- | --- |
+| `PYTHONPATH=packages/research_core/src uv run pytest -q` | `204 passed` |
+| `PYTHONPATH=packages/research_core/src uv run ruff check .` | `All checks passed!` |
+| `PYTHONPATH=packages/research_core/src uv run pytest tests/course/test_docs_freshness.py -q` | `3 passed` |
+| `PYTHONPATH=packages/research_core/src uv run pytest tests/course/test_markdown_python_blocks.py -q` | `5 passed` (Parts 0-5 + the `apps/api/src` path test) |
+| Part 5 direct gate run (`python -m infra.markdown_python_blocks` on the 3 files) | Checked 42 Python blocks; 24 expected outputs matched. |
+| `git diff --check` | Clean |
+| `cd apps/web && npm ci && npm run build` | Passed; Vite built successfully. |
+| Whole-branch code review | READY WITH MINOR FOLLOW-UPS; Task-7 closeout was the only blocker (now landed); four per-task Minor findings triaged acceptable-as-is. |

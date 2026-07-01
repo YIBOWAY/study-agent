@@ -12,7 +12,7 @@ This folder is the redesign progress dashboard for humans and agents.
 - `phases/phase-r2.md`: completed progress record for the course teaching redesign of Part 2.
 - `phases/phase-r3.md`: completed progress record for the course teaching redesign of Part 3.
 - `phases/phase-r4.md`: completed progress record for the course teaching redesign of Part 4.
-- `phases/phase-r5.md`: in-progress record for the course teaching redesign of Part 5.
+- `phases/phase-r5.md`: completed progress record for the course teaching redesign of Part 5.
 
 ## Maintenance Rule
 
