@@ -8,10 +8,22 @@ from infra.markdown_python_blocks import (
 )
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
-PART3_MARKDOWN_PATHS = (
+COURSE_MARKDOWN_PATHS = (
+    PROJECT_ROOT / "course" / "chapters" / "00-before-agent-kernel.md",
+    PROJECT_ROOT / "course" / "labs" / "00-environment-check.md",
+    PROJECT_ROOT / "course" / "solutions" / "00-environment-check-solution.md",
+    PROJECT_ROOT / "course" / "chapters" / "01-agent-kernel-foundations.md",
+    PROJECT_ROOT / "course" / "labs" / "01-agent-runner-lab.md",
+    PROJECT_ROOT / "course" / "solutions" / "01-agent-runner-solution.md",
+    PROJECT_ROOT / "course" / "chapters" / "02-research-core-foundations.md",
+    PROJECT_ROOT / "course" / "labs" / "02-source-evidence-claim-lab.md",
+    PROJECT_ROOT / "course" / "solutions" / "02-source-evidence-claim-solution.md",
     PROJECT_ROOT / "course" / "chapters" / "03-memory-and-skills.md",
     PROJECT_ROOT / "course" / "labs" / "03-memory-skill-runtime-lab.md",
     PROJECT_ROOT / "course" / "solutions" / "03-memory-skill-runtime-solution.md",
+    PROJECT_ROOT / "course" / "chapters" / "04-multi-agent-delegation.md",
+    PROJECT_ROOT / "course" / "labs" / "04-delegation-runtime-lab.md",
+    PROJECT_ROOT / "course" / "solutions" / "04-delegation-runtime-solution.md",
 )
 
 
@@ -104,9 +116,9 @@ assert value == 42
     assert report.expected_outputs_checked == 0
 
 
-def test_part3_course_python_blocks_stay_executable() -> None:
-    report = validate_markdown_python_blocks(PART3_MARKDOWN_PATHS, PROJECT_ROOT)
+def test_course_python_blocks_for_parts_1_through_4_stay_executable() -> None:
+    report = validate_markdown_python_blocks(COURSE_MARKDOWN_PATHS, PROJECT_ROOT)
 
-    expected_files = tuple(path.resolve(strict=False) for path in PART3_MARKDOWN_PATHS)
+    expected_files = tuple(path.resolve(strict=False) for path in COURSE_MARKDOWN_PATHS)
     assert report.checked_files == expected_files
     assert report.executed_blocks > 0

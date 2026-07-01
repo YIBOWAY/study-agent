@@ -149,15 +149,15 @@ Commit the plan/progress kickoff on a phase branch (for example `codex/redesign-
 - Modify: `infra/markdown_python_blocks.py` (only if needed)
 - Modify: `docs/progress/phases/phase-r4.md`
 
-- [ ] **Step 1: Add Part 4 files to the gate (TDD)**
+- [x] **Step 1: Add Part 4 files to the gate (TDD)**
 
 Add the three Part 4 files to the checked set. Because Part 4 has not been rewritten yet, first confirm the gate meaningfully executes them; if the v1 blocks are not self-contained, that is acceptable until Task 3-5 replace them. The intent is that by the end of R4, `tests/course/test_markdown_python_blocks.py` covers Part 4 the same way it covers Part 3.
 
-- [ ] **Step 2: Backfill Part 1 and Part 2 into the gate**
+- [x] **Step 2: Backfill Part 1 and Part 2 into the gate**
 
 Add the Part 1 and Part 2 chapter/lab/solution files to the gate so the already-verified R1/R2 code blocks are locked against future API drift, closing the "only Part 3 is automated" gap. If any R1/R2 block is not executable in a shared namespace (for example, it intentionally shows a bare error), adjust the block minimally in its own R-phase spirit or document why it is excluded; do not silently weaken the gate.
 
-- [ ] **Step 3: Verify the gate**
+- [x] **Step 3: Verify the gate**
 
 Run:
 

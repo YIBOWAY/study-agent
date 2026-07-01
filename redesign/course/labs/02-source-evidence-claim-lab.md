@@ -359,9 +359,9 @@ paper://citation-audit   -> 讲 citation audit / evidence links
 
 先自己写 10 到 15 分钟，再去看 solution。
 
-最低自查形状：
+最低自查形状如下。注意：这段依赖你自己在 L3 里创建的 `sources` 和 `links`，所以它是自查模板，不是直接粘贴运行的完整示例；可运行参考答案在 solution 里。
 
-```python
+```text
 assert [source.id for source in sources] == ["paper_1", "paper_2"]
 assert [link.source_uri for link in links] == [
     "paper://eval-loop",
