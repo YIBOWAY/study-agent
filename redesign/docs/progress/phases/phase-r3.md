@@ -32,7 +32,7 @@ Rewrite Part 3 so Memory and Skills teach persistent memory policies and progres
 ## Task Checklist
 
 - [x] Task 1: Start R3 plan and progress.
-- [ ] Task 2: Add markdown Python block verification gate.
+- [x] Task 2: Add markdown Python block verification gate.
 - [ ] Task 3: Rewrite Chapter 03 as project-driven Part 3 material.
 - [ ] Task 4: Rewrite Lab 03 with L1/L2/L3 exercises and feedback loops.
 - [ ] Task 5: Rewrite Solution 03 with reference design, invariants, and why-correct explanations.
@@ -59,6 +59,8 @@ Rewrite Part 3 so Memory and Skills teach persistent memory policies and progres
 | 2026-07-01 | Phase R3 started after first-principles review of the R3 plan, current Part 3 material, and the real `MemoryEngine` / `SkillRuntime` code. Codegraph is initialized and up to date, so R3 can use the existing index without re-running `codegraph init`. |
 | 2026-07-01 | The R3 plan was refined to accept the six review suggestions: add an automated markdown Python block gate, teach all six `MemoryKind` labels, write L3 as reference design plus invariants, show recall ordering `(pinned_rank, -score, index)`, keep Memory and Skills balanced, and teach `MemoryWritePolicy.validate()` first-error order. |
 | 2026-07-01 | R3 kickoff docs indexes were synced and verified with `PYTHONPATH=packages/research_core/src uv run pytest tests/course/test_docs_freshness.py -q` -> `3 passed`. |
+| 2026-07-01 | Task 2 TDD started. `tests/course/test_markdown_python_blocks.py` now captures the desired gate behavior, and the first run failed as expected with `ModuleNotFoundError: No module named 'infra.markdown_python_blocks'`. |
+| 2026-07-01 | Task 2 completed. `infra/markdown_python_blocks.py` now executes fenced Python blocks, shares namespace per markdown file, compares adjacent marked `Expected output:` text fences, exposes a CLI, and checks the Part 3 chapter/lab/solution files in pytest. |
 
 ## Verification Target
 
@@ -82,3 +84,5 @@ Run from `redesign/` unless noted.
 | --- | --- |
 | `codegraph status .` on 2026-07-01 | Up to date; 65 files, 1,001 nodes, 2,751 edges. |
 | `PYTHONPATH=packages/research_core/src uv run pytest tests/course/test_docs_freshness.py -q` on 2026-07-01 | `3 passed` |
+| `PYTHONPATH=packages/research_core/src uv run pytest tests/course/test_markdown_python_blocks.py -q` on 2026-07-01 | `4 passed` |
+| `PYTHONPATH=packages/research_core/src uv run ruff check infra/markdown_python_blocks.py tests/course/test_markdown_python_blocks.py` on 2026-07-01 | `All checks passed!` |

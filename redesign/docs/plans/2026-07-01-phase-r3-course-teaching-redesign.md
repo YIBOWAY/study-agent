@@ -145,19 +145,19 @@ Commit the plan/progress kickoff on a phase branch (for example `codex/redesign-
 - Create: `tests/course/test_markdown_python_blocks.py`
 - Modify: `docs/progress/phases/phase-r3.md`
 
-- [ ] **Step 1: Write failing tests first**
+- [x] **Step 1: Write failing tests first**
 
 Add tests that prove the gate can extract fenced `python` blocks from markdown, execute blocks from the same file in a shared namespace, compare output when the markdown provides an `Expected output:` `text` block, report mismatches with file and line context, and import `research_core` through the same path boundary used by the course.
 
-- [ ] **Step 2: Implement the gate**
+- [x] **Step 2: Implement the gate**
 
 Implement a small parser/executor under `infra/markdown_python_blocks.py`. It should be offline-only, add `packages/research_core/src` to `sys.path` for execution, capture stdout per block, compare expected output only when an adjacent expected-output text fence is marked, and expose a CLI so humans can run the same check outside pytest.
 
-- [ ] **Step 3: Cover Part 3 course files**
+- [x] **Step 3: Cover Part 3 course files**
 
 Wire `tests/course/test_markdown_python_blocks.py` so the changed Part 3 chapter/lab/solution files are checked by pytest after the rewrite lands. The initial infra tests may use temporary markdown fixtures before the Part 3 files are rewritten.
 
-- [ ] **Step 4: Verify and commit**
+- [x] **Step 4: Verify and commit**
 
 Run:
 
