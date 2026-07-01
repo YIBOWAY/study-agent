@@ -5,11 +5,11 @@ Last updated: 2026-07-01
 ## Current State
 
 - Active branch: `codex/redesign-course-r3`
-- Active phase: Phase R3: Course Teaching Redesign - Part 3.
+- Active phase: Phase R3: Course Teaching Redesign - Part 3 final verification and docs reconciliation.
 - Completed runtime/product phases: 8 of 8
-- Course teaching redesign: Phase R1 and R2 complete; R3 active; R4-R9 planned.
+- Course teaching redesign: Phase R1 and R2 complete; R3 content landed and in final verification; R4-R9 planned.
 - Current verification baseline: Phase R2 completion on 2026-07-01: `codegraph status .` up to date with 65 files, 1,001 nodes, and 2,751 edges; full redesign suite `199 passed`; `ruff check .` clean; docs freshness `3 passed`; `apps/web` Vite build clean with `46 modules transformed`; `git diff --check` clean. R3 kickoff rechecked `codegraph status .` on 2026-07-01 with the same up-to-date index.
-- Course documentation now has a complete v1 baseline plus project-driven R1 and R2 teaching material. Phase R1 completed the learner guide, roadmap, Part 1 chapters/lab/solution, reusable Part template, and Capstone placeholder for the 本地论文研究助手 narrative. Phase R2 completed the Part 2 Research Core chapter/lab/solution rewrite around the citation problem. Phase R3 is now rewriting Part 3 Memory and Skills. Parts 4-7 remain current v1 material until R4-R7 rewrites land.
+- Course documentation now has a complete v1 baseline plus project-driven R1, R2, and R3 teaching material. Phase R1 completed the learner guide, roadmap, Part 1 chapters/lab/solution, reusable Part template, and Capstone placeholder for the 本地论文研究助手 narrative. Phase R2 completed the Part 2 Research Core chapter/lab/solution rewrite around the citation problem. Phase R3 completed the Part 3 Memory and Skills chapter/lab/solution rewrite around the repeated-session notebook problem. Parts 4-7 remain current v1 material until R4-R7 rewrites land.
 
 ## Phase Index
 
@@ -25,7 +25,7 @@ Last updated: 2026-07-01
 | Phase 7: Production Readiness | Complete | `phases/phase-7.md` | Offline production-readiness contracts, docs freshness gate, local readiness docs, Course 07, docs sync, and final verification landed. |
 | Phase R1: Course Teaching Redesign - Part 1 | Complete | `phases/phase-r1.md` | Learner entrypoint, Part 1 teaching materials, roadmap/template/index, Capstone placeholder, docs sync, subagent reviews, and final verification landed. |
 | Phase R2: Course Teaching Redesign - Part 2 | Complete | `phases/phase-r2.md` | Part 2 Research Core chapter/lab/solution, docs sync, final verification, cleanup, and neat-freak reconciliation landed. |
-| Phase R3: Course Teaching Redesign - Part 3 | Active | `phases/phase-r3.md` | Part 3 Memory and Skills teaching rewrite plus markdown Python block verification gate is underway. |
+| Phase R3: Course Teaching Redesign - Part 3 | Active | `phases/phase-r3.md` | Part 3 Memory and Skills rewrite and markdown Python block gate have landed; final verification and docs reconciliation are pending. |
 
 ## Update Checklist
 

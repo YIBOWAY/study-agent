@@ -258,11 +258,11 @@ Explain why memory write/recall boundaries matter for Part 4 child-context isola
 - Modify: `docs/progress/overall.md`
 - Modify: `docs/progress/phases/phase-r3.md`
 
-- [ ] **Step 1: Mark Part 3 as R3 rewritten**
+- [x] **Step 1: Mark Part 3 as R3 rewritten**
 
 After Tasks 3-5 land, update course indexes to describe Part 3 as completed R3 material. Keep Parts 4-7 as current v1 material.
 
-- [ ] **Step 2: Verify docs freshness**
+- [x] **Step 2: Verify docs freshness**
 
 Run:
 

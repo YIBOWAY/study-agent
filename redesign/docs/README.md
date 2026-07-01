@@ -56,9 +56,9 @@ This directory is the canonical archive for the redesign version of the project.
 - `../course/chapters/02-research-core-foundations.md`: Part 2 R2 Research Core evidence-chain material.
 - `../course/labs/02-source-evidence-claim-lab.md`: Part 2 R2 Source/Evidence/Claim lab with L1/L2/L3 exercises.
 - `../course/solutions/02-source-evidence-claim-solution.md`: Part 2 R2 Research Core solution with design rationale.
-- `../course/chapters/03-memory-and-skills.md`: Part 3 current v1 Memory policy and SkillRuntime material until R3.
-- `../course/labs/03-memory-skill-runtime-lab.md`: Part 3 current v1 Memory/Skill lab until R3.
-- `../course/solutions/03-memory-skill-runtime-solution.md`: Part 3 current v1 Memory/Skill solution until R3.
+- `../course/chapters/03-memory-and-skills.md`: Part 3 R3 Memory notebook and Skill package material.
+- `../course/labs/03-memory-skill-runtime-lab.md`: Part 3 R3 Memory/Skill lab with L1/L2/L3 exercises.
+- `../course/solutions/03-memory-skill-runtime-solution.md`: Part 3 R3 Memory/Skill solution with reference design and invariants.
 - `../course/chapters/04-multi-agent-delegation.md`: Part 4 current v1 Multi-Agent Delegation material until R4.
 - `../course/labs/04-delegation-runtime-lab.md`: Part 4 current v1 DelegationRuntime lab until R4.
 - `../course/solutions/04-delegation-runtime-solution.md`: Part 4 current v1 DelegationRuntime solution until R4.

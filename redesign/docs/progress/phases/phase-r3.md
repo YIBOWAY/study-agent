@@ -36,7 +36,7 @@ Rewrite Part 3 so Memory and Skills teach persistent memory policies and progres
 - [x] Task 3: Rewrite Chapter 03 as project-driven Part 3 material.
 - [x] Task 4: Rewrite Lab 03 with L1/L2/L3 exercises and feedback loops.
 - [x] Task 5: Rewrite Solution 03 with reference design, invariants, and why-correct explanations.
-- [ ] Task 6: Sync course indexes and progress after content lands.
+- [x] Task 6: Sync course indexes and progress after content lands.
 - [ ] Task 7: Final verification, cleanup, and neat-freak docs reconciliation.
 
 ## Exit Signal
@@ -65,6 +65,7 @@ Rewrite Part 3 so Memory and Skills teach persistent memory policies and progres
 | 2026-07-01 | Task 3 rewrote `course/chapters/03-memory-and-skills.md` as project-driven Part 3 material. The chapter now starts from the repeated-session "assistant has no notebook" problem, teaches Memory as a notebook and Skills as skill packages, covers all six `MemoryKind` labels, shows recall ordering `(pinned_rank, -score, index)`, balances Memory and Skill Break/Fix cases, and adds the `validate()` short-circuit interpretation point. |
 | 2026-07-01 | Task 4 rewrote `course/labs/03-memory-skill-runtime-lab.md` with L1 Follow, L2 Modify, and L3 Design exercises. L2 now includes Memory and Skill Break/Fix checks, and L3 is explicitly graded by invariants rather than a single canonical answer. |
 | 2026-07-01 | Task 5 rewrote `course/solutions/03-memory-skill-runtime-solution.md`. The solution now provides runnable L1/L2 answers, one valid L3 reference design, required invariants, explicit failure-output interpretation, and forward connections to Part 4 delegation, Part 5 Workbench panels, and Part 7 diagnostics. |
+| 2026-07-01 | Task 6 synced course/docs indexes after Part 3 content landed. `course/README.md`, `redesign/README.md`, `docs/README.md`, `docs/course/roadmap.md`, `docs/progress/overall.md`, and the execution roadmap now describe Part 3 as R3 rewritten while keeping Parts 4-7 as current v1 material. |
 
 ## Verification Target
 
@@ -93,3 +94,4 @@ Run from `redesign/` unless noted.
 | `PYTHONPATH=packages/research_core/src uv run python -m infra.markdown_python_blocks course/chapters/03-memory-and-skills.md --project-root .` on 2026-07-01 | Checked 13 Python blocks; 8 expected outputs matched. |
 | `PYTHONPATH=packages/research_core/src uv run python -m infra.markdown_python_blocks course/labs/03-memory-skill-runtime-lab.md --project-root .` on 2026-07-01 | Checked 11 Python blocks; 5 expected outputs matched. |
 | `PYTHONPATH=packages/research_core/src uv run python -m infra.markdown_python_blocks course/solutions/03-memory-skill-runtime-solution.md --project-root .` on 2026-07-01 | Checked 10 Python blocks; no expected output text fences. |
+| `PYTHONPATH=packages/research_core/src uv run pytest tests/course/test_docs_freshness.py -q` after Task 6 on 2026-07-01 | `3 passed` |

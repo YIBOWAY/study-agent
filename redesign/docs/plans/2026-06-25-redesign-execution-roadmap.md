@@ -197,7 +197,7 @@ Exit criteria:
 
 Follow-up:
 
-- R2 completed the Part 2 teaching rewrite; R3-R7 should rewrite Parts 3-7 with the same project-driven teaching method.
+- R2 and R3 completed the Part 2 and Part 3 teaching rewrites; R4-R7 should rewrite Parts 4-7 with the same project-driven teaching method.
 - R8 should build the full Capstone materials under `course/capstone/`.
 - R9 should add support references such as troubleshooting, design-decision indexes, discussion prompts, and glossary updates.
 
@@ -222,7 +222,7 @@ Exit criteria:
 
 Follow-up:
 
-- R3 should rewrite Part 3 with the same project-driven teaching method while keeping Part 2 as the evidence-chain foundation.
+- R3 rewrote Part 3 with the same project-driven teaching method while keeping Part 2 as the evidence-chain foundation.
 
 ### Phase R3: Course Teaching Redesign - Part 3
 
@@ -236,8 +236,8 @@ Purpose:
 
 Exit criteria:
 
-- Chapter/Lab/Solution 03 are rewritten using the R1/R2 teaching contract. Pending.
-- `course/README.md`, `docs/course/roadmap.md`, `docs/README.md`, and `docs/progress/` describe Part 3 as R3 rewritten. Pending.
+- Chapter/Lab/Solution 03 are rewritten using the R1/R2 teaching contract. Completed on 2026-07-01.
+- `course/README.md`, `docs/course/roadmap.md`, `docs/README.md`, and `docs/progress/` describe Part 3 as R3 rewritten. Completed on 2026-07-01.
 - `cd redesign && PYTHONPATH=packages/research_core/src uv run pytest -q` passes. Pending.
 - `cd redesign && PYTHONPATH=packages/research_core/src uv run ruff check .` passes. Pending.
 - `cd redesign && PYTHONPATH=packages/research_core/src uv run pytest tests/course/test_docs_freshness.py -q` passes. Pending.
