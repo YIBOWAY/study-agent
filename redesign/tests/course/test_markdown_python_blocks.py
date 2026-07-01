@@ -28,6 +28,9 @@ COURSE_MARKDOWN_PATHS = (
     PROJECT_ROOT / "course" / "chapters" / "05-workbench-product.md",
     PROJECT_ROOT / "course" / "labs" / "05-workbench-product-lab.md",
     PROJECT_ROOT / "course" / "solutions" / "05-workbench-product-solution.md",
+    PROJECT_ROOT / "course" / "chapters" / "06-framework-comparisons.md",
+    PROJECT_ROOT / "course" / "labs" / "06-framework-comparisons-lab.md",
+    PROJECT_ROOT / "course" / "solutions" / "06-framework-comparisons-solution.md",
 )
 
 

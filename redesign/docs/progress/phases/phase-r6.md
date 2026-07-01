@@ -23,11 +23,11 @@ R6 has no infra/gate code change (a deliberate contrast with R5's `apps/api/src`
 
 ## Task Checklist
 
-- [ ] Task 1: Start R6 plan and progress.
-- [ ] Task 2: Rewrite Chapter 06 as project-driven Part 6 material.
-- [ ] Task 3: Rewrite Lab 06 with L1/L2/L3 exercises and feedback loops.
-- [ ] Task 4: Rewrite Solution 06 with runnable assertions and design rationale.
-- [ ] Task 5: Add Part 6 files to the gate and sync course indexes and progress.
+- [x] Task 1: Start R6 plan and progress.
+- [x] Task 2: Rewrite Chapter 06 as project-driven Part 6 material.
+- [x] Task 3: Rewrite Lab 06 with L1/L2/L3 exercises and feedback loops.
+- [x] Task 4: Rewrite Solution 06 with runnable assertions and design rationale.
+- [x] Task 5: Add Part 6 files to the gate and sync course indexes and progress.
 - [ ] Task 6: Final verification, cleanup, whole-branch review, and docs reconciliation.
 
 ## Exit Signal
@@ -46,6 +46,11 @@ R6 has no infra/gate code change (a deliberate contrast with R5's `apps/api/src`
 | Date | Update |
 | --- | --- |
 | 2026-07-01 | Phase R6 started after first-principles review of the R6 plan, the current Part 6 v1 material gaps, and the real `course.framework_comparisons` contracts. Verified the gate imports `course.framework_comparisons` with no helper change, so R6 has no infra task. |
+| 2026-07-01 | Task 1 landed (commit `501fd68`): R6 plan, phase-r6 progress record, and docs/progress index updates marking R6 in progress. |
+| 2026-07-01 | Task 2 landed (commit `69f2c21`): Chapter 06 rewritten around the build-vs-adopt decision with a transparent weighted score (by-hand `total_score` 0.854 reproduced and asserted equal to the record, plus the `>=0.8` strengths / `<0.55` tradeoffs derivation and the deterministic tie-break), Learner Contract, two ASCII diagrams, eight callouts, and five self-caught controlled-metric breaks. Gate self-check 14 blocks / 14 matched. Task reviewer approved with two Minor notes recorded. |
+| 2026-07-01 | Task 3 landed (commits `8563bc1` write, `b1aa488` fix): Lab 06 rewritten with L1 Follow, L2 Modify (raise `state_resume` weight, predict-then-verify the winner flip, by-hand `total_score` check) plus five self-caught breaks, and an open-ended L3 Design whose self-check is a non-executed text block. Four-part feedback on each tier. Gate self-check 15 blocks / 11 matched. Task reviewer approved; a false-positive "missing Solution section" finding was resolved (the runnable L3 reference lives in the separate `course/solutions/06` file), and two Minor L2 weight-shift wording nits were fixed by the coordinator. |
+| 2026-07-01 | Task 4 landed (commit `608ea30`): Solution 06 rewritten with runnable assert-based L1/L2/L3 answers (including a manual `total_score` reproduction and a runnable L3 reference design where langgraph beats the crewai decoy), What This Proves / Why This Design per tier, Forward Connections, and Final Takeaway. Gate self-check 12 blocks, all asserts pass. Task reviewer approved with one Minor note recorded. |
+| 2026-07-01 | Task 5 landed: Part 6 chapter/lab/solution added to `COURSE_MARKDOWN_PATHS` (markdown gate now covers Parts 0-6, `5 passed`; direct run 41 Part-6 blocks / 25 expected outputs matched). Course README, redesign README, roadmap, execution roadmap, and progress indexes now describe Part 6 as R6 rewritten while Part 7 stays v1. |
 
 ## Verification Target
 
