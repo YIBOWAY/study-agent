@@ -217,15 +217,15 @@ Include at least one tradeoff question, for example: why does an over-budget chi
 - Modify: `course/labs/04-delegation-runtime-lab.md`
 - Modify: `docs/progress/phases/phase-r4.md`
 
-- [ ] **Step 1: Convert lab to L1/L2/L3**
+- [x] **Step 1: Convert lab to L1/L2/L3**
 
 L1 Follow: run a single delegation with a deterministic child runner, then inspect `status`, `step_count`, and the parent event trail. L2 Modify: predict-then-verify changes such as tightening `max_steps_per_child` until a previously-passing child produces a `FAILED` result, and running `run_many` until `max_total_steps` is exhausted. L3 Design: no skeleton; the learner designs a role + budget + merge policy for a stated requirement (for example two reviewer children, a hard total-step ceiling, and a rule that any non-completed child must remain in `unresolved_conflicts`), then proves the required invariants.
 
-- [ ] **Step 2: Add feedback loops**
+- [x] **Step 2: Add feedback loops**
 
 Every exercise must include Common Errors, Failure Output Interpretation, Where To Go Back, and Why Correct Answer Is Correct, matching the Lab 02/03 shape exactly.
 
-- [ ] **Step 3: Add break/fix checks**
+- [x] **Step 3: Add break/fix checks**
 
 Include system-message rejection, observed step-budget overflow, role-too-large rejection, and duplicate-id rejection, each with expected error text and a diagnosis question before the fix.
 
