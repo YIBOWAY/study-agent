@@ -1,3 +1,4 @@
+import sys
 from pathlib import Path
 
 import pytest
@@ -114,6 +115,42 @@ assert value == 42
 
     assert report.executed_blocks == 1
     assert report.expected_outputs_checked == 0
+
+
+def test_markdown_python_blocks_can_import_apps_api_modules(tmp_path, monkeypatch) -> None:
+    # Isolate sys.path so the helper under test is the only supplier of
+    # ``apps/api/src`` (pytest's configured ``pythonpath`` would otherwise mask it).
+    apps_api_src = (PROJECT_ROOT / "apps" / "api" / "src").as_posix()
+    monkeypatch.setattr(
+        sys, "path", [entry for entry in sys.path if Path(entry).as_posix() != apps_api_src]
+    )
+    for module_name in [name for name in sys.modules if name.split(".")[0] == "research_api"]:
+        monkeypatch.delitem(sys.modules, module_name, raising=False)
+
+    markdown_path = tmp_path / "workbench.md"
+    markdown_path.write_text(
+        """# Workbench
+
+```python
+from research_api.main import create_app
+
+app = create_app()
+print(app.title)
+```
+
+Expected output:
+
+```text
+Research Workbench API
+```
+""",
+        encoding="utf-8",
+    )
+
+    report = validate_markdown_python_blocks((markdown_path,), PROJECT_ROOT)
+
+    assert report.executed_blocks == 1
+    assert report.expected_outputs_checked == 1
 
 
 def test_course_python_blocks_for_parts_1_through_4_stay_executable() -> None:

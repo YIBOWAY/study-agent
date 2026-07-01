@@ -46,7 +46,7 @@ def validate_markdown_python_blocks(
     project_root: str | Path,
 ) -> MarkdownPythonCheckReport:
     root = Path(project_root).resolve(strict=False)
-    _ensure_research_core_on_path(root)
+    _ensure_source_paths(root)
     checked_files = tuple(Path(path).resolve(strict=False) for path in markdown_paths)
 
     executed_blocks = 0
@@ -73,12 +73,16 @@ def validate_markdown_python_blocks(
     )
 
 
-def _ensure_research_core_on_path(root: Path) -> None:
-    research_core_path = root / "packages" / "research_core" / "src"
-    if research_core_path.is_dir():
-        path_text = research_core_path.as_posix()
-        if path_text not in sys.path:
-            sys.path.insert(0, path_text)
+def _ensure_source_paths(root: Path) -> None:
+    source_dirs = (
+        root / "packages" / "research_core" / "src",
+        root / "apps" / "api" / "src",
+    )
+    for source_dir in source_dirs:
+        if source_dir.is_dir():
+            path_text = source_dir.as_posix()
+            if path_text not in sys.path:
+                sys.path.insert(0, path_text)
 
 
 def _python_blocks(markdown_path: Path) -> tuple[_PythonBlock, ...]:
