@@ -243,3 +243,27 @@ Exit criteria:
 - `cd redesign && PYTHONPATH=packages/research_core/src uv run pytest tests/course/test_docs_freshness.py -q` passes. Completed on 2026-07-01 with `3 passed`.
 - `cd redesign && PYTHONPATH=packages/research_core/src uv run pytest tests/course/test_markdown_python_blocks.py -q` passes. Completed on 2026-07-01 with `4 passed`.
 - `cd redesign/apps/web && npm ci && npm run build` passes. Completed on 2026-07-01 with Vite `46 modules transformed`.
+
+Follow-up:
+
+- R4 is active to rewrite Part 4 with the same project-driven teaching method while keeping Part 3 as the memory/skill boundary foundation.
+
+### Phase R4: Course Teaching Redesign - Part 4
+
+Plan: `redesign/docs/plans/2026-07-01-phase-r4-course-teaching-redesign.md`
+
+Purpose:
+
+- Rewrite Part 4 so Multi-Agent Delegation starts from the local paper research assistant's delegated-review problem.
+- Teach `AgentRolePolicy`, `DelegationTask`, `DelegationBudget`, `DelegationRuntime`, `DelegationResult`, and `DelegationMergeResult` through child context isolation, parent event trails, step-budget accounting, and unresolved-conflict visibility.
+- Backfill the markdown Python block gate so Parts 1-4 course examples are checked against the real local API.
+
+Exit criteria:
+
+- Chapter/Lab/Solution 04 are rewritten using the R1-R3 teaching contract.
+- `course/README.md`, `docs/course/roadmap.md`, `docs/README.md`, and `docs/progress/` describe Part 4 as R4 rewritten after content lands.
+- `cd redesign && PYTHONPATH=packages/research_core/src uv run pytest -q` passes.
+- `cd redesign && PYTHONPATH=packages/research_core/src uv run ruff check .` passes.
+- `cd redesign && PYTHONPATH=packages/research_core/src uv run pytest tests/course/test_docs_freshness.py -q` passes.
+- `cd redesign && PYTHONPATH=packages/research_core/src uv run pytest tests/course/test_markdown_python_blocks.py -q` passes for Parts 1-4.
+- `cd redesign/apps/web && npm ci && npm run build` passes.

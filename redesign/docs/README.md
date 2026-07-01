@@ -28,6 +28,7 @@ This directory is the canonical archive for the redesign version of the project.
 - `plans/2026-06-30-phase-r1-course-teaching-redesign.md`: Phase R1 implementation plan for the learner entrypoint and Part 1 teaching rewrite.
 - `plans/2026-07-01-phase-r2-course-teaching-redesign.md`: Phase R2 implementation plan for the Part 2 Research Core teaching rewrite.
 - `plans/2026-07-01-phase-r3-course-teaching-redesign.md`: Phase R3 implementation plan for the Part 3 Memory and Skills teaching rewrite.
+- `plans/2026-07-01-phase-r4-course-teaching-redesign.md`: Phase R4 implementation plan for the Part 4 Multi-Agent Delegation teaching rewrite.
 - `progress/overall.md`: phase status dashboard for humans and agents.
 - `architecture/overview.md`: double-layer repository and dependency direction.
 - `architecture/runtime.md`: runtime contracts, Phase 1 agent loop, fake provider boundary, delegation events, and Phase 5 product boundary.
@@ -59,9 +60,9 @@ This directory is the canonical archive for the redesign version of the project.
 - `../course/chapters/03-memory-and-skills.md`: Part 3 R3 Memory notebook and Skill package material.
 - `../course/labs/03-memory-skill-runtime-lab.md`: Part 3 R3 Memory/Skill lab with L1/L2/L3 exercises.
 - `../course/solutions/03-memory-skill-runtime-solution.md`: Part 3 R3 Memory/Skill solution with reference design and invariants.
-- `../course/chapters/04-multi-agent-delegation.md`: Part 4 current v1 Multi-Agent Delegation material until R4.
-- `../course/labs/04-delegation-runtime-lab.md`: Part 4 current v1 DelegationRuntime lab until R4.
-- `../course/solutions/04-delegation-runtime-solution.md`: Part 4 current v1 DelegationRuntime solution until R4.
+- `../course/chapters/04-multi-agent-delegation.md`: Part 4 current v1 Multi-Agent Delegation material while R4 is active.
+- `../course/labs/04-delegation-runtime-lab.md`: Part 4 current v1 DelegationRuntime lab while R4 is active.
+- `../course/solutions/04-delegation-runtime-solution.md`: Part 4 current v1 DelegationRuntime solution while R4 is active.
 - `../course/chapters/05-workbench-product.md`: Part 5 current v1 Workbench Product integration material until R5.
 - `../course/labs/05-workbench-product-lab.md`: Part 5 current v1 WorkbenchSnapshot, API, and web build lab until R5.
 - `../course/solutions/05-workbench-product-solution.md`: Part 5 current v1 Workbench Product solution until R5.
