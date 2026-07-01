@@ -174,39 +174,39 @@ Expected: markdown Python block tests pass. Commit and push this infra milestone
 - Modify: `course/chapters/03-memory-and-skills.md`
 - Modify: `docs/progress/phases/phase-r3.md`
 
-- [ ] **Step 1: Rewrite opener and learner contract**
+- [x] **Step 1: Rewrite opener and learner contract**
 
 Turn Chapter 03 into "Part 3: Memory and Skills" with a Learner Contract block (Who this is for / Before you start / You will build / You will be able to explain / You will prove it works by running / Offline guarantee), matching the Chapter 02 shape.
 
-- [ ] **Step 2: Open with the problem hook**
+- [x] **Step 2: Open with the problem hook**
 
 Start from the researcher asking a follow-up question in a new session. The assistant re-derives the same evidence chain from scratch and no longer applies a rule it was told last time (for example "always cite sources"). Name this "the assistant has no notebook" problem before introducing any object.
 
-- [ ] **Step 3: Introduce the two mental models**
+- [x] **Step 3: Introduce the two mental models**
 
 Memory = 研究助手的笔记本：不是什么都值得写进去，笔记本也需要能查、能优先看到重要规则。Skills = 研究助手的技能包：平时收在抽屉里，只有要用某个能力时才翻开对应资料，不会一次性把所有资料倒在桌上。Use a small story-role table like Chapter 01's, mapping `MemoryRecord` / `MemoryWritePolicy` / `MemoryRecallPolicy` / `MemoryEngine` and `SkillPackage` / `SkillRuntime` to their plain-language roles. Add a `MemoryKind` mental-model table with one "when to use" sentence for each of `WORKING`, `SESSION`, `EPISODIC`, `SEMANTIC`, `PROCEDURAL`, and `PINNED`, and explicitly note that only `PINNED` has special recall sorting in the current implementation.
 
-- [ ] **Step 4: Add architecture and flow diagrams**
+- [x] **Step 4: Add architecture and flow diagrams**
 
 Add at least two ASCII diagrams: (a) a memory write/recall flow (`MemoryRecord -> MemoryWritePolicy.validate() -> MemoryEngine.write()` and `MemoryRecallPolicy -> MemoryEngine.recall()`) that shows the recall sort key `(pinned_rank, -score, index)`, and (b) a skill load/read flow (`SkillRuntime.load(path) -> SkillPackage(entrypoint + references/scripts/assets manifest) -> explicit read_reference()`).
 
-- [ ] **Step 5: Build the fuller memory example**
+- [x] **Step 5: Build the fuller memory example**
 
 Keep the existing SEMANTIC/PINNED recall example as the L1-level base case, then extend it to demonstrate what v1 never showed: a `WORKING` draft-kind memory that should not resurface next session, `MemoryRecallPolicy(allowed_kinds=...)` filtering it out, the deterministic `(pinned_rank, -score, index)` ordering, and `MemoryEngine.list_records()` as the "inspect the whole notebook" step.
 
-- [ ] **Step 6: Build the fuller skill example**
+- [x] **Step 6: Build the fuller skill example**
 
 Extend the existing `deep-research` skill folder example to include a `scripts/` and an `assets/` entry (not only `references/`), and show `package.scripts` / `package.assets` alongside `package.references`, so learners see the full skill-package shape.
 
-- [ ] **Step 7: Break and fix, both memory and skills**
+- [x] **Step 7: Break and fix, both memory and skills**
 
 Cover at least: forbidden-phrase rejection, `max_content_chars` rejection, and one `kind not allowed` rejection for memory; path-traversal rejection and missing-reference-file rejection for skills. Frame each as Break -> diagnose from the error message -> Fix, consistent with Part 1/Part 2's Break/Fix framing. Include one explicit note that `MemoryWritePolicy.validate()` short-circuits in this order: `kind` -> `importance` -> `forbidden_phrases` -> `max_content_chars`.
 
-- [ ] **Step 8: Add product connection and eval gate**
+- [x] **Step 8: Add product connection and eval gate**
 
 Explain how the Workbench memory panel, write-policy inspector, skills panel, and context inspector (Part 5) depend on memory and skill state staying inspectable now. List the exact pytest/ruff commands from the existing Eval Gate section (`tests/research_core/test_memory_engine.py`, `test_skill_runtime.py`, `test_memory_skill_evals.py`).
 
-- [ ] **Step 9: Add reflection questions**
+- [x] **Step 9: Add reflection questions**
 
 Include at least one tradeoff question, for example: why does `MemoryRecallPolicy` default `allowed_kinds` to every kind while `MemoryWritePolicy` should usually be configured narrower — are write and recall policies protecting against the same risk?
 

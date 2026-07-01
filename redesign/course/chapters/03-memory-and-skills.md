@@ -1,48 +1,142 @@
-# Chapter 03: Memory And Skills
+# Part 3: Memory and Skills - 让助手下次还能接着研究
 
-## Goal
+> 接 Part 2。你已经能把 report claim 接回 source/evidence。Part 3 继续训练同一个习惯：不要问 "助手最后答得像不像"，要问 "它这次到底记住了什么、加载了什么能力包、为什么这些东西可以进入上下文"。
 
-这一章补上 Phase 3 的学习路径：Agent 从一次性运行，走向带状态、会加载能力包的系统。
+预计时间：75 到 100 分钟。
 
-学完以后，你应该能看懂两条主线：
+## Learner Contract
+
+- **Who this is for**: Beginner Track 和 Engineer Track 都适合。你需要会运行 Python shell，知道 `assert` 是检查条件。
+- **Before you start**: 先完成 Part 1 的 Agent event trail 和 Part 2 的 source -> evidence -> claim -> report 证据链。
+- **You will build**: 一个完全离线的 memory notebook 和 skill package loader：写入、检查、召回 memory；加载 skill folder；只在需要时显式读取 reference。
+- **You will be able to explain**: 为什么不是所有内容都应该进 memory；为什么 `PINNED` 会排在普通 memory 前面；为什么 skill runtime 先读 `SKILL.md`，不偷读全部 references。
+- **You will prove it works by running**: `uv run pytest tests/research_core/test_memory_engine.py tests/research_core/test_skill_runtime.py tests/research_core/test_memory_skill_evals.py -q`。
+- **Offline guarantee**: 所有 memory 都在内存里；skill folder 用临时目录；没有数据库、向量库、网络 skill marketplace 或 API key。
+
+## 你的本地论文研究助手现在需要：笔记本
+
+研究员昨天问过：
+
+> "之后回答 RAG 评测问题时，所有结论都要带 source evidence。"
+
+今天他继续问：
+
+> "基于昨天那批论文，继续写 citation grounding 的研究摘要。"
+
+如果助手没有 memory，它会重新推导一遍昨天已经确认过的偏好和规则。如果它没有 skill package，它也不知道 "deep research" 这类能力应该从哪里读取操作说明。更糟糕的是，如果它什么都记、什么都加载，临时草稿、错误猜测、超长 reference 会一起污染上下文。
+
+Part 3 解决的是这个问题：让助手有一本可检查的笔记本，也有一组按需打开的技能包。
+
+> [BIG] **大局观**：Part 2 证明研究回答有出处；Part 3 让助手在多次研究会话之间保留该保留的规则，并在需要时打开正确的能力包。后面的 Delegation 会把任务分给 child agent，Workbench 会把 memory/skill 状态展示给人看。
 
 ```text
-MemoryWritePolicy -> MemoryEngine -> MemoryRecallPolicy
-SkillRuntime -> SKILL.md -> explicit reference reads
+Local Paper Research Assistant
+  [x] Part 1: Agent Kernel, event trail
+  [x] Part 2: Research Core, evidence chain
+  [*] Part 3: Memory and Skills
+      [*] Memory notebook with write/recall policy
+      [*] Skill package with progressive disclosure
+      [*] Break/Fix for state and capability boundaries
+  [ ] Part 4: Delegation
+  [ ] Part 5: Workbench UI
+  [ ] Part 6: Framework comparison
+  [ ] Part 7: Production readiness
 ```
 
-预计时间：60 到 75 分钟。
+## Section 1 [LIGHT Concept]: 笔记本和技能包
 
-## Before You Start
+### Problem Hook
 
-请先完成：
+没有 Memory 时，助手像一个每次都失忆的研究助理：
 
-- `01-agent-kernel-foundations.md`
-- `02-research-core-foundations.md`
+```text
+Session 1:
+  user says "Always cite source evidence."
+  assistant follows the rule.
 
-这一章仍然不使用真实数据库、向量库或远程 skill marketplace。我们先用最小离线实现理解边界。
+Session 2:
+  user asks a follow-up.
+  assistant has no notebook, so the rule is gone.
+```
 
-## The Idea In Plain Language
+没有 Skills 时，助手像一个把所有教材都摊在桌上的新人：不知道当前任务需要哪份资料，也不知道什么时候才该读取 reference。
 
-Memory 和 Skills 都是在回答同一个问题：Agent 这次运行以外，还能依赖什么？
+```text
+Bad shape:
+  every skill doc + every reference + every script note
+      -> dumped into context before the task is understood
+```
 
-Memory 处理“系统记住什么”。如果什么都能写进 memory，Agent 很快会被低价值、错误或隐私敏感内容污染。所以 Phase 3 先引入 `MemoryWritePolicy` 和 `MemoryRecallPolicy`。
+### 两个心智模型
 
-Skills 处理“系统能学会什么能力包”。一个 skill folder 里可能有 `SKILL.md`、references、scripts 和 assets。Phase 3 的重点是 progressive disclosure：先读入口说明，只在需要时显式读取 references。
-
-## Core Objects
-
-| Object | Plain Meaning | Why It Exists |
+| System piece | Plain-language model | What to inspect |
 | --- | --- | --- |
-| `MemoryRecord` | 一条记忆 | 保存 kind、content、tags、importance 和 metadata |
-| `MemoryKind` | 记忆类别 | 区分 working、session、semantic、procedural、pinned 等用途 |
-| `MemoryWritePolicy` | 写入规则 | 拦截不该写入的 memory |
-| `MemoryRecallPolicy` | 召回规则 | 控制查询、允许的 kind、limit 和 pinned ordering |
-| `MemoryEngine` | 离线记忆引擎 | 提供确定性的 write/list/recall 行为 |
-| `SkillPackage` | 已加载 skill | 保存 entrypoint 和资源清单 |
-| `SkillRuntime` | skill 加载器 | 读取 `SKILL.md`，发现资源，但不偷读 references |
+| `MemoryRecord` | 笔记本里的一条笔记 | `id`, `kind`, `content`, `tags`, `importance` |
+| `MemoryWritePolicy` | 记笔记前的规则 | 允许哪些 kind、最低重要性、禁词、最长内容 |
+| `MemoryRecallPolicy` | 翻笔记时的筛选器 | query、允许哪些 kind、limit、是否 pinned first |
+| `MemoryEngine` | 这本离线笔记本 | `write()`, `recall()`, `list_records()` |
+| `SkillPackage` | 一个技能包的清单 | entrypoint、references、scripts、assets |
+| `SkillRuntime` | 打开技能包的人 | `load()` 只读入口和清单，`read_reference()` 才读正文 |
 
-## Minimal Memory Example
+Memory = 研究助手的笔记本。不是所有话都值得写进去，笔记也要能被筛选、排序、检查。
+
+Skills = 研究助手的技能包。平时收在抽屉里；要做 deep research 时，先看 `SKILL.md` 的入口说明，再决定是否读取某份 reference。
+
+> [DD] **设计决策**：Part 3 先做确定性的本地 memory 和 folder skill runtime，不做真实长期数据库或远程 skill marketplace。因为这节课要先看清边界：什么能写、什么能召回、什么资源被加载。
+
+### `MemoryKind` 什么时候用
+
+这些 kind 现在主要是策略标签，让人和 policy 都能分清用途。源码里只有 `PINNED` 有特殊 recall 排序；其它 kind 不代表六套不同算法。
+
+| Kind | When to use |
+| --- | --- |
+| `WORKING` | 当前任务里的临时草稿、假设、待验证线索；会话后通常不该被召回。 |
+| `SESSION` | 本次会话内有用、下次不一定有用的上下文，例如 "刚才用户选择了第 2 篇论文"。 |
+| `EPISODIC` | 发生过的一次具体事件，例如 "2026-07-01 这次研究 run 发现 citation link 缺失"。 |
+| `SEMANTIC` | 稳定事实或长期偏好，例如 "用户喜欢 citation-backed research answers"。 |
+| `PROCEDURAL` | 做事步骤或操作规则，例如 "生成 report 前先检查 claim-source links"。 |
+| `PINNED` | 必须优先看到的规则或安全边界，例如 "Always cite source evidence"。 |
+
+> [CHECK] **检查一下**：如果一条内容只是 "这次先试试看" 的草稿，它更像 `WORKING`，不是 `SEMANTIC`。如果你把草稿写成长期事实，下次召回就会污染研究。
+
+## Section 2 [FULL Build]: Build The Notebook
+
+### Architecture
+
+Memory 写入和召回是两条不同的边界：
+
+```text
+WRITE PATH
+
+MemoryRecord
+    |
+    v
+MemoryWritePolicy.validate()
+    |
+    |  check order:
+    |  kind -> importance -> forbidden_phrases -> max_content_chars
+    v
+MemoryEngine.write()
+    |
+    v
+stored records in write order
+
+RECALL PATH
+
+MemoryRecallPolicy(query, allowed_kinds, limit, pinned_first)
+    |
+    v
+MemoryEngine.recall()
+    |
+    |  score matching records
+    |  sort key = (pinned_rank, -score, index)
+    v
+tuple[MemoryRecord, ...]
+```
+
+`pinned_rank` 是 `0` 时排在前面；`-score` 让分数高的排在前面；`index` 保留写入顺序作为最后的稳定 tie-breaker。
+
+### Build
 
 从 `redesign/` 打开 Python shell：
 
@@ -50,9 +144,12 @@ Skills 处理“系统能学会什么能力包”。一个 skill folder 里可�
 PYTHONPATH=packages/research_core/src uv run python
 ```
 
-粘贴：
+先准备 imports：
 
 ```python
+from pathlib import Path
+from tempfile import TemporaryDirectory
+
 from research_core.memory import (
     MemoryEngine,
     MemoryKind,
@@ -60,182 +157,370 @@ from research_core.memory import (
     MemoryRecord,
     MemoryWritePolicy,
 )
+from research_core.skills import SkillRuntime
+```
 
-engine = MemoryEngine(
+创建一本只允许研究相关记忆进入的笔记本：
+
+```python
+memory_engine = MemoryEngine(
     write_policy=MemoryWritePolicy(
-        allowed_kinds=[MemoryKind.PINNED, MemoryKind.SEMANTIC],
+        allowed_kinds=[
+            MemoryKind.PINNED,
+            MemoryKind.SEMANTIC,
+            MemoryKind.WORKING,
+            MemoryKind.PROCEDURAL,
+        ],
         min_importance=0.2,
+        max_content_chars=180,
+        forbidden_phrases=["remember everything"],
     )
 )
+```
 
-engine.write(
+写入三条记忆：长期偏好、临时草稿、必须优先看的规则。
+
+```python
+memory_engine.write(
     MemoryRecord(
-        id="mem_1",
+        id="pref_grounding",
         kind=MemoryKind.SEMANTIC,
-        content="The user prefers citation-backed research answers.",
-        tags=["preference"],
+        content="The user prefers citation-backed research answers with evidence.",
+        tags=["preference", "citation"],
         importance=0.8,
     )
 )
 
-engine.write(
+memory_engine.write(
     MemoryRecord(
-        id="mem_2",
-        kind=MemoryKind.PINNED,
-        content="Always preserve source evidence in research answers.",
-        tags=["rule"],
-        importance=0.7,
+        id="draft_hypothesis",
+        kind=MemoryKind.WORKING,
+        content="Draft note: citation evidence section may need a rewrite.",
+        tags=["draft", "citation"],
+        importance=0.3,
     )
 )
 
-recalled = engine.recall(MemoryRecallPolicy(query="research evidence answers", limit=2))
+memory_engine.write(
+    MemoryRecord(
+        id="rule_citation",
+        kind=MemoryKind.PINNED,
+        content="Always cite source evidence in research answers.",
+        tags=["rule", "citation"],
+        importance=0.9,
+    )
+)
+```
+
+### Inspect
+
+先检查整本笔记本，再检查下一次研究会话会召回什么。
+
+```python
+all_records = memory_engine.list_records()
+recalled = memory_engine.recall(
+    MemoryRecallPolicy(
+        query="citation evidence research",
+        allowed_kinds=[MemoryKind.PINNED, MemoryKind.SEMANTIC],
+        limit=5,
+    )
+)
+
+print([record.id for record in all_records])
 print([record.id for record in recalled])
 ```
 
-你应该看到：
+Expected output:
 
-```python
-['mem_2', 'mem_1']
+```text
+['pref_grounding', 'draft_hypothesis', 'rule_citation']
+['rule_citation', 'pref_grounding']
 ```
 
-`mem_2` 先出现，是因为默认 `pinned_first=True`。这不是语义搜索，它只是一个确定性的入门版本：足够小，可以看清 policy 怎么影响结果。
+`draft_hypothesis` 还在 notebook 里，所以可以检查；但它没有进入下一次 recall，因为 `allowed_kinds` 只允许 `PINNED` 和 `SEMANTIC`。`rule_citation` 排在 `pref_grounding` 前面，是因为 sort key 的第一项 `pinned_rank` 更高优先级。
 
-## Minimal Skill Example
+> [TRAP] **常见陷阱：list 和 recall 不是一回事**
+>
+> `list_records()` 是审计整本笔记本。`recall()` 是给当前任务挑选上下文。一个 record 能被列出，不代表它应该被下一次任务召回。
 
-继续在同一个 shell 粘贴：
+### Break/Fix: Memory write policy
+
+先打坏 kind allowlist：
 
 ```python
-from pathlib import Path
-from tempfile import TemporaryDirectory
+semantic_only_policy = MemoryWritePolicy(allowed_kinds=[MemoryKind.SEMANTIC])
 
-from research_core.skills import SkillRuntime
+try:
+    semantic_only_policy.validate(
+        MemoryRecord(
+            id="bad_kind",
+            kind=MemoryKind.WORKING,
+            content="Draft citation note.",
+        )
+    )
+except ValueError as exc:
+    print(str(exc))
+```
 
-with TemporaryDirectory() as tmp:
-    root = Path(tmp) / "deep-research"
-    (root / "references").mkdir(parents=True)
-    (root / "SKILL.md").write_text(
-        """---
+Expected output:
+
+```text
+kind 'working' is not allowed
+```
+
+再打坏 forbidden phrase 和 max length：
+
+```python
+phrase_policy = MemoryWritePolicy(
+    allowed_kinds=[MemoryKind.SEMANTIC],
+    forbidden_phrases=["remember everything"],
+)
+length_policy = MemoryWritePolicy(
+    allowed_kinds=[MemoryKind.SEMANTIC],
+    max_content_chars=30,
+)
+
+for policy, record in [
+    (
+        phrase_policy,
+        MemoryRecord(
+            id="bad_phrase",
+            kind=MemoryKind.SEMANTIC,
+            content="Remember everything the user says.",
+        ),
+    ),
+    (
+        length_policy,
+        MemoryRecord(
+            id="bad_length",
+            kind=MemoryKind.SEMANTIC,
+            content="Citation evidence needs a longer note than policy allows.",
+        ),
+    ),
+]:
+    try:
+        policy.validate(record)
+    except ValueError as exc:
+        print(str(exc))
+```
+
+Expected output:
+
+```text
+content contains forbidden phrase
+content exceeds policy maximum
+```
+
+最后看一个很适合做 failure interpretation 的细节：一条记录同时违反多条规则时，只报第一条。
+
+```python
+strict_policy = MemoryWritePolicy(
+    allowed_kinds=[MemoryKind.SEMANTIC],
+    min_importance=0.8,
+    forbidden_phrases=["draft"],
+    max_content_chars=20,
+)
+
+try:
+    strict_policy.validate(
+        MemoryRecord(
+            id="many_failures",
+            kind=MemoryKind.WORKING,
+            content="draft citation evidence is much too long",
+            importance=0.1,
+        )
+    )
+except ValueError as exc:
+    print(str(exc))
+```
+
+Expected output:
+
+```text
+kind 'working' is not allowed
+```
+
+这不是说 importance、forbidden phrase、length 都没问题，而是 `validate()` 按 `kind -> importance -> forbidden_phrases -> max_content_chars` 短路。读失败输出时，先修最早失败的边界，再继续跑。
+
+## Section 3 [FULL Build]: Build The Skill Package
+
+### Architecture
+
+Skill runtime 的核心不是 "把所有资料塞进上下文"，而是 progressive disclosure：
+
+```text
+Skill folder
+  SKILL.md
+  references/*.md
+  scripts/*
+  assets/*
+      |
+      v
+SkillRuntime.load(path)
+      |
+      v
+SkillPackage(
+  entrypoint = SKILL.md text,
+  references = path manifest,
+  scripts = path manifest,
+  assets = path manifest,
+)
+      |
+      v
+explicit runtime.read_reference(package, "references/guide.md")
+```
+
+### Build
+
+创建一个临时 `deep-research` skill folder。注意它不只有 references，也有 scripts 和 assets。
+
+```python
+skill_tmp = TemporaryDirectory()
+skill_root = Path(skill_tmp.name) / "deep-research"
+(skill_root / "references").mkdir(parents=True)
+(skill_root / "scripts").mkdir()
+(skill_root / "assets").mkdir()
+
+(skill_root / "SKILL.md").write_text(
+    """---
 name: deep-research
 description: Find and ground research sources.
 ---
 # Deep Research
 
-Load references only when the task needs them.
+Use this skill when the task needs paper evidence and citation checks.
+Read references only when the task needs their details.
 """,
-        encoding="utf-8",
-    )
-    (root / "references" / "guide.md").write_text(
-        "REFERENCE: cite every claim.",
-        encoding="utf-8",
-    )
+    encoding="utf-8",
+)
+(skill_root / "references" / "citation-style.md").write_text(
+    "STYLE: every claim must name a source URI.",
+    encoding="utf-8",
+)
+(skill_root / "scripts" / "check_claims.py").write_text(
+    "print('check claims')\n",
+    encoding="utf-8",
+)
+(skill_root / "assets" / "rubric.txt").write_text(
+    "citation rubric",
+    encoding="utf-8",
+)
 
-    runtime = SkillRuntime()
-    package = runtime.load(root)
-    print(package.name)
-    print(package.references)
-    print("REFERENCE:" in package.entrypoint)
-    print(runtime.read_reference(package, "references/guide.md"))
+skill_runtime = SkillRuntime()
+skill_package = skill_runtime.load(skill_root)
+
+print(skill_package.name)
+print(skill_package.references)
+print(skill_package.scripts)
+print(skill_package.assets)
+print("STYLE:" in skill_package.entrypoint)
 ```
 
-你应该看到：
+Expected output:
 
 ```text
 deep-research
-('references/guide.md',)
+('references/citation-style.md',)
+('scripts/check_claims.py',)
+('assets/rubric.txt',)
 False
-REFERENCE: cite every claim.
 ```
 
-关键点是第三行：`SKILL.md` 入口没有把 reference 内容自动塞进 context。reference 只有在显式读取时才进入。
+`False` 是重点：`SkillRuntime.load()` 发现了 reference 路径，但没有把 reference 正文偷塞进 entrypoint。
 
-## Why Policies Matter
+### Inspect
 
-没有 policy 的 memory 很容易变成“什么都记”：
-
-- 临时草稿被当成长期偏好。
-- 模型猜测被当成事实。
-- 敏感内容被永久保存。
-- 低价值噪音压过真正重要的规则。
-
-没有 progressive disclosure 的 skill 也会出问题：
-
-- 一次任务加载过多资料，context 被挤爆。
-- reference 里的长文档还没判断是否相关，就污染当前任务。
-- skill 越多，Agent 越难解释自己到底用了什么依据。
-
-Phase 3 的实现还很小，但它把这两个边界先立住了。
-
-## Failure Lab Preview
-
-故意写入低价值 memory：
+现在显式读取 reference：
 
 ```python
-policy = MemoryWritePolicy(
-    allowed_kinds=[MemoryKind.SEMANTIC],
-    min_importance=0.5,
-    forbidden_phrases=["remember everything"],
-)
+style_guide = skill_runtime.read_reference(skill_package, "references/citation-style.md")
+print(style_guide)
+```
 
-bad_record = MemoryRecord(
-    id="bad_1",
-    kind=MemoryKind.SEMANTIC,
-    content="Remember everything the user says.",
-    importance=0.9,
-)
+Expected output:
 
+```text
+STYLE: every claim must name a source URI.
+```
+
+### Break/Fix: Skill reference boundary
+
+越界读取必须失败：
+
+```python
 try:
-    policy.validate(bad_record)
+    skill_runtime.read_reference(skill_package, "../SKILL.md")
 except ValueError as exc:
     print(str(exc))
 ```
 
-你应该看到：
+Expected output:
 
 ```text
-content contains forbidden phrase
+reference path must stay under references
 ```
 
-再故意越界读取 skill reference：
+读取不存在的 reference 也必须失败：
 
 ```python
-# 在上面的 TemporaryDirectory 示例里，把这一行放到 with block 内运行：
-# runtime.read_reference(package, "../SKILL.md")
+try:
+    skill_runtime.read_reference(skill_package, "references/missing.md")
+except ValueError as exc:
+    print(str(exc))
 ```
 
-会得到 `reference path must stay under references`。这说明 skill runtime 不允许借 reference API 偷读目录外文件。
+Expected output:
 
-## Product Integration
+```text
+reference file does not exist
+```
 
-Phase 5 的 Workbench 至少会需要这些视图：
+修复方式不是绕过 `read_reference()`，而是只读取 `references/` 下确实存在的文件：
+
+```python
+assert skill_runtime.read_reference(skill_package, "references/citation-style.md") == (
+    "STYLE: every claim must name a source URI."
+)
+
+skill_tmp.cleanup()
+```
+
+> [DEEP] **更深一层**：Progressive disclosure 不是为了省事，而是为了审计。之后 Workbench 的 context inspector 要能回答：这次 run 到底加载了哪个 skill entrypoint？又显式读取了哪份 reference？
+
+## Product Connection
+
+Part 5 的 Workbench 至少会需要这些视图：
 
 - memory panel：列出 recalled memory，并显示 kind、tags、importance。
 - write policy inspector：解释为什么某条候选 memory 被拒绝。
 - skills panel：显示 skill entrypoint、references、scripts、assets。
 - context inspector：显示这次 run 实际加载了哪些 skill reference。
 
-这些 UI 都依赖 Phase 3 的边界：memory 要可解释，skill 加载要可追踪。
+这些 UI 都依赖 Part 3 的边界：memory 要可解释，skill 加载要可追踪。否则界面只能展示 final answer，不能解释这次研究到底使用了哪些状态和能力。
 
 ## Eval Gate
 
 项目级检查：
 
 ```bash
-uv run pytest tests/research_core/test_memory_engine.py tests/research_core/test_skill_runtime.py tests/research_core/test_memory_skill_evals.py -q
-uv run ruff check packages/research_core/src/research_core/memory packages/research_core/src/research_core/skills tests/research_core/test_memory_engine.py tests/research_core/test_skill_runtime.py tests/research_core/test_memory_skill_evals.py
+PYTHONPATH=packages/research_core/src uv run pytest tests/research_core/test_memory_engine.py tests/research_core/test_skill_runtime.py tests/research_core/test_memory_skill_evals.py -q
+PYTHONPATH=packages/research_core/src uv run pytest tests/course/test_markdown_python_blocks.py -q
+PYTHONPATH=packages/research_core/src uv run ruff check packages/research_core/src/research_core/memory packages/research_core/src/research_core/skills tests/research_core/test_memory_engine.py tests/research_core/test_skill_runtime.py tests/research_core/test_memory_skill_evals.py
 ```
 
 核心自查：
 
 ```python
-assert [record.id for record in recalled] == ["mem_2", "mem_1"]
+assert [record.id for record in recalled] == ["rule_citation", "pref_grounding"]
+assert skill_package.references == ("references/citation-style.md",)
 ```
 
 ## Checkpoint
 
 继续后面的章节前，用自己的话回答：
 
-1. 为什么 memory write 需要 policy？
-2. `pinned` memory 为什么默认排在前面？
-3. `MemoryRecallPolicy` 控制了哪些事情？
-4. Skill runtime 为什么先读 `SKILL.md`，不直接读所有 references？
-5. `read_reference()` 为什么要拒绝 `../SKILL.md`？
+1. 为什么 memory write policy 和 recall policy 保护的风险不一样？
+2. `WORKING` 和 `SEMANTIC` 的差别是什么？如果把草稿写成 `SEMANTIC` 会发生什么？
+3. `MemoryEngine.recall()` 为什么需要 `(pinned_rank, -score, index)` 这种稳定排序？
+4. `SkillRuntime.load()` 为什么只返回 references/scripts/assets 清单，不直接读取所有文件正文？
+5. 如果一个 memory 同时 kind 不允许、importance 太低、content 太长，你应该先修哪一个？为什么？
