@@ -25,6 +25,9 @@ COURSE_MARKDOWN_PATHS = (
     PROJECT_ROOT / "course" / "chapters" / "04-multi-agent-delegation.md",
     PROJECT_ROOT / "course" / "labs" / "04-delegation-runtime-lab.md",
     PROJECT_ROOT / "course" / "solutions" / "04-delegation-runtime-solution.md",
+    PROJECT_ROOT / "course" / "chapters" / "05-workbench-product.md",
+    PROJECT_ROOT / "course" / "labs" / "05-workbench-product-lab.md",
+    PROJECT_ROOT / "course" / "solutions" / "05-workbench-product-solution.md",
 )
 
 

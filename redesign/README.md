@@ -91,13 +91,19 @@ Phase R4 adds the fourth project-driven course teaching rewrite:
 - Lab 04 now uses L1 Follow, L2 Modify/Break-Fix checks, and an open-ended L3 Design exercise graded by delegation invariants.
 - The markdown Python block gate now covers setup material plus Parts 1-4 chapter/lab/solution files.
 
+Phase R5 adds the fifth project-driven course teaching rewrite:
+
+- Part 5 Chapter/Lab/Solution materials now teach Workbench Product through the "give the researcher an inspectable workbench without inventing a separate data model" problem: the `from_*` adapters that turn raw domain objects into panel items, `summary_row()` projections, `WorkbenchSnapshot` referential-integrity validation, and the downward-only core -> FastAPI -> React boundary.
+- Lab 05 now uses L1 Follow, L2 Modify/Break-Fix checks, and an open-ended L3 Design exercise graded by snapshot invariants.
+- The markdown Python block gate now also runs `apps/api/src` blocks and covers setup material plus Parts 1-5 chapter/lab/solution files.
+
 Real retrieval adapters, async delegation, streaming, real auth, real cloud deployment, real A2A transport, and live framework adapters arrive in later phases.
 
 ## Course Entry
 
 Start at `course/README.md`. New learners should follow the Beginner Track before Chapter 01; experienced engineers can skim the glossary and jump to the Agent Kernel lab.
 
-Current course coverage follows the implemented runtime phases. Phase R1 rewrote the learner entrypoint and Part 1 into the project-driven teaching style; Phase R2 rewrote Part 2; Phase R3 rewrote Part 3; Phase R4 rewrote Part 4. Parts 5-7 remain current v1 course material until their planned R5-R7 rewrites.
+Current course coverage follows the implemented runtime phases. Phase R1 rewrote the learner entrypoint and Part 1 into the project-driven teaching style; Phase R2 rewrote Part 2; Phase R3 rewrote Part 3; Phase R4 rewrote Part 4; Phase R5 rewrote Part 5. Parts 6-7 remain current v1 course material until their planned R6-R7 rewrites.
 
 - Chapter/Lab/Solution 00: learner setup and pre-kernel mental model.
 - Chapter/Lab/Solution 01: Agent Kernel.

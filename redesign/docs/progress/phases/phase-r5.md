@@ -25,10 +25,10 @@ To keep every commit's gate green, the `apps/api/src` path extension lands in Ta
 
 - [x] Task 1: Start R5 plan and progress.
 - [x] Task 2: Extend the markdown Python block gate to support `apps/api/src` on the path.
-- [ ] Task 3: Rewrite Chapter 05 as project-driven Part 5 material.
-- [ ] Task 4: Rewrite Lab 05 with L1/L2/L3 exercises and feedback loops.
-- [ ] Task 5: Rewrite Solution 05 with runnable assertions and design rationale.
-- [ ] Task 6: Add Part 5 files to the gate and sync course indexes and progress.
+- [x] Task 3: Rewrite Chapter 05 as project-driven Part 5 material.
+- [x] Task 4: Rewrite Lab 05 with L1/L2/L3 exercises and feedback loops.
+- [x] Task 5: Rewrite Solution 05 with runnable assertions and design rationale.
+- [x] Task 6: Add Part 5 files to the gate and sync course indexes and progress.
 - [ ] Task 7: Final verification, cleanup, and neat-freak docs reconciliation.
 
 ## Exit Signal
@@ -50,6 +50,10 @@ To keep every commit's gate green, the `apps/api/src` path extension lands in Ta
 | 2026-07-01 | Phase R5 started after first-principles review of the R5 plan, the current Part 5 v1 material gaps, and the real `research_core.product` / `apps/api` contracts. Execution uses the subagent-driven workflow: a coordinator handles docs bookkeeping (Tasks 1, 6, and final verification), implementer/writer subagents handle the gate change and the chapter/lab/solution rewrites, and task-reviewer plus a final whole-branch code-reviewer subagent gate quality. |
 | 2026-07-01 | Task 1 landed (commit `ad14aa3`): R5 plan, phase-r5 progress record, and docs/progress index updates marking R5 in progress. |
 | 2026-07-01 | Task 2 landed (commit `2a682cb`): the markdown gate helper now also puts `apps/api/src` on `sys.path` when present, with a monkeypatch-isolated RED->GREEN test proving an `apps/api` import block executes (gate 4 -> 5 passing). Task reviewer approved with one Minor symlink-resolution hardening note recorded for the final whole-branch review. Part 5 files are intentionally not yet in `COURSE_MARKDOWN_PATHS`; that lands in Task 6. |
+| 2026-07-01 | Task 3 landed (commits `59da98e` write, `a4bbc5d` fix): Chapter 05 rewritten around the inspectable-workbench problem with Learner Contract, two ASCII diagrams, eight callouts, all five `from_*` adapters, referential-integrity Break/Fix, and the FastAPI/React boundary. Gate self-check 16 blocks / 14 expected outputs matched. Task reviewer approved; the one Important finding (standalone `from_evidence` demo) and two Minors were fixed. |
+| 2026-07-01 | Task 4 landed (commit `2ca02bf`): Lab 05 rewritten with L1 Follow, L2 Modify/Break-Fix (all five referential errors + copy safety), and an open-ended L3 Design whose self-check is a non-executed text block. Four-part feedback on each tier. Gate self-check 14 blocks / 10 matched. Task reviewer approved with two Minor notes recorded. |
+| 2026-07-01 | Task 5 landed (commit `282e80a`): Solution 05 rewritten with runnable assert-based L1/L2/L3 answers, What This Proves / Why This Design per tier, Forward Connections mapping all four earlier Parts to panels, and Final Takeaway. Gate self-check 12 blocks, all asserts pass. Task reviewer approved with one Minor note recorded. |
+| 2026-07-01 | Task 6 landed: Part 5 chapter/lab/solution added to `COURSE_MARKDOWN_PATHS` (markdown gate now covers Parts 0-5, `5 passed`; direct run 42 Part-5 blocks / 24 expected outputs matched). Course README, redesign README, roadmap, execution roadmap, and progress indexes now describe Part 5 as R5 rewritten while Parts 6-7 stay v1. Docs freshness + markdown gate `8 passed`. |
 
 ## Verification Target
 
