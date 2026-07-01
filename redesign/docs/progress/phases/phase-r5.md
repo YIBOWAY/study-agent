@@ -23,8 +23,8 @@ To keep every commit's gate green, the `apps/api/src` path extension lands in Ta
 
 ## Task Checklist
 
-- [ ] Task 1: Start R5 plan and progress.
-- [ ] Task 2: Extend the markdown Python block gate to support `apps/api/src` on the path.
+- [x] Task 1: Start R5 plan and progress.
+- [x] Task 2: Extend the markdown Python block gate to support `apps/api/src` on the path.
 - [ ] Task 3: Rewrite Chapter 05 as project-driven Part 5 material.
 - [ ] Task 4: Rewrite Lab 05 with L1/L2/L3 exercises and feedback loops.
 - [ ] Task 5: Rewrite Solution 05 with runnable assertions and design rationale.
@@ -48,6 +48,8 @@ To keep every commit's gate green, the `apps/api/src` path extension lands in Ta
 | Date | Update |
 | --- | --- |
 | 2026-07-01 | Phase R5 started after first-principles review of the R5 plan, the current Part 5 v1 material gaps, and the real `research_core.product` / `apps/api` contracts. Execution uses the subagent-driven workflow: a coordinator handles docs bookkeeping (Tasks 1, 6, and final verification), implementer/writer subagents handle the gate change and the chapter/lab/solution rewrites, and task-reviewer plus a final whole-branch code-reviewer subagent gate quality. |
+| 2026-07-01 | Task 1 landed (commit `ad14aa3`): R5 plan, phase-r5 progress record, and docs/progress index updates marking R5 in progress. |
+| 2026-07-01 | Task 2 landed (commit `2a682cb`): the markdown gate helper now also puts `apps/api/src` on `sys.path` when present, with a monkeypatch-isolated RED->GREEN test proving an `apps/api` import block executes (gate 4 -> 5 passing). Task reviewer approved with one Minor symlink-resolution hardening note recorded for the final whole-branch review. Part 5 files are intentionally not yet in `COURSE_MARKDOWN_PATHS`; that lands in Task 6. |
 
 ## Verification Target
 
