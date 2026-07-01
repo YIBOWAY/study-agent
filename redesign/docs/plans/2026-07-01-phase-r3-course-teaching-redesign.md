@@ -236,15 +236,15 @@ Include forbidden-phrase, `max_content_chars`, and `kind not allowed` scenarios 
 - Modify: `course/solutions/03-memory-skill-runtime-solution.md`
 - Modify: `docs/progress/phases/phase-r3.md`
 
-- [ ] **Step 1: Provide runnable answers**
+- [x] **Step 1: Provide runnable answers**
 
 Include complete L1/L2/L3 solution snippets and assertions, covering every case introduced in Lab 03. For L3, present one reference design plus required invariants instead of implying a single canonical answer. Include assertions for pinned-first ordering, allowed-kind filtering, and no draft recall after the session boundary.
 
-- [ ] **Step 2: Explain why answers are correct**
+- [x] **Step 2: Explain why answers are correct**
 
 For each exercise, add a "What This Proves" and a "Why This Design" section, matching the Solution 01/02 shape. In the failure solutions, call out why the first error message follows the `validate()` short-circuit order.
 
-- [ ] **Step 3: Connect design decisions forward**
+- [x] **Step 3: Connect design decisions forward**
 
 Explain why memory write/recall boundaries matter for Part 4 child-context isolation (a delegated child agent should not inherit unfiltered parent memory), why skill progressive disclosure matters for Part 5's context inspector panel, and why both matter for Part 7 production diagnostics (auditing what a run actually had access to).
 
