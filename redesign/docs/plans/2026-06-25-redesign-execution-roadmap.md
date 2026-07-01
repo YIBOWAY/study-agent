@@ -275,3 +275,25 @@ Completion notes:
 - `cd redesign && PYTHONPATH=packages/research_core/src uv run pytest tests/course/test_docs_freshness.py -q` passed on 2026-07-01 with `3 passed`.
 - `cd redesign && PYTHONPATH=packages/research_core/src uv run pytest tests/course/test_markdown_python_blocks.py -q` passed on 2026-07-01 with `4 passed`.
 - `cd redesign/apps/web && npm ci && npm run build` passed on 2026-07-01 with Vite `46 modules transformed`.
+
+### Phase R5: Course Teaching Redesign - Part 5
+
+Plan: `redesign/docs/plans/2026-07-01-phase-r5-course-teaching-redesign.md`
+
+Status: In progress (started 2026-07-01).
+
+Purpose:
+
+- Rewrite Part 5 so Workbench Product starts from the local paper research assistant's "give the researcher an inspectable workbench without inventing a separate data model" problem.
+- Teach the `research_core.product` `from_*` adapters, `summary_row()` projections, `WorkbenchSnapshot` referential-integrity validation, and the downward-only core -> FastAPI -> React boundary.
+- Extend the markdown Python block gate so Part 5 API examples run with `apps/api/src` on the path, then bring Part 5 into the gate.
+
+Exit criteria:
+
+- Chapter/Lab/Solution 05 are rewritten using the R1-R4 teaching contract.
+- `course/README.md`, `docs/course/roadmap.md`, `docs/README.md`, and `docs/progress/` describe Part 5 as R5 rewritten after content lands.
+- `cd redesign && PYTHONPATH=packages/research_core/src uv run pytest -q` passes.
+- `cd redesign && PYTHONPATH=packages/research_core/src uv run ruff check .` passes.
+- `cd redesign && PYTHONPATH=packages/research_core/src uv run pytest tests/course/test_docs_freshness.py -q` passes.
+- `cd redesign && PYTHONPATH=packages/research_core/src uv run pytest tests/course/test_markdown_python_blocks.py -q` passes for Parts 1-5.
+- `cd redesign/apps/web && npm ci && npm run build` passes.

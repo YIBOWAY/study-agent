@@ -75,6 +75,7 @@ Current means the file exists in the tree now. It does not mean every file has a
 - [2026-07-01-phase-r2-course-teaching-redesign.md](../plans/2026-07-01-phase-r2-course-teaching-redesign.md): completed R2 implementation plan.
 - [2026-07-01-phase-r3-course-teaching-redesign.md](../plans/2026-07-01-phase-r3-course-teaching-redesign.md): completed R3 implementation plan.
 - [2026-07-01-phase-r4-course-teaching-redesign.md](../plans/2026-07-01-phase-r4-course-teaching-redesign.md): completed R4 implementation plan.
+- [2026-07-01-phase-r5-course-teaching-redesign.md](../plans/2026-07-01-phase-r5-course-teaching-redesign.md): in-progress R5 implementation plan.
 - [course/README.md](../../course/README.md): learner entrypoint, track selection, commands, and common stuck points.
 - [python-terminal-primer.md](../../course/reference/python-terminal-primer.md): minimal terminal and Python concepts needed for the course.
 - [agent-kernel-glossary.md](../../course/reference/agent-kernel-glossary.md): plain-language Agent kernel vocabulary.
@@ -96,7 +97,7 @@ Current means the file exists in the tree now. It does not mean every file has a
 - Phase R2 (complete): rewrote Part 2 so Research Core teaches the source -> evidence -> claim -> report chain through the assistant's citation problem.
 - Phase R3 (complete): rewrote Part 3 so Memory and Skills teach persistent memory policies and skill loading through repeated research sessions, plus added markdown Python block verification for changed course examples.
 - Phase R4 (complete): rewrote Part 4 so Multi-Agent Delegation teaches child context isolation, budget accounting, parent event trails, and unresolved-conflict visibility through divided research work.
-- Phase R5 (planned): rewrite Part 5 so Workbench Product teaches the product adapter, FastAPI API, and React workbench through a researcher-facing interface.
+- Phase R5 (in progress): rewrite Part 5 so Workbench Product teaches the product adapter, FastAPI API, and React workbench through a researcher-facing interface.
 - Phase R6 (planned): rewrite Part 6 so Framework Comparisons teach how to compare frameworks on the same task without moving framework code into the product runtime.
 - Phase R7 (planned): rewrite Part 7 so Production Readiness teaches diagnostics, persistence, approval, and sandbox policies as local-first deployment boundaries.
 - Phase R8 (planned): build the full Capstone under `course/capstone/`, including paper fixtures, starter, solution, rubric, event trail, report, and reflection.
