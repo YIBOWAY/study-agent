@@ -340,7 +340,7 @@ Completion notes:
 
 Plan: `redesign/docs/plans/2026-07-02-phase-r7-course-teaching-redesign.md`
 
-Status: Planned.
+Status: In Progress (started 2026-07-02).
 
 Purpose:
 

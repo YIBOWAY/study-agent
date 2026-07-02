@@ -109,7 +109,7 @@ Real retrieval adapters, async delegation, streaming, real auth, real cloud depl
 
 Start at `course/README.md`. New learners should follow the Beginner Track before Chapter 01; experienced engineers can skim the glossary and jump to the Agent Kernel lab.
 
-Current course coverage follows the implemented runtime phases. Phase R1 rewrote the learner entrypoint and Part 1 into the project-driven teaching style; Phase R2 rewrote Part 2; Phase R3 rewrote Part 3; Phase R4 rewrote Part 4; Phase R5 rewrote Part 5; Phase R6 rewrote Part 6. The R7 plan is saved, but Part 7 remains current v1 course material until that rewrite lands.
+Current course coverage follows the implemented runtime phases. Phase R1 rewrote the learner entrypoint and Part 1 into the project-driven teaching style; Phase R2 rewrote Part 2; Phase R3 rewrote Part 3; Phase R4 rewrote Part 4; Phase R5 rewrote Part 5; Phase R6 rewrote Part 6. R7 is active now, but Part 7 remains current v1 course material until that rewrite lands.
 
 - Chapter/Lab/Solution 00: learner setup and pre-kernel mental model.
 - Chapter/Lab/Solution 01: Agent Kernel.

@@ -179,8 +179,8 @@ PYTHONPATH=packages/research_core/src uv run python
 | R4 | 已把 Part 4 改成 child context isolation、budget accounting、delegate event trail、unresolved conflicts 的项目驱动学习结构 |
 | R5 | 已把 Part 5 改成 product adapter、`WorkbenchSnapshot`、referential validation 和三层 core/API/UI 边界的项目驱动学习结构，并把 Part 5 纳入 markdown 代码块门禁 |
 | R6 | 已把 Part 6 改成固定 task/fixture/metric 的透明加权评分（build-vs-adopt 技术选型）的项目驱动学习结构，并把 Part 6 纳入 markdown 代码块门禁 |
-| R7 | 计划已保存，下一步把 Part 7 改成同一套 Build -> Inspect -> Break -> Fix -> Reflect 学习结构 |
+| R7 | 正在把 Part 7 改成同一套 Build -> Inspect -> Break -> Fix -> Reflect 学习结构 |
 | R8 | 计划补齐完整 Capstone：fixtures、starter、solution、rubric、trajectory、report、reflection |
 | R9 | 计划补齐参考材料、troubleshooting、设计决策索引、讨论题和 glossary 更新 |
 
-学习时用一个简单判断：如果你正在 Parts 1-6，就按 R1-R6 新结构认真做完整循环；如果你正在 Part 7，就把它当作有效的 current v1 材料，同时知道 R7 计划已经保存，后续会把它重新组织成更强的项目驱动版本。
+学习时用一个简单判断：如果你正在 Parts 1-6，就按 R1-R6 新结构认真做完整循环；如果你正在 Part 7，就把它当作有效的 current v1 材料，同时知道 R7 正在把它重新组织成更强的项目驱动版本。

@@ -14,7 +14,7 @@ This folder is the redesign progress dashboard for humans and agents.
 - `phases/phase-r4.md`: completed progress record for the course teaching redesign of Part 4.
 - `phases/phase-r5.md`: completed progress record for the course teaching redesign of Part 5.
 - `phases/phase-r6.md`: completed progress record for the course teaching redesign of Part 6.
-- Phase R7 does not have a progress file yet because implementation has not started; its plan is saved at `../plans/2026-07-02-phase-r7-course-teaching-redesign.md`.
+- `phases/phase-r7.md`: active progress record for the course teaching redesign of Part 7.
 
 ## Maintenance Rule
 
