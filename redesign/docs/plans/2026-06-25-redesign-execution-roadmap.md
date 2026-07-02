@@ -197,7 +197,7 @@ Exit criteria:
 
 Follow-up:
 
-- R2, R3, R4, R5, R6, and R7 completed or landed the Part 2 through Part 7 teaching rewrites with the same project-driven teaching method; R8 should build the full Capstone materials under `course/capstone/`.
+- R2, R3, R4, R5, R6, and R7 completed the Part 2 through Part 7 teaching rewrites with the same project-driven teaching method; R8 should build the full Capstone materials under `course/capstone/`.
 - R8 should build the full Capstone materials under `course/capstone/`.
 - R9 should add support references such as troubleshooting, design-decision indexes, discussion prompts, and glossary updates.
 
@@ -340,7 +340,7 @@ Completion notes:
 
 Plan: `redesign/docs/plans/2026-07-02-phase-r7-course-teaching-redesign.md`
 
-Status: In Progress (started 2026-07-02; Part 7 content and gate sync landed, final verification pending).
+Status: Complete (2026-07-02).
 
 Purpose:
 
@@ -357,3 +357,12 @@ Exit criteria:
 - `cd redesign && PYTHONPATH=packages/research_core/src uv run pytest tests/course/test_docs_freshness.py -q` passes.
 - `cd redesign && PYTHONPATH=packages/research_core/src uv run pytest tests/course/test_markdown_python_blocks.py -q` passes for Parts 0-7.
 - `cd redesign/apps/web && npm ci && npm run build` passes.
+
+Completion notes:
+
+- `cd redesign && PYTHONPATH=packages/research_core/src uv run pytest -q` passed on 2026-07-02 with `204 passed`.
+- `cd redesign && PYTHONPATH=packages/research_core/src uv run ruff check .` passed on 2026-07-02 with `All checks passed!`.
+- `cd redesign && PYTHONPATH=packages/research_core/src uv run pytest tests/course/test_docs_freshness.py -q` passed on 2026-07-02 with `3 passed`.
+- `cd redesign && PYTHONPATH=packages/research_core/src uv run pytest tests/course/test_markdown_python_blocks.py -q` passed on 2026-07-02 with `5 passed` (Parts 0-7).
+- `cd redesign && PYTHONPATH=.:packages/research_core/src uv run python -m infra.markdown_python_blocks course/chapters/07-production-readiness.md course/labs/07-production-readiness-lab.md course/solutions/07-production-readiness-solution.md --project-root .` checked `31` Python blocks with `26` expected outputs matched.
+- `cd redesign/apps/web && npm ci && npm run build` passed on 2026-07-02.

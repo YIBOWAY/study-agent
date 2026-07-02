@@ -12,7 +12,7 @@ The course should teach Agent engineering through a single, growing project: a æ
 
 For learners who know some Python but are new to Agent engineering, the path is Part-based. Parts 1-7 build on each other and end with the Capstone; do not treat later Parts as independent one-off chapters.
 
-R1 completed the teaching-redesign pass for the learner entrypoint and Part 1. R2 completed the Part 2 Research Core rewrite. R3 completed the Part 3 Memory and Skills rewrite. R4 completed the Part 4 Multi-Agent Delegation content rewrite. R5 completed the Part 5 Workbench Product rewrite. R6 completed the Part 6 Framework Comparisons rewrite. R7 has landed the Part 7 Production Readiness content rewrite; final R7 verification is tracked in `docs/progress/phases/phase-r7.md`.
+R1 completed the teaching-redesign pass for the learner entrypoint and Part 1. R2 completed the Part 2 Research Core rewrite. R3 completed the Part 3 Memory and Skills rewrite. R4 completed the Part 4 Multi-Agent Delegation content rewrite. R5 completed the Part 5 Workbench Product rewrite. R6 completed the Part 6 Framework Comparisons rewrite. R7 completed the Part 7 Production Readiness rewrite.
 
 | Step | File to read/do | What capability the assistant gains |
 |------|-----------------|--------------------------------------|
@@ -77,7 +77,7 @@ Current means the file exists in the tree now. It does not mean every file has a
 - [2026-07-01-phase-r4-course-teaching-redesign.md](../plans/2026-07-01-phase-r4-course-teaching-redesign.md): completed R4 implementation plan.
 - [2026-07-01-phase-r5-course-teaching-redesign.md](../plans/2026-07-01-phase-r5-course-teaching-redesign.md): completed R5 implementation plan.
 - [2026-07-01-phase-r6-course-teaching-redesign.md](../plans/2026-07-01-phase-r6-course-teaching-redesign.md): completed R6 implementation plan.
-- [2026-07-02-phase-r7-course-teaching-redesign.md](../plans/2026-07-02-phase-r7-course-teaching-redesign.md): active R7 implementation plan for the Part 7 Production Readiness teaching rewrite.
+- [2026-07-02-phase-r7-course-teaching-redesign.md](../plans/2026-07-02-phase-r7-course-teaching-redesign.md): completed R7 implementation plan for the Part 7 Production Readiness teaching rewrite.
 - [course/README.md](../../course/README.md): learner entrypoint, track selection, commands, and common stuck points.
 - [python-terminal-primer.md](../../course/reference/python-terminal-primer.md): minimal terminal and Python concepts needed for the course.
 - [agent-kernel-glossary.md](../../course/reference/agent-kernel-glossary.md): plain-language Agent kernel vocabulary.
@@ -101,6 +101,6 @@ Current means the file exists in the tree now. It does not mean every file has a
 - Phase R4 (complete): rewrote Part 4 so Multi-Agent Delegation teaches child context isolation, budget accounting, parent event trails, and unresolved-conflict visibility through divided research work.
 - Phase R5 (complete): rewrote Part 5 so Workbench Product teaches the product adapter, FastAPI read API, and React workbench through the researcher-facing inspectable-snapshot problem, and brought Part 5 into the markdown Python block gate.
 - Phase R6 (complete): rewrote Part 6 so Framework Comparisons teaches a defensible build-vs-adopt decision through a pinned task/fixture/metric and a transparent weighted score, and brought Part 6 into the markdown Python block gate.
-- Phase R7 (content landed; final verification pending): rewrite Part 7 so Production Readiness teaches diagnostics, persistence, approval, sandbox policies, and docs freshness as local-first deployment boundaries, then bring Part 7 into the markdown Python block gate.
+- Phase R7 (complete): rewrote Part 7 so Production Readiness teaches diagnostics, persistence, approval, sandbox policies, and docs freshness as local-first deployment boundaries, then brought Part 7 into the markdown Python block gate.
 - Phase R8 (planned): build the full Capstone under `course/capstone/`, including paper fixtures, starter, solution, rubric, event trail, report, and reflection.
 - Phase R9 (planned): add reference and support materials such as common patterns, troubleshooting, design-decision index, discussion prompts, and glossary updates.

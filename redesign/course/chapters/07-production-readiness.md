@@ -242,7 +242,8 @@ approval = ApprovalPolicy(
 
 for subject in ("retriever.search", "shell.exec", "email.send"):
     decision = approval.decide(subject)
-    print(subject, decision.mode.value, decision.requires_review, decision.matched_rule)
+    matched_rule = decision.matched_rule or "<default>"
+    print(subject, decision.mode.value, decision.requires_review, matched_rule)
 ```
 
 Expected output:
@@ -250,7 +251,7 @@ Expected output:
 ```text
 retriever.search allow False retriever.*
 shell.exec deny False shell.*
-email.send require_approval True 
+email.send require_approval True <default>
 ```
 
 `email.send` 没有被 allow，也没有被 deny；它落到 default `require_approval`。这就是一个很常见的生产边界：未知动作不该默默放行，但也不一定永远禁止，先让人审。
