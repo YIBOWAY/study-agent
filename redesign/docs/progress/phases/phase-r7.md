@@ -27,7 +27,7 @@ R7 is a teaching rewrite, not a runtime/product implementation phase. The existi
 - [x] Task 1: Start R7 plan and progress.
 - [x] Task 2: Rewrite Chapter 07 as project-driven Part 7 material.
 - [x] Task 3: Rewrite Lab 07 with L1/L2/L3 exercises and feedback loops.
-- [ ] Task 4: Rewrite Solution 07 with runnable assertions and design rationale.
+- [x] Task 4: Rewrite Solution 07 with runnable assertions and design rationale.
 - [ ] Task 5: Add Part 7 files to the markdown gate and sync course indexes and progress.
 - [ ] Task 6: Final verification, cleanup, whole-branch review, and docs reconciliation.
 
@@ -49,6 +49,7 @@ R7 is a teaching rewrite, not a runtime/product implementation phase. The existi
 | 2026-07-02 | Phase R7 started from `codex/redesign-course-r7` after reviewing the R7 plan and the real `research_core.production` contracts. Codegraph status was up to date at start (65 files, 1,001 nodes, 2,751 edges). |
 | 2026-07-02 | Task 2 landed: Chapter 07 rewritten around the replay/audit/block-unsafe-runs problem with a Learner Contract, local-first safety-desk mental model, two ASCII diagrams, six callouts, Build/Inspect/Break/Fix/Reflect flow, explicit docs-freshness and Capstone connections, and self-caught production-boundary failures. Direct chapter gate checked 12 Python blocks with 12 expected outputs matched. |
 | 2026-07-02 | Task 3 landed: Lab 07 rewritten with L1 Follow (diagnostics, JSONL replay, approval/sandbox decisions), L2 Modify/Break-Fix (trajectory and policy changes plus seven production-boundary checks), and open-ended L3 Design for a report-export readiness boundary. Each tier includes Common Errors, Failure Output Interpretation, Where To Go Back, and Why Correct Answer Is Correct. Direct lab gate checked 16 Python blocks with 11 expected outputs matched. |
+| 2026-07-02 | Task 4 landed: Solution 07 rewritten as L1/L2/L3 runnable answers with assert-based verification, per-tier What This Proves and Why This Design, one valid report-export reference design, and Capstone trust-evidence connections. Direct solution gate checked 3 Python blocks with 3 expected outputs matched. |
 
 ## Verification Target
 
