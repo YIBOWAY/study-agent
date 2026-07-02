@@ -28,18 +28,18 @@ R7 is a teaching rewrite, not a runtime/product implementation phase. The existi
 - [x] Task 2: Rewrite Chapter 07 as project-driven Part 7 material.
 - [x] Task 3: Rewrite Lab 07 with L1/L2/L3 exercises and feedback loops.
 - [x] Task 4: Rewrite Solution 07 with runnable assertions and design rationale.
-- [ ] Task 5: Add Part 7 files to the markdown gate and sync course indexes and progress.
+- [x] Task 5: Add Part 7 files to the markdown gate and sync course indexes and progress.
 - [ ] Task 6: Final verification, cleanup, whole-branch review, and docs reconciliation.
 
 ## Exit Signal
 
-- [ ] Chapter/Lab/Solution 07 are rewritten around the replay/audit/block-unsafe-runs problem.
-- [ ] Part 7 has at least two ASCII diagrams and at least three `[DD]` / `[TRAP]` / `[CHECK]` / `[BIG]` / `[DEEP]` callouts.
-- [ ] The rewrite teaches diagnostics, JSONL event replay, approval policy, sandbox policy, and docs freshness as inspectable local contracts.
-- [ ] Lab 07 includes L1 Follow, L2 Modify, and L3 Design exercises with feedback loops.
-- [ ] Solution 07 provides runnable L1/L2 answers plus one valid L3 reference design and required production-readiness invariants.
-- [ ] Every error-demonstrating block self-catches, and the markdown Python block gate covers Part 7 with no helper change.
-- [ ] Docs index, course roadmap, course README, redesign README, execution roadmap, and overall progress are synced.
+- [x] Chapter/Lab/Solution 07 are rewritten around the replay/audit/block-unsafe-runs problem.
+- [x] Part 7 has at least two ASCII diagrams and at least three `[DD]` / `[TRAP]` / `[CHECK]` / `[BIG]` / `[DEEP]` callouts.
+- [x] The rewrite teaches diagnostics, JSONL event replay, approval policy, sandbox policy, and docs freshness as inspectable local contracts.
+- [x] Lab 07 includes L1 Follow, L2 Modify, and L3 Design exercises with feedback loops.
+- [x] Solution 07 provides runnable L1/L2 answers plus one valid L3 reference design and required production-readiness invariants.
+- [x] Every error-demonstrating block self-catches, and the markdown Python block gate covers Part 7 with no helper change.
+- [x] Docs index, course roadmap, course README, redesign README, execution roadmap, and overall progress are synced.
 - [ ] Fresh verification results and a whole-branch review are recorded.
 
 ## Progress Log
@@ -50,6 +50,7 @@ R7 is a teaching rewrite, not a runtime/product implementation phase. The existi
 | 2026-07-02 | Task 2 landed: Chapter 07 rewritten around the replay/audit/block-unsafe-runs problem with a Learner Contract, local-first safety-desk mental model, two ASCII diagrams, six callouts, Build/Inspect/Break/Fix/Reflect flow, explicit docs-freshness and Capstone connections, and self-caught production-boundary failures. Direct chapter gate checked 12 Python blocks with 12 expected outputs matched. |
 | 2026-07-02 | Task 3 landed: Lab 07 rewritten with L1 Follow (diagnostics, JSONL replay, approval/sandbox decisions), L2 Modify/Break-Fix (trajectory and policy changes plus seven production-boundary checks), and open-ended L3 Design for a report-export readiness boundary. Each tier includes Common Errors, Failure Output Interpretation, Where To Go Back, and Why Correct Answer Is Correct. Direct lab gate checked 16 Python blocks with 11 expected outputs matched. |
 | 2026-07-02 | Task 4 landed: Solution 07 rewritten as L1/L2/L3 runnable answers with assert-based verification, per-tier What This Proves and Why This Design, one valid report-export reference design, and Capstone trust-evidence connections. Direct solution gate checked 3 Python blocks with 3 expected outputs matched. |
+| 2026-07-02 | Task 5 landed: Part 7 chapter/lab/solution files were added to `tests/course/test_markdown_python_blocks.py`, course/docs/progress indexes now describe Part 7 as R7 rewritten material, the markdown Python block gate passed with `5 passed`, and docs freshness passed with `3 passed`. |
 
 ## Verification Target
 

@@ -72,9 +72,9 @@ This directory is the canonical archive for the redesign version of the project.
 - `../course/chapters/06-framework-comparisons.md`: Part 6 R6 framework comparison material around pinned task/fixture/metric scoring.
 - `../course/labs/06-framework-comparisons-lab.md`: Part 6 R6 recommendation matrix lab with L1/L2/L3 exercises.
 - `../course/solutions/06-framework-comparisons-solution.md`: Part 6 R6 Framework Comparisons solution with reference design and invariants.
-- `../course/chapters/07-production-readiness.md`: Part 7 current v1 production-readiness contracts material until R7.
-- `../course/labs/07-production-readiness-lab.md`: Part 7 current v1 production diagnostics, persistence, approval, and sandbox lab until R7.
-- `../course/solutions/07-production-readiness-solution.md`: Part 7 current v1 Production Readiness solution until R7.
+- `../course/chapters/07-production-readiness.md`: Part 7 R7 Production Readiness material around replay, audit, approval, sandbox, and docs freshness.
+- `../course/labs/07-production-readiness-lab.md`: Part 7 R7 production diagnostics, JSONL replay, approval, sandbox, and report-export readiness lab with L1/L2/L3 exercises.
+- `../course/solutions/07-production-readiness-solution.md`: Part 7 R7 Production Readiness solution with runnable assertions, break/fix checks, and one valid report-export reference design.
 - `../course/framework_comparisons/reports/echo-tool-task.md`: shared echo-tool task report.
 - `../course/framework_comparisons/reports/recommendation-matrix.md`: current framework recommendation matrix.
 

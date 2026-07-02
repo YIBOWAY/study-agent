@@ -103,22 +103,28 @@ Phase R6 adds the sixth project-driven course teaching rewrite:
 - Lab 06 now uses L1 Follow, L2 Modify/Break-Fix checks, and an open-ended L3 Design exercise graded by a predicted-winner invariant.
 - The markdown Python block gate now covers setup material plus Parts 1-6 chapter/lab/solution files; no gate helper change was needed because `course.framework_comparisons` already imports under the gate.
 
+Phase R7 adds the seventh project-driven course teaching rewrite:
+
+- Part 7 Chapter/Lab/Solution materials now teach Production Readiness through the "can we replay, audit, and block unsafe runs before real deployment?" problem: `RunDiagnostics`, `JsonlRunEventStore`, `ApprovalPolicy`, `SandboxPolicy`, and docs freshness as local-first contracts.
+- Lab 07 now uses L1 Follow, L2 Modify/Break-Fix checks, and an open-ended L3 Design exercise for a report-export readiness boundary.
+- The markdown Python block gate now covers setup material plus Parts 1-7 chapter/lab/solution files.
+
 Real retrieval adapters, async delegation, streaming, real auth, real cloud deployment, real A2A transport, and live framework adapters arrive in later phases.
 
 ## Course Entry
 
 Start at `course/README.md`. New learners should follow the Beginner Track before Chapter 01; experienced engineers can skim the glossary and jump to the Agent Kernel lab.
 
-Current course coverage follows the implemented runtime phases. Phase R1 rewrote the learner entrypoint and Part 1 into the project-driven teaching style; Phase R2 rewrote Part 2; Phase R3 rewrote Part 3; Phase R4 rewrote Part 4; Phase R5 rewrote Part 5; Phase R6 rewrote Part 6. R7 is active now, but Part 7 remains current v1 course material until that rewrite lands.
+Current course coverage follows the implemented runtime phases. Phase R1 rewrote the learner entrypoint and Part 1 into the project-driven teaching style; Phase R2 rewrote Part 2; Phase R3 rewrote Part 3; Phase R4 rewrote Part 4; Phase R5 rewrote Part 5; Phase R6 rewrote Part 6; Phase R7 rewrote Part 7.
 
 - Chapter/Lab/Solution 00: learner setup and pre-kernel mental model.
 - Chapter/Lab/Solution 01: Agent Kernel.
 - Chapter/Lab/Solution 02: Research Core, R2 project-driven rewrite.
 - Chapter/Lab/Solution 03: Memory and Skills, R3 project-driven rewrite.
 - Chapter/Lab/Solution 04: Multi-Agent Delegation, R4 project-driven rewrite.
-- Chapter/Lab/Solution 05: Workbench Product.
-- Chapter/Lab/Solution 06: Framework Comparisons.
-- Chapter/Lab/Solution 07: Production Readiness.
+- Chapter/Lab/Solution 05: Workbench Product, R5 project-driven rewrite.
+- Chapter/Lab/Solution 06: Framework Comparisons, R6 project-driven rewrite.
+- Chapter/Lab/Solution 07: Production Readiness, R7 project-driven rewrite.
 
 ## Commands
 

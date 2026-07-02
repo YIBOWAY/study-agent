@@ -197,7 +197,7 @@ Exit criteria:
 
 Follow-up:
 
-- R2, R3, and R4 completed the Part 2, Part 3, and Part 4 teaching rewrites; R5-R7 should rewrite Parts 5-7 with the same project-driven teaching method.
+- R2, R3, R4, R5, R6, and R7 completed or landed the Part 2 through Part 7 teaching rewrites with the same project-driven teaching method; R8 should build the full Capstone materials under `course/capstone/`.
 - R8 should build the full Capstone materials under `course/capstone/`.
 - R9 should add support references such as troubleshooting, design-decision indexes, discussion prompts, and glossary updates.
 
@@ -340,7 +340,7 @@ Completion notes:
 
 Plan: `redesign/docs/plans/2026-07-02-phase-r7-course-teaching-redesign.md`
 
-Status: In Progress (started 2026-07-02).
+Status: In Progress (started 2026-07-02; Part 7 content and gate sync landed, final verification pending).
 
 Purpose:
 

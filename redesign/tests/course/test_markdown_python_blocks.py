@@ -31,6 +31,9 @@ COURSE_MARKDOWN_PATHS = (
     PROJECT_ROOT / "course" / "chapters" / "06-framework-comparisons.md",
     PROJECT_ROOT / "course" / "labs" / "06-framework-comparisons-lab.md",
     PROJECT_ROOT / "course" / "solutions" / "06-framework-comparisons-solution.md",
+    PROJECT_ROOT / "course" / "chapters" / "07-production-readiness.md",
+    PROJECT_ROOT / "course" / "labs" / "07-production-readiness-lab.md",
+    PROJECT_ROOT / "course" / "solutions" / "07-production-readiness-solution.md",
 )
 
 
@@ -159,7 +162,7 @@ Research Workbench API
     assert report.expected_outputs_checked == 1
 
 
-def test_course_python_blocks_for_parts_1_through_4_stay_executable() -> None:
+def test_course_python_blocks_for_parts_0_through_7_stay_executable() -> None:
     report = validate_markdown_python_blocks(COURSE_MARKDOWN_PATHS, PROJECT_ROOT)
 
     expected_files = tuple(path.resolve(strict=False) for path in COURSE_MARKDOWN_PATHS)
