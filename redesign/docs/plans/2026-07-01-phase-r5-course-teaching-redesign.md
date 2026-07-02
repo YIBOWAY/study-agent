@@ -1,6 +1,6 @@
 # Phase R5: Part 5 Course Restructuring Implementation Plan
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [x]`) syntax for tracking.
 
 **Goal:** Rewrite Part 5 so Workbench Product teaches the product-adapter boundary (raw domain objects -> `WorkbenchSnapshot` -> FastAPI read API -> React panels) through the local paper research assistant's "the researcher cannot read code, give them an inspectable workbench" problem, using the project-driven teaching contract established in Phases R1-R4.
 
@@ -117,11 +117,11 @@ Modify:
 - Create: `docs/progress/phases/phase-r5.md`
 - Modify: `docs/README.md`, `docs/course/roadmap.md`, `docs/progress/README.md`, `docs/progress/overall.md`, `docs/plans/2026-06-25-redesign-execution-roadmap.md`
 
-- [ ] **Step 1: Add this plan** — save this plan under `docs/plans/` (already done by this authoring step).
-- [ ] **Step 2: Start progress tracking** — create `docs/progress/phases/phase-r5.md` with R5 scope, task checklist, verification target, and a start log dated with the actual start date.
-- [ ] **Step 3: Update indexes** — update the docs/progress indexes and the execution roadmap so R5 is visible as active, without marking rewritten course content complete yet.
-- [ ] **Step 4: Verify indexed docs paths** — run `cd redesign && PYTHONPATH=packages/research_core/src uv run pytest tests/course/test_docs_freshness.py -q`. Expected: docs freshness passes.
-- [ ] **Step 5: Commit** — commit the plan/progress kickoff on a phase branch (for example `codex/redesign-course-r5`).
+- [x] **Step 1: Add this plan** — save this plan under `docs/plans/` (already done by this authoring step).
+- [x] **Step 2: Start progress tracking** — create `docs/progress/phases/phase-r5.md` with R5 scope, task checklist, verification target, and a start log dated with the actual start date.
+- [x] **Step 3: Update indexes** — update the docs/progress indexes and the execution roadmap so R5 is visible as active, without marking rewritten course content complete yet.
+- [x] **Step 4: Verify indexed docs paths** — run `cd redesign && PYTHONPATH=packages/research_core/src uv run pytest tests/course/test_docs_freshness.py -q`. Expected: docs freshness passes.
+- [x] **Step 5: Commit** — commit the plan/progress kickoff on a phase branch (for example `codex/redesign-course-r5`).
 
 ## Task 2: Extend The Markdown Python Block Gate For Part 5
 
@@ -131,18 +131,18 @@ Modify:
 - Modify: `tests/course/test_markdown_python_blocks.py`
 - Modify: `docs/progress/phases/phase-r5.md`
 
-- [ ] **Step 1: Decide the API-block strategy (design decision)**
+- [x] **Step 1: Decide the API-block strategy (design decision)**
 
 Part 5 is the first Part whose code blocks need a second source root (`apps/api/src`) on top of `packages/research_core/src`. Choose and record one approach:
 
 - Preferred: extend `_ensure_research_core_on_path` (or add a sibling helper) so that when `apps/api/src` exists under the project root, it is also inserted on `sys.path`. This mirrors the exact `PYTHONPATH` the course tells learners to use and keeps the "every executable block actually runs" guarantee for Part 5's API exercises.
 - Fallback: keep API-dependent blocks (`TestClient`, `from research_api.main import create_app`) as `text`/documentation blocks that the gate does not execute, and rely on `tests/apps/test_workbench_api.py` for API correctness. Record this as an explicit exclusion, not a silent gap.
 
-- [ ] **Step 2: Implement the chosen approach (TDD)**
+- [x] **Step 2: Implement the chosen approach (TDD)**
 
 If extending the path: add the helper, then add the three Part 5 files to `COURSE_MARKDOWN_PATHS`. Write/adjust a gate test first so a Part 5 API block would fail before the fix and pass after. Confirm the extension does not change behavior for Parts 1-4 (they only need `packages/research_core/src`).
 
-- [ ] **Step 3: Verify the gate**
+- [x] **Step 3: Verify the gate**
 
 Run `cd redesign && PYTHONPATH=packages/research_core/src uv run pytest tests/course/test_markdown_python_blocks.py -q`. Expected: passes for all included files, now including Part 5. Note: because the gate itself must import `research_api`, confirm the gate test passes under the plain `pytest` invocation used in CI (the helper must add the path, not rely on the caller's `PYTHONPATH`).
 
@@ -153,15 +153,15 @@ Run `cd redesign && PYTHONPATH=packages/research_core/src uv run pytest tests/co
 - Modify: `course/chapters/05-workbench-product.md`
 - Modify: `docs/progress/phases/phase-r5.md`
 
-- [ ] **Step 1: Rewrite opener and learner contract** — turn Chapter 05 into "Part 5: Workbench Product" with a Learner Contract block (Who this is for / Before you start / You will build / You will be able to explain / You will prove it works by running / Offline guarantee), matching Chapter 02-04, and update the project progress tracker so Part 4 is `[x]` and Part 5 is `[*]`.
-- [ ] **Step 2: Open with the problem hook** — start from the researcher who cannot read code or raw event dicts and needs an inspectable workbench. Name the two failures to avoid: the UI inventing its own data model, and the UI reading live internal objects that drift from the runtime.
-- [ ] **Step 3: Introduce the mental model** — product layer = 研究员的仪表盘; `WorkbenchSnapshot` = 一页稳定的页面契约; `from_*` adapters = 工程对象到面板项的翻译; referential validation = 契约替 UI 守边界. Use a story-role/panel table mapping each `Workbench*` item to the raw object it adapts from and the panel it feeds.
-- [ ] **Step 4: Add architecture and composition diagrams** — add at least two ASCII diagrams: (a) the three-layer downward-only data flow (`raw domain objects -> from_* adapters -> WorkbenchSnapshot.to_record() -> FastAPI -> React panels`), and (b) a `WorkbenchSnapshot` composition diagram showing its nine panel slots and their source objects.
-- [ ] **Step 5: Build a snapshot from raw objects and inspect it** — instead of only calling `build_demo_workbench_snapshot()`, walk the learner through assembling a small snapshot from raw `Source`/`Evidence`/`Claim`/`Report`/`RunEvent`/`MemoryRecord` using the `from_*` adapters. Inspect `to_record()` panels, `summary_row()` projections, and the timeline order. Keep `build_demo_workbench_snapshot()` as a reference base case.
-- [ ] **Step 6: Break and fix the referential integrity** — trigger and diagnose the real validation errors: `run project_id must match project id`, `timeline run_id must match run id`, `report claim_source_links evidence_id must reference snapshot evidence`, `delegation node ids must be unique`, and `score must be a number between 0 and 1`. Frame each as Break -> diagnose from the message -> Fix, and explain that the contract fails at construction so a broken snapshot can never reach the UI.
-- [ ] **Step 7: Inspect the transport and UI boundary** — show the FastAPI `TestClient` reading `/health`, `/api/workbench/snapshot`, and `/api/workbench/timeline`, and the mutate-the-record copy-safety proof. Explain the React fallback-fixture-must-match-shape rule with a `[DD]` callout. Note the required `PYTHONPATH=apps/api/src:packages/research_core/src` for API snippets.
-- [ ] **Step 8: Add product connection and eval gate** — explain how every earlier Part's objects surface here (Part 1 events -> timeline, Part 2 evidence chain -> sources/report, Part 3 memory -> memory panel, Part 4 delegation -> delegation tree) and forward to Part 7 (a production run must be reconstructable from the same records). List the exact pytest/ruff commands plus `tests/course/test_markdown_python_blocks.py` and the `cd apps/web && npm run build` check.
-- [ ] **Step 9: Add reflection questions** — include at least one tradeoff question, for example: why enforce referential integrity in the Python snapshot contract instead of in React validation, and what breaks if the UI is the only place that checks it?
+- [x] **Step 1: Rewrite opener and learner contract** — turn Chapter 05 into "Part 5: Workbench Product" with a Learner Contract block (Who this is for / Before you start / You will build / You will be able to explain / You will prove it works by running / Offline guarantee), matching Chapter 02-04, and update the project progress tracker so Part 4 is `[x]` and Part 5 is `[*]`.
+- [x] **Step 2: Open with the problem hook** — start from the researcher who cannot read code or raw event dicts and needs an inspectable workbench. Name the two failures to avoid: the UI inventing its own data model, and the UI reading live internal objects that drift from the runtime.
+- [x] **Step 3: Introduce the mental model** — product layer = 研究员的仪表盘; `WorkbenchSnapshot` = 一页稳定的页面契约; `from_*` adapters = 工程对象到面板项的翻译; referential validation = 契约替 UI 守边界. Use a story-role/panel table mapping each `Workbench*` item to the raw object it adapts from and the panel it feeds.
+- [x] **Step 4: Add architecture and composition diagrams** — add at least two ASCII diagrams: (a) the three-layer downward-only data flow (`raw domain objects -> from_* adapters -> WorkbenchSnapshot.to_record() -> FastAPI -> React panels`), and (b) a `WorkbenchSnapshot` composition diagram showing its nine panel slots and their source objects.
+- [x] **Step 5: Build a snapshot from raw objects and inspect it** — instead of only calling `build_demo_workbench_snapshot()`, walk the learner through assembling a small snapshot from raw `Source`/`Evidence`/`Claim`/`Report`/`RunEvent`/`MemoryRecord` using the `from_*` adapters. Inspect `to_record()` panels, `summary_row()` projections, and the timeline order. Keep `build_demo_workbench_snapshot()` as a reference base case.
+- [x] **Step 6: Break and fix the referential integrity** — trigger and diagnose the real validation errors: `run project_id must match project id`, `timeline run_id must match run id`, `report claim_source_links evidence_id must reference snapshot evidence`, `delegation node ids must be unique`, and `score must be a number between 0 and 1`. Frame each as Break -> diagnose from the message -> Fix, and explain that the contract fails at construction so a broken snapshot can never reach the UI.
+- [x] **Step 7: Inspect the transport and UI boundary** — show the FastAPI `TestClient` reading `/health`, `/api/workbench/snapshot`, and `/api/workbench/timeline`, and the mutate-the-record copy-safety proof. Explain the React fallback-fixture-must-match-shape rule with a `[DD]` callout. Note the required `PYTHONPATH=apps/api/src:packages/research_core/src` for API snippets.
+- [x] **Step 8: Add product connection and eval gate** — explain how every earlier Part's objects surface here (Part 1 events -> timeline, Part 2 evidence chain -> sources/report, Part 3 memory -> memory panel, Part 4 delegation -> delegation tree) and forward to Part 7 (a production run must be reconstructable from the same records). List the exact pytest/ruff commands plus `tests/course/test_markdown_python_blocks.py` and the `cd apps/web && npm run build` check.
+- [x] **Step 9: Add reflection questions** — include at least one tradeoff question, for example: why enforce referential integrity in the Python snapshot contract instead of in React validation, and what breaks if the UI is the only place that checks it?
 
 ## Task 4: Rewrite Lab 05
 
@@ -170,9 +170,9 @@ Run `cd redesign && PYTHONPATH=packages/research_core/src uv run pytest tests/co
 - Modify: `course/labs/05-workbench-product-lab.md`
 - Modify: `docs/progress/phases/phase-r5.md`
 
-- [ ] **Step 1: Convert lab to L1/L2/L3** — L1 Follow: inspect `build_demo_workbench_snapshot().to_record()` panels and call the API with `TestClient`. L2 Modify: predict-then-verify — mutate a returned record and prove the fresh snapshot is unchanged; change one raw object so a `from_*`-built snapshot fails a specific referential check. L3 Design: no skeleton; assemble a *new* valid snapshot from scratch for a different research scenario using the `from_*` adapters, and prove the required invariants (nine panels present, cross-references valid, `to_record()` returns independent copies, `summary_row()` projections correct).
-- [ ] **Step 2: Add feedback loops** — every exercise includes Common Errors, Failure Output Interpretation, Where To Go Back, and Why Correct Answer Is Correct, matching Lab 02-04.
-- [ ] **Step 3: Add break/fix checks** — include the referential-integrity failures (run/project mismatch, timeline run_id mismatch, report evidence reference, duplicate delegation ids) and the bad-eval-score failure, each with expected error text and a diagnosis question before the fix. Keep any API-dependent block consistent with the Task 2 gate decision (executed vs documentation).
+- [x] **Step 1: Convert lab to L1/L2/L3** — L1 Follow: inspect `build_demo_workbench_snapshot().to_record()` panels and call the API with `TestClient`. L2 Modify: predict-then-verify — mutate a returned record and prove the fresh snapshot is unchanged; change one raw object so a `from_*`-built snapshot fails a specific referential check. L3 Design: no skeleton; assemble a *new* valid snapshot from scratch for a different research scenario using the `from_*` adapters, and prove the required invariants (nine panels present, cross-references valid, `to_record()` returns independent copies, `summary_row()` projections correct).
+- [x] **Step 2: Add feedback loops** — every exercise includes Common Errors, Failure Output Interpretation, Where To Go Back, and Why Correct Answer Is Correct, matching Lab 02-04.
+- [x] **Step 3: Add break/fix checks** — include the referential-integrity failures (run/project mismatch, timeline run_id mismatch, report evidence reference, duplicate delegation ids) and the bad-eval-score failure, each with expected error text and a diagnosis question before the fix. Keep any API-dependent block consistent with the Task 2 gate decision (executed vs documentation).
 
 ## Task 5: Rewrite Solution 05
 
@@ -181,9 +181,9 @@ Run `cd redesign && PYTHONPATH=packages/research_core/src uv run pytest tests/co
 - Modify: `course/solutions/05-workbench-product-solution.md`
 - Modify: `docs/progress/phases/phase-r5.md`
 
-- [ ] **Step 1: Provide runnable answers** — include complete L1/L2/L3 solution snippets and assertions, covering every case introduced in Lab 05. Use `assert`-based self-verification so the markdown gate executes and checks them. Keep API snippets under the documented `apps/api/src:packages/research_core/src` path and consistent with the Task 2 decision.
-- [ ] **Step 2: Explain why answers are correct** — for each exercise add "What This Proves" and "Why This Design", matching Solution 02-04. For the open-ended L3, provide one reference snapshot design plus the required invariants, not a single canonical answer.
-- [ ] **Step 3: Connect design decisions forward** — explain why the stable snapshot contract lets FastAPI and React be replaceable shells, why referential integrity belongs in core (Part 7 diagnostics and audits depend on it), and how each earlier Part's contract (events, evidence chain, memory, delegation) shows up as a panel here.
+- [x] **Step 1: Provide runnable answers** — include complete L1/L2/L3 solution snippets and assertions, covering every case introduced in Lab 05. Use `assert`-based self-verification so the markdown gate executes and checks them. Keep API snippets under the documented `apps/api/src:packages/research_core/src` path and consistent with the Task 2 decision.
+- [x] **Step 2: Explain why answers are correct** — for each exercise add "What This Proves" and "Why This Design", matching Solution 02-04. For the open-ended L3, provide one reference snapshot design plus the required invariants, not a single canonical answer.
+- [x] **Step 3: Connect design decisions forward** — explain why the stable snapshot contract lets FastAPI and React be replaceable shells, why referential integrity belongs in core (Part 7 diagnostics and audits depend on it), and how each earlier Part's contract (events, evidence chain, memory, delegation) shows up as a panel here.
 
 ## Task 6: Sync Course Indexes And Progress
 
@@ -191,8 +191,8 @@ Run `cd redesign && PYTHONPATH=packages/research_core/src uv run pytest tests/co
 
 - Modify: `course/README.md`, `docs/README.md`, `docs/course/roadmap.md`, `docs/progress/overall.md`, `docs/progress/phases/phase-r5.md`
 
-- [ ] **Step 1: Mark Part 5 as R5 rewritten** — after Tasks 2-5 land, update course indexes to describe Part 5 as completed R5 material. Keep Parts 6-7 as current v1 material.
-- [ ] **Step 2: Verify docs freshness** — run `cd redesign && PYTHONPATH=packages/research_core/src uv run pytest tests/course/test_docs_freshness.py -q`. Expected: passes with all indexed paths resolved.
+- [x] **Step 1: Mark Part 5 as R5 rewritten** — after Tasks 2-5 land, update course indexes to describe Part 5 as completed R5 material. Keep Parts 6-7 as current v1 material.
+- [x] **Step 2: Verify docs freshness** — run `cd redesign && PYTHONPATH=packages/research_core/src uv run pytest tests/course/test_docs_freshness.py -q`. Expected: passes with all indexed paths resolved.
 
 ## Task 7: Final Verification And Cleanup
 
@@ -200,7 +200,7 @@ Run `cd redesign && PYTHONPATH=packages/research_core/src uv run pytest tests/co
 
 - Modify: `docs/progress/overall.md`, `docs/progress/phases/phase-r5.md`
 
-- [ ] **Step 1: Run final verification** — run from `redesign/`:
+- [x] **Step 1: Run final verification** — run from `redesign/`:
 
 ```bash
 PYTHONPATH=packages/research_core/src uv run pytest -q
@@ -211,10 +211,10 @@ git diff --check
 cd apps/web && npm ci && npm run build
 ```
 
-- [ ] **Step 2: Manually re-run every new/changed course code block** — paste every changed block in Chapter 05, Lab 05, and Solution 05 into a real shell (core blocks under `PYTHONPATH=packages/research_core/src`, API blocks under `PYTHONPATH=apps/api/src:packages/research_core/src`) and confirm output matches the documented output exactly, the same way R1-R4 were verified. The gate compares stdout only for blocks with an adjacent `Expected output:` fence; blocks without one are execution-only, so a manual pass still catches output text the gate does not compare.
-- [ ] **Step 3: Clean generated artifacts** — remove generated `.venv`, `.pytest_cache`, `.ruff_cache`, `uv.lock`, `apps/web/node_modules`, `apps/web/dist`, `apps/web/tsconfig.tsbuildinfo`, and `__pycache__` outputs unless already tracked.
-- [ ] **Step 4: Run final docs reconciliation** — use the neat-freak workflow to verify docs/progress/README/AGENTS alignment, including the markdown-gate scope note now that it covers Parts 1-5 (and the `apps/api/src` path extension if adopted).
-- [ ] **Step 5: Mark R5 complete** — only after fresh verification, mark R5 complete and commit the final docs sync.
+- [x] **Step 2: Manually re-run every new/changed course code block** — paste every changed block in Chapter 05, Lab 05, and Solution 05 into a real shell (core blocks under `PYTHONPATH=packages/research_core/src`, API blocks under `PYTHONPATH=apps/api/src:packages/research_core/src`) and confirm output matches the documented output exactly, the same way R1-R4 were verified. The gate compares stdout only for blocks with an adjacent `Expected output:` fence; blocks without one are execution-only, so a manual pass still catches output text the gate does not compare.
+- [x] **Step 3: Clean generated artifacts** — remove generated `.venv`, `.pytest_cache`, `.ruff_cache`, `uv.lock`, `apps/web/node_modules`, `apps/web/dist`, `apps/web/tsconfig.tsbuildinfo`, and `__pycache__` outputs unless already tracked.
+- [x] **Step 4: Run final docs reconciliation** — use the neat-freak workflow to verify docs/progress/README/AGENTS alignment, including the markdown-gate scope note now that it covers Parts 1-5 (and the `apps/api/src` path extension if adopted).
+- [x] **Step 5: Mark R5 complete** — only after fresh verification, mark R5 complete and commit the final docs sync.
 
 ## Exit Criteria
 

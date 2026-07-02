@@ -31,6 +31,7 @@ This directory is the canonical archive for the redesign version of the project.
 - `plans/2026-07-01-phase-r4-course-teaching-redesign.md`: Phase R4 implementation plan for the Part 4 Multi-Agent Delegation teaching rewrite.
 - `plans/2026-07-01-phase-r5-course-teaching-redesign.md`: Phase R5 implementation plan for the Part 5 Workbench Product teaching rewrite.
 - `plans/2026-07-01-phase-r6-course-teaching-redesign.md`: Phase R6 implementation plan for the Part 6 Framework Comparisons teaching rewrite.
+- `plans/2026-07-02-phase-r7-course-teaching-redesign.md`: Phase R7 implementation plan for the Part 7 Production Readiness teaching rewrite.
 - `progress/overall.md`: phase status dashboard for humans and agents.
 - `architecture/overview.md`: double-layer repository and dependency direction.
 - `architecture/runtime.md`: runtime contracts, Phase 1 agent loop, fake provider boundary, delegation events, and Phase 5 product boundary.
@@ -65,12 +66,12 @@ This directory is the canonical archive for the redesign version of the project.
 - `../course/chapters/04-multi-agent-delegation.md`: Part 4 R4 Multi-Agent Delegation material.
 - `../course/labs/04-delegation-runtime-lab.md`: Part 4 R4 DelegationRuntime lab with L1/L2/L3 exercises.
 - `../course/solutions/04-delegation-runtime-solution.md`: Part 4 R4 DelegationRuntime solution with reference design and invariants.
-- `../course/chapters/05-workbench-product.md`: Part 5 current v1 Workbench Product integration material until R5.
-- `../course/labs/05-workbench-product-lab.md`: Part 5 current v1 WorkbenchSnapshot, API, and web build lab until R5.
-- `../course/solutions/05-workbench-product-solution.md`: Part 5 current v1 Workbench Product solution until R5.
-- `../course/chapters/06-framework-comparisons.md`: Part 6 current v1 framework comparison method material until R6.
-- `../course/labs/06-framework-comparisons-lab.md`: Part 6 current v1 recommendation matrix lab until R6.
-- `../course/solutions/06-framework-comparisons-solution.md`: Part 6 current v1 Framework Comparisons solution until R6.
+- `../course/chapters/05-workbench-product.md`: Part 5 R5 Workbench Product material around the product-adapter boundary.
+- `../course/labs/05-workbench-product-lab.md`: Part 5 R5 WorkbenchSnapshot, API, and web build lab with L1/L2/L3 exercises.
+- `../course/solutions/05-workbench-product-solution.md`: Part 5 R5 Workbench Product solution with reference design and invariants.
+- `../course/chapters/06-framework-comparisons.md`: Part 6 R6 framework comparison material around pinned task/fixture/metric scoring.
+- `../course/labs/06-framework-comparisons-lab.md`: Part 6 R6 recommendation matrix lab with L1/L2/L3 exercises.
+- `../course/solutions/06-framework-comparisons-solution.md`: Part 6 R6 Framework Comparisons solution with reference design and invariants.
 - `../course/chapters/07-production-readiness.md`: Part 7 current v1 production-readiness contracts material until R7.
 - `../course/labs/07-production-readiness-lab.md`: Part 7 current v1 production diagnostics, persistence, approval, and sandbox lab until R7.
 - `../course/solutions/07-production-readiness-solution.md`: Part 7 current v1 Production Readiness solution until R7.

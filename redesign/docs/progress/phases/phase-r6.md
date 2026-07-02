@@ -33,14 +33,14 @@ R6 has no infra/gate code change (a deliberate contrast with R5's `apps/api/src`
 
 ## Exit Signal
 
-- [ ] Chapter/Lab/Solution 06 are rewritten around the build-vs-adopt decision problem.
-- [ ] Part 6 has at least two ASCII diagrams and at least three `[DD]` / `[TRAP]` / `[CHECK]` / `[BIG]` / `[DEEP]` callouts.
-- [ ] The rewrite makes the weighted score transparent (manual `total_score` reproduction, `>=0.8` strengths / `<0.55` tradeoffs derivation, deterministic tie-break).
-- [ ] Lab 06 includes L1 Follow, L2 Modify, and L3 Design exercises with feedback loops.
-- [ ] Solution 06 provides runnable L1/L2 answers plus one valid L3 reference design and the required winner invariant.
-- [ ] Every error-demonstrating block self-catches, and the markdown Python block gate covers Part 6 with no infra/gate helper change.
-- [ ] Docs index, course roadmap, course README, redesign README, and overall progress are synced.
-- [ ] Fresh verification results and a whole-branch review are recorded.
+- [x] Chapter/Lab/Solution 06 are rewritten around the build-vs-adopt decision problem.
+- [x] Part 6 has at least two ASCII diagrams and at least three `[DD]` / `[TRAP]` / `[CHECK]` / `[BIG]` / `[DEEP]` callouts.
+- [x] The rewrite makes the weighted score transparent (manual `total_score` reproduction, `>=0.8` strengths / `<0.55` tradeoffs derivation, deterministic tie-break).
+- [x] Lab 06 includes L1 Follow, L2 Modify, and L3 Design exercises with feedback loops.
+- [x] Solution 06 provides runnable L1/L2 answers plus one valid L3 reference design and the required winner invariant.
+- [x] Every error-demonstrating block self-catches, and the markdown Python block gate covers Part 6 with no infra/gate helper change.
+- [x] Docs index, course roadmap, course README, redesign README, and overall progress are synced.
+- [x] Fresh verification results and a whole-branch review are recorded.
 
 ## Progress Log
 
@@ -53,6 +53,7 @@ R6 has no infra/gate code change (a deliberate contrast with R5's `apps/api/src`
 | 2026-07-01 | Task 4 landed (commit `608ea30`): Solution 06 rewritten with runnable assert-based L1/L2/L3 answers (including a manual `total_score` reproduction and a runnable L3 reference design where langgraph beats the crewai decoy), What This Proves / Why This Design per tier, Forward Connections, and Final Takeaway. Gate self-check 12 blocks, all asserts pass. Task reviewer approved with one Minor note recorded. |
 | 2026-07-01 | Task 5 landed: Part 6 chapter/lab/solution added to `COURSE_MARKDOWN_PATHS` (markdown gate now covers Parts 0-6, `5 passed`; direct run 41 Part-6 blocks / 25 expected outputs matched). Course README, redesign README, roadmap, execution roadmap, and progress indexes now describe Part 6 as R6 rewritten while Part 7 stays v1. |
 | 2026-07-01 | Task 6 completed final verification and whole-branch review. Coordinator verification: full `pytest -q` `204 passed`; `ruff check .` clean; docs freshness + markdown gate `8 passed`; `git diff --check` clean; `apps/web` `npm ci && npm run build` clean. A whole-branch code-reviewer returned READY WITH MINOR FOLLOW-UPS with no Critical/Important findings; the two recorded Minor notes (the empty-weights Break rationale wording, consistent across all three files; and Solution Break E reusing the L1 `matrix` under the shared-namespace model) were both triaged acceptable-as-is. Generated artifacts were removed before final status checks. |
+| 2026-07-02 | Post-audit sync fixed stale completion markers: R6 exit signals are now checked, docs indexes no longer describe Parts 5-6 as current v1 material, Part 7's v1 failure preview and eval gate are direct-gate clean, and the R7 teaching-redesign plan has been added for the next phase. Verification rerun: full `pytest -q` `204 passed`; `ruff check .` clean; docs freshness `3 passed`; markdown gate `5 passed`; direct Part 7 gate checked 18 Python blocks; `git diff --check` clean; `apps/web` build clean. |
 
 ## Verification Target
 

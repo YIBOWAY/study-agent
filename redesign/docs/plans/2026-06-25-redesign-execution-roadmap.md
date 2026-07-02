@@ -335,3 +335,25 @@ Completion notes:
 - `cd redesign && PYTHONPATH=packages/research_core/src uv run pytest tests/course/test_docs_freshness.py -q` passed on 2026-07-01 with `3 passed`.
 - `cd redesign && PYTHONPATH=packages/research_core/src uv run pytest tests/course/test_markdown_python_blocks.py -q` passed on 2026-07-01 with `5 passed` (Parts 0-6).
 - `cd redesign/apps/web && npm ci && npm run build` passed on 2026-07-01.
+
+### Phase R7: Course Teaching Redesign - Part 7
+
+Plan: `redesign/docs/plans/2026-07-02-phase-r7-course-teaching-redesign.md`
+
+Status: Planned.
+
+Purpose:
+
+- Rewrite Part 7 so Production Readiness starts from the local paper research assistant's "can we replay, audit, and block unsafe runs before real deployment?" problem.
+- Teach `RunDiagnostics`, `JsonlRunEventStore`, `ApprovalPolicy`, `SandboxPolicy`, and docs freshness as local-first production boundaries.
+- Add the three Part 7 files to the markdown Python block gate after the rewrite normalizes every error-demonstrating block.
+
+Exit criteria:
+
+- Chapter/Lab/Solution 07 are rewritten using the R1-R6 teaching contract.
+- `course/README.md`, `README.md`, `docs/course/roadmap.md`, `docs/README.md`, and `docs/progress/` describe Part 7 as R7 rewritten after content lands.
+- `cd redesign && PYTHONPATH=packages/research_core/src uv run pytest -q` passes.
+- `cd redesign && PYTHONPATH=packages/research_core/src uv run ruff check .` passes.
+- `cd redesign && PYTHONPATH=packages/research_core/src uv run pytest tests/course/test_docs_freshness.py -q` passes.
+- `cd redesign && PYTHONPATH=packages/research_core/src uv run pytest tests/course/test_markdown_python_blocks.py -q` passes for Parts 0-7.
+- `cd redesign/apps/web && npm ci && npm run build` passes.

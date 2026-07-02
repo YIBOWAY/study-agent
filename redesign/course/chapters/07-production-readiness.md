@@ -209,13 +209,18 @@ print(sandbox.network_decision().to_record())
 故意把 sandbox access 写成不存在的动作：
 
 ```python
-sandbox.decide_path(workspace / "script.sh", access="execute")
+try:
+    sandbox.decide_path(workspace / "script.sh", access="execute")
+except ValueError as exc:
+    print(type(exc).__name__, str(exc))
+else:
+    raise AssertionError("Expected invalid access to fail")
 ```
 
 你应该看到：
 
 ```text
-ValueError: access must be one of: read, write
+ValueError access must be one of: read, write
 ```
 
 这是一种好失败。contract 不会猜 `execute` 是什么意思，也不会偷偷当成 read 或 write。生产 readiness 的一部分，就是让坏输入在边界处清楚地失败。
@@ -236,8 +241,10 @@ assert diagnostics.event_count == 4
 assert diagnostics.event_type_counts["error"] == 1
 assert diagnostics.error_summaries[0]["message"] == "fixture missing"
 
-store.append_many(events)
-assert [event.id for event in store.read_run("run_7")] == [
+gate_tmp = TemporaryDirectory()
+gate_store = JsonlRunEventStore(Path(gate_tmp.name) / "events.jsonl")
+gate_store.append_many(events)
+assert [event.id for event in gate_store.read_run("run_7")] == [
     "evt_1",
     "evt_2",
     "evt_3",
