@@ -102,7 +102,11 @@ WorkerRunner = Callable[[WorkerTask, Sequence[BaseTool]], AgentRunResult]
 
 def compile_child_prompt(task: WorkerTask) -> str:
     """Build the only user message the child should see (isolated context)."""
-    parts = [f"Objective: {task.objective}"]
+    parts = [
+        f"Role: {task.role.name}",
+        f"Role instructions: {task.role.system_prompt}",
+        f"Objective: {task.objective}",
+    ]
     if task.context_messages:
         parts.append("Allowed context:")
         for i, msg in enumerate(task.context_messages, start=1):
@@ -156,7 +160,15 @@ class DelegationCoordinator:
     """Sequential multi-worker coordinator with parent trail and budgets.
 
     Does not auto-enforce skill/memory allowlists (honest boundary, same lesson
-    as handwritten Part 4). Enforces max_steps / budget counts.
+    as handwritten Part 4).
+
+    Budget honesty (intentional teaching design for scripted/offline runners):
+    per-worker step caps are enforced *post-hoc* after ``runner`` returns.
+    Side effects from the runner may already have happened before the coordinator
+    compares model_request count to the cap and marks the WorkerResult failed.
+    ``run_many`` soft-fails remaining tasks when total steps are exhausted
+    (failed "not run" results) rather than raising mid-loop; ``max_workers``
+    is still enforced up front by raising DelegationError.
     """
 
     parent_steps: list[AgentStep] = field(default_factory=list)
@@ -212,6 +224,7 @@ class DelegationCoordinator:
             return result
 
         step_count = _count_model_requests(agent_result)
+        # Post-hoc: runner already returned; side effects may have occurred.
         per_cap = min(task.role.max_steps, budget.max_steps_per_worker, remaining)
         if step_count > per_cap:
             result = WorkerResult(
@@ -255,7 +268,41 @@ class DelegationCoordinator:
             )
         results: list[WorkerResult] = []
         used = 0
-        for task in tasks:
+        for index, task in enumerate(tasks):
+            remaining = budget.max_total_steps - used
+            if remaining < 1:
+                # Soft-fail this task and all subsequent ones; do not raise.
+                # Still record parent trail so merge results and audit trail agree.
+                for leftover in tasks[index:]:
+                    skipped = WorkerResult(
+                        task_id=leftover.task_id,
+                        status="failed",
+                        final_text="",
+                        steps=(),
+                        step_count=0,
+                        error_message="not run: no remaining total steps",
+                    )
+                    self.parent_steps.append(
+                        AgentStep(
+                            kind="delegate_start",
+                            payload={
+                                "task_id": leftover.task_id,
+                                "role": leftover.role.name,
+                                "objective": leftover.objective,
+                                "context_count": len(leftover.context_messages),
+                                "skipped": True,
+                                "reason": "no remaining total steps",
+                            },
+                        )
+                    )
+                    self.parent_steps.append(
+                        AgentStep(
+                            kind="delegate_finish",
+                            payload=skipped.to_record(),
+                        )
+                    )
+                    results.append(skipped)
+                break
             result = self.run_task(
                 task,
                 budget,
@@ -265,9 +312,6 @@ class DelegationCoordinator:
             )
             results.append(result)
             used += result.step_count
-            if used > budget.max_total_steps:
-                # mark remaining as not run via conflict on last? already counted
-                break
         return merge_worker_results(results)
 
     def parent_step_kinds(self) -> list[str]:

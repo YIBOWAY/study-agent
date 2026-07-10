@@ -4,8 +4,8 @@
 
 ### L1 Child prompt
 
-- `compile_child_prompt` 固定结构：`Objective` + 可选 `Allowed context` 编号列表 + “不要编造 parent-private history”。
-- 隔离靠**调用方不传**，不是靠模型自觉。
+- `compile_child_prompt` 固定结构：`Role` + `Role instructions`（`WorkerRole.system_prompt`）+ `Objective` + 可选 `Allowed context` 编号列表 + “不要编造 parent-private history”。
+- 隔离靠**调用方不传 parent 私有历史**，不是靠模型自觉；role 指令会注入 child 可见 prompt。
 
 ### L1 Single task trail
 
@@ -104,7 +104,25 @@ over = DelegationCoordinator().run_task(
 )
 assert over.status == "failed"
 assert "budget exceeded" in over.error_message
+
+# run_many：total steps 用尽时后续 soft-fail（不 raise），parent trail 仍对齐
+coord_many = DelegationCoordinator()
+role = WorkerRole(name="w", system_prompt="w", max_steps=2)
+tasks_many = [
+    WorkerTask(task_id="a", role=role, objective="use budget"),
+    WorkerTask(task_id="b", role=role, objective="skip"),
+]
+merged_skip = coord_many.run_many(
+    tasks_many,
+    WorkerBudget(max_workers=3, max_steps_per_worker=2, max_total_steps=1),
+    runner=scripted_runner({"a": make_plain_agent_result("ok", model_requests=1)}),
+)
+assert merged_skip.worker_results[1].status == "failed"
+assert "not run" in merged_skip.worker_results[1].error_message
+assert "delegate_start" in coord_many.parent_step_kinds()
 ```
+
+**预算诚实边界**：per-worker cap 是 **post-hoc**（scripted/offline runner 返回后再比 `model_request` 次数）；side effect 可能已经发生。`run_many` 在 total steps 用尽时对剩余 task soft-fail 并写 parent trail，而不是中途 raise。
 
 **设计讨论参考**：把 pinned memory **复制**进 `context_messages`，child 得到的是一次性快照，parent 可审计“到底泄露了哪些句子”。共享整个 `Notebook` 等于默许 child 任意 recall，与 “skill/memory allowlist 不自动 enforce、由调用方显式编译 context” 的诚实边界冲突。
 
@@ -119,6 +137,8 @@ assert "budget exceeded" in over.error_message
 1. 用 `len(result.steps)` 当 budget → 应用 `model_request` 计数。
 2. 以为 `tool_names=()` 表示“禁用所有工具” → 空 tuple 表示不过滤（返回全部传入 tools）。
 3. merge 只读 `summary` 字符串 → 必须检查 `unresolved_conflicts`。
+4. 以为 `system_prompt` 只校验不注入 → `compile_child_prompt` 会写 `Role instructions:`。
+5. 以为 total budget 用尽会 raise 整批 → `run_many` soft-fail 剩余 task。
 
 ## Offline gate
 

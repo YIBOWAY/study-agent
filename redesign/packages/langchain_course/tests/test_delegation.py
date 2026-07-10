@@ -62,10 +62,34 @@ def test_compile_child_prompt_includes_objective_and_allowed_context_only() -> N
     assert "API_KEY" not in prompt
 
 
+def test_compile_child_prompt_includes_role_system_prompt() -> None:
+    """WorkerRole.system_prompt is validated and must appear in the child prompt."""
+    role = _role(
+        name="critic",
+        system_prompt="Challenge weak evidence and demand citations.",
+    )
+    task = _task(
+        role=role,
+        objective="Review the draft.",
+        context_messages=("Draft claims X",),
+    )
+    prompt = compile_child_prompt(task)
+
+    assert "Challenge weak evidence and demand citations." in prompt
+    assert "Role instructions:" in prompt
+    assert "Objective: Review the draft." in prompt
+
+
 def test_filter_tools_for_role_empty_returns_all_nonempty_filters() -> None:
+    """Empty tool_names means all tools; non-empty is an allowlist filter."""
     tools = [echo, add]
-    all_tools = filter_tools_for_role(_role(tool_names=()), tools)
+    empty_names_role = _role(tool_names=())
+    assert empty_names_role.tool_names == ()
+
+    all_tools = filter_tools_for_role(empty_names_role, tools)
     assert [t.name for t in all_tools] == ["echo", "add"]
+    # Same object identities: empty allowlist is "all tools", not a copy filter miss
+    assert all_tools == list(tools)
 
     only_echo = filter_tools_for_role(_role(tool_names=("echo",)), tools)
     assert [t.name for t in only_echo] == ["echo"]
@@ -117,6 +141,12 @@ def test_run_task_exhausted_total_steps_raises() -> None:
 
 
 def test_run_task_budget_exceeded_marks_failed() -> None:
+    """Budget enforcement is intentionally post-hoc for scripted/offline runners.
+
+    The runner may already have executed (side effects possible) before the
+    coordinator compares model_request count to the per-worker cap and marks
+    the WorkerResult failed. Teaching-honest: still fail when step_count > cap.
+    """
     coordinator = DelegationCoordinator()
     task = _task(role=_role(max_steps=1))
     budget = WorkerBudget(max_workers=1, max_steps_per_worker=1, max_total_steps=5)
@@ -126,7 +156,9 @@ def test_run_task_budget_exceeded_marks_failed() -> None:
 
     result = coordinator.run_task(task, budget, runner=runner)
 
+    # Post-hoc: runner already returned final_text and steps; status is failed.
     assert result.status == "failed"
+    assert result.final_text == "too many steps"
     assert result.step_count == 3
     assert "budget exceeded" in result.error_message
     assert "3 > cap 1" in result.error_message
@@ -196,6 +228,77 @@ def test_run_many_mixed_results_merge_decisions_and_conflicts() -> None:
     assert merged.unresolved_conflicts[0].startswith("bad:")
     assert "budget exceeded" in merged.unresolved_conflicts[0]
     assert "1 completed, 1 unresolved conflict(s)" in merged.summary
+
+
+def test_run_many_exhausted_total_steps_marks_remaining_not_run_without_raising() -> None:
+    """When total budget is exhausted mid-loop, later tasks fail as not-run.
+
+    run_many must not raise DelegationError for exhausted total steps after a
+    prior worker used the remaining budget. Each remaining task becomes a
+    failed WorkerResult with step_count=0 and a clear "not run" error, and
+    merge includes those conflicts. Parent trail records start/finish for
+    skipped workers so audit and merge stay aligned. Leftover runners must
+    never be invoked.
+    """
+    coordinator = DelegationCoordinator()
+    role = _role(max_steps=3)
+    tasks = [
+        _task(task_id="first", role=role, objective="Use all steps"),
+        _task(task_id="second", role=role, objective="Should not run"),
+        _task(task_id="third", role=role, objective="Also should not run"),
+    ]
+    # First worker uses exactly max_total_steps; remaining tasks have no budget.
+    budget = WorkerBudget(max_workers=3, max_steps_per_worker=3, max_total_steps=2)
+    called: list[str] = []
+    base = scripted_runner(
+        {
+            # Only first is scripted — leftover ids raise if runner is wrongly called.
+            "first": make_plain_agent_result("done", model_requests=2),
+        }
+    )
+
+    def counting_runner(task: WorkerTask, tools) -> object:
+        called.append(task.task_id)
+        return base(task, tools)
+
+    merged = coordinator.run_many(tasks, budget, runner=counting_runner)  # type: ignore[arg-type]
+
+    assert called == ["first"], f"leftover runners must not run, got {called}"
+
+    assert len(merged.worker_results) == 3
+    first, second, third = merged.worker_results
+    assert first.status == "completed"
+    assert first.step_count == 2
+    assert first.final_text == "done"
+
+    for leftover in (second, third):
+        assert leftover.status == "failed"
+        assert leftover.step_count == 0
+        assert leftover.final_text == ""
+        assert "not run" in leftover.error_message
+        assert "no remaining total steps" in leftover.error_message
+
+    assert merged.decisions == ("first: done",)
+    assert len(merged.unresolved_conflicts) == 2
+    # Parent trail includes start/finish for run + both skipped workers (6 steps).
+    assert coordinator.parent_step_kinds() == [
+        "delegate_start",
+        "delegate_finish",
+        "delegate_start",
+        "delegate_finish",
+        "delegate_start",
+        "delegate_finish",
+    ]
+    assert coordinator.parent_steps[0].payload["task_id"] == "first"
+    assert coordinator.parent_steps[2].payload["task_id"] == "second"
+    assert coordinator.parent_steps[2].payload.get("skipped") is True
+    assert coordinator.parent_steps[3].payload["status"] == "failed"
+    assert coordinator.parent_steps[4].payload["task_id"] == "third"
+    assert coordinator.parent_steps[5].payload["status"] == "failed"
+    assert any(c.startswith("second:") for c in merged.unresolved_conflicts)
+    assert any(c.startswith("third:") for c in merged.unresolved_conflicts)
+    assert "not run" in merged.unresolved_conflicts[0]
+    assert "1 completed, 2 unresolved conflict(s)" in merged.summary
 
 
 def test_merge_summary_strings_sensible() -> None:

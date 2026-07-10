@@ -202,7 +202,7 @@ except SkillError as exc:
 
 1. `load()` 只读 `SKILL.md` frontmatter + body，列出 `references/` / `scripts/` 文件名。
 2. `read_reference()` 才打开正文；拒绝 `..` 路径穿越。
-3. 未列入 manifest 的 reference 名会 `SkillError`。
+3. 未列入 manifest 的 reference 名会 `SkillError`——**含** `references/hidden.md` 前缀形式；只允许 bare 列表名或 `references/<listed-name>`。
 
 > [TRAP] **progressive disclosure 不是“懒加载缓存”**：是教学纪律——默认不把全部 reference 塞进 agent 上下文。
 

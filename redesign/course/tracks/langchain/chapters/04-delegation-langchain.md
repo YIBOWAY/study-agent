@@ -7,9 +7,9 @@
 ## Learner Contract
 
 - **你会构建**：`DelegationCoordinator` 串行派工：`WorkerRole` + `WorkerTask` + `WorkerBudget` → `WorkerResult` / `MergeResult`。
-- **你会解释**：为什么 child prompt 只含 objective + allowed context；为什么 budget 按 child `model_request` 计数；为什么 merge 不吞 failed worker。
+- **你会解释**：为什么 child prompt 含 Role instructions + objective + allowed context（不含 parent 私有历史）；为什么 budget 按 child `model_request` **事后**计数；为什么 merge 不吞 failed / not-run worker。
 - **你怎么验收**：`uv run pytest packages/langchain_course/tests/test_delegation.py -q`（离线）。
-- **诚实边界**：不自动 enforce skill/memory allowlist；提供 `filter_tools_for_role` helper。不依赖 LangGraph。
+- **诚实边界**：不自动 enforce skill/memory allowlist；提供 `filter_tools_for_role` helper。预算是 post-hoc（runner 已返回后比对步数）。不依赖 LangGraph。
 
 ## 与 handwritten 对照
 
@@ -75,6 +75,8 @@ task = WorkerTask(
 )
 prompt = compile_child_prompt(task)
 print(prompt)
+assert "Role: citation_reviewer" in prompt
+assert "Role instructions: Check citation links only." in prompt
 assert "Objective: Verify claim links mention paper_1." in prompt
 assert "Allowed context:" in prompt
 assert "1. Claim: RAG eval needs citation grounding." in prompt
@@ -82,7 +84,7 @@ assert "Do not invent parent-private history." in prompt
 assert "secret parent chain-of-thought" not in prompt
 ```
 
-> [CHECK] child **只**应看到你放进 `context_messages` 的材料。parent 其它历史默认不传。
+> [CHECK] child 看到 **role 指令 + objective + 你放进 `context_messages` 的材料**。parent 其它历史默认不传。
 
 ## Section 3 [BUILD]：单 worker + parent trail
 
@@ -186,7 +188,8 @@ assert [t.name for t in filter_tools_for_role(role_all, [echo, add])] == ["echo"
 
 1. `role.max_steps > budget.max_steps_per_worker` → `DelegationError`（跑之前）
 2. `len(tasks) > budget.max_workers` → `DelegationError`
-3. scripted child `model_requests` 超过 cap → `WorkerResult.status == "failed"`，`error_message` 含 `budget exceeded`
+3. scripted child `model_requests` 超过 cap → `WorkerResult.status == "failed"`，`error_message` 含 `budget exceeded`（**post-hoc**：runner 已跑完）
+4. `run_many` 中 total steps 用尽 → 后续 task **不 raise**，而是 `failed` + `not run: no remaining total steps`，且 parent trail 仍记 `delegate_start`/`delegate_finish`（payload 可含 `skipped`）
 
 ```python
 from langchain_course.delegation import DelegationError

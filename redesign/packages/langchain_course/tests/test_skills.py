@@ -58,10 +58,49 @@ def test_read_reference_rejects_path_traversal(tmp_path: Path) -> None:
 
 def test_read_unlisted_reference_fails(tmp_path: Path) -> None:
     skill = _write_skill(tmp_path)
-    (skill / "references" / "hidden.md").write_text("nope", encoding="utf-8")
-    # recreate listing without hidden by only having checklist in dir... actually discover lists all
-    # remove checklist and only hidden? better: request a name not present
     loader = SkillLoader()
     manifest = loader.load(skill)
     with pytest.raises(SkillError, match="not listed"):
         loader.read_reference(manifest, "missing.md")
+
+
+def test_read_unlisted_but_present_bare_name_fails(tmp_path: Path) -> None:
+    """Bare basename that exists on disk but is absent from the load-time list."""
+    skill = _write_skill(tmp_path)
+    loader = SkillLoader()
+    manifest = loader.load(skill)
+    assert "hidden.md" not in manifest.references
+    (skill / "references" / "hidden.md").write_text("nope", encoding="utf-8")
+    with pytest.raises(SkillError, match="not listed"):
+        loader.read_reference(manifest, "hidden.md")
+
+
+def test_read_reference_rejects_unlisted_references_prefix_even_if_file_exists(
+    tmp_path: Path,
+) -> None:
+    """Allowlist must apply to "references/<name>" form, not only bare basenames.
+
+    Files added after load (or otherwise absent from manifest.references) must
+    not be readable just because the caller prefixes references/.
+    """
+    skill = _write_skill(tmp_path)
+    loader = SkillLoader()
+    manifest = loader.load(skill)
+    assert "hidden.md" not in manifest.references
+
+    # Added after load so discover never listed it; file exists on disk.
+    (skill / "references" / "hidden.md").write_text("secret unlisted", encoding="utf-8")
+
+    with pytest.raises(SkillError, match="not listed"):
+        loader.read_reference(manifest, "references/hidden.md")
+
+
+def test_read_reference_accepts_prefixed_listed_name(tmp_path: Path) -> None:
+    """Prefixed form "references/<name>" is allowed when <name> is listed."""
+    skill = _write_skill(tmp_path)
+    loader = SkillLoader()
+    manifest = loader.load(skill)
+    assert "checklist.md" in manifest.references
+
+    text = loader.read_reference(manifest, "references/checklist.md")
+    assert "Collect sources" in text

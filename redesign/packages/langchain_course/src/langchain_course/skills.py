@@ -99,17 +99,23 @@ class SkillLoader:
         if rel.is_absolute() or ".." in rel.parts:
             raise SkillError(f"unsafe reference path: {relative_path}")
         rel_str = rel.as_posix()
-        if rel_str not in manifest.references and not rel_str.startswith("references/"):
-            # allow either bare filename discovered under references/ or prefixed form
-            bare = Path(rel_str).name
-            if bare not in manifest.references:
+        # Allow only: (a) bare name listed in manifest.references, or
+        # (b) "references/<name>" where <name> is listed. Reject all else.
+        if rel_str in manifest.references:
+            bare = rel_str
+        elif rel_str.startswith("references/"):
+            bare = rel_str.removeprefix("references/")
+            if not bare or "/" in bare or bare not in manifest.references:
                 raise SkillError(
                     f"reference {relative_path!r} is not listed in skill manifest; "
                     "load() does not auto-read references"
                 )
-            rel = Path("references") / bare
-        elif rel_str in manifest.references:
-            rel = Path("references") / rel_str
+        else:
+            raise SkillError(
+                f"reference {relative_path!r} is not listed in skill manifest; "
+                "load() does not auto-read references"
+            )
+        rel = Path("references") / bare
         root = Path(manifest.root).resolve()
         target = (root / rel).resolve()
         try:
