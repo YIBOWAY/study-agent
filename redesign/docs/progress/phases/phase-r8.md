@@ -43,6 +43,7 @@ Build the full Capstone under `course/capstone/`: paper fixtures, starter, solut
 | 2026-07-10 | Landed starter skeleton + skip-until-implemented tests; solution `run_capstone()`, tests, trajectory, report, reflection. |
 | 2026-07-10 | Residual optimization: root `.gitignore` for node_modules/uv.lock/tsbuildinfo/caches; index honesty sweep for Capstone complete language. |
 | 2026-07-10 | Docs/progress/course indexes synced; R8 marked complete; R9 remains planned. |
+| 2026-07-10 | Post-R8 review + neat-freak: Engineer Track Capstone step; architecture data-model/runtime/overview honesty; Capstone `runtime_decision` exercised in solution/tests. |
 
 ## Deliverables
 

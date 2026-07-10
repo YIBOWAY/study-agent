@@ -35,8 +35,8 @@ This directory is the canonical archive for the redesign version of the project.
 - `plans/2026-07-10-phase-r8-course-teaching-redesign.md`: Phase R8 implementation plan for the full Capstone project.
 - `progress/overall.md`: phase status dashboard for humans and agents.
 - `architecture/overview.md`: double-layer repository and dependency direction.
-- `architecture/runtime.md`: runtime contracts, Phase 1 agent loop, fake provider boundary, delegation events, and Phase 5 product boundary.
-- `architecture/data-model.md`: research entities, memory records, skill package model, delegation contracts, workbench snapshot model, fake retrieval, ingestion, and claim-source mapping.
+- `architecture/runtime.md`: runtime contracts, Phase 1 agent loop, fake provider boundary, delegation events, Phase 5-7 product/production boundaries, and Capstone composition boundary.
+- `architecture/data-model.md`: research entities, memory records, skill package model, delegation contracts, workbench snapshot model, fake retrieval, ingestion, claim-source mapping, and Capstone composition of the research data contract.
 - `course/roadmap.md`: project-driven Part roadmap and current rewrite status for the 本地论文研究助手 course.
 - `course/chapter-template.md`: reusable project-driven Part authoring template with Build -> Inspect -> Break -> Fix -> Reflect structure.
 - `product/workbench.md`: product boundary and first workbench screen expectations.

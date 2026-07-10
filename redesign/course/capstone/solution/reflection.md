@@ -22,9 +22,9 @@ This reflection models criterion 6 of the Capstone rubric. When you write your o
 
 ## Decision 4 — Production trust evidence is part of the deliverable
 
-- **Chose:** Ship diagnostics, JSONL trajectory, approval allow/deny, and network-disabled sandbox decisions with the report.
-- **Rejected:** Treating Part 7 as optional garnish after a pretty answer.
-- **Because:** Part 7's forward contract for Capstone is explicit: a report without replay/audit/policy evidence is not ready to hand to a research team.
+- **Chose:** Ship diagnostics, JSONL trajectory, approval allow/deny, network-disabled sandbox decisions, and explicit `SandboxPolicy.runtime_decision(...)` checks for under/over budget elapsed time.
+- **Rejected:** Treating Part 7 as optional garnish after a pretty answer, or configuring `max_runtime_seconds` without calling `runtime_decision` (the inspectable-only trap).
+- **Because:** Part 7's forward contract for Capstone is explicit: a report without replay/audit/policy evidence is not ready to hand to a research team. Setting a runtime limit without exercising the decision API would re-teach the auto-kill myth.
 
 ## Decision 5 — Stay offline with fixtures and fakes
 

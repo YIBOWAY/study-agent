@@ -157,6 +157,13 @@ RunEvent / research / memory / skills / delegation records
 The API and web layers read product records. They do not own runtime state,
 provider calls, memory policy, skill loading, or delegation execution.
 
+## Phase 6 Framework Comparison Boundary
+
+Phase 6 does not change the runtime loop. Comparison harnesses live under
+`course/framework_comparisons/` and use the handwritten `AgentRunner` baseline
+plus offline profiles. Third-party agent frameworks stay out of
+`research_core`, `apps/api`, and `apps/web`.
+
 ## Phase 7 Production Readiness Boundary
 
 Phase 7 keeps production readiness local and inspectable. It does not add cloud
@@ -174,3 +181,27 @@ path/network subject -> SandboxPolicy -> SandboxDecision
 `JsonlRunEventStore` appends schema-versioned event records and reads them back
 by `run_id`. `ApprovalPolicy` and `SandboxPolicy` return typed decision records
 so permissions are explicit before any tool or infrastructure adapter runs.
+`AgentRunner` does not auto-gate tools through those policies; callers inspect
+and enforce decisions. `SandboxPolicy.runtime_decision` is inspectable only —
+the runner does not wall-clock kill a run.
+
+`MEMORY_*` and `SKILL_*` event enum values exist for later wiring. Phase 3
+memory/skill surfaces do not auto-emit them into the runner trail unless a
+caller records them explicitly.
+
+## Capstone Composition Boundary
+
+Capstone (R8) composes public Parts 1-7 contracts offline under
+`course/capstone/`:
+
+```text
+paper fixtures -> SourceIngestor / FakeRetriever -> Evidence / Claim / Report
+  -> MemoryEngine + SkillRuntime
+  -> optional DelegationRuntime
+  -> WorkbenchSnapshot.to_record()
+  -> RunDiagnostics / JsonlRunEventStore / ApprovalPolicy / SandboxPolicy
+```
+
+Capstone must not grow a product package or require network/provider access.
+Role fields such as `tool_names` remain declarative unless the child factory
+calls `filter_tools_for_role` and registers only the returned allowlist.

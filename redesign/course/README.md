@@ -54,6 +54,7 @@ Setup
 3. 从 [chapters/01-agent-kernel-foundations.md](chapters/01-agent-kernel-foundations.md) 开始跑 Part 1。
 4. 做 [labs/01-agent-runner-lab.md](labs/01-agent-runner-lab.md)，只在自己试过以后看 [solutions/01-agent-runner-solution.md](solutions/01-agent-runner-solution.md)。
 5. 继续 Part 2 到 Part 7 时，按 R2/R3/R4/R5/R6/R7 的 lab 做完整练习。
+6. 做完 Parts 1-7 后进入 Capstone：读 [capstone/README.md](capstone/README.md) 和 [capstone/rubric.md](capstone/rubric.md)，先独立完成 [capstone/starter/](capstone/starter/)，再对照 [capstone/solution/](capstone/solution/)。
 
 ## How To Run Commands
 

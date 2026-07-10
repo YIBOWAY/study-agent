@@ -97,6 +97,8 @@ class CapstoneResult:
     approval_retrieval: str
     approval_shell: str
     network_allowed: bool
+    runtime_under_budget: bool
+    runtime_over_budget: bool
     final_answer: str
 
 
@@ -109,7 +111,12 @@ def load_paper_inputs(path: Path = PAPERS_PATH) -> list[SourceInput]:
             content=paper["content"],
             metadata={
                 "year": paper.get("year"),
-                "topics": tuple(paper.get("topics", ())),
+                # Guard string topics so "a,b" does not become a char tuple.
+                "topics": tuple(
+                    paper["topics"]
+                    if isinstance(paper.get("topics"), (list, tuple))
+                    else ()
+                ),
             },
         )
         for paper in raw_papers
@@ -296,15 +303,16 @@ def run_delegation_review() -> tuple[str, tuple[Any, ...]]:
 
     def child_factory(child_role: AgentRolePolicy) -> AgentRunner:
         # Enforce tool allowlist explicitly (role fields alone do not filter tools).
-        filter_tools_for_role(child_role, ("retriever.search",))
+        allowed = filter_tools_for_role(child_role, ("retriever.search",))
         tools = ToolRuntime()
-        tools.register(
-            ToolDefinition(
-                name="retriever.search",
-                description="Unused in this scripted child final answer.",
-                handler=lambda arguments: {"ok": True},
+        for tool_name in allowed:
+            tools.register(
+                ToolDefinition(
+                    name=tool_name,
+                    description="Unused in this scripted child final answer.",
+                    handler=lambda arguments: {"ok": True},
+                )
             )
-        )
         model = FakeModel(
             [
                 FakeModelResponse(
@@ -445,7 +453,7 @@ def build_snapshot(
 def production_boundary(
     events: tuple[Any, ...],
     store_path: Path,
-) -> tuple[dict[str, Any], tuple[str, ...], str, str, bool]:
+) -> tuple[dict[str, Any], tuple[str, ...], str, str, bool, bool, bool]:
     diagnostics = RunDiagnostics.from_events(events)
     store = JsonlRunEventStore(store_path)
     if store_path.exists():
@@ -474,12 +482,18 @@ def production_boundary(
         allow_network=False,
         max_runtime_seconds=30,
     )
+    # max_runtime_seconds is inspectable only — AgentRunner does not auto-kill.
+    # Call runtime_decision explicitly so Capstone exercises the Part 7 trap.
+    under_budget = sandbox.runtime_decision(5.0)
+    over_budget = sandbox.runtime_decision(45.0)
     return (
         diagnostics.to_record(),
         store.list_run_ids(),
         approval.decide("retriever.search").mode.value,
         approval.decide("shell.exec").mode.value,
         sandbox.network_decision().allowed,
+        under_budget.allowed,
+        over_budget.allowed,
     )
 
 
@@ -518,9 +532,15 @@ def run_capstone(*, trajectory_path: Path = TRAJECTORY_PATH) -> CapstoneResult:
         skill_name=skill_name,
         delegation_status=delegation_status,
     )
-    diagnostics_record, jsonl_run_ids, approval_retrieval, approval_shell, network_allowed = (
-        production_boundary(combined_events, trajectory_path)
-    )
+    (
+        diagnostics_record,
+        jsonl_run_ids,
+        approval_retrieval,
+        approval_shell,
+        network_allowed,
+        runtime_under_budget,
+        runtime_over_budget,
+    ) = production_boundary(combined_events, trajectory_path)
 
     return CapstoneResult(
         sources=sources,
@@ -539,6 +559,8 @@ def run_capstone(*, trajectory_path: Path = TRAJECTORY_PATH) -> CapstoneResult:
         approval_retrieval=approval_retrieval,
         approval_shell=approval_shell,
         network_allowed=network_allowed,
+        runtime_under_budget=runtime_under_budget,
+        runtime_over_budget=runtime_over_budget,
         final_answer=final_answer,
     )
 

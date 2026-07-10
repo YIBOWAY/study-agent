@@ -35,6 +35,7 @@ For readers already comfortable with Python projects, pytest, and basic Agent te
 3. Continue through Part 2, Part 3, Part 4, Part 5, Part 6, and Part 7 as R2/R3/R4/R5/R6/R7 rewritten material.
 4. Read [07-production-readiness.md](../../course/chapters/07-production-readiness.md) when evaluating local-first production-readiness contracts.
 5. Use labs and solutions as runnable verification material.
+6. Finish with Capstone: read [course/capstone/README.md](../../course/capstone/README.md) and [rubric.md](../../course/capstone/rubric.md), fill [starter/](../../course/capstone/starter/), then compare with [solution/](../../course/capstone/solution/).
 
 ## Shape
 
@@ -67,7 +68,9 @@ Parts 2-7 now follow this contract after R2/R3/R4/R5/R6/R7. Capstone is complete
 
 ## Current Materials
 
-Current means the file exists in the tree now. It does not mean every file has already been rewritten under the R1 teaching method.
+Parts 1-7 and Capstone are R1-R8 rewritten teaching materials. "Current" still
+means the path is present and linked from the course map; support/reference
+extras remain planned for R9.
 
 - [2026-06-25-study-agent-comprehensive-redesign.md](../specs/2026-06-25-study-agent-comprehensive-redesign.md): approved redesign spec for the broader runtime/product/course direction.
 - [2026-06-30-course-teaching-redesign.md](../specs/2026-06-30-course-teaching-redesign.md): approved teaching-redesign spec for the project-driven course and R1-R9 plan.

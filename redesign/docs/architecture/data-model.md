@@ -69,13 +69,22 @@ This gives Phase 2 its first citation-quality gate: a report claim is not
 considered grounded unless it can be traced to concrete evidence and a concrete
 source.
 
-## Deferred Research Workflow
+## Research Workflow Boundary
 
-Research planning and report synthesis are not implemented by Phase 2. Phase 3
-now provides the first memory and skill policies they need, but richer eval
-fixtures are still required before they become useful product workflows. Until
-that slice lands, Phase 2 should be treated as the stable data contract layer
-for later planning and synthesis work.
+Phase 2 ships the stable data contracts: source ingestion, fake retrieval,
+evidence, claims, reports, and claim-source links. It does not implement an
+autonomous research planner or free-form multi-document synthesis agent.
+
+Later layers compose those contracts without replacing them:
+
+- Phase 3 adds memory and skill policies around the same evidence chain.
+- Capstone (R8) under `course/capstone/` composes offline paper fixtures into a
+  full source -> evidence -> claim -> report flow, plus memory, skills,
+  optional delegation, Workbench snapshot, and production trust evidence.
+
+Treat Phase 2 as the citation data contract. Treat Capstone as the teaching
+composition of that contract into a complete 本地论文研究助手, not as a new
+research domain model.
 
 ## Memory Model
 

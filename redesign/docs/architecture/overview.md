@@ -87,7 +87,14 @@ Phase 7 adds:
 - docs freshness checks and local readiness docs,
 - Course Chapter/Lab/Solution 07 for production-readiness literacy.
 
-Framework comparison code is course material, not a product runtime dependency.
-Async delegation, real A2A transport, database persistence, streaming, real
-auth, real cloud deployment, real retrieval adapters, and live framework adapters
-are introduced only by later approved phase plans.
+Capstone (R8) adds:
+
+- full offline Capstone materials under `course/capstone/` (fixtures, rubric,
+  starter, solution, trajectory, report, reflection),
+- composition of Parts 1-7 into one 本地论文研究助手 without new product packages
+  or provider/network dependencies.
+
+Framework comparison code and Capstone are course material, not product runtime
+dependencies. Async delegation, real A2A transport, database persistence,
+streaming, real auth, real cloud deployment, real retrieval adapters, and live
+framework adapters are introduced only by later approved phase plans.

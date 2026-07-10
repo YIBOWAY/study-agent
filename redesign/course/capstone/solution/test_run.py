@@ -69,6 +69,9 @@ def test_capstone_meets_six_success_criteria(tmp_path) -> None:
     assert result.approval_retrieval == "allow"
     assert result.approval_shell == "deny"
     assert result.network_allowed is False
+    # Part 7 trap: max_runtime is inspectable via runtime_decision, not auto-killed.
+    assert result.runtime_under_budget is True
+    assert result.runtime_over_budget is False
 
     # Event trail includes tool use from Part 1 composition
     assert "tool_call" in result.event_types
