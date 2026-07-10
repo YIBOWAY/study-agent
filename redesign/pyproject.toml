@@ -13,15 +13,29 @@ dev = [
   "pytest>=8.2",
   "ruff>=0.5",
 ]
+langchain-course = [
+  "langchain-core>=0.3",
+  "langchain-openai>=0.2",
+]
+langgraph-course = [
+  "langchain-core>=0.3",
+  "langchain-openai>=0.2",
+  "langgraph>=0.2",
+]
 
 [tool.pytest.ini_options]
 pythonpath = [
   ".",
   "apps/api/src",
   "packages/research_core/src",
+  "packages/langchain_course/src",
+  "packages/langgraph_course/src",
 ]
 testpaths = [
   "tests",
+]
+markers = [
+  "integration: hits live network/API; skipped unless RUN_DEEPSEEK_TESTS=1",
 ]
 filterwarnings = [
   "ignore:Using `httpx` with `starlette.testclient` is deprecated.*:Warning",

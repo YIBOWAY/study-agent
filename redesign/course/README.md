@@ -183,6 +183,15 @@ PYTHONPATH=packages/research_core/src uv run python
 - [framework_comparisons/reports/echo-tool-task.md](framework_comparisons/reports/echo-tool-task.md): echo-tool shared task report。
 - [framework_comparisons/reports/recommendation-matrix.md](framework_comparisons/reports/recommendation-matrix.md): framework recommendation matrix。
 
+### 并行框架轨（F0+，不替代主课）
+
+手写主线 R1–R9 仍然是默认 Beginner Track。若要系统学习真实框架，走并行轨（框架原生重写，默认 DeepSeek API，与 `research_core` 零混合）：
+
+- [tracks/langchain/README.md](tracks/langchain/README.md): LangChain 完整镜像轨入口（先学完本轨再学 LangGraph）。
+- [tracks/langchain/labs/00-deepseek-hello.md](tracks/langchain/labs/00-deepseek-hello.md): F0 DeepSeek hello lab。
+- [tracks/langgraph/README.md](tracks/langgraph/README.md): LangGraph 轨入口（F0 占位；系统内容从 F4 起）。
+- 设计：`docs/specs/2026-07-10-langchain-langgraph-parallel-tracks-design.md`
+
 ## Current Rewrite Status
 
 实现状态和教学重写状态不是一回事。很多 runtime/product 代码已经存在；Parts 1-7 已完成 R1-R7 教学重写；Capstone 已在 R8 补齐；参考支持材料已在 R9 补齐。
@@ -198,5 +207,7 @@ PYTHONPATH=packages/research_core/src uv run python
 | R7 | 已把 Part 7 改成 diagnostics、JSONL replay、approval、sandbox、docs freshness 的项目驱动学习结构，并把 Part 7 纳入 markdown 代码块门禁 |
 | R8 | 已补齐完整 Capstone：fixtures、starter、solution、rubric、trajectory、report、reflection |
 | R9 | 已补齐参考材料：common patterns、troubleshooting、设计决策索引、讨论题（含详细参考答案与解析）、glossary 扩展 |
+| F0 | 并行框架轨脚手架：`course/tracks/langchain|langgraph`、`packages/*_course`、DeepSeek hello；Parts 1–7 尚未交付 |
+| F1–F5 | 计划中：LC Parts 1–7 + Capstone，再 LG Parts 1–7 + Capstone |
 
-学习时用一个简单判断：Parts 1-7 按 R1-R7 新结构认真做完整循环；做完后进入 Capstone，按 rubric 自检，先独立完成 starter，再对照 solution；卡住或复习时回查 R9 reference。
+学习时用一个简单判断：Parts 1-7 按 R1-R7 新结构认真做完整循环；做完后进入 Capstone，按 rubric 自检，先独立完成 starter，再对照 solution；卡住或复习时回查 R9 reference。若要学 LangChain/LangGraph，走「并行框架轨」，不要替换主线路径。

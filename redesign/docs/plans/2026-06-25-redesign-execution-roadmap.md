@@ -384,3 +384,40 @@ Exit criteria:
 - Capstone is no longer a placeholder.
 - Solution tests prove the six rubric success criteria offline.
 - Course/docs/progress indexes describe Capstone as R8 complete.
+
+### Phase R9: Course Teaching Redesign - Reference & Support
+
+Plan: `redesign/docs/plans/2026-07-10-phase-r9-course-teaching-redesign.md`
+
+Status: Complete (2026-07-10).
+
+Purpose:
+
+- Add reference and support materials under `course/reference/`.
+- Keep R1–R8 teaching narrative intact; indexes link the full reference set.
+
+Exit criteria:
+
+- Patterns, troubleshooting, design-decision index, discussion prompts with answers, and glossary updates are online.
+- Course/docs/progress indexes describe R9 as complete.
+
+### Phase F0: LangChain / LangGraph Parallel Track Scaffold
+
+Plan: `redesign/docs/plans/2026-07-10-phase-f0-langchain-langgraph-scaffold.md`
+
+Design: `redesign/docs/specs/2026-07-10-langchain-langgraph-parallel-tracks-design.md`
+
+Status: Complete (2026-07-10).
+
+Purpose:
+
+- Scaffold parallel LangChain and LangGraph teaching tracks without replacing handwritten R1–R9.
+- Teaching packages `packages/langchain_course` and `packages/langgraph_course` with optional uv dependency groups.
+- DeepSeek hello for the LangChain track; full Parts 1–7 + Capstone deferred to F1–F5.
+
+Exit criteria:
+
+- Track entrypoints under `course/tracks/{langchain,langgraph}/`.
+- `langchain_course` config unit tests green without API key; live tests skip unless `RUN_DEEPSEEK_TESTS=1`.
+- Default offline suite remains green without requiring LC/LG groups or a DeepSeek key.
+- Indexes link tracks without claiming Parts 1–7 complete.

@@ -82,6 +82,10 @@ Parts 1-7, Capstone, and R9 reference materials are current teaching materials.
 - [2026-07-02-phase-r7-course-teaching-redesign.md](../plans/2026-07-02-phase-r7-course-teaching-redesign.md): completed R7 implementation plan for the Part 7 Production Readiness teaching rewrite.
 - [2026-07-10-phase-r8-course-teaching-redesign.md](../plans/2026-07-10-phase-r8-course-teaching-redesign.md): completed R8 implementation plan for the full Capstone project.
 - [2026-07-10-phase-r9-course-teaching-redesign.md](../plans/2026-07-10-phase-r9-course-teaching-redesign.md): completed R9 implementation plan for reference and support materials.
+- [2026-07-10-langchain-langgraph-parallel-tracks-design.md](../specs/2026-07-10-langchain-langgraph-parallel-tracks-design.md): design for parallel LC/LG full-mirror tracks.
+- [2026-07-10-phase-f0-langchain-langgraph-scaffold.md](../plans/2026-07-10-phase-f0-langchain-langgraph-scaffold.md): F0 scaffold plan (packages, DeepSeek hello, indexes).
+- [course/tracks/langchain/README.md](../../course/tracks/langchain/README.md): LangChain parallel track entry (F0+).
+- [course/tracks/langgraph/README.md](../../course/tracks/langgraph/README.md): LangGraph parallel track entry (placeholder until F4).
 - [course/README.md](../../course/README.md): learner entrypoint, track selection, commands, and common stuck points.
 - [python-terminal-primer.md](../../course/reference/python-terminal-primer.md): minimal terminal and Python concepts needed for the course.
 - [agent-kernel-glossary.md](../../course/reference/agent-kernel-glossary.md): plain-language Agent kernel vocabulary (Parts 1–7 + Capstone).
@@ -115,3 +119,6 @@ Parts 1-7, Capstone, and R9 reference materials are current teaching materials.
 - Phase R7 (complete): rewrote Part 7 so Production Readiness teaches diagnostics, persistence, approval, sandbox policies, and docs freshness as local-first deployment boundaries, then brought Part 7 into the markdown Python block gate.
 - Phase R8 (complete): built the full Capstone under `course/capstone/`, including paper fixtures, starter, solution, rubric, event trail, report, and reflection.
 - Phase R9 (complete): added reference and support materials — common patterns, troubleshooting, design-decision index, discussion prompts with detailed answers, and glossary updates.
+- Phase F0 (complete): scaffold parallel LangChain/LangGraph tracks under `course/tracks/`, teaching packages, DeepSeek hello, optional deps — does not replace R1–R9.
+- Phase F1–F3 (planned): full LangChain mirror (Parts 1–7 + Capstone).
+- Phase F4–F5 (planned): full LangGraph mirror (Parts 1–7 + Capstone) after LC.

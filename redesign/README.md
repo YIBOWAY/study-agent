@@ -122,7 +122,13 @@ Phase R9 adds reference and support materials:
 - `course/reference/agent-kernel-glossary.md` expanded for Parts 1–7 + Capstone.
 - Course/docs indexes link the full reference set; R1–R9 teaching redesign is complete.
 
-Real retrieval adapters, async delegation, streaming, real auth, real cloud deployment, real A2A transport, and live framework adapters arrive in later phases.
+Phase F0 scaffolds parallel framework teaching tracks (does not replace handwritten R1–R9):
+
+- `course/tracks/langchain/` and `course/tracks/langgraph/` entrypoints.
+- Teaching packages `packages/langchain_course` and `packages/langgraph_course` (optional uv groups; not product runtime).
+- DeepSeek hello lab for the LangChain track; full Parts 1–7 + Capstone arrive in F1–F5.
+
+Real retrieval adapters, async delegation, streaming, real auth, real cloud deployment, real A2A transport, and live framework product adapters arrive in later phases.
 
 ## Course Entry
 
@@ -140,6 +146,7 @@ Current course coverage follows the implemented runtime phases. Phase R1 rewrote
 - Chapter/Lab/Solution 07: Production Readiness, R7 project-driven rewrite.
 - Capstone (R8): full offline 本地论文研究助手 under `course/capstone/`.
 - Reference (R9): patterns, troubleshooting, design-decision index, discussion prompts with answers, glossary.
+- Parallel framework tracks (F0+): `course/tracks/langchain/`, `course/tracks/langgraph/` (LC then LG; DeepSeek by default).
 
 ## Commands
 

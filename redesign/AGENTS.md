@@ -16,6 +16,9 @@ These instructions apply to files under `redesign/`.
 - Keep `research_core.production` offline-first and independent from FastAPI, React, provider SDKs, databases, cloud services, and real auth. Production-readiness contracts should be inspectable policy/diagnostic/storage boundaries before real infrastructure adapters exist.
 - Keep framework comparison code under `course/framework_comparisons/`; do not import third-party agent frameworks into `research_core`, `apps/api`, or `apps/web` without an approved later-phase plan.
 - Keep Capstone teaching artifacts under `course/capstone/`; Capstone may compose public `research_core` contracts but must not grow a product package or require network/provider access.
+- Keep `packages/langchain_course` and `packages/langgraph_course` teaching-only; do not import them from `research_core`, `apps/api`, or `apps/web`.
+- Keep framework track materials under `course/tracks/langchain/` and `course/tracks/langgraph/`; do not mix their code with handwritten Capstone under `course/capstone/`.
+- Framework track live API tests require `DEEPSEEK_API_KEY` and `RUN_DEEPSEEK_TESTS=1`; default CI stays offline.
 - Keep `apps/api` as a transport layer over `research_core.product`; do not put domain logic, provider calls, or persistence shortcuts there without an approved later-phase plan.
 - Keep `apps/web` consuming the Workbench API record shape or a matching deterministic fallback fixture; do not let React components invent a separate product data model.
 - Use `SourceIngestor` and `FakeRetriever` for deterministic offline research tests.

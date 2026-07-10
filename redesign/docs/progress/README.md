@@ -17,6 +17,7 @@ This folder is the redesign progress dashboard for humans and agents.
 - `phases/phase-r7.md`: completed progress record for the course teaching redesign of Part 7.
 - `phases/phase-r8.md`: completed progress record for the Capstone project materials.
 - `phases/phase-r9.md`: completed progress record for reference and support materials.
+- `phases/phase-f0.md`: progress record for LangChain/LangGraph parallel track scaffold.
 
 ## Maintenance Rule
 
