@@ -4,13 +4,13 @@ Last updated: 2026-07-10
 
 ## Current State
 
-- Active branch: `codex/redesign-course-r7` (R1–R9 teaching work + F0–F1 framework tracks)
+- Active branch: `codex/redesign-course-r7` (R1–R9 teaching work + F0–F2 framework tracks)
 - Active phase: None.
 - Completed runtime/product phases: 8 of 8
 - Course teaching redesign: Phase R1, R2, R3, R4, R5, R6, R7, R8, and R9 complete.
-- Parallel framework tracks: Phase F0 and F1 complete. F2–F5 planned (LC Parts 3–7 + Capstone, then LG).
-- Current verification baseline: post-F1 pass on 2026-07-10: full redesign suite offline green; `packages/langchain_course/tests` unit green with integration skip unless `RUN_DEEPSEEK_TESTS=1`; `ruff check .` clean; docs freshness green. DeepSeek keys via env or gitignored `.env`.
-- Course documentation now has a complete v1 baseline plus project-driven R1–R9 teaching material. Phase R1–R9 delivered handwritten 本地论文研究助手 course through Capstone and reference materials. Phase F0 scaffolded parallel LangChain/LangGraph teaching tracks. Phase F1 delivered LangChain Parts 1–2 (inspectable `bind_tools` agent loop + local keyword evidence chain) with chapters/labs/solutions and handwritten mapping.
+- Parallel framework tracks: Phase F0, F1, and F2 complete. F3–F5 planned (LC Parts 5–7 + Capstone, then LG).
+- Current verification baseline: post-F2 pass on 2026-07-10: full redesign suite offline green; `packages/langchain_course/tests` unit green with integration skip unless `RUN_DEEPSEEK_TESTS=1`; `ruff check .` clean; docs freshness green. DeepSeek keys via env or gitignored `.env`.
+- Course documentation now has a complete v1 baseline plus project-driven R1–R9 teaching material. Phase R1–R9 delivered handwritten 本地论文研究助手 course through Capstone and reference materials. Phase F0 scaffolded parallel LangChain/LangGraph teaching tracks. Phase F1 delivered LangChain Parts 1–2 (inspectable `bind_tools` agent loop + local keyword evidence chain). Phase F2 delivered LangChain Parts 3–4 (offline memory notebook + progressive skills + multi-worker delegation budgets/merge) with chapters/labs/solutions.
 
 ## Phase Index
 
@@ -35,7 +35,8 @@ Last updated: 2026-07-10
 | Phase R9: Course Teaching Redesign - Reference & Support | Complete | `phases/phase-r9.md` | Reference materials (patterns, troubleshooting, DD index, discussion answers, glossary); indexes synced. |
 | Phase F0: LangChain / LangGraph Parallel Track Scaffold | Complete | `phases/phase-f0.md` | Track dirs, teaching packages, optional deps, DeepSeek hello, indexes; no Parts 1–7 content. |
 | Phase F1: LangChain Parts 1–2 | Complete | `phases/phase-f1.md` | `.env` loading; tool-calling agent kernel; evidence chain; chapters/labs/solutions. |
-| Phase F2–F3: LangChain Parts 3–7 + Capstone | Planned | — | Memory/skills, delegation, workbench, comparisons, production, LC Capstone. |
+| Phase F2: LangChain Parts 3–4 | Complete | `phases/phase-f2.md` | Memory notebook + skill loader; multi-worker delegation budgets/merge; chapters/labs/solutions. |
+| Phase F3: LangChain Parts 5–7 + Capstone | Planned | — | Workbench, comparisons, production, LC Capstone. |
 | Phase F4–F5: LangGraph full mirror | Planned | — | LG Parts 1–7 + Capstone after LC. |
 
 ## Update Checklist
@@ -75,3 +76,11 @@ Status: Complete (2026-07-10).
 LangChain Parts 1–2: `.env` DeepSeek loading, `run_tool_calling_agent` with inspectable steps, local `PaperDoc` / `KeywordRetriever` / `build_claim_links`, track chapters/labs/solutions, handwritten mapping. Main CI remains offline without key.
 
 Progress: [phases/phase-f1.md](phases/phase-f1.md)
+
+## Phase F2
+
+Status: Complete (2026-07-10).
+
+LangChain Parts 3–4: offline `Notebook` / `SkillLoader`, `DelegationCoordinator` with budgets and merge conflicts, track chapters/labs/solutions 03–04, handwritten mapping extended. Main CI remains offline without key.
+
+Progress: [phases/phase-f2.md](phases/phase-f2.md)

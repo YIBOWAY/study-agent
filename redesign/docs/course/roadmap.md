@@ -85,9 +85,12 @@ Parts 1-7, Capstone, and R9 reference materials are current teaching materials.
 - [2026-07-10-langchain-langgraph-parallel-tracks-design.md](../specs/2026-07-10-langchain-langgraph-parallel-tracks-design.md): design for parallel LC/LG full-mirror tracks.
 - [2026-07-10-phase-f0-langchain-langgraph-scaffold.md](../plans/2026-07-10-phase-f0-langchain-langgraph-scaffold.md): F0 scaffold plan (packages, DeepSeek hello, indexes).
 - [2026-07-10-phase-f1-langchain-parts-1-2.md](../plans/2026-07-10-phase-f1-langchain-parts-1-2.md): F1 LangChain Parts 1–2 plan.
-- [course/tracks/langchain/README.md](../../course/tracks/langchain/README.md): LangChain parallel track entry (F0–F1).
+- [2026-07-10-phase-f2-langchain-parts-3-4.md](../plans/2026-07-10-phase-f2-langchain-parts-3-4.md): F2 LangChain Parts 3–4 plan.
+- [course/tracks/langchain/README.md](../../course/tracks/langchain/README.md): LangChain parallel track entry (F0–F2).
 - [course/tracks/langchain/chapters/01-agent-kernel-langchain.md](../../course/tracks/langchain/chapters/01-agent-kernel-langchain.md): LC Part 1 chapter.
 - [course/tracks/langchain/chapters/02-research-core-langchain.md](../../course/tracks/langchain/chapters/02-research-core-langchain.md): LC Part 2 chapter.
+- [course/tracks/langchain/chapters/03-memory-skills-langchain.md](../../course/tracks/langchain/chapters/03-memory-skills-langchain.md): LC Part 3 chapter.
+- [course/tracks/langchain/chapters/04-delegation-langchain.md](../../course/tracks/langchain/chapters/04-delegation-langchain.md): LC Part 4 chapter.
 - [course/tracks/langgraph/README.md](../../course/tracks/langgraph/README.md): LangGraph parallel track entry (placeholder until F4).
 - [course/README.md](../../course/README.md): learner entrypoint, track selection, commands, and common stuck points.
 - [python-terminal-primer.md](../../course/reference/python-terminal-primer.md): minimal terminal and Python concepts needed for the course.
@@ -124,5 +127,6 @@ Parts 1-7, Capstone, and R9 reference materials are current teaching materials.
 - Phase R9 (complete): added reference and support materials — common patterns, troubleshooting, design-decision index, discussion prompts with detailed answers, and glossary updates.
 - Phase F0 (complete): scaffold parallel LangChain/LangGraph tracks under `course/tracks/`, teaching packages, DeepSeek hello, optional deps — does not replace R1–R9.
 - Phase F1 (complete): LangChain Parts 1–2 (tool-calling agent + evidence chain), `.env` loading, track chapters/labs/solutions.
-- Phase F2–F3 (planned): LangChain Parts 3–7 + Capstone.
+- Phase F2 (complete): LangChain Parts 3–4 (memory/skills notebook + multi-worker delegation), offline unit tests, track chapters/labs/solutions.
+- Phase F3 (planned): LangChain Parts 5–7 + Capstone.
 - Phase F4–F5 (planned): full LangGraph mirror (Parts 1–7 + Capstone) after LC.

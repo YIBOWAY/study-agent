@@ -1,6 +1,6 @@
 # Design: LangChain & LangGraph Parallel Teaching Tracks
 
-> **Status:** Approved (2026-07-10); F0–F1 complete (LC Parts 1–2)  
+> **Status:** Approved (2026-07-10); F0–F2 complete (LC Parts 1–4)  
 > **Date:** 2026-07-10  
 > **Branch:** `codex/redesign-course-r7` (or successor teaching branch)  
 > **Related:** handwritten course R1–R9 complete; Part 6 framework profiles remain deterministic records only

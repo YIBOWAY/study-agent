@@ -49,7 +49,7 @@ cp .env.example .env
 ```bash
 uv sync --group langchain-course
 
-# 无 key 的 unit 测试（配置 + mock + Parts 1–2）
+# 无 key 的 unit 测试（配置 + mock + Parts 1–4）
 uv run pytest packages/langchain_course/tests -q
 
 # 主课 suite（应仍离线全绿）
@@ -71,13 +71,15 @@ RUN_DEEPSEEK_TESTS=1 uv run pytest packages/langchain_course/tests -m integratio
 | 0 | [labs/00-deepseek-hello.md](labs/00-deepseek-hello.md) | F0 完成 |
 | 1 | [chapters/01-agent-kernel-langchain.md](chapters/01-agent-kernel-langchain.md) → [labs/01-tool-calling-agent-lab.md](labs/01-tool-calling-agent-lab.md) | F1 完成 |
 | 2 | [chapters/02-research-core-langchain.md](chapters/02-research-core-langchain.md) → [labs/02-evidence-chain-lab.md](labs/02-evidence-chain-lab.md) | F1 完成 |
-| 3–7 + Capstone | — | F2–F3 计划中 |
+| 3 | [chapters/03-memory-skills-langchain.md](chapters/03-memory-skills-langchain.md) → [labs/03-memory-skills-lab.md](labs/03-memory-skills-lab.md) | F2 完成 |
+| 4 | [chapters/04-delegation-langchain.md](chapters/04-delegation-langchain.md) → [labs/04-delegation-lab.md](labs/04-delegation-lab.md) | F2 完成 |
+| 5–7 + Capstone | — | F3 计划中 |
 
 ## 当前进度
 
 - [x] F0：包脚手架 + DeepSeek 配置 + hello + `.env` 支持
 - [x] F1：Parts 1–2（agent kernel + evidence chain）
-- [ ] F2：Parts 3–4
+- [x] F2：Parts 3–4（memory/skills + multi-worker delegation）
 - [ ] F3：Parts 5–7 + Capstone
 
 ## 诚实边界
@@ -93,3 +95,4 @@ RUN_DEEPSEEK_TESTS=1 uv run pytest packages/langchain_course/tests -m integratio
 - [并行轨设计](../../../docs/specs/2026-07-10-langchain-langgraph-parallel-tracks-design.md)
 - [F0 计划](../../../docs/plans/2026-07-10-phase-f0-langchain-langgraph-scaffold.md)
 - [F1 计划](../../../docs/plans/2026-07-10-phase-f1-langchain-parts-1-2.md)
+- [F2 计划](../../../docs/plans/2026-07-10-phase-f2-langchain-parts-3-4.md)

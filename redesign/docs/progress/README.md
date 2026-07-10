@@ -19,6 +19,7 @@ This folder is the redesign progress dashboard for humans and agents.
 - `phases/phase-r9.md`: completed progress record for reference and support materials.
 - `phases/phase-f0.md`: progress record for LangChain/LangGraph parallel track scaffold.
 - `phases/phase-f1.md`: progress record for LangChain Parts 1–2.
+- `phases/phase-f2.md`: progress record for LangChain Parts 3–4.
 
 ## Maintenance Rule
 

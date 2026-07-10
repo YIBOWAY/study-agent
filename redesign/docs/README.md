@@ -37,6 +37,7 @@ This directory is the canonical archive for the redesign version of the project.
 - `specs/2026-07-10-langchain-langgraph-parallel-tracks-design.md`: parallel LangChain/LangGraph full-mirror teaching tracks design.
 - `plans/2026-07-10-phase-f0-langchain-langgraph-scaffold.md`: Phase F0 scaffold plan for framework tracks.
 - `plans/2026-07-10-phase-f1-langchain-parts-1-2.md`: Phase F1 LangChain Parts 1–2 plan.
+- `plans/2026-07-10-phase-f2-langchain-parts-3-4.md`: Phase F2 LangChain Parts 3–4 plan.
 - `progress/overall.md`: phase status dashboard for humans and agents.
 - `architecture/overview.md`: double-layer repository and dependency direction.
 - `architecture/runtime.md`: runtime contracts, Phase 1 agent loop, fake provider boundary, delegation events, Phase 5-7 product/production boundaries, and Capstone composition boundary.
@@ -63,9 +64,11 @@ This directory is the canonical archive for the redesign version of the project.
 - `../course/reference/troubleshooting.md`: common errors and fix guidance.
 - `../course/reference/design-decisions-index.md`: index of all `[DD]` / `[TRAP]` callouts.
 - `../course/reference/discussion-prompts.md`: per-part discussion prompts with detailed answers and analysis.
-- `../course/tracks/langchain/README.md`: LangChain parallel teaching track (F0–F1: hello + Parts 1–2).
+- `../course/tracks/langchain/README.md`: LangChain parallel teaching track (F0–F2: hello + Parts 1–4).
 - `../course/tracks/langchain/chapters/01-agent-kernel-langchain.md`: LC Part 1 tool-calling agent.
 - `../course/tracks/langchain/chapters/02-research-core-langchain.md`: LC Part 2 evidence chain.
+- `../course/tracks/langchain/chapters/03-memory-skills-langchain.md`: LC Part 3 memory + skills.
+- `../course/tracks/langchain/chapters/04-delegation-langchain.md`: LC Part 4 multi-worker delegation.
 - `../course/tracks/langgraph/README.md`: LangGraph parallel teaching track (placeholder until after LC).
 - `../course/chapters/00-before-agent-kernel.md`: Part 1 Section 1 mental model and narrative start.
 - `../course/labs/00-environment-check.md`: local environment readiness lab.
