@@ -12,7 +12,7 @@ The course should teach Agent engineering through a single, growing project: a �
 
 For learners who know some Python but are new to Agent engineering, the path is Part-based. Parts 1-7 build on each other and end with the Capstone; do not treat later Parts as independent one-off chapters.
 
-R1 completed the teaching-redesign pass for the learner entrypoint and Part 1. R2 completed the Part 2 Research Core rewrite. R3 completed the Part 3 Memory and Skills rewrite. R4 completed the Part 4 Multi-Agent Delegation content rewrite. R5 completed the Part 5 Workbench Product rewrite. R6 completed the Part 6 Framework Comparisons rewrite. R7 completed the Part 7 Production Readiness rewrite. R8 completed the full Capstone materials under `course/capstone/`.
+R1 completed the teaching-redesign pass for the learner entrypoint and Part 1. R2 completed the Part 2 Research Core rewrite. R3 completed the Part 3 Memory and Skills rewrite. R4 completed the Part 4 Multi-Agent Delegation content rewrite. R5 completed the Part 5 Workbench Product rewrite. R6 completed the Part 6 Framework Comparisons rewrite. R7 completed the Part 7 Production Readiness rewrite. R8 completed the full Capstone materials under `course/capstone/`. R9 completed the reference and support materials under `course/reference/`.
 
 | Step | File to read/do | What capability the assistant gains |
 |------|-----------------|--------------------------------------|
@@ -50,7 +50,7 @@ The target course shape is:
 7. Part 7: Production Readiness — diagnostics, persistence, approval, and sandbox policies
 8. Capstone — integrate all Parts into a complete 本地论文研究助手
 
-R1 makes this shape visible and rewrites Part 1. R2 rewrites Part 2. R3 rewrites Part 3. R4 rewrites Part 4. R5 rewrites Part 5. R6 rewrites Part 6. R7 rewrites Part 7. R8 builds the full Capstone. R9 remains planned for support/reference material.
+R1 makes this shape visible and rewrites Part 1. R2 rewrites Part 2. R3 rewrites Part 3. R4 rewrites Part 4. R5 rewrites Part 5. R6 rewrites Part 6. R7 rewrites Part 7. R8 builds the full Capstone. R9 adds support/reference material (complete).
 
 ## Part Contract
 
@@ -64,13 +64,12 @@ Every rewritten Part should include:
 - an eval gate with concrete commands or checks,
 - reflection questions that ask the learner to explain tradeoffs, not just recall names.
 
-Parts 2-7 now follow this contract after R2/R3/R4/R5/R6/R7. Capstone is complete after R8. Support/reference materials remain planned for R9.
+Parts 2-7 now follow this contract after R2/R3/R4/R5/R6/R7. Capstone is complete after R8. Support/reference materials are complete after R9.
 
 ## Current Materials
 
-Parts 1-7 and Capstone are R1-R8 rewritten teaching materials. "Current" still
-means the path is present and linked from the course map; support/reference
-extras remain planned for R9.
+Parts 1-7, Capstone, and R9 reference materials are current teaching materials.
+"Current" means the path is present and linked from the course map.
 
 - [2026-06-25-study-agent-comprehensive-redesign.md](../specs/2026-06-25-study-agent-comprehensive-redesign.md): approved redesign spec for the broader runtime/product/course direction.
 - [2026-06-30-course-teaching-redesign.md](../specs/2026-06-30-course-teaching-redesign.md): approved teaching-redesign spec for the project-driven course and R1-R9 plan.
@@ -82,9 +81,14 @@ extras remain planned for R9.
 - [2026-07-01-phase-r6-course-teaching-redesign.md](../plans/2026-07-01-phase-r6-course-teaching-redesign.md): completed R6 implementation plan.
 - [2026-07-02-phase-r7-course-teaching-redesign.md](../plans/2026-07-02-phase-r7-course-teaching-redesign.md): completed R7 implementation plan for the Part 7 Production Readiness teaching rewrite.
 - [2026-07-10-phase-r8-course-teaching-redesign.md](../plans/2026-07-10-phase-r8-course-teaching-redesign.md): completed R8 implementation plan for the full Capstone project.
+- [2026-07-10-phase-r9-course-teaching-redesign.md](../plans/2026-07-10-phase-r9-course-teaching-redesign.md): completed R9 implementation plan for reference and support materials.
 - [course/README.md](../../course/README.md): learner entrypoint, track selection, commands, and common stuck points.
 - [python-terminal-primer.md](../../course/reference/python-terminal-primer.md): minimal terminal and Python concepts needed for the course.
-- [agent-kernel-glossary.md](../../course/reference/agent-kernel-glossary.md): plain-language Agent kernel vocabulary.
+- [agent-kernel-glossary.md](../../course/reference/agent-kernel-glossary.md): plain-language Agent kernel vocabulary (Parts 1–7 + Capstone).
+- [common-patterns.md](../../course/reference/common-patterns.md): reusable agent engineering patterns with honesty boundaries.
+- [troubleshooting.md](../../course/reference/troubleshooting.md): common errors and fix guidance.
+- [design-decisions-index.md](../../course/reference/design-decisions-index.md): index of all `[DD]` / `[TRAP]` callouts.
+- [discussion-prompts.md](../../course/reference/discussion-prompts.md): per-part discussion prompts with detailed answers and analysis.
 - Setup material: [00-environment-check.md](../../course/labs/00-environment-check.md), [00-environment-check-solution.md](../../course/solutions/00-environment-check-solution.md).
 - Part 1 / R1 completed material: [00-before-agent-kernel.md](../../course/chapters/00-before-agent-kernel.md), [01-agent-kernel-foundations.md](../../course/chapters/01-agent-kernel-foundations.md), [01-agent-runner-lab.md](../../course/labs/01-agent-runner-lab.md), [01-agent-runner-solution.md](../../course/solutions/01-agent-runner-solution.md).
 - Part 2 / R2 completed material: [02-research-core-foundations.md](../../course/chapters/02-research-core-foundations.md), [02-source-evidence-claim-lab.md](../../course/labs/02-source-evidence-claim-lab.md), [02-source-evidence-claim-solution.md](../../course/solutions/02-source-evidence-claim-solution.md).
@@ -110,4 +114,4 @@ extras remain planned for R9.
 - Phase R6 (complete): rewrote Part 6 so Framework Comparisons teaches a defensible build-vs-adopt decision through a pinned task/fixture/metric and a transparent weighted score, and brought Part 6 into the markdown Python block gate.
 - Phase R7 (complete): rewrote Part 7 so Production Readiness teaches diagnostics, persistence, approval, sandbox policies, and docs freshness as local-first deployment boundaries, then brought Part 7 into the markdown Python block gate.
 - Phase R8 (complete): built the full Capstone under `course/capstone/`, including paper fixtures, starter, solution, rubric, event trail, report, and reflection.
-- Phase R9 (planned): add reference and support materials such as common patterns, troubleshooting, design-decision index, discussion prompts, and glossary updates.
+- Phase R9 (complete): added reference and support materials — common patterns, troubleshooting, design-decision index, discussion prompts with detailed answers, and glossary updates.

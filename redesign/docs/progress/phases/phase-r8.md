@@ -32,7 +32,7 @@ Build the full Capstone under `course/capstone/`: paper fixtures, starter, solut
 - [x] Rubric covers the six success criteria from the teaching redesign spec.
 - [x] Solution tests prove evidence chain, memory/skill use, workbench timeline, and production diagnostics/persistence/policy decisions.
 - [x] Course/docs/progress indexes no longer call Capstone a placeholder.
-- [x] Verification baseline recorded; R9 remains planned.
+- [x] Verification baseline recorded.
 
 ## Progress Log
 
@@ -42,7 +42,7 @@ Build the full Capstone under `course/capstone/`: paper fixtures, starter, solut
 | 2026-07-10 | Landed paper fixtures, rubric, Capstone README, citation-check skill package. |
 | 2026-07-10 | Landed starter skeleton + skip-until-implemented tests; solution `run_capstone()`, tests, trajectory, report, reflection. |
 | 2026-07-10 | Residual optimization: root `.gitignore` for node_modules/uv.lock/tsbuildinfo/caches; index honesty sweep for Capstone complete language. |
-| 2026-07-10 | Docs/progress/course indexes synced; R8 marked complete; R9 remains planned. |
+| 2026-07-10 | Docs/progress/course indexes synced; R8 marked complete. |
 | 2026-07-10 | Post-R8 review + neat-freak: Engineer Track Capstone step; architecture data-model/runtime/overview honesty; Capstone `runtime_decision` exercised in solution/tests. |
 
 ## Deliverables
@@ -72,6 +72,5 @@ PYTHONPATH=packages/research_core/src uv run pytest tests/course/test_docs_fresh
 - `ruff check .`: clean
 - Docs freshness + markdown Python blocks: `8 passed`
 - Capstone intentionally outside default `testpaths` (module-name isolation for `agent`/`agent_starter`); run Capstone tests explicitly
-- R9 remains planned
 
 

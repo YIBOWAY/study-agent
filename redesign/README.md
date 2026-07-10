@@ -116,13 +116,19 @@ Phase R8 adds the full Capstone project:
 - Capstone stays offline with FakeModel, FakeRetriever, and static paper fixtures; solution tests prove the six rubric success criteria.
 - Capstone tests live under `course/capstone/` and are run explicitly (outside default `tests/` paths).
 
+Phase R9 adds reference and support materials:
+
+- `course/reference/common-patterns.md`, `course/reference/troubleshooting.md`, `course/reference/design-decisions-index.md`, and `course/reference/discussion-prompts.md` (with detailed answers).
+- `course/reference/agent-kernel-glossary.md` expanded for Parts 1–7 + Capstone.
+- Course/docs indexes link the full reference set; R1–R9 teaching redesign is complete.
+
 Real retrieval adapters, async delegation, streaming, real auth, real cloud deployment, real A2A transport, and live framework adapters arrive in later phases.
 
 ## Course Entry
 
 Start at `course/README.md`. New learners should follow the Beginner Track before Chapter 01; experienced engineers can skim the glossary and jump to the Agent Kernel lab.
 
-Current course coverage follows the implemented runtime phases. Phase R1 rewrote the learner entrypoint and Part 1 into the project-driven teaching style; Phase R2 rewrote Part 2; Phase R3 rewrote Part 3; Phase R4 rewrote Part 4; Phase R5 rewrote Part 5; Phase R6 rewrote Part 6; Phase R7 rewrote Part 7; Phase R8 completed the Capstone under `course/capstone/`.
+Current course coverage follows the implemented runtime phases. Phase R1 rewrote the learner entrypoint and Part 1 into the project-driven teaching style; Phase R2 rewrote Part 2; Phase R3 rewrote Part 3; Phase R4 rewrote Part 4; Phase R5 rewrote Part 5; Phase R6 rewrote Part 6; Phase R7 rewrote Part 7; Phase R8 completed the Capstone under `course/capstone/`; Phase R9 completed reference and support materials under `course/reference/`.
 
 - Chapter/Lab/Solution 00: learner setup and pre-kernel mental model.
 - Chapter/Lab/Solution 01: Agent Kernel.
@@ -133,6 +139,7 @@ Current course coverage follows the implemented runtime phases. Phase R1 rewrote
 - Chapter/Lab/Solution 06: Framework Comparisons, R6 project-driven rewrite.
 - Chapter/Lab/Solution 07: Production Readiness, R7 project-driven rewrite.
 - Capstone (R8): full offline 本地论文研究助手 under `course/capstone/`.
+- Reference (R9): patterns, troubleshooting, design-decision index, discussion prompts with answers, glossary.
 
 ## Commands
 

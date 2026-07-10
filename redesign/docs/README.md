@@ -33,6 +33,7 @@ This directory is the canonical archive for the redesign version of the project.
 - `plans/2026-07-01-phase-r6-course-teaching-redesign.md`: Phase R6 implementation plan for the Part 6 Framework Comparisons teaching rewrite.
 - `plans/2026-07-02-phase-r7-course-teaching-redesign.md`: Phase R7 implementation plan for the Part 7 Production Readiness teaching rewrite.
 - `plans/2026-07-10-phase-r8-course-teaching-redesign.md`: Phase R8 implementation plan for the full Capstone project.
+- `plans/2026-07-10-phase-r9-course-teaching-redesign.md`: Phase R9 implementation plan for reference and support materials.
 - `progress/overall.md`: phase status dashboard for humans and agents.
 - `architecture/overview.md`: double-layer repository and dependency direction.
 - `architecture/runtime.md`: runtime contracts, Phase 1 agent loop, fake provider boundary, delegation events, Phase 5-7 product/production boundaries, and Capstone composition boundary.
@@ -54,7 +55,11 @@ This directory is the canonical archive for the redesign version of the project.
 - `../course/capstone/starter/`: Capstone starter skeleton.
 - `../course/capstone/solution/`: Capstone reference solution and artifacts.
 - `../course/reference/python-terminal-primer.md`: terminal and Python primer for course readers.
-- `../course/reference/agent-kernel-glossary.md`: plain-language Agent kernel glossary.
+- `../course/reference/agent-kernel-glossary.md`: plain-language Agent kernel glossary (Parts 1–7 + Capstone).
+- `../course/reference/common-patterns.md`: reusable agent engineering patterns with honesty boundaries.
+- `../course/reference/troubleshooting.md`: common errors and fix guidance.
+- `../course/reference/design-decisions-index.md`: index of all `[DD]` / `[TRAP]` callouts.
+- `../course/reference/discussion-prompts.md`: per-part discussion prompts with detailed answers and analysis.
 - `../course/chapters/00-before-agent-kernel.md`: Part 1 Section 1 mental model and narrative start.
 - `../course/labs/00-environment-check.md`: local environment readiness lab.
 - `../course/solutions/00-environment-check-solution.md`: expected environment-check outputs.

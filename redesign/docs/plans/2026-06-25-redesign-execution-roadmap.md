@@ -199,7 +199,7 @@ Follow-up:
 
 - R2, R3, R4, R5, R6, and R7 completed the Part 2 through Part 7 teaching rewrites with the same project-driven teaching method.
 - R8 completed the full Capstone materials under `course/capstone/`.
-- R9 should add support references such as troubleshooting, design-decision indexes, discussion prompts, and glossary updates.
+- R9 completed support references: troubleshooting, design-decision indexes, discussion prompts with detailed answers, and glossary updates.
 
 ### Phase R2: Course Teaching Redesign - Part 2
 
@@ -383,4 +383,4 @@ Exit criteria:
 
 - Capstone is no longer a placeholder.
 - Solution tests prove the six rubric success criteria offline.
-- Course/docs/progress indexes describe Capstone as R8 complete; R9 remains planned.
+- Course/docs/progress indexes describe Capstone as R8 complete.

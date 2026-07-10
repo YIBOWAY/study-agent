@@ -2,7 +2,7 @@
 
 这门课不是让你先背一堆 Agent 名词，再猜它们有什么用。你会从零构建一个完全离线的本地论文研究助手：它能接收研究问题，按步骤运行，留下可检查的 event trail，并逐步长出证据链、记忆、委派、Workbench 和生产边界。
 
-现在先把范围说清楚：Phase R1 到 R7 已经把课程入口和 Parts 1-7 改成项目驱动学习；Phase R8 已经补齐完整 Capstone（fixtures、starter、solution、rubric、trajectory、report、reflection）。R9 仍会补参考支持材料。也就是说，你现在可以按 Parts 1-7 学完后，直接做完整的本地论文研究助手 Capstone。
+现在先把范围说清楚：Phase R1 到 R7 已经把课程入口和 Parts 1-7 改成项目驱动学习；Phase R8 已经补齐完整 Capstone（fixtures、starter、solution、rubric、trajectory、report、reflection）；Phase R9 已经补齐参考支持材料（common patterns、troubleshooting、设计决策索引、讨论题含参考答案、glossary 扩展）。也就是说，你现在可以按 Parts 1-7 学完后，直接做完整的本地论文研究助手 Capstone，并随时回查 reference。
 
 Part 1 还不会真的检索论文，也不会产出真实引用报告。它先训练最底层的能力：让助手跑一次，调用工具，留下轨迹，并让你能解释每一步发生了什么。后面的论文检索、证据抽取、记忆和界面，都会接在这条轨迹上。
 
@@ -35,7 +35,7 @@ Setup
 
 | Step | Content | 你的助手获得的能力 |
 | --- | --- | --- |
-| Setup | 先读 [reference/python-terminal-primer.md](reference/python-terminal-primer.md) 和 [reference/agent-kernel-glossary.md](reference/agent-kernel-glossary.md)。再做 [labs/00-environment-check.md](labs/00-environment-check.md)，做完后对照 [solutions/00-environment-check-solution.md](solutions/00-environment-check-solution.md)。 | 你获得运行环境、命令行和术语准备；助手本身还没有新增 runtime 能力。 |
+| Setup | 先读 [reference/python-terminal-primer.md](reference/python-terminal-primer.md) 和 [reference/agent-kernel-glossary.md](reference/agent-kernel-glossary.md)。卡住时查 [reference/troubleshooting.md](reference/troubleshooting.md)；复习模式与决策时用 [reference/common-patterns.md](reference/common-patterns.md)、[reference/design-decisions-index.md](reference/design-decisions-index.md)、[reference/discussion-prompts.md](reference/discussion-prompts.md)。再做 [labs/00-environment-check.md](labs/00-environment-check.md)，做完后对照 [solutions/00-environment-check-solution.md](solutions/00-environment-check-solution.md)。 | 你获得运行环境、命令行和术语准备；助手本身还没有新增 runtime 能力。 |
 | Part 1: Agent Kernel, R1 rewritten | 先读 [chapters/00-before-agent-kernel.md](chapters/00-before-agent-kernel.md)，再读 [chapters/01-agent-kernel-foundations.md](chapters/01-agent-kernel-foundations.md)。然后做 [labs/01-agent-runner-lab.md](labs/01-agent-runner-lab.md)，尝试后再看 [solutions/01-agent-runner-solution.md](solutions/01-agent-runner-solution.md)。 | 助手获得最小 think-act-observe loop：能接收问题、请求工具、记录 `model_request` / `tool_call` / `tool_result` / `error` 等 event，并让你检查这次 run 到底怎么发生。 |
 | Part 2: Research Core, R2 rewritten | 读 [chapters/02-research-core-foundations.md](chapters/02-research-core-foundations.md)。做 [labs/02-source-evidence-claim-lab.md](labs/02-source-evidence-claim-lab.md)，再对照 [solutions/02-source-evidence-claim-solution.md](solutions/02-source-evidence-claim-solution.md)。 | 助手开始理解 source -> evidence -> claim -> report 的证据链，并练习 L1/L2/L3 evidence-chain 设计。 |
 | Part 3: Memory and Skills, R3 rewritten | 读 [chapters/03-memory-and-skills.md](chapters/03-memory-and-skills.md)。做 [labs/03-memory-skill-runtime-lab.md](labs/03-memory-skill-runtime-lab.md)，再对照 [solutions/03-memory-skill-runtime-solution.md](solutions/03-memory-skill-runtime-solution.md)。 | 助手获得可检查的 memory notebook、write/recall policy、skill package manifest 和 progressive disclosure，并练习 L1/L2/L3 memory-skill 设计。 |
@@ -99,6 +99,8 @@ PYTHONPATH=packages/research_core/src uv run python
 这套课里“失败”不是坏事。失败后还能留下清楚的事件轨迹，才是可维护 Agent 系统的起点。
 
 ## Common Stuck Points
+
+更完整的排障见 [reference/troubleshooting.md](reference/troubleshooting.md)。下面是入门时最常见的几条：
 
 | Symptom | Usually Means | What To Do |
 | --- | --- | --- |
@@ -167,6 +169,15 @@ PYTHONPATH=packages/research_core/src uv run python
 - [capstone/starter/](capstone/starter/): 学习者 starter skeleton 与 scaffold tests。
 - [capstone/solution/](capstone/solution/): 参考实现、tests、trajectory、report、reflection。
 
+### Reference: R9 Complete
+
+- [reference/python-terminal-primer.md](reference/python-terminal-primer.md): 终端与 Python 最小准备。
+- [reference/agent-kernel-glossary.md](reference/agent-kernel-glossary.md): Parts 1–7 + Capstone 术语表（含易混词对照）。
+- [reference/common-patterns.md](reference/common-patterns.md): 可复用工程模式与诚实边界。
+- [reference/troubleshooting.md](reference/troubleshooting.md): 常见错误与修复指南。
+- [reference/design-decisions-index.md](reference/design-decisions-index.md): 全部 `[DD]` / `[TRAP]` 索引。
+- [reference/discussion-prompts.md](reference/discussion-prompts.md): 每章讨论题 + 详细参考答案与解析。
+
 ### Framework Reports
 
 - [framework_comparisons/reports/echo-tool-task.md](framework_comparisons/reports/echo-tool-task.md): echo-tool shared task report。
@@ -174,7 +185,7 @@ PYTHONPATH=packages/research_core/src uv run python
 
 ## Current Rewrite Status
 
-实现状态和教学重写状态不是一回事。很多 runtime/product 代码已经存在；Parts 1-7 已完成 R1-R7 教学重写；Capstone 已在 R8 补齐。R9 仍会补参考支持材料。
+实现状态和教学重写状态不是一回事。很多 runtime/product 代码已经存在；Parts 1-7 已完成 R1-R7 教学重写；Capstone 已在 R8 补齐；参考支持材料已在 R9 补齐。
 
 | Phase | Teaching status |
 | --- | --- |
@@ -186,6 +197,6 @@ PYTHONPATH=packages/research_core/src uv run python
 | R6 | 已把 Part 6 改成固定 task/fixture/metric 的透明加权评分（build-vs-adopt 技术选型）的项目驱动学习结构，并把 Part 6 纳入 markdown 代码块门禁 |
 | R7 | 已把 Part 7 改成 diagnostics、JSONL replay、approval、sandbox、docs freshness 的项目驱动学习结构，并把 Part 7 纳入 markdown 代码块门禁 |
 | R8 | 已补齐完整 Capstone：fixtures、starter、solution、rubric、trajectory、report、reflection |
-| R9 | 计划补齐参考材料、troubleshooting、设计决策索引、讨论题和 glossary 更新 |
+| R9 | 已补齐参考材料：common patterns、troubleshooting、设计决策索引、讨论题（含详细参考答案与解析）、glossary 扩展 |
 
-学习时用一个简单判断：Parts 1-7 按 R1-R7 新结构认真做完整循环；做完后进入 Capstone，按 rubric 自检，先独立完成 starter，再对照 solution。
+学习时用一个简单判断：Parts 1-7 按 R1-R7 新结构认真做完整循环；做完后进入 Capstone，按 rubric 自检，先独立完成 starter，再对照 solution；卡住或复习时回查 R9 reference。

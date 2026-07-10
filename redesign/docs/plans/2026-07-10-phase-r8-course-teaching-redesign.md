@@ -133,4 +133,4 @@ Modify:
 - Capstone is no longer a placeholder.
 - Learners can complete the project offline with fixtures + starter + rubric.
 - Solution proves all 6 success criteria.
-- Indexes and progress mark R8 complete; R9 remains planned.
+- Indexes and progress mark R8 complete.
