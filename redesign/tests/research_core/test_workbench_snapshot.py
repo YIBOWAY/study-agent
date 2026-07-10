@@ -431,3 +431,20 @@ def _copy_snapshot(snapshot: WorkbenchSnapshot, **overrides: object) -> Workbenc
     }
     values.update(overrides)
     return WorkbenchSnapshot(**values)
+
+
+def test_snapshot_rejects_duplicate_memory_ids() -> None:
+    snapshot = build_demo_workbench_snapshot()
+    memory = snapshot.memory[0]
+    with pytest.raises(ValueError, match="memory ids must be unique"):
+        WorkbenchSnapshot(
+            project=snapshot.project,
+            run=snapshot.run,
+            timeline=snapshot.timeline,
+            delegation=snapshot.delegation,
+            sources=snapshot.sources,
+            report=snapshot.report,
+            memory=(memory, memory),
+            skills=snapshot.skills,
+            evals=snapshot.evals,
+        )

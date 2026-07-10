@@ -3,8 +3,10 @@ import type { ReactNode } from "react";
 import {
   Activity,
   Braces,
+  AlertCircle,
   CheckCircle2,
   CircleDot,
+  XCircle,
   Database,
   FileText,
   Gauge,
@@ -621,24 +623,49 @@ function SkillList({ items }: { items: WorkbenchSkillItem[] }) {
 function EvalList({ items }: { items: WorkbenchEvalItem[] }) {
   return (
     <div className="compact-list">
-      {items.map((item) => (
-        <article className="eval-row" key={item.id}>
-          <div className="eval-score">
-            <CheckCircle2 size={18} />
-            <strong>{Math.round(item.score * 100)}%</strong>
-          </div>
-          <div>
-            <div className="row-heading">
-              <strong>{item.title}</strong>
-              <span>{item.status}</span>
+      {items.map((item) => {
+        const tone = evalStatusTone(item.status);
+        const Icon =
+          tone === "good" ? CheckCircle2 : tone === "bad" ? XCircle : AlertCircle;
+        return (
+          <article className="eval-row" key={item.id}>
+            <div className={`eval-score eval-score-${tone}`}>
+              <Icon size={18} />
+              <strong>{Math.round(item.score * 100)}%</strong>
             </div>
-            <p>{item.details}</p>
-            <code>{item.metric}</code>
-          </div>
-        </article>
-      ))}
+            <div>
+              <div className="row-heading">
+                <strong>{item.title}</strong>
+                <span className={statusTone(item.status)}>{item.status}</span>
+              </div>
+              <p>{item.details}</p>
+              <code>{item.metric}</code>
+            </div>
+          </article>
+        );
+      })}
     </div>
   );
+}
+
+function evalStatusTone(status: string): "good" | "bad" | "neutral" {
+  const normalized = status.toLowerCase();
+  if (
+    normalized === "passed" ||
+    normalized === "pass" ||
+    normalized === "completed" ||
+    normalized === "ok"
+  ) {
+    return "good";
+  }
+  if (
+    normalized === "failed" ||
+    normalized === "fail" ||
+    normalized === "error"
+  ) {
+    return "bad";
+  }
+  return "neutral";
 }
 
 function Metric({

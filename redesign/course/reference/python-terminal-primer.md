@@ -7,10 +7,19 @@
 Terminal 就是用文字命令操作电脑的地方。课程里的命令默认从这个目录运行：
 
 ```bash
-cd /Users/sunyibo/programs/study-agent/redesign
+# Repository root -> redesign package root (directory with pyproject.toml)
+cd redesign
 ```
 
 如果命令前面写着 `uv run`，意思是：用这个项目自己的 Python 环境运行命令，而不是随便拿系统里的 Python。
+
+如果本机还没有 `uv`：
+
+```bash
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
+
+装完后重新打开终端，再运行 `uv --version` 确认可用。
 
 ## Python Shell
 

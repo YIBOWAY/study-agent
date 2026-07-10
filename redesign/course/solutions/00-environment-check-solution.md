@@ -13,10 +13,10 @@ pwd
 Expected shape:
 
 ```text
-/Users/sunyibo/programs/study-agent/redesign
+.../redesign
 ```
 
-如果不是这个目录，后面的路径大概率会错。
+最后一段目录名应是 `redesign`（或你 clone 后的等价目录），且该目录下有 `pyproject.toml`。如果不是，后面的路径大概率会错。
 
 ## Python Version
 

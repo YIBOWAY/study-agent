@@ -25,6 +25,33 @@ ChildRunnerFactory = Callable[[AgentRolePolicy], ChildRunner]
 DEFAULT_DELEGATION_BUDGET = DelegationBudget()
 
 
+def filter_tools_for_role(role: AgentRolePolicy, tool_names: Sequence[str]) -> tuple[str, ...]:
+    """Return tool names allowed by the role policy.
+
+    Empty ``role.tool_names`` means "no tools allowed". Call this (or an equivalent
+    check) inside every ``child_runner_factory`` before registering tools. Role
+    ``skill_names`` and ``memory_kinds`` remain declarative labels until a later
+    phase wires SkillRuntime / MemoryEngine into the child factory.
+    """
+    if not isinstance(role, AgentRolePolicy):
+        raise ValueError("role must be an AgentRolePolicy")
+    if isinstance(tool_names, (str, bytes)) or not isinstance(tool_names, Sequence):
+        raise ValueError("tool_names must be a sequence of strings")
+    requested = tuple(tool_names)
+    if any(not isinstance(name, str) or not name.strip() for name in requested):
+        raise ValueError("tool_names must not contain blank values")
+    allowed = set(role.tool_names)
+    denied = [name for name in requested if name not in allowed]
+    if denied:
+        denied_list = ", ".join(repr(name) for name in denied)
+        raise ValueError(
+            f"role {role.id!r} does not allow tools: {denied_list}; "
+            f"allowed={list(role.tool_names)!r}"
+        )
+    return requested
+
+
+
 class DelegationRuntime:
     def __init__(self, child_runner_factory: ChildRunnerFactory) -> None:
         self._child_runner_factory = child_runner_factory

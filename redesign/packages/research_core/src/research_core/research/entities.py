@@ -27,9 +27,17 @@ def _freeze_metadata(metadata: Mapping[str, Any]) -> Mapping[str, Any]:
 
 
 def _tuple_of_non_empty_strings(name: str, values: Sequence[str]) -> tuple[str, ...]:
+    if isinstance(values, (str, bytes)) or isinstance(values, Mapping):
+        raise ValueError(f"{name} must be a sequence of strings")
     result = tuple(values)
     if any(not isinstance(value, str) or not value.strip() for value in result):
         raise ValueError(f"{name} must not contain blank values")
+    # Preserve order while rejecting duplicates that would make claim links ambiguous.
+    seen: set[str] = set()
+    for value in result:
+        if value in seen:
+            raise ValueError(f"{name} must not contain duplicate values")
+        seen.add(value)
     return result
 
 
@@ -134,5 +142,8 @@ class Report:
         claims = tuple(self.claims)
         if any(not isinstance(claim, Claim) for claim in claims):
             raise ValueError("claims must contain Claim objects")
+        claim_ids = [claim.id for claim in claims]
+        if len(set(claim_ids)) != len(claim_ids):
+            raise ValueError("claims must not contain duplicate claim ids")
         object.__setattr__(self, "claims", claims)
         object.__setattr__(self, "metadata", _freeze_metadata(self.metadata))

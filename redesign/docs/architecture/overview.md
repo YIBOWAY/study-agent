@@ -7,7 +7,7 @@ The redesign uses a double-layer repository under `redesign/`:
 - `course/`: learning chapters, labs, solutions, and framework comparisons.
 - `apps/`: product applications.
 - `packages/`: shared runtime packages.
-- `evals/`: datasets, trajectory fixtures, and evaluation reports.
+- `evals/`: datasets and evaluation reports for offline checks. Trajectory-style checks also live under `tests/research_core/` (for example memory/skill and multi-agent eval tests); treat `evals/` as fixtures/reports, not a separate runtime.
 - `docs/`: architecture, specs, plans, and glossary.
 - `infra/`: deployment and operations placeholders for deployment phases.
 

@@ -1,6 +1,7 @@
 from dataclasses import FrozenInstanceError
 
-from research_core.research import FakeRetriever, SearchResult, SourceIngestor, SourceInput
+import pytest
+from research_core.research import FakeRetriever, SearchResult, Source, SourceIngestor, SourceInput
 
 
 def test_source_input_rejects_blank_uri_title_and_content() -> None:
@@ -151,3 +152,34 @@ def test_search_result_contract_is_frozen_slotted_and_metadata_is_read_only() ->
         pass
     else:
         raise AssertionError("Expected search result metadata to be read-only")
+
+
+def test_fake_retriever_matches_chinese_query() -> None:
+    source = Source(
+        id="src_cjk",
+        uri="memory://cjk",
+        title="研究笔记",
+        content="本地论文研究助手需要证据链。",
+    )
+    retriever = FakeRetriever([source])
+
+    results = retriever.search("论文证据")
+
+    assert [item.source_id for item in results] == ["src_cjk"]
+
+
+def test_fake_retriever_rejects_duplicate_source_ids() -> None:
+    source = Source(
+        id="src_dup",
+        uri="memory://a",
+        title="A",
+        content="alpha beta",
+    )
+    duplicate = Source(
+        id="src_dup",
+        uri="memory://b",
+        title="B",
+        content="gamma delta",
+    )
+    with pytest.raises(ValueError, match="duplicate source id"):
+        FakeRetriever([source, duplicate])

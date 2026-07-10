@@ -179,6 +179,36 @@ class SandboxPolicy:
             reason="network access is disabled",
         )
 
+    def runtime_decision(self, elapsed_seconds: float) -> SandboxDecision:
+        """Decide whether a run may continue given elapsed wall-clock seconds.
+
+        This is an inspectable local contract only. ``AgentRunner`` does not call
+        it automatically; production adapters must check before or during a run.
+        """
+        if (
+            not isinstance(elapsed_seconds, (int, float))
+            or isinstance(elapsed_seconds, bool)
+            or elapsed_seconds < 0
+        ):
+            raise ValueError("elapsed_seconds must be a non-negative number")
+        if elapsed_seconds <= self.max_runtime_seconds:
+            return SandboxDecision(
+                subject="runtime",
+                allowed=True,
+                reason=(
+                    f"elapsed runtime {elapsed_seconds}s is within "
+                    f"max_runtime_seconds {self.max_runtime_seconds}"
+                ),
+            )
+        return SandboxDecision(
+            subject="runtime",
+            allowed=False,
+            reason=(
+                f"elapsed runtime {elapsed_seconds}s exceeds "
+                f"max_runtime_seconds {self.max_runtime_seconds}"
+            ),
+        )
+
 
 def _normalize_paths(paths: Sequence[str | Path]) -> tuple[Path, ...]:
     if isinstance(paths, (str, bytes, Path)):

@@ -140,6 +140,12 @@ cd apps/web && npm install && npm run build
 
 Legacy code remains outside this folder. New redesign work should live under `redesign/` unless an approved phase plan explicitly says otherwise.
 
+## Prerequisites
+
+- Python 3.11+
+- [uv](https://docs.astral.sh/uv/) for the Python toolchain (`curl -LsSf https://astral.sh/uv/install.sh | sh` on macOS/Linux)
+- Node.js + npm for `apps/web` builds
+
 ## Verification
 
 Expected local checks:

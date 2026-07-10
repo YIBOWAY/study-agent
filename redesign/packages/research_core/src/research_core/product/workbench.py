@@ -795,10 +795,22 @@ def _validate_snapshot_references(snapshot: WorkbenchSnapshot) -> None:
     if snapshot.report is not None and snapshot.report.run_id != snapshot.run.id:
         raise ValueError("report run_id must match run id")
 
+    _validate_unique_ids("timeline", [item.id for item in snapshot.timeline])
+    _validate_unique_ids("memory", [item.id for item in snapshot.memory])
+    _validate_unique_ids("skills", [item.id for item in snapshot.skills])
+    _validate_unique_ids("evals", [item.id for item in snapshot.evals])
     _validate_delegation_references(snapshot.delegation)
     evidence_by_id = _validate_source_references(snapshot.sources)
     if snapshot.report is not None:
         _validate_report_links(snapshot.report, evidence_by_id)
+
+
+def _validate_unique_ids(name: str, ids: list[str]) -> None:
+    seen: set[str] = set()
+    for item_id in ids:
+        if item_id in seen:
+            raise ValueError(f"{name} ids must be unique")
+        seen.add(item_id)
 
 
 def _validate_delegation_references(
@@ -842,11 +854,15 @@ def _validate_delegation_nesting(
 def _validate_source_references(
     sources: Sequence[WorkbenchSourceItem],
 ) -> dict[str, WorkbenchEvidenceItem]:
+    source_ids = [source.id for source in sources]
+    _validate_unique_ids("source", source_ids)
     evidence_by_id: dict[str, WorkbenchEvidenceItem] = {}
     for source in sources:
         for evidence in source.evidence:
             if evidence.source_id != source.id:
                 raise ValueError("source evidence source_id must match source id")
+            if evidence.id in evidence_by_id:
+                raise ValueError("evidence ids must be unique")
             evidence_by_id[evidence.id] = evidence
     return evidence_by_id
 

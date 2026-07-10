@@ -7,7 +7,7 @@ from research_core.delegation.contracts import (
     DelegationStatus,
     DelegationTask,
 )
-from research_core.delegation.runtime import DelegationRuntime
+from research_core.delegation.runtime import DelegationRuntime, filter_tools_for_role
 
 __all__ = [
     "A2AAdapterStub",
@@ -19,4 +19,5 @@ __all__ = [
     "DelegationRuntime",
     "DelegationStatus",
     "DelegationTask",
+    "filter_tools_for_role",
 ]

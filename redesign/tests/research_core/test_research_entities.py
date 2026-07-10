@@ -1,5 +1,6 @@
 from dataclasses import FrozenInstanceError
 
+import pytest
 from research_core.research import (
     Claim,
     Evidence,
@@ -162,3 +163,20 @@ def test_entity_contracts_are_frozen_and_slotted() -> None:
             pass
         else:
             raise AssertionError("Expected entity to be frozen")
+
+
+def test_claim_rejects_duplicate_evidence_ids() -> None:
+    with pytest.raises(ValueError, match="duplicate"):
+        Claim(id="claim_1", text="text", evidence_ids=["e1", "e1"])
+
+
+def test_report_rejects_duplicate_claim_ids() -> None:
+    claim = Claim(id="claim_1", text="text", evidence_ids=["e1"])
+    with pytest.raises(ValueError, match="duplicate claim ids"):
+        Report(
+            id="report_1",
+            run_id="run_1",
+            title="title",
+            summary="summary",
+            claims=[claim, claim],
+        )

@@ -11,6 +11,14 @@ SnapshotProvider = Callable[[], WorkbenchSnapshot]
 
 
 def create_app(snapshot_provider: SnapshotProvider | None = None) -> FastAPI:
+    """Create the read-only Workbench API.
+
+    The snapshot is resolved once at app creation. That keeps the Phase 5 demo
+    deterministic and matches the product contract that ``apps/api`` is a thin
+    transport over a fixed ``WorkbenchSnapshot``. Callers that need live data
+    must supply a provider that already closes over current state, then rebuild
+    the app (or later replace this with a request-scoped provider).
+    """
     provider = build_demo_workbench_snapshot if snapshot_provider is None else snapshot_provider
     snapshot = provider()
     if not isinstance(snapshot, WorkbenchSnapshot):
@@ -25,6 +33,8 @@ def create_app(snapshot_provider: SnapshotProvider | None = None) -> FastAPI:
             }
         ],
     )
+    app.state.snapshot = snapshot
+    app.state.snapshot_provider = provider
 
     @app.get("/health")
     def health() -> dict[str, str]:

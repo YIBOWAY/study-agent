@@ -93,3 +93,17 @@ def test_sandbox_policy_rejects_invalid_limits_and_access_names(tmp_path) -> Non
     policy = SandboxPolicy(readable_paths=(tmp_path,))
     with pytest.raises(ValueError, match="access must be one of"):
         policy.decide_path(tmp_path / "file.txt", access="execute")
+
+
+def test_sandbox_runtime_decision_uses_max_runtime_seconds(tmp_path) -> None:
+    sandbox = SandboxPolicy(
+        readable_paths=(tmp_path,),
+        max_runtime_seconds=15,
+    )
+
+    allowed = sandbox.runtime_decision(5)
+    denied = sandbox.runtime_decision(20)
+
+    assert allowed.allowed is True
+    assert denied.allowed is False
+    assert "exceeds max_runtime_seconds 15" in denied.reason

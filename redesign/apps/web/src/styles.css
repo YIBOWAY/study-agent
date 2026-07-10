@@ -679,6 +679,24 @@ code {
   font-size: 16px;
 }
 
+.eval-score-good {
+  border-color: #bfe7ce;
+  background: var(--green-soft);
+  color: var(--green);
+}
+
+.eval-score-bad {
+  border-color: #f3c1c8;
+  background: var(--rose-soft);
+  color: var(--rose);
+}
+
+.eval-score-neutral {
+  border-color: var(--line);
+  background: #eef1f5;
+  color: #4b5563;
+}
+
 .claim-list {
   border-top: 1px solid var(--line);
 }

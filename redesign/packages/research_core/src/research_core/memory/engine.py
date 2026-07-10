@@ -8,7 +8,8 @@ from typing import Any
 
 from research_core.runtime.immutability import freeze_json_value
 
-_TOKEN_PATTERN = re.compile(r"[A-Za-z0-9_]+")
+# Latin/identifier tokens, or individual CJK characters so pure Chinese queries work.
+_TOKEN_PATTERN = re.compile(r"[A-Za-z0-9_]+|[一-鿿㐀-䶿豈-﫿]")
 
 
 class MemoryKind(StrEnum):
@@ -43,9 +44,7 @@ class MemoryRecord:
             or not 0 <= self.importance <= 1
         ):
             raise ValueError("importance must be a number between 0 and 1")
-        tags = tuple(self.tags)
-        if any(not isinstance(tag, str) or not tag.strip() for tag in tags):
-            raise ValueError("tags must not contain blank values")
+        tags = _tuple_of_non_empty_strings("tags", self.tags)
         object.__setattr__(self, "kind", kind)
         object.__setattr__(self, "tags", tags)
         object.__setattr__(self, "importance", float(self.importance))
@@ -157,6 +156,15 @@ def _normalize_kind(kind: MemoryKind | str) -> MemoryKind:
     except ValueError as exc:
         allowed_kinds = ", ".join(kind.value for kind in MemoryKind)
         raise ValueError(f"kind must be one of: {allowed_kinds}") from exc
+
+
+def _tuple_of_non_empty_strings(name: str, values: Sequence[str]) -> tuple[str, ...]:
+    if isinstance(values, (str, bytes)) or isinstance(values, Mapping):
+        raise ValueError(f"{name} must be a sequence of strings")
+    result = tuple(values)
+    if any(not isinstance(value, str) or not value.strip() for value in result):
+        raise ValueError(f"{name} must not contain blank values")
+    return result
 
 
 def _tokenize(value: str) -> tuple[str, ...]:

@@ -60,6 +60,9 @@ Delegation 的心智模型很简单：你不是把整个大脑复制给下属，
 
 > [DD] **设计决策**：R4 不做真实并发，也不接远程 worker。先把本地 deterministic contract 教清楚：context 怎么编译、预算怎么数、失败怎么留下。否则后面做 async 或 A2A 只是把不清楚的边界放大。
 
+> [TRAP] **诚实边界**：`tool_names` / `skill_names` / `memory_kinds` 写在工牌上，但 `DelegationRuntime` **不会**自动按这些列表过滤 child 的 `ToolRuntime`、Skill 或 Memory。当前真正 enforced 的是 `max_steps` 与 `DelegationBudget`。工厂侧应调用 `filter_tools_for_role(role, tool_names)`（或等价检查）再注册工具；`skill_names` / `memory_kinds` 仍是声明式标签，留给后续 phase 接入。
+
+
 ### Delegation flow
 
 ```text

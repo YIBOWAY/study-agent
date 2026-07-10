@@ -464,96 +464,17 @@ PYTHONPATH=packages/research_core/src uv run python
 ]
 ```
 
-完成后再对照这个参考实现：
+自己先写出 `FakeModel` 剧本、四个 `ToolDefinition`、运行与断言。完整可运行参考实现和 why-correct 说明放在 lab/solution，不在正文剧透：
 
-```python
-from research_core.runtime import AgentRunner, ToolDefinition, ToolRuntime
-from research_core.runtime import event_type_sequence, events_to_records
-from research_core.testing import FakeModel, FakeModelResponse
+- 练习：[`labs/01-agent-runner-lab.md`](../labs/01-agent-runner-lab.md) 的 L3 Design
+- 参考答案：[`solutions/01-agent-runner-solution.md`](../solutions/01-agent-runner-solution.md)
 
-add_json = '{"tool_call": {"id": "call_1", "name": "add", "arguments": {"a": 3, "b": 4}}}'
-multiply_json = '{"tool_call": {"id": "call_2", "name": "multiply", "arguments": {"a": 7, "b": 2}}}'
+自检目标（不要先打开 solution）：
 
-model = FakeModel(
-    [
-        FakeModelResponse(content=add_json),
-        FakeModelResponse(content=multiply_json),
-        FakeModelResponse(content="3+4 is 7, and 7*2 is 14."),
-    ]
-)
-
-tools = ToolRuntime()
-tools.register(
-    ToolDefinition(
-        name="add",
-        description="Add two numbers.",
-        handler=lambda arguments: {"value": arguments["a"] + arguments["b"]},
-    )
-)
-tools.register(
-    ToolDefinition(
-        name="subtract",
-        description="Subtract b from a.",
-        handler=lambda arguments: {"value": arguments["a"] - arguments["b"]},
-    )
-)
-tools.register(
-    ToolDefinition(
-        name="multiply",
-        description="Multiply two numbers.",
-        handler=lambda arguments: {"value": arguments["a"] * arguments["b"]},
-    )
-)
-tools.register(
-    ToolDefinition(
-        name="divide",
-        description="Divide a by b.",
-        handler=lambda arguments: {"value": arguments["a"] / arguments["b"]},
-    )
-)
-
-result = AgentRunner(model=model, tools=tools).run(
-    run_id="calculator_1",
-    system_prompt="You are careful.",
-    user_message="3+4 then multiply by 2",
-)
-
-expected_sequence = [
-    "model_request",
-    "model_response",
-    "tool_call",
-    "tool_result",
-    "model_request",
-    "model_response",
-    "tool_call",
-    "tool_result",
-    "model_request",
-    "model_response",
-]
-
-print(result.final_message.content)
-print(event_type_sequence(result.events))
-
-records = events_to_records(result.events)
-tool_values = [
-    record["payload"]["tool_result"]["content"]["value"]
-    for record in records
-    if record["type"] == "tool_result"
-]
-print(tool_values)
-
-assert result.final_message.content == "3+4 is 7, and 7*2 is 14."
-assert event_type_sequence(result.events) == expected_sequence
-assert tool_values == [7, 14]
-```
-
-你应该看到：
-
-```text
-3+4 is 7, and 7*2 is 14.
-['model_request', 'model_response', 'tool_call', 'tool_result', 'model_request', 'model_response', 'tool_call', 'tool_result', 'model_request', 'model_response']
-[7, 14]
-```
+- final answer 形如 `3+4 is 7, and 7*2 is 14.`
+- event sequence 长度 10，且两轮 `tool_call` / `tool_result`
+- `tool_values == [7, 14]`
+- 四个工具都已注册（即使 happy path 只用到 `add` 与 `multiply`）
 
 #### L3 Design 练习反馈
 

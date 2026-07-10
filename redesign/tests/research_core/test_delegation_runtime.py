@@ -10,6 +10,7 @@ from research_core.delegation import (
     DelegationRuntime,
     DelegationStatus,
     DelegationTask,
+    filter_tools_for_role,
 )
 from research_core.runtime import AgentRunResult
 from research_core.runtime.events import RunEvent, RunEventType
@@ -464,3 +465,16 @@ def test_run_many_rejects_total_child_step_budget_before_launching_next_child() 
 
     assert len(first_runner.calls) == 1
     assert second_runner.calls == []
+
+
+def test_filter_tools_for_role_rejects_disallowed_tools() -> None:
+    role = _role(tool_names=("echo",))
+
+    with pytest.raises(ValueError, match="does not allow tools"):
+        filter_tools_for_role(role, ("echo", "secret_tool"))
+
+
+def test_filter_tools_for_role_allows_listed_tools() -> None:
+    role = _role(tool_names=("echo", "search"))
+
+    assert filter_tools_for_role(role, ("search", "echo")) == ("search", "echo")

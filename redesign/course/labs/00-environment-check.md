@@ -11,28 +11,41 @@
 ## Step 1: Go To The Redesign Directory
 
 ```bash
-cd /Users/sunyibo/programs/study-agent/redesign
+# From the repository root:
+cd redesign
+# If your clone lives elsewhere, cd into the directory that contains pyproject.toml.
 ```
 
 确认当前位置：
 
 ```bash
 pwd
+ls pyproject.toml
 ```
 
-你应该看到：
+`pwd` 的最后一段应是 `redesign`（或你 clone 后的等价目录名），且当前目录下应有 `pyproject.toml`。
 
-```text
-/Users/sunyibo/programs/study-agent/redesign
+## Step 2: Install uv (if needed) And Check Python
+
+如果 `uv` 还没装，macOS/Linux 可用：
+
+```bash
+curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
-## Step 2: Check Python Through uv
+Windows 见 https://docs.astral.sh/uv/getting-started/installation/ 。装完后重新打开终端，确认：
+
+```bash
+uv --version
+```
+
+然后检查项目 Python：
 
 ```bash
 uv run python --version
 ```
 
-你不需要记住具体小版本，但它应该是 Python 3.11 或更高。
+你不需要记住具体小版本，但它应该是 Python 3.11 或更高。第一次 `uv run` 会创建/同步本地虚拟环境，可能稍慢。
 
 ## Step 3: Run A Small Test
 
@@ -77,7 +90,7 @@ uv run ruff check .
 | Error | Meaning | Fix |
 | --- | --- | --- |
 | `ModuleNotFoundError: No module named 'research_core'` | 没有把本地 package 放进 Python 搜索路径 | 确认从 `redesign/` 运行，并使用 `PYTHONPATH=packages/research_core/src` |
-| `No such file or directory` | 当前目录不对 | 重新运行 `cd /Users/sunyibo/programs/study-agent/redesign` |
+| `No such file or directory` | 当前目录不对 | 回到含 `pyproject.toml` 的 `redesign/` 目录再试 |
 | `command not found: uv` | 本机找不到 `uv` | 先安装或修复 `uv` |
 | pytest 有失败 | 当前代码基线不干净 | 先看失败测试名，不要继续后面的课程 |
 

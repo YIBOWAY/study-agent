@@ -1,3 +1,4 @@
+import pytest
 from research_core.research import (
     Claim,
     ClaimSourceLink,
@@ -144,3 +145,26 @@ def test_build_claim_source_links_rejects_claims_without_evidence() -> None:
         assert "claim 'claim_1' must reference at least one evidence id" in str(exc)
     else:
         raise AssertionError("Expected unsupported claim to be rejected")
+
+
+def test_build_claim_source_links_rejects_duplicate_evidence_ids() -> None:
+    source = Source(
+        id="src_1",
+        uri="memory://1",
+        title="T",
+        content="body",
+    )
+    evidence = Evidence(
+        id="ev_1",
+        source_id=source.id,
+        quote="body",
+    )
+    report = Report(
+        id="report_1",
+        run_id="run_1",
+        title="title",
+        summary="summary",
+        claims=[Claim(id="c1", text="claim", evidence_ids=["ev_1"])],
+    )
+    with pytest.raises(ValueError, match="duplicate evidence id"):
+        build_claim_source_links(report, evidence=[evidence, evidence], sources=[source])

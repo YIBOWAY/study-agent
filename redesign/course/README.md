@@ -102,7 +102,7 @@ PYTHONPATH=packages/research_core/src uv run python
 | Symptom | Usually Means | What To Do |
 | --- | --- | --- |
 | `ModuleNotFoundError: No module named 'research_core'` | Python shell 没找到本地 package | 从 `redesign/` 运行，并使用 `PYTHONPATH=packages/research_core/src uv run python` |
-| `zsh: command not found: uv` | 本机没有可用的 `uv` 命令 | 先安装或修复 `uv`，再继续课程 |
+| `zsh: command not found: uv` | 本机没有可用的 `uv` 命令 | 安装 uv：`curl -LsSf https://astral.sh/uv/install.sh | sh`，重新打开终端后再继续 |
 | `AssertionError` | 你的实际结果和课程期望不一致 | 不要只看报错行；打印变量和 event sequence，找是哪一步不同 |
 | `unknown tool 'echo'` 或 `unknown_tool` | model 请求了一个没有注册的 tool，或 JSON 里的工具名和注册表不一致 | 检查 `ToolDefinition(name=...)` 和 JSON 里的 `"name"` 是否完全一样，并确认 `AgentRunner(model=model, tools=tools)` 用的是同一个 `ToolRuntime` |
 | Python shell 里粘贴多行代码乱了 | 交互模式不适合大段代码，或缩进被破坏 | 使用 lab 里的 one-shot command，或把代码放进临时 `.py` 文件 |

@@ -7,7 +7,8 @@ from typing import Any
 
 from research_core.research.entities import Source, _freeze_metadata, _require_non_empty
 
-_TOKEN_PATTERN = re.compile(r"[A-Za-z0-9_]+")
+# Latin/identifier tokens, or individual CJK characters so pure Chinese queries work.
+_TOKEN_PATTERN = re.compile(r"[A-Za-z0-9_]+|[一-鿿㐀-䶿豈-﫿]")
 
 
 @dataclass(frozen=True, slots=True)
@@ -32,6 +33,11 @@ class FakeRetriever:
         source_tuple = tuple(sources)
         if any(not isinstance(source, Source) for source in source_tuple):
             raise ValueError("sources must contain Source objects")
+        seen_ids: set[str] = set()
+        for source in source_tuple:
+            if source.id in seen_ids:
+                raise ValueError(f"duplicate source id: {source.id}")
+            seen_ids.add(source.id)
         self._sources = source_tuple
 
     def search(self, query: str, limit: int = 10) -> tuple[SearchResult, ...]:

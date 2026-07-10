@@ -99,6 +99,9 @@ Skills = 研究助手的技能包。平时收在抽屉里；要做 deep research
 
 > [CHECK] **检查一下**：如果一条内容只是 "这次先试试看" 的草稿，它更像 `WORKING`，不是 `SEMANTIC`。如果你把草稿写成长期事实，下次召回就会污染研究。
 
+
+> [TRAP] **诚实边界**：`RunEventType` 里已有 `memory_write` / `memory_recall` / `skill_load` / `skill_step` 枚举值，但 `MemoryEngine` 与 `SkillRuntime` **不会**自动写入这些 event。当前它们是独立 offline contract；要进 event trail，需要你在 runner/adapter 层显式 append。不要假设 “write memory 就会出现 MEMORY_WRITE event”。
+
 ## Section 2 [FULL Build]: Build The Notebook
 
 ### Architecture

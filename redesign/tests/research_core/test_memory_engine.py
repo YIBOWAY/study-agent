@@ -1,5 +1,6 @@
 from dataclasses import FrozenInstanceError
 
+import pytest
 from research_core.memory import (
     MemoryEngine,
     MemoryKind,
@@ -220,3 +221,30 @@ def test_memory_engine_recall_filters_allowed_kinds() -> None:
     )
 
     assert recalled == (semantic,)
+
+
+def test_memory_record_rejects_string_tags() -> None:
+    with pytest.raises(ValueError, match="tags must be a sequence of strings"):
+        MemoryRecord(
+            id="mem_bad_tags",
+            kind=MemoryKind.SEMANTIC,
+            content="hello",
+            tags="hello",  # type: ignore[arg-type]
+        )
+
+
+def test_memory_recall_matches_chinese_content() -> None:
+    engine = MemoryEngine()
+    engine.write(
+        MemoryRecord(
+            id="mem_cjk",
+            kind=MemoryKind.SEMANTIC,
+            content="本地论文研究助手需要保留引用链路。",
+            tags=["引用"],
+            importance=0.9,
+        )
+    )
+
+    hits = engine.recall(MemoryRecallPolicy(query="论文引用"))
+
+    assert [record.id for record in hits] == ["mem_cjk"]

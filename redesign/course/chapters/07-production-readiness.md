@@ -293,6 +293,23 @@ network: False network access is disabled
 
 `blocked_paths` 优先于 readable/writable roots。`tmp/course07-workspace/secrets/token.txt` 在 workspace 里面，但仍然被挡住，因为 secrets 子目录显式 blocked。
 
+`max_runtime_seconds` 是可检查的配置字段。课程提供 `sandbox.runtime_decision(elapsed_seconds)` 来判断是否超时，但 **`AgentRunner` 不会自动掐表**——生产适配层需要在 run 前后自己调用并记录 decision。
+
+```python
+print(sandbox.runtime_decision(5).allowed)
+print(sandbox.runtime_decision(20).allowed)
+print(sandbox.runtime_decision(20).reason)
+```
+
+Expected output:
+
+```text
+True
+False
+elapsed runtime 20s exceeds max_runtime_seconds 15
+```
+
+
 > [CHECK] **检查一下**：deny/review/blocked 都不是 "程序坏了"。它们是 typed decision record，说明 contract 在执行前做出了判断。真正危险的是没有 record，只靠 prompt 说 "请不要访问秘密文件"。
 
 ## Section 5 [BREAK/FIX]: 打破 production 边界

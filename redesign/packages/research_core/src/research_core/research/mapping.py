@@ -45,6 +45,8 @@ def build_claim_source_links(
     evidence: Sequence[Evidence],
     sources: Sequence[Source],
 ) -> tuple[ClaimSourceLink, ...]:
+    if not isinstance(report, Report):
+        raise ValueError("report must be a Report object")
     evidence_by_id = _index_evidence(evidence)
     source_by_id = _index_sources(sources)
 
@@ -75,6 +77,8 @@ def _index_evidence(evidence: Sequence[Evidence]) -> dict[str, Evidence]:
     for evidence_item in evidence:
         if not isinstance(evidence_item, Evidence):
             raise ValueError("evidence must contain Evidence objects")
+        if evidence_item.id in evidence_by_id:
+            raise ValueError(f"duplicate evidence id: {evidence_item.id}")
         evidence_by_id[evidence_item.id] = evidence_item
     return evidence_by_id
 
@@ -84,6 +88,8 @@ def _index_sources(sources: Sequence[Source]) -> dict[str, Source]:
     for source in sources:
         if not isinstance(source, Source):
             raise ValueError("sources must contain Source objects")
+        if source.id in source_by_id:
+            raise ValueError(f"duplicate source id: {source.id}")
         source_by_id[source.id] = source
     return source_by_id
 
