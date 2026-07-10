@@ -1,15 +1,15 @@
 # Redesign Overall Progress
 
-Last updated: 2026-07-02
+Last updated: 2026-07-10
 
 ## Current State
 
-- Active branch: `codex/redesign-course-r7`
+- Active branch: `codex/redesign-course-r7` (R8 Capstone work landed on this teaching branch)
 - Active phase: None.
 - Completed runtime/product phases: 8 of 8
-- Course teaching redesign: Phase R1, R2, R3, R4, R5, R6, and R7 complete; R8-R9 planned.
-- Current verification baseline: R7 final verification on 2026-07-02: full redesign suite `204 passed`; `ruff check .` clean; docs freshness `3 passed`; markdown Python block gate `5 passed` (covering setup material plus Parts 1-7 chapter/lab/solution files); direct Part 7 gate checked `31` Python blocks with `26` expected outputs matched; `apps/web` Vite build clean; `git diff --check` clean; codegraph index up to date.
-- Course documentation now has a complete v1 baseline plus project-driven R1, R2, R3, R4, R5, R6, and R7 teaching material. Phase R1 completed the learner guide, roadmap, Part 1 chapters/lab/solution, reusable Part template, and Capstone placeholder for the 本地论文研究助手 narrative. Phase R2 completed the Part 2 Research Core chapter/lab/solution rewrite around the citation problem. Phase R3 completed the Part 3 Memory and Skills chapter/lab/solution rewrite around the repeated-session notebook problem. Phase R4 completed the Part 4 Multi-Agent Delegation chapter/lab/solution rewrite around delegated-review isolation, budgets, event trails, and unresolved conflicts. Phase R5 completed the Part 5 Workbench Product chapter/lab/solution rewrite around the product-adapter boundary (`from_*` adapters, `summary_row()` projections, `WorkbenchSnapshot` referential-integrity validation, and the downward-only core -> FastAPI -> React boundary), and extended the markdown gate to run `apps/api/src` blocks and cover Part 5. Phase R6 completed the Part 6 Framework Comparisons chapter/lab/solution rewrite around the build-vs-adopt decision made transparent (a pinned task/fixture/metric plus a reproducible weighted score, the `>=0.8` strengths / `<0.55` tradeoffs derivation, and the deterministic tie-break), and brought Part 6 into the markdown gate with no gate helper change. Phase R7 completed the Part 7 Production Readiness rewrite around replay, audit, approval, sandbox, docs freshness, and local-first production boundaries, and Part 7 is now covered by the markdown Python block gate.
+- Course teaching redesign: Phase R1, R2, R3, R4, R5, R6, R7, and R8 complete; R9 planned.
+- Current verification baseline: R8 final verification on 2026-07-10: full redesign suite `215 passed`; Capstone `2 passed, 1 skipped`; `ruff check .` clean; docs freshness + markdown Python block gate `8 passed` (setup + Parts 1-7); Capstone covered by `course/capstone/` tests (not markdown gate); `git diff --check` clean after EOF fix.
+- Course documentation now has a complete v1 baseline plus project-driven R1, R2, R3, R4, R5, R6, R7, and R8 teaching material. Phase R1 completed the learner guide, roadmap, Part 1 chapters/lab/solution, reusable Part template, and early Capstone placeholder for the 本地论文研究助手 narrative. Phase R2 completed the Part 2 Research Core chapter/lab/solution rewrite around the citation problem. Phase R3 completed the Part 3 Memory and Skills chapter/lab/solution rewrite around the repeated-session notebook problem. Phase R4 completed the Part 4 Multi-Agent Delegation chapter/lab/solution rewrite around delegated-review isolation, budgets, event trails, and unresolved conflicts. Phase R5 completed the Part 5 Workbench Product chapter/lab/solution rewrite around the product-adapter boundary (`from_*` adapters, `summary_row()` projections, `WorkbenchSnapshot` referential-integrity validation, and the downward-only core -> FastAPI -> React boundary), and extended the markdown gate to run `apps/api/src` blocks and cover Part 5. Phase R6 completed the Part 6 Framework Comparisons chapter/lab/solution rewrite around the build-vs-adopt decision made transparent (a pinned task/fixture/metric plus a reproducible weighted score, the `>=0.8` strengths / `<0.55` tradeoffs derivation, and the deterministic tie-break), and brought Part 6 into the markdown gate with no gate helper change. Phase R7 completed the Part 7 Production Readiness rewrite around replay, audit, approval, sandbox, docs freshness, and local-first production boundaries, and Part 7 is now covered by the markdown Python block gate. Phase R8 completed the full Capstone under `course/capstone/` (fixtures, rubric, starter, solution, trajectory, report, reflection); Capstone is no longer a placeholder. R9 remains planned for support/reference materials.
 
 ## Phase Index
 
@@ -30,9 +30,18 @@ Last updated: 2026-07-02
 | Phase R5: Course Teaching Redesign - Part 5 | Complete | `phases/phase-r5.md` | Part 5 Workbench Product chapter/lab/solution rewrite around the product-adapter boundary, markdown gate `apps/api/src` path support plus Part 5 coverage, docs sync, final verification, and whole-branch review landed. |
 | Phase R6: Course Teaching Redesign - Part 6 | Complete | `phases/phase-r6.md` | Part 6 Framework Comparisons chapter/lab/solution rewrite around the build-vs-adopt decision with transparent weighted scoring, Part 6 gate coverage (no helper change), docs sync, final verification, and whole-branch review landed. |
 | Phase R7: Course Teaching Redesign - Part 7 | Complete | `phases/phase-r7.md` | Part 7 Production Readiness chapter/lab/solution rewrite, Part 7 markdown gate coverage, docs sync, final verification, cleanup, neat-freak reconciliation, and whole-branch review landed. |
+| Phase R8: Course Teaching Redesign - Capstone | Complete | `phases/phase-r8.md` | Full Capstone materials under course/capstone/; indexes synced; R9 remains planned. |
 
 ## Update Checklist
 
 - Update the active phase file after each merged task or committed milestone.
 - Update this file after each phase start, phase completion, or verification baseline change.
 - Keep `redesign/docs/plans/2026-06-25-redesign-execution-roadmap.md` aligned with this dashboard.
+
+## Phase R8
+
+Status: Complete (2026-07-10).
+
+Delivered full Capstone materials under `course/capstone/`: paper fixtures, rubric, starter, solution, trajectory, report, reflection. Course and docs indexes no longer treat Capstone as a placeholder. R9 remains planned for support/reference materials.
+
+Progress: [phases/phase-r8.md](phases/phase-r8.md)

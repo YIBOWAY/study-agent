@@ -1,0 +1,30 @@
+[
+  {
+    "uri": "paper://rag-evaluation-survey",
+    "title": "RAG Evaluation Survey",
+    "year": 2024,
+    "topics": ["rag", "evaluation", "citation"],
+    "content": "RAG evaluation should report retrieval quality and citation grounding. Evidence links help readers audit generated claims. Systems that only emit a final paragraph without source quotes are hard to trust in research workflows."
+  },
+  {
+    "uri": "paper://citation-mapping",
+    "title": "Citation Mapping for Research Assistants",
+    "year": 2023,
+    "topics": ["citation", "mapping", "audit"],
+    "content": "Citation mapping connects every report claim to a quote, source URI, and paper title. A claim without evidence is an unsupported claim. Local fixtures make citation checks deterministic for teaching and tests."
+  },
+  {
+    "uri": "paper://agent-memory-notes",
+    "title": "Agent Memory Notes",
+    "year": 2022,
+    "topics": ["memory", "policy", "skills"],
+    "content": "Memory records can pollute an agent when write policy is missing. Skill packages should load progressively: first the SKILL.md summary, then only the references a task actually needs. Offline memory and skill contracts keep repeated research sessions inspectable."
+  },
+  {
+    "uri": "paper://delegation-budgets",
+    "title": "Delegation Budgets for Multi-Agent Research",
+    "year": 2024,
+    "topics": ["delegation", "budget", "isolation"],
+    "content": "Child agents need isolated context and explicit budgets. Parent runs should record delegate_start and delegate_finish events so reviewers can audit who did which subtask. Unlimited child steps make multi-agent research hard to reproduce."
+  }
+]

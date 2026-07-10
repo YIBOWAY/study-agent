@@ -15,6 +15,7 @@ These instructions apply to files under `redesign/`.
 - Keep `research_core.product` independent from FastAPI, React, databases, provider SDKs, and network transport. Product contracts should expose JSON-compatible `to_record()` data for API/UI layers.
 - Keep `research_core.production` offline-first and independent from FastAPI, React, provider SDKs, databases, cloud services, and real auth. Production-readiness contracts should be inspectable policy/diagnostic/storage boundaries before real infrastructure adapters exist.
 - Keep framework comparison code under `course/framework_comparisons/`; do not import third-party agent frameworks into `research_core`, `apps/api`, or `apps/web` without an approved later-phase plan.
+- Keep Capstone teaching artifacts under `course/capstone/`; Capstone may compose public `research_core` contracts but must not grow a product package or require network/provider access.
 - Keep `apps/api` as a transport layer over `research_core.product`; do not put domain logic, provider calls, or persistence shortcuts there without an approved later-phase plan.
 - Keep `apps/web` consuming the Workbench API record shape or a matching deterministic fallback fixture; do not let React components invent a separate product data model.
 - Use `SourceIngestor` and `FakeRetriever` for deterministic offline research tests.
@@ -48,9 +49,16 @@ For course markdown changes that include runnable Python examples, also run:
 PYTHONPATH=packages/research_core/src uv run pytest tests/course/test_markdown_python_blocks.py -q
 ```
 
+For Capstone changes, also run:
+
+```bash
+PYTHONPATH=packages/research_core/src uv run pytest course/capstone/solution/test_run.py course/capstone/starter/test_starter.py -q
+```
+
 This gate currently covers setup material plus Parts 1-7 chapter/lab/solution
 files, and it compares stdout for blocks followed by an `Expected output:` text
-fence.
+fence. Capstone is covered by dedicated tests under `course/capstone/` rather
+than the markdown Python block gate.
 
 ## Architecture Direction
 
@@ -65,5 +73,6 @@ The runtime should follow these boundaries:
 - Phase 5 product flow is `runtime/research/memory/skills/delegation objects -> WorkbenchSnapshot.to_record() -> research_api FastAPI endpoints -> apps/web React panels`.
 - Phase 6 comparison flow is `ComparisonTask -> handwritten AgentRunner baseline -> FrameworkProfile -> FrameworkRecommendation matrix`, all under `course/framework_comparisons/`.
 - Phase 7 production-readiness flow is `RunEvent -> RunDiagnostics`, `RunEvent -> JsonlRunEventStore`, and tool/path/network subjects -> approval/sandbox decisions, all offline and testable.
+- Capstone flow (R8) composes Parts 1-7 offline under `course/capstone/`: fixtures -> evidence chain -> memory/skill -> optional delegation -> WorkbenchSnapshot -> production trust evidence.
 - Provider adapters convert at the boundary.
 - Fake model providers are first-class testing infrastructure.

@@ -44,7 +44,7 @@ Local Paper Research Assistant
       [*] ApprovalPolicy: which tool subject needs allow/deny/review
       [*] SandboxPolicy: which path/network action is allowed
       [*] docs freshness: whether the project map can be trusted
-  [ ] Capstone: complete offline paper research assistant
+  [x] Capstone: complete offline paper research assistant
 ```
 
 ## Section 1 [LIGHT Concept]: 本地安全台的五个岗位

@@ -15,6 +15,7 @@ This folder is the redesign progress dashboard for humans and agents.
 - `phases/phase-r5.md`: completed progress record for the course teaching redesign of Part 5.
 - `phases/phase-r6.md`: completed progress record for the course teaching redesign of Part 6.
 - `phases/phase-r7.md`: completed progress record for the course teaching redesign of Part 7.
+- `phases/phase-r8.md`: completed progress record for the Capstone project materials.
 
 ## Maintenance Rule
 

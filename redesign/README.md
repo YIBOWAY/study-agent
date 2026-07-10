@@ -71,7 +71,7 @@ Phase R1 adds the first project-driven course teaching rewrite:
 - The learner entrypoint now frames the course as building a 本地论文研究助手.
 - Part 1 Chapter/Lab/Solution materials now teach the Agent Kernel through mental models, event-trail inspection, break/fix loops, three-tier exercises, and design rationale.
 - `docs/course/roadmap.md` and `docs/course/chapter-template.md` define the Part-based teaching contract for R2-R9.
-- `course/capstone/README.md` previews the full offline Capstone without claiming it is implemented yet.
+- Capstone began as a placeholder in R1; the full project materials land in Phase R8.
 
 Phase R2 adds the second project-driven course teaching rewrite:
 
@@ -109,13 +109,20 @@ Phase R7 adds the seventh project-driven course teaching rewrite:
 - Lab 07 now uses L1 Follow, L2 Modify/Break-Fix checks, and an open-ended L3 Design exercise for a report-export readiness boundary.
 - The markdown Python block gate now covers setup material plus Parts 1-7 chapter/lab/solution files.
 
+Phase R8 adds the full Capstone project:
+
+- `course/capstone/README.md` is the real product brief (no longer a placeholder).
+- Paper fixtures, rubric, starter skeleton, reference solution, trajectory, sample report, and reflection ship under `course/capstone/`.
+- Capstone stays offline with FakeModel, FakeRetriever, and static paper fixtures; solution tests prove the six rubric success criteria.
+- Capstone tests live under `course/capstone/` and are run explicitly (outside default `tests/` paths).
+
 Real retrieval adapters, async delegation, streaming, real auth, real cloud deployment, real A2A transport, and live framework adapters arrive in later phases.
 
 ## Course Entry
 
 Start at `course/README.md`. New learners should follow the Beginner Track before Chapter 01; experienced engineers can skim the glossary and jump to the Agent Kernel lab.
 
-Current course coverage follows the implemented runtime phases. Phase R1 rewrote the learner entrypoint and Part 1 into the project-driven teaching style; Phase R2 rewrote Part 2; Phase R3 rewrote Part 3; Phase R4 rewrote Part 4; Phase R5 rewrote Part 5; Phase R6 rewrote Part 6; Phase R7 rewrote Part 7.
+Current course coverage follows the implemented runtime phases. Phase R1 rewrote the learner entrypoint and Part 1 into the project-driven teaching style; Phase R2 rewrote Part 2; Phase R3 rewrote Part 3; Phase R4 rewrote Part 4; Phase R5 rewrote Part 5; Phase R6 rewrote Part 6; Phase R7 rewrote Part 7; Phase R8 completed the Capstone under `course/capstone/`.
 
 - Chapter/Lab/Solution 00: learner setup and pre-kernel mental model.
 - Chapter/Lab/Solution 01: Agent Kernel.
@@ -125,6 +132,7 @@ Current course coverage follows the implemented runtime phases. Phase R1 rewrote
 - Chapter/Lab/Solution 05: Workbench Product, R5 project-driven rewrite.
 - Chapter/Lab/Solution 06: Framework Comparisons, R6 project-driven rewrite.
 - Chapter/Lab/Solution 07: Production Readiness, R7 project-driven rewrite.
+- Capstone (R8): full offline 本地论文研究助手 under `course/capstone/`.
 
 ## Commands
 
@@ -133,6 +141,7 @@ Run from this directory:
 ```bash
 uv run pytest -q
 uv run ruff check .
+PYTHONPATH=packages/research_core/src uv run pytest course/capstone/solution/test_run.py course/capstone/starter/test_starter.py -q
 cd apps/web && npm install && npm run build
 ```
 
@@ -153,10 +162,12 @@ Expected local checks:
 ```bash
 uv run pytest -q
 uv run ruff check .
+PYTHONPATH=packages/research_core/src uv run pytest course/capstone/solution/test_run.py course/capstone/starter/test_starter.py -q
 cd apps/web && npm run build
 ```
 
-The pytest suite should include runtime, fake provider, research core, memory,
+The pytest suite under `tests/` includes runtime, fake provider, research core, memory,
 skill, delegation, product snapshot, API, production-readiness, and docs
-freshness tests. The web build should pass when `apps/web` dependencies are
+freshness tests. Capstone tests live under `course/capstone/` and are run with the
+explicit command above. The web build should pass when `apps/web` dependencies are
 installed.

@@ -1,74 +1,200 @@
 # Capstone: 本地论文研究助手
 
-当前状态：这是一个占位页。Phase R1 先把课程终点和学习路线讲清楚，完整 Capstone 会在 Phase R8 补齐。
+> **Status:** Phase R8 complete — this is the real Capstone brief, not a placeholder.
+>
+> Build one offline research assistant that composes Parts 1-7. Do the starter first; open the solution only after your tests and rubric self-check.
 
-现在不要把这里当成已经完成的项目需求、starter code 或参考答案。等 Phase R8 完成后，这里才会变成可以正式练习和验收的 Capstone 项目入口。
+## Product Brief
 
-## Capstone 是什么
+You are shipping a **local paper research assistant** for a small research team.
 
-Capstone 会把前 7 个 Part 学到的能力整合成一个完整的离线项目：本地论文研究助手。
+The researcher asks:
 
-它最终会做到：
+> "Does citation grounding matter for trustworthy RAG evaluation, and what should a local research assistant remember or delegate when producing a cited report?"
 
-- 接收一个研究问题。
-- 从本地 paper fixture 里检索相关论文材料，不访问真实网络。
-- 从 source 中提取可以检查的 evidence。
-- 生成带引用的 cited report。
-- 使用 memory 记住前面查过的内容和中间结论。
-- 把复杂问题 delegation 给 child agents。
-- 通过 Workbench UI 查看 sources、timeline、report 和运行状态。
-- 留下 inspectable event trails，让每一次 run 都可以复盘。
+Your assistant must answer **offline**:
 
-这套设计的重点不是做一个联网 demo，而是让你能在完全离线、可重复、可测试的环境里，看清一个研究型 Agent 从问题到证据、从证据到报告、从一次运行到可复盘系统的完整过程。
+1. Load local paper fixtures (no network).
+2. Retrieve relevant sources.
+3. Extract evidence quotes.
+4. Produce a cited report where every claim traces to evidence.
+5. Write at least one memory under an explicit write policy.
+6. Load at least one skill package.
+7. Optionally delegate a focused review child task.
+8. Build a Workbench snapshot with an inspectable timeline.
+9. Record diagnostics / JSONL persistence / approval+sandbox decisions as production trust evidence.
 
-## 学习路线
+This is not a chat demo. The deliverable is an inspectable research run.
 
-建议按顺序完成：
+## Learner Contract
 
-1. Part 1: [00-before-agent-kernel.md](../chapters/00-before-agent-kernel.md) - Section 1：先建立心智模型和项目叙事起点；然后读 [01-agent-kernel-foundations.md](../chapters/01-agent-kernel-foundations.md) - Sections 2-5：动手搭出 Agent build loop。
-2. Part 2: [02-research-core-foundations.md](../chapters/02-research-core-foundations.md) - source、evidence、claim、report 怎么连成证据链。
-3. Part 3: [03-memory-and-skills.md](../chapters/03-memory-and-skills.md) - memory 和 skill 如何参与运行。
-4. Part 4: [04-multi-agent-delegation.md](../chapters/04-multi-agent-delegation.md) - child agents 如何分工。
-5. Part 5: [05-workbench-product.md](../chapters/05-workbench-product.md) - Workbench UI 如何观察运行过程。
-6. Part 6: [06-framework-comparisons.md](../chapters/06-framework-comparisons.md) - 如何用同一个任务比较框架。
-7. Part 7: [07-production-readiness.md](../chapters/07-production-readiness.md) - 如何补上可观测、可持久化、可审批、可复盘的生产边界。
-8. Capstone: [course/capstone/](./) - 把上面 7 个 Part 串成完整的本地论文研究助手。
+- **Who this is for**: learners who finished Parts 1-7 (Beginner Track or Engineer Track).
+- **Before you start**: complete Part 2 evidence chain, Part 3 memory/skills, Part 5 workbench snapshot, and Part 7 production contracts.
+- **You will build**: one integrated offline Capstone agent under `course/capstone/starter/` (or your own module that satisfies the same rubric).
+- **You will prove it**: rubric Pass on all six criteria + Capstone tests green.
+- **Offline guarantee**: static `paper_fixtures/`, `FakeModel`, `FakeRetriever`, no API keys.
 
-## Phase R8 会补什么
+## What You Already Have From Parts 1-7
 
-Phase R8 计划把 `course/capstone/` 补成下面这样的结构：
+```text
+Part 1  AgentRunner + FakeModel + event trail
+Part 2  Source -> Evidence -> Claim -> Report -> ClaimSourceLink
+Part 3  MemoryEngine policies + SkillRuntime progressive disclosure
+Part 4  DelegationRuntime, budgets, child isolation, filter_tools_for_role
+Part 5  WorkbenchSnapshot + to_record() product shape
+Part 6  Build-vs-adopt comparison method (use as a reflection lens)
+Part 7  RunDiagnostics, JsonlRunEventStore, ApprovalPolicy, SandboxPolicy
+```
+
+## Directory Map
 
 ```text
 course/capstone/
-|-- README.md
-|-- rubric.md
+|-- README.md                 # this brief
+|-- rubric.md                 # six success criteria
 |-- paper_fixtures/
+|   |-- papers.json           # offline papers
+|   `-- README.md
+|-- skills/
+|   `-- citation-check/       # Capstone skill package
 |-- starter/
-|   |-- agent_starter.py
-|   `-- test_starter.py
+|   |-- agent_starter.py      # TODO skeleton
+|   `-- test_starter.py       # scaffold tests
 `-- solution/
-    |-- agent.py
-    |-- test_run.py
-    |-- trajectory.jsonl
-    |-- report.md
-    `-- reflection.md
+    |-- agent.py              # reference implementation
+    |-- test_run.py           # rubric-backed tests
+    |-- trajectory.jsonl      # sample event log
+    |-- report.md             # sample research report
+    `-- reflection.md         # design-decision reflection
 ```
 
-这些文件的角色会是：
+## Required Workflow
 
-- `README.md`: Capstone 的项目说明和练习入口。
-- `rubric.md`: 评分标准，帮助你判断自己的实现是否达标。
-- `paper_fixtures/`: 离线论文数据集。
-- `starter/`: 给学习者起步用的代码骨架。
-- `solution/`: 参考实现。
-- `trajectory.jsonl`: 一次完整运行留下的事件轨迹。
-- `report.md`: Agent 生成的示例研究报告。
-- `reflection.md`: 对关键设计决策的复盘。
+### Step 1 — Read the brief and rubric
 
-## 现在该怎么用这个页面
+1. Skim this README.
+2. Read [rubric.md](rubric.md).
+3. Inspect [paper_fixtures/papers.json](paper_fixtures/papers.json).
 
-现在你只需要把它当成课程终点预告：
+### Step 2 — Fill the starter
 
-1. 先按 `course/README.md` 里的顺序学完 Part 1 到 Part 7。
-2. 学每一 Part 时，都留意它最终会怎样服务于本地论文研究助手。
-3. 等 Phase R8 完成后，再回到这里做完整 Capstone。
+From `redesign/`:
+
+```bash
+# study the skeleton
+sed -n '1,220p' course/capstone/starter/agent_starter.py
+
+# run starter tests (they skip until you implement TODOs)
+PYTHONPATH=packages/research_core/src uv run pytest course/capstone/starter/test_starter.py -q
+```
+
+Implement in `starter/agent_starter.py`:
+
+1. Load paper fixtures → ingest sources.
+2. Retrieve with `FakeRetriever`.
+3. Build evidence + claims + report + claim-source links.
+4. Write memory with `MemoryWritePolicy`.
+5. Load the Capstone citation-check skill.
+6. Run a scripted `AgentRunner` tool trail (search tool is enough).
+7. Build `WorkbenchSnapshot` with timeline items from run events.
+8. Produce diagnostics, JSONL store records, and policy decisions.
+
+### Step 3 — Self-grade with the rubric
+
+Use [rubric.md](rubric.md). Every criterion needs evidence, not vibes.
+
+### Step 4 — Compare with the solution (after your attempt)
+
+```bash
+PYTHONPATH=packages/research_core/src uv run pytest course/capstone/solution/test_run.py -q
+PYTHONPATH=packages/research_core/src uv run python course/capstone/solution/agent.py
+```
+
+Then read:
+
+- [solution/report.md](solution/report.md)
+- [solution/reflection.md](solution/reflection.md)
+- [solution/trajectory.jsonl](solution/trajectory.jsonl)
+
+## Architecture Target
+
+```text
+Research question
+      |
+      v
+paper_fixtures -> SourceIngestor -> FakeRetriever
+      |
+      +--> Evidence / Claim / Report / ClaimSourceLink
+      |
+      +--> MemoryEngine (write policy + recall)
+      |
+      +--> SkillRuntime (citation-check package)
+      |
+      +--> AgentRunner tool trail (FakeModel)
+      |         optional: DelegationRuntime child review
+      |
+      +--> WorkbenchSnapshot.to_record()
+      |
+      v
+RunDiagnostics + JsonlRunEventStore + Approval/Sandbox decisions
+```
+
+## Honesty Notes (do not fake these)
+
+> [TRAP] **Skill/memory role fields are not auto-enforced**
+>
+> `AgentRolePolicy.skill_names` and `memory_kinds` are declarative labels unless your child factory wires `SkillRuntime` / `MemoryEngine`. Tool allowlists should use `filter_tools_for_role(...)`.
+
+> [TRAP] **MEMORY_*/SKILL_* events are not automatic**
+>
+> Writing memory or loading a skill does not invent runtime events by itself. Capstone can still *use* memory and skills without claiming those event types fired.
+
+> [TRAP] **max_runtime_seconds is inspectable, not auto-killed**
+>
+> Use `SandboxPolicy.runtime_decision(elapsed_seconds)`. `AgentRunner` does not start a wall-clock timer for you.
+
+> [DD] **Why Capstone stays on handwritten research_core contracts**
+>
+> **Chose**: compose Parts 1-7 public APIs offline.
+> **Did not choose**: pull LangChain/CrewAI into Capstone for a prettier demo.
+> **Because**: the course goal is inspectable contracts and event trails, not framework tourism. Part 6 already taught how to compare frameworks later.
+
+## Success Criteria (summary)
+
+1. Evidence from >=3 local sources.
+2. Every claim traces to evidence.
+3. >=1 skill loaded and >=1 memory write policy used.
+4. Workbench snapshot timeline is inspectable.
+5. Capstone tests pass offline.
+6. Reflection explains 3 design decisions.
+
+Details and scoring: [rubric.md](rubric.md).
+
+## Eval Gate
+
+From `redesign/`:
+
+```bash
+PYTHONPATH=packages/research_core/src uv run pytest course/capstone/solution/test_run.py -q
+PYTHONPATH=packages/research_core/src uv run pytest course/capstone/starter/test_starter.py -q
+PYTHONPATH=packages/research_core/src uv run pytest -q
+PYTHONPATH=packages/research_core/src uv run ruff check .
+```
+
+## Suggested Timebox
+
+| Track | Time |
+| --- | --- |
+| Engineer Track | 3-5 hours |
+| Beginner Track | 6-10 hours across two sessions |
+
+If stuck, re-open the Part that owns the missing piece (Part 2 for links, Part 3 for memory/skills, Part 5 for snapshot integrity, Part 7 for diagnostics/policy).
+
+## After Capstone
+
+- Re-read Part 6: would you still keep handwritten contracts for this assistant?
+- Optional R9 materials (patterns, troubleshooting, design-decision index) are planned support docs, not required for Capstone Pass.
+
+---
+
+**完成 Capstone 后，你应该能演示一个完整、离线、可复盘的本地论文研究助手。**

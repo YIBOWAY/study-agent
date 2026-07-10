@@ -197,8 +197,8 @@ Exit criteria:
 
 Follow-up:
 
-- R2, R3, R4, R5, R6, and R7 completed the Part 2 through Part 7 teaching rewrites with the same project-driven teaching method; R8 should build the full Capstone materials under `course/capstone/`.
-- R8 should build the full Capstone materials under `course/capstone/`.
+- R2, R3, R4, R5, R6, and R7 completed the Part 2 through Part 7 teaching rewrites with the same project-driven teaching method.
+- R8 completed the full Capstone materials under `course/capstone/`.
 - R9 should add support references such as troubleshooting, design-decision indexes, discussion prompts, and glossary updates.
 
 ### Phase R2: Course Teaching Redesign - Part 2
@@ -366,3 +366,21 @@ Completion notes:
 - `cd redesign && PYTHONPATH=packages/research_core/src uv run pytest tests/course/test_markdown_python_blocks.py -q` passed on 2026-07-02 with `5 passed` (Parts 0-7).
 - `cd redesign && PYTHONPATH=.:packages/research_core/src uv run python -m infra.markdown_python_blocks course/chapters/07-production-readiness.md course/labs/07-production-readiness-lab.md course/solutions/07-production-readiness-solution.md --project-root .` checked `31` Python blocks with `26` expected outputs matched.
 - `cd redesign/apps/web && npm ci && npm run build` passed on 2026-07-02.
+
+### Phase R8: Course Teaching Redesign - Capstone
+
+Plan: `redesign/docs/plans/2026-07-10-phase-r8-course-teaching-redesign.md`
+
+Status: Complete (2026-07-10).
+
+Purpose:
+
+- Replace the Capstone placeholder with a complete offline 本地论文研究助手 project.
+- Ship paper fixtures, rubric, starter, solution, trajectory, report, and reflection under `course/capstone/`.
+- Keep Capstone as teaching artifacts that compose public `research_core` contracts from Parts 1-7.
+
+Exit criteria:
+
+- Capstone is no longer a placeholder.
+- Solution tests prove the six rubric success criteria offline.
+- Course/docs/progress indexes describe Capstone as R8 complete; R9 remains planned.

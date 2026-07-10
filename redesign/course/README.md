@@ -2,7 +2,7 @@
 
 这门课不是让你先背一堆 Agent 名词，再猜它们有什么用。你会从零构建一个完全离线的本地论文研究助手：它能接收研究问题，按步骤运行，留下可检查的 event trail，并逐步长出证据链、记忆、委派、Workbench 和生产边界。
 
-现在先把范围说清楚：Phase R1 已经把课程入口和 Part 1 改成项目驱动学习，Phase R2 已经把 Part 2 改成同一套学习方式，Phase R3 已经把 Part 3 改成同一套学习方式，Phase R4 已经把 Part 4 改成同一套学习方式，Phase R5 已经把 Part 5 改成同一套学习方式，Phase R6 已经把 Part 6 改成同一套学习方式，Phase R7 已经把 Part 7 改成同一套学习方式。Capstone 现在还是占位页，完整项目练习会在 R8 补齐。也就是说，R1-R7 让你看清“终点是什么”以及“前七部分怎么学”，不是在宣称整套课程已经全部重写完成。
+现在先把范围说清楚：Phase R1 到 R7 已经把课程入口和 Parts 1-7 改成项目驱动学习；Phase R8 已经补齐完整 Capstone（fixtures、starter、solution、rubric、trajectory、report、reflection）。R9 仍会补参考支持材料。也就是说，你现在可以按 Parts 1-7 学完后，直接做完整的本地论文研究助手 Capstone。
 
 Part 1 还不会真的检索论文，也不会产出真实引用报告。它先训练最底层的能力：让助手跑一次，调用工具，留下轨迹，并让你能解释每一步发生了什么。后面的论文检索、证据抽取、记忆和界面，都会接在这条轨迹上。
 
@@ -15,7 +15,7 @@ Setup
   -> Part 5: Workbench Product
   -> Part 6: Framework Comparisons
   -> Part 7: Production Readiness
-  -> Capstone: complete offline paper research assistant (planned R8)
+  -> Capstone: complete offline paper research assistant (R8 complete)
 ```
 
 ## Who This Is For
@@ -43,7 +43,7 @@ Setup
 | Part 5: Workbench Product, R5 rewritten | 读 [chapters/05-workbench-product.md](chapters/05-workbench-product.md)。做 [labs/05-workbench-product-lab.md](labs/05-workbench-product-lab.md)，再对照 [solutions/05-workbench-product-solution.md](solutions/05-workbench-product-solution.md)。 | 助手获得 product adapter、FastAPI 只读 API 和 React Workbench 边界：raw domain objects 经 `from_*` adapters 组成 `WorkbenchSnapshot`，referential validation 守住引用完整性，并练习 L1/L2/L3 snapshot 设计。 |
 | Part 6: Framework Comparisons, R6 rewritten | 读 [chapters/06-framework-comparisons.md](chapters/06-framework-comparisons.md)。做 [labs/06-framework-comparisons-lab.md](labs/06-framework-comparisons-lab.md)，再对照 [solutions/06-framework-comparisons-solution.md](solutions/06-framework-comparisons-solution.md)。 | 你学会用固定 task、固定 fixture、固定 metric 的透明加权评分做 build-vs-adopt 技术选型，并练习 L1/L2/L3 comparison 设计。 |
 | Part 7: Production Readiness, R7 rewritten | 读 [chapters/07-production-readiness.md](chapters/07-production-readiness.md)。做 [labs/07-production-readiness-lab.md](labs/07-production-readiness-lab.md)，再对照 [solutions/07-production-readiness-solution.md](solutions/07-production-readiness-solution.md)。 | 助手获得 diagnostics、JSONL event replay、approval policy、sandbox policy 和 docs freshness 等本地生产边界，并练习 L1/L2/L3 production-readiness 设计。 |
-| Capstone: placeholder, planned R8 | 读 [capstone/README.md](capstone/README.md)，只把它当作课程终点预告。 | 当前只是完整项目的说明和占位，不是 starter、rubric 或参考答案。R8 会补齐完整本地论文研究助手 Capstone。 |
+| Capstone: R8 complete | 读 [capstone/README.md](capstone/README.md) 和 [capstone/rubric.md](capstone/rubric.md)。先填 [capstone/starter/](capstone/starter/)，再对照 [capstone/solution/](capstone/solution/)。 | 把 Parts 1-7 整合成完整离线本地论文研究助手：证据链、memory/skill、可选 delegation、Workbench timeline、production trust evidence。 |
 
 ## Engineer Track
 
@@ -158,9 +158,13 @@ PYTHONPATH=packages/research_core/src uv run python
 - [labs/07-production-readiness-lab.md](labs/07-production-readiness-lab.md): Part 7 动手练习，包含 L1 Follow、L2 Modify/Break-Fix、L3 Design。
 - [solutions/07-production-readiness-solution.md](solutions/07-production-readiness-solution.md): Part 7 参考答案、断言解释、L3 参考设计和不变量。
 
-### Capstone
+### Capstone: R8 Complete
 
-- [capstone/README.md](capstone/README.md): 当前 Capstone 占位页。它说明最终项目会是什么，但现在不要把它当成已经完成的 starter、rubric 或 solution。完整 Capstone 计划在 R8 补齐。
+- [capstone/README.md](capstone/README.md): Capstone 项目说明、工作流和诚实边界。
+- [capstone/rubric.md](capstone/rubric.md): 六条 success criteria 与评分标准。
+- [capstone/paper_fixtures/](capstone/paper_fixtures/): 离线 paper fixture。
+- [capstone/starter/](capstone/starter/): 学习者 starter skeleton 与 scaffold tests。
+- [capstone/solution/](capstone/solution/): 参考实现、tests、trajectory、report、reflection。
 
 ### Framework Reports
 
@@ -169,18 +173,18 @@ PYTHONPATH=packages/research_core/src uv run python
 
 ## Current Rewrite Status
 
-实现状态和教学重写状态不是一回事。很多 runtime/product 代码已经存在，Parts 2-7 已完成 R2/R3/R4/R5/R6/R7 教学重写；但完整 Capstone 和参考支持材料还会继续通过 R8-R9 完成。
+实现状态和教学重写状态不是一回事。很多 runtime/product 代码已经存在；Parts 1-7 已完成 R1-R7 教学重写；Capstone 已在 R8 补齐。R9 仍会补参考支持材料。
 
 | Phase | Teaching status |
 | --- | --- |
-| R1 | 当前入口页、roadmap、template、Capstone placeholder，以及 Part 1 项目驱动材料 |
+| R1 | 当前入口页、roadmap、template、早期 Capstone placeholder，以及 Part 1 项目驱动材料 |
 | R2 | 已把 Part 2 改成 source -> evidence -> claim -> report 的项目驱动学习结构 |
 | R3 | 已把 Part 3 改成 Memory notebook、Skill package、Break/Fix 和 L3 invariants 的项目驱动学习结构 |
 | R4 | 已把 Part 4 改成 child context isolation、budget accounting、delegate event trail、unresolved conflicts 的项目驱动学习结构 |
 | R5 | 已把 Part 5 改成 product adapter、`WorkbenchSnapshot`、referential validation 和三层 core/API/UI 边界的项目驱动学习结构，并把 Part 5 纳入 markdown 代码块门禁 |
 | R6 | 已把 Part 6 改成固定 task/fixture/metric 的透明加权评分（build-vs-adopt 技术选型）的项目驱动学习结构，并把 Part 6 纳入 markdown 代码块门禁 |
 | R7 | 已把 Part 7 改成 diagnostics、JSONL replay、approval、sandbox、docs freshness 的项目驱动学习结构，并把 Part 7 纳入 markdown 代码块门禁 |
-| R8 | 计划补齐完整 Capstone：fixtures、starter、solution、rubric、trajectory、report、reflection |
+| R8 | 已补齐完整 Capstone：fixtures、starter、solution、rubric、trajectory、report、reflection |
 | R9 | 计划补齐参考材料、troubleshooting、设计决策索引、讨论题和 glossary 更新 |
 
-学习时用一个简单判断：如果你正在 Parts 1-7，就按 R1-R7 新结构认真做完整循环；如果你正在 Capstone，就把它当作 R8 前的终点预告，不要把占位页当成完整项目材料。
+学习时用一个简单判断：Parts 1-7 按 R1-R7 新结构认真做完整循环；做完后进入 Capstone，按 rubric 自检，先独立完成 starter，再对照 solution。

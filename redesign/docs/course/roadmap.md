@@ -12,7 +12,7 @@ The course should teach Agent engineering through a single, growing project: a �
 
 For learners who know some Python but are new to Agent engineering, the path is Part-based. Parts 1-7 build on each other and end with the Capstone; do not treat later Parts as independent one-off chapters.
 
-R1 completed the teaching-redesign pass for the learner entrypoint and Part 1. R2 completed the Part 2 Research Core rewrite. R3 completed the Part 3 Memory and Skills rewrite. R4 completed the Part 4 Multi-Agent Delegation content rewrite. R5 completed the Part 5 Workbench Product rewrite. R6 completed the Part 6 Framework Comparisons rewrite. R7 completed the Part 7 Production Readiness rewrite.
+R1 completed the teaching-redesign pass for the learner entrypoint and Part 1. R2 completed the Part 2 Research Core rewrite. R3 completed the Part 3 Memory and Skills rewrite. R4 completed the Part 4 Multi-Agent Delegation content rewrite. R5 completed the Part 5 Workbench Product rewrite. R6 completed the Part 6 Framework Comparisons rewrite. R7 completed the Part 7 Production Readiness rewrite. R8 completed the full Capstone materials under `course/capstone/`.
 
 | Step | File to read/do | What capability the assistant gains |
 |------|-----------------|--------------------------------------|
@@ -24,7 +24,7 @@ R1 completed the teaching-redesign pass for the learner entrypoint and Part 1. R
 | 5 | Read [05-workbench-product.md](../../course/chapters/05-workbench-product.md).<br>Do [05-workbench-product-lab.md](../../course/labs/05-workbench-product-lab.md), then compare with [05-workbench-product-solution.md](../../course/solutions/05-workbench-product-solution.md). | Part 5: Workbench Product — the assistant gains a product adapter, FastAPI read API, and React workbench. This is the R5 rewritten material. |
 | 6 | Read [06-framework-comparisons.md](../../course/chapters/06-framework-comparisons.md).<br>Do [06-framework-comparisons-lab.md](../../course/labs/06-framework-comparisons-lab.md), then compare with [06-framework-comparisons-solution.md](../../course/solutions/06-framework-comparisons-solution.md). | Part 6: Framework Comparisons — the learner gains a method for a defensible build-vs-adopt decision using a pinned task/fixture/metric and a transparent weighted score. This is the R6 rewritten material. |
 | 7 | Read [07-production-readiness.md](../../course/chapters/07-production-readiness.md).<br>Do [07-production-readiness-lab.md](../../course/labs/07-production-readiness-lab.md), then compare with [07-production-readiness-solution.md](../../course/solutions/07-production-readiness-solution.md). | Part 7: Production Readiness — the assistant gains diagnostics, JSONL event replay, approval policy, sandbox policy, and docs freshness as local-first production boundaries. This is the R7 rewritten material. |
-| 8 | Read [course/capstone/README.md](../../course/capstone/README.md). | Capstone — the learner integrates all Parts into a complete 本地论文研究助手. The current page is a placeholder; the full Capstone is planned for R8. |
+| 8 | Read [course/capstone/README.md](../../course/capstone/README.md) and [course/capstone/rubric.md](../../course/capstone/rubric.md). Fill [course/capstone/starter/](../../course/capstone/starter/), then compare with [course/capstone/solution/](../../course/capstone/solution/). | Capstone — the learner integrates all Parts into a complete 本地论文研究助手. This is the completed R8 Capstone material. |
 
 ### Engineer Track
 
@@ -49,7 +49,7 @@ The target course shape is:
 7. Part 7: Production Readiness — diagnostics, persistence, approval, and sandbox policies
 8. Capstone — integrate all Parts into a complete 本地论文研究助手
 
-R1 makes this shape visible and rewrites Part 1. R2 rewrites Part 2. R3 rewrites Part 3. R4 rewrites Part 4. R5 rewrites Part 5. R6 rewrites Part 6. R7 rewrites Part 7. R8-R9 are planned follow-up phases for the Capstone and support/reference material.
+R1 makes this shape visible and rewrites Part 1. R2 rewrites Part 2. R3 rewrites Part 3. R4 rewrites Part 4. R5 rewrites Part 5. R6 rewrites Part 6. R7 rewrites Part 7. R8 builds the full Capstone. R9 remains planned for support/reference material.
 
 ## Part Contract
 
@@ -63,7 +63,7 @@ Every rewritten Part should include:
 - an eval gate with concrete commands or checks,
 - reflection questions that ask the learner to explain tradeoffs, not just recall names.
 
-Parts 2-7 now follow this contract after R2/R3/R4/R5/R6/R7. Capstone and support/reference materials are still planned for R8-R9.
+Parts 2-7 now follow this contract after R2/R3/R4/R5/R6/R7. Capstone is complete after R8. Support/reference materials remain planned for R9.
 
 ## Current Materials
 
@@ -78,6 +78,7 @@ Current means the file exists in the tree now. It does not mean every file has a
 - [2026-07-01-phase-r5-course-teaching-redesign.md](../plans/2026-07-01-phase-r5-course-teaching-redesign.md): completed R5 implementation plan.
 - [2026-07-01-phase-r6-course-teaching-redesign.md](../plans/2026-07-01-phase-r6-course-teaching-redesign.md): completed R6 implementation plan.
 - [2026-07-02-phase-r7-course-teaching-redesign.md](../plans/2026-07-02-phase-r7-course-teaching-redesign.md): completed R7 implementation plan for the Part 7 Production Readiness teaching rewrite.
+- [2026-07-10-phase-r8-course-teaching-redesign.md](../plans/2026-07-10-phase-r8-course-teaching-redesign.md): completed R8 implementation plan for the full Capstone project.
 - [course/README.md](../../course/README.md): learner entrypoint, track selection, commands, and common stuck points.
 - [python-terminal-primer.md](../../course/reference/python-terminal-primer.md): minimal terminal and Python concepts needed for the course.
 - [agent-kernel-glossary.md](../../course/reference/agent-kernel-glossary.md): plain-language Agent kernel vocabulary.
@@ -89,7 +90,10 @@ Current means the file exists in the tree now. It does not mean every file has a
 - Part 5 / R5 completed material: [05-workbench-product.md](../../course/chapters/05-workbench-product.md), [05-workbench-product-lab.md](../../course/labs/05-workbench-product-lab.md), [05-workbench-product-solution.md](../../course/solutions/05-workbench-product-solution.md).
 - Part 6 / R6 completed material: [06-framework-comparisons.md](../../course/chapters/06-framework-comparisons.md), [06-framework-comparisons-lab.md](../../course/labs/06-framework-comparisons-lab.md), [06-framework-comparisons-solution.md](../../course/solutions/06-framework-comparisons-solution.md).
 - Part 7 / R7 rewritten material: [07-production-readiness.md](../../course/chapters/07-production-readiness.md), [07-production-readiness-lab.md](../../course/labs/07-production-readiness-lab.md), [07-production-readiness-solution.md](../../course/solutions/07-production-readiness-solution.md).
-- [course/capstone/README.md](../../course/capstone/README.md): current Capstone placeholder; full Capstone project material is planned for R8.
+- [course/capstone/README.md](../../course/capstone/README.md): completed R8 Capstone brief.
+- [course/capstone/rubric.md](../../course/capstone/rubric.md): Capstone success criteria and scoring.
+- [course/capstone/starter/](../../course/capstone/starter/): starter skeleton and scaffold tests.
+- [course/capstone/solution/](../../course/capstone/solution/): reference solution, tests, trajectory, report, reflection.
 - [echo-tool-task.md](../../course/framework_comparisons/reports/echo-tool-task.md): shared echo-tool task report.
 - [recommendation-matrix.md](../../course/framework_comparisons/reports/recommendation-matrix.md): current recommendation matrix report.
 
@@ -102,5 +106,5 @@ Current means the file exists in the tree now. It does not mean every file has a
 - Phase R5 (complete): rewrote Part 5 so Workbench Product teaches the product adapter, FastAPI read API, and React workbench through the researcher-facing inspectable-snapshot problem, and brought Part 5 into the markdown Python block gate.
 - Phase R6 (complete): rewrote Part 6 so Framework Comparisons teaches a defensible build-vs-adopt decision through a pinned task/fixture/metric and a transparent weighted score, and brought Part 6 into the markdown Python block gate.
 - Phase R7 (complete): rewrote Part 7 so Production Readiness teaches diagnostics, persistence, approval, sandbox policies, and docs freshness as local-first deployment boundaries, then brought Part 7 into the markdown Python block gate.
-- Phase R8 (planned): build the full Capstone under `course/capstone/`, including paper fixtures, starter, solution, rubric, event trail, report, and reflection.
+- Phase R8 (complete): built the full Capstone under `course/capstone/`, including paper fixtures, starter, solution, rubric, event trail, report, and reflection.
 - Phase R9 (planned): add reference and support materials such as common patterns, troubleshooting, design-decision index, discussion prompts, and glossary updates.

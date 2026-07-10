@@ -1,0 +1,32 @@
+# Local ignore rules for redesign workspace artifacts
+
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# UV / package managers
+uv.lock
+
+# Node / web
+apps/web/node_modules/
+apps/web/dist/
+apps/web/tsconfig.tsbuildinfo
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/
+
+# Local temp outputs
+*.log
+capstone-starter-events.jsonl
