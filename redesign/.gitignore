@@ -30,3 +30,8 @@ yarn-error.log*
 # Local temp outputs
 *.log
 capstone-starter-events.jsonl
+
+# Secrets (DeepSeek / framework tracks)
+.env
+.env.local
+.env.*.local

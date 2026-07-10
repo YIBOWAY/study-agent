@@ -6,7 +6,7 @@
 
 | Group | Packages (lower bounds) | Used by |
 | --- | --- | --- |
-| `langchain-course` | `langchain-core>=0.3`, `langchain-openai>=0.2` | LC track code + labs |
+| `langchain-course` | `langchain-core>=0.3`, `langchain-openai>=0.2`, `python-dotenv>=1.0` | LC track code + labs |
 | `langgraph-course` | above + `langgraph>=0.2` | LG track (from F4) |
 
 Install:

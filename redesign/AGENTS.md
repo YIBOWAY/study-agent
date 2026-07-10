@@ -18,7 +18,7 @@ These instructions apply to files under `redesign/`.
 - Keep Capstone teaching artifacts under `course/capstone/`; Capstone may compose public `research_core` contracts but must not grow a product package or require network/provider access.
 - Keep `packages/langchain_course` and `packages/langgraph_course` teaching-only; do not import them from `research_core`, `apps/api`, or `apps/web`.
 - Keep framework track materials under `course/tracks/langchain/` and `course/tracks/langgraph/`; do not mix their code with handwritten Capstone under `course/capstone/`.
-- Framework track live API tests require `DEEPSEEK_API_KEY` and `RUN_DEEPSEEK_TESTS=1`; default CI stays offline.
+- Framework track live API tests require `DEEPSEEK_API_KEY` (env or gitignored `.env`) and `RUN_DEEPSEEK_TESTS=1`; default CI stays offline. Never commit real keys.
 - Keep `apps/api` as a transport layer over `research_core.product`; do not put domain logic, provider calls, or persistence shortcuts there without an approved later-phase plan.
 - Keep `apps/web` consuming the Workbench API record shape or a matching deterministic fallback fixture; do not let React components invent a separate product data model.
 - Use `SourceIngestor` and `FakeRetriever` for deterministic offline research tests.

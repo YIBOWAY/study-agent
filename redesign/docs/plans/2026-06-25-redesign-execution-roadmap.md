@@ -421,3 +421,21 @@ Exit criteria:
 - `langchain_course` config unit tests green without API key; live tests skip unless `RUN_DEEPSEEK_TESTS=1`.
 - Default offline suite remains green without requiring LC/LG groups or a DeepSeek key.
 - Indexes link tracks without claiming Parts 1–7 complete.
+
+### Phase F1: LangChain Parts 1–2
+
+Plan: `redesign/docs/plans/2026-07-10-phase-f1-langchain-parts-1-2.md`
+
+Status: Complete (2026-07-10).
+
+Purpose:
+
+- Deliver LangChain track Parts 1–2 (tool-calling agent + local evidence chain).
+- Support DeepSeek keys via gitignored `.env` as well as process env.
+- Keep zero import mix with `research_core` and offline main CI.
+
+Exit criteria:
+
+- Unit tests for agent kernel and research chain green without API key.
+- Course materials under `course/tracks/langchain/` for Parts 1–2.
+- Indexes and progress mark F1 complete without claiming Parts 3–7 done.
