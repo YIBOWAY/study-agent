@@ -49,8 +49,11 @@ cp .env.example .env
 ```bash
 uv sync --group langchain-course
 
-# 无 key 的 unit 测试（配置 + mock + Parts 1–4）
+# 无 key 的 unit 测试（配置 + mock + Parts 1–7）
 uv run pytest packages/langchain_course/tests -q
+
+# LC Capstone 参考实现
+uv run pytest course/tracks/langchain/capstone/solution -q
 
 # 主课 suite（应仍离线全绿）
 uv run pytest -q
@@ -73,14 +76,17 @@ RUN_DEEPSEEK_TESTS=1 uv run pytest packages/langchain_course/tests -m integratio
 | 2 | [chapters/02-research-core-langchain.md](chapters/02-research-core-langchain.md) → [labs/02-evidence-chain-lab.md](labs/02-evidence-chain-lab.md) | F1 完成 |
 | 3 | [chapters/03-memory-skills-langchain.md](chapters/03-memory-skills-langchain.md) → [labs/03-memory-skills-lab.md](labs/03-memory-skills-lab.md) | F2 完成 |
 | 4 | [chapters/04-delegation-langchain.md](chapters/04-delegation-langchain.md) → [labs/04-delegation-lab.md](labs/04-delegation-lab.md) | F2 完成 |
-| 5–7 + Capstone | — | F3 计划中 |
+| 5 | [chapters/05-workbench-langchain.md](chapters/05-workbench-langchain.md) → [labs/05-workbench-lab.md](labs/05-workbench-lab.md) | F3 完成 |
+| 6 | [chapters/06-comparisons-langchain.md](chapters/06-comparisons-langchain.md) → [labs/06-comparisons-lab.md](labs/06-comparisons-lab.md) | F3 完成 |
+| 7 | [chapters/07-production-langchain.md](chapters/07-production-langchain.md) → [labs/07-production-lab.md](labs/07-production-lab.md) | F3 完成 |
+| Capstone | [capstone/README.md](capstone/README.md) | F3 完成 |
 
 ## 当前进度
 
 - [x] F0：包脚手架 + DeepSeek 配置 + hello + `.env` 支持
 - [x] F1：Parts 1–2（agent kernel + evidence chain）
 - [x] F2：Parts 3–4（memory/skills + multi-worker delegation）
-- [ ] F3：Parts 5–7 + Capstone
+- [x] F3：Parts 5–7 + Capstone
 
 ## 诚实边界
 

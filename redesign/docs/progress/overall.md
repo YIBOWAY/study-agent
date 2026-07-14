@@ -1,16 +1,16 @@
 # Redesign Overall Progress
 
-Last updated: 2026-07-10
+Last updated: 2026-07-14
 
 ## Current State
 
-- Active branch: `codex/redesign-course-r7` (R1–R9 teaching work + F0–F2 framework tracks)
+- Active branch: `codex/redesign-course-r7` (R1–R9 teaching work + F0–F3 framework tracks)
 - Active phase: None.
 - Completed runtime/product phases: 8 of 8
 - Course teaching redesign: Phase R1, R2, R3, R4, R5, R6, R7, R8, and R9 complete.
-- Parallel framework tracks: Phase F0, F1, and F2 complete. F3–F5 planned (LC Parts 5–7 + Capstone, then LG).
-- Current verification baseline: post-F2 pass on 2026-07-10: full redesign suite offline green; `packages/langchain_course/tests` unit green with integration skip unless `RUN_DEEPSEEK_TESTS=1`; `ruff check .` clean; docs freshness green. DeepSeek keys via env or gitignored `.env`.
-- Course documentation now has a complete v1 baseline plus project-driven R1–R9 teaching material. Phase R1–R9 delivered handwritten 本地论文研究助手 course through Capstone and reference materials. Phase F0 scaffolded parallel LangChain/LangGraph teaching tracks. Phase F1 delivered LangChain Parts 1–2 (inspectable `bind_tools` agent loop + local keyword evidence chain). Phase F2 delivered LangChain Parts 3–4 (offline memory notebook + progressive skills + multi-worker delegation budgets/merge) with chapters/labs/solutions.
+- Parallel framework tracks: Phase F0, F1, F2, and F3 complete (full LangChain track + Capstone). F4–F5 planned (LangGraph).
+- Current verification baseline: post-F3 pass on 2026-07-14: full redesign suite offline green; `packages/langchain_course/tests` unit green with integration skip unless `RUN_DEEPSEEK_TESTS=1`; LC Capstone solution tests green; `ruff check .` clean; docs freshness green. DeepSeek keys via env or gitignored `.env`.
+- Course documentation now has a complete v1 baseline plus project-driven R1–R9 teaching material. Phase R1–R9 delivered handwritten 本地论文研究助手 course through Capstone and reference materials. Phase F0 scaffolded parallel LangChain/LangGraph teaching tracks. Phase F1 delivered LangChain Parts 1–2 (inspectable `bind_tools` agent loop + local keyword evidence chain). Phase F2 delivered LangChain Parts 3–4 (offline memory notebook + progressive skills + multi-worker delegation budgets/merge). Phase F3 delivered LangChain Parts 5–7 (workbench, comparisons, production) and offline LC Capstone.
 
 ## Phase Index
 
@@ -36,7 +36,7 @@ Last updated: 2026-07-10
 | Phase F0: LangChain / LangGraph Parallel Track Scaffold | Complete | `phases/phase-f0.md` | Track dirs, teaching packages, optional deps, DeepSeek hello, indexes; no Parts 1–7 content. |
 | Phase F1: LangChain Parts 1–2 | Complete | `phases/phase-f1.md` | `.env` loading; tool-calling agent kernel; evidence chain; chapters/labs/solutions. |
 | Phase F2: LangChain Parts 3–4 | Complete | `phases/phase-f2.md` | Memory notebook + skill loader; multi-worker delegation budgets/merge; chapters/labs/solutions. |
-| Phase F3: LangChain Parts 5–7 + Capstone | Planned | — | Workbench, comparisons, production, LC Capstone. |
+| Phase F3: LangChain Parts 5–7 + Capstone | Complete | `phases/phase-f3.md` | Workbench, comparisons, production, LC Capstone. |
 | Phase F4–F5: LangGraph full mirror | Planned | — | LG Parts 1–7 + Capstone after LC. |
 
 ## Update Checklist
@@ -84,3 +84,11 @@ Status: Complete (2026-07-10).
 LangChain Parts 3–4: offline `Notebook` / `SkillLoader`, `DelegationCoordinator` with budgets and merge conflicts, track chapters/labs/solutions 03–04, handwritten mapping extended. Main CI remains offline without key.
 
 Progress: [phases/phase-f2.md](phases/phase-f2.md)
+
+## Phase F3
+
+Status: Complete (2026-07-14).
+
+LangChain Parts 5–7 + Capstone: `WorkbenchSnapshot` product shape, offline comparison harness with real-LC-aware profiles, production diagnostics/JSONL/approval/sandbox on `AgentStep` trails, track chapters/labs/solutions 05–07, and `course/tracks/langchain/capstone/` offline composition. Main CI remains offline without key.
+
+Progress: [phases/phase-f3.md](phases/phase-f3.md)
