@@ -2,7 +2,7 @@
 
 ## 参考行为
 
-```python
+```python-live
 from langchain_course.deepseek import run_hello_chat
 
 print(run_hello_chat())
@@ -11,7 +11,7 @@ print(run_hello_chat())
 
 配置加载（自动读 `redesign/.env`，**不覆盖**已 export 的环境变量）：
 
-```python
+```python-live
 from langchain_course.config import load_deepseek_settings
 
 settings = load_deepseek_settings()
@@ -20,7 +20,7 @@ settings = load_deepseek_settings()
 
 模型工厂：
 
-```python
+```python-live
 from langchain_course.deepseek import build_deepseek_chat_model
 
 model = build_deepseek_chat_model(settings)

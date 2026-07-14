@@ -9,7 +9,7 @@
 ```bash
 cd redesign   # 仓库内 redesign 根
 uv sync --group langchain-course
-uv run python
+PYTHONPATH=packages/langchain_course/src uv run python
 ```
 
 ```python
@@ -105,10 +105,20 @@ except MemoryError as exc:
 3. `read_reference(manifest, "checklist.md")` 含 “Collect sources”。
 4. `read_reference(manifest, "../secrets.txt")` 抛 `SkillError`（unsafe）。
 
+## Exercise 3B (L2 Modify): RunnableWithMessageHistory
+
+用 `FakeListChatModel`、`SessionHistoryStore` 和 `build_history_runnable` 创建两个
+session。第一个调用两轮，第二个调用一轮；断言消息数分别为 4 和 2。
+
+**版本反馈**：当前 LangChain Core 1.4.x 会提示将持久化迁往 LangGraph。
+不要屏蔽后忘掉它；在实验记录里写明“本章理解 history contract，F4 学持久化”。
+
 ## Exercise 4 (L3 Design): 边界选择
 
 1. 用 `allowed_kinds=(MemoryKind.FACT,)` 的 recall，确认 `PINNED` 偏好是否仍被召回；解释你观察到的行为是否符合“kind 过滤优先于 pinned”。
 2. 设计 3–5 句：若产品要“skill 加载也进 parent trail”，你会记录哪些字段（name / references 列表 / 是否已 read_reference），**而不是**假设 loader 自动写 event。
+3. 画出 message history 与 policy-filtered Notebook 的分界：哪些信息只留在
+   session，哪些信息值得写成长期 note？
 
 ## Offline gate
 

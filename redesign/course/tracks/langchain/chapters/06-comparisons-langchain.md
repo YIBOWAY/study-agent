@@ -16,7 +16,7 @@
 | Handwritten | 本轨 |
 | --- | --- |
 | `course.framework_comparisons` | `langchain_course.comparisons` |
-| `run_handwritten_task` + FakeModel | `run_lc_baseline` + scripted `AgentStep` |
+| `run_handwritten_task` + FakeModel | `run_lc_baseline` + 真实 LC tool loop |
 | `FrameworkProfile` 记录 | 同语义，分数反映“学完 LC 后”的诚实更新 |
 | 禁止第三方 framework import | 同样禁止；profile 不是 wrapper |
 
@@ -33,10 +33,18 @@ tradeoffs: score < 0.55
 tie-break: (-total_score, profile_id)
 ```
 
+```text
+fixed task + fixed fixture + fixed metric
+                 |
+        run evidence + score profile
+                 |
+          recommendation record
+```
+
 ## Section 2 [BUILD]：inspectability task
 
 ```bash
-uv run python
+PYTHONPATH=packages/langchain_course/src uv run python
 ```
 
 ```python
@@ -58,9 +66,20 @@ assert winner.profile_id == "handwritten"
 baseline = run_lc_baseline(task)
 print(baseline.step_sequence, baseline.tool_call_count)
 assert "tool_call" in baseline.step_sequence
+assert "user_message" in baseline.step_sequence
+assert "model_response" in baseline.step_sequence
 ```
 
-## Section 3 [BUILD]：换 weights
+## Section 3 [INSPECT]：确认 baseline 不是“画出来的轨迹”
+
+`run_lc_baseline` 内部调用 Part 1 的 `run_tool_calling_agent`，使用真实
+`BaseChatModel`、`AIMessage.tool_calls` 和 `BaseTool.invoke`，只是模型输出
+确定且离线。
+
+> [CHECK] deterministic 不等于 synthetic。确定性模型仍经过框架执行路径；
+> 手工创建 `AgentStep(...)` 列表则绕过了被比较对象。
+
+## Section 4 [BUILD]：换 weights
 
 ```python
 resume = build_state_resume_task()
@@ -71,7 +90,25 @@ assert winner2.profile_id == "langgraph"
 
 > [CHECK] **同一批 profile，不同 task，不同赢家**——这才是选型记录，不是“永远手写”或“永远框架”。
 
-## Section 4：Reflection
+## Section 5 [BREAK / FIX]：怎样做出一张骗人的评分表
+
+- 只给 LangChain 跑真实任务，其他候选只凭印象打分；
+- 中途换 fixture，却保留旧分数；
+- 把“框架自带”和“课程自己补的 `AgentStep`”混成一个分数；
+- 用手工轨迹冒充真实 baseline。
+
+修复：在 recommendation 旁保存 task id、weights、运行证据和人工判断说明。
+
+> [TRAP] 本课的 profile 仍是课程记录，不是自动 benchmark。`run_lc_baseline`
+> 只让 LC 的执行证据变真实，不会自动证明所有主观分数正确。
+
+## Eval gate
+
+```bash
+uv run pytest packages/langchain_course/tests/test_comparisons.py -q
+```
+
+## Section 6 [REFLECT]：写一条可反驳的结论
 
 写三段：在你刚完成的 LC 体验里，inspectability / team_cost / state_resume 各怎么变？下一步为什么还要学 LangGraph 轨？
 

@@ -2,9 +2,11 @@
 
 from __future__ import annotations
 
+import os
 from pathlib import Path
 
-from agent import run_capstone
+import pytest
+from agent import run_capstone, run_live_capstone_agent
 from langchain_course.production import JsonlStepStore
 from langchain_course.research import build_claim_links
 
@@ -63,9 +65,16 @@ def test_capstone_rubric_core_invariants(tmp_path: Path) -> None:
     assert result.approval_records[1]["mode"] == "deny"
     assert result.sandbox_records[0]["subject"] == "network"
     assert result.sandbox_records[0]["allowed"] is False
+    callback_kinds = [record["kind"] for record in result.callback_records]
+    assert "chat_model_start" in callback_kinds
+    assert "tool_start" in callback_kinds
+    assert "tool_end" in callback_kinds
 
     # bonus: delegation trail present
     kinds = [step.kind for step in result.steps]
+    assert kinds[0] == "user_message"
+    assert "model_response" in kinds
+    assert "tool_decision" in kinds
     assert "delegate_start" in kinds
     assert "delegate_finish" in kinds
     assert result.delegation_summary
@@ -76,3 +85,14 @@ def test_capstone_snapshot_eval_passed(tmp_path: Path) -> None:
     evals = result.snapshot.to_record()["evals"]
     assert evals
     assert evals[0]["passed"] is True
+
+
+@pytest.mark.integration
+def test_live_deepseek_capstone_tool_smoke() -> None:
+    if os.environ.get("RUN_DEEPSEEK_TESTS") != "1":
+        pytest.skip("set RUN_DEEPSEEK_TESTS=1 and DEEPSEEK_API_KEY to run")
+    result = run_live_capstone_agent()
+    kinds = [step.kind for step in result.steps]
+    assert "tool_call" in kinds
+    assert "tool_result" in kinds
+    assert result.final_text.strip()

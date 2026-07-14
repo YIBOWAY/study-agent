@@ -113,7 +113,9 @@ Phase R8 adds the full Capstone project:
 
 - `course/capstone/README.md` is the real product brief (no longer a placeholder).
 - Paper fixtures, rubric, starter skeleton, reference solution, trajectory, sample report, and reflection ship under `course/capstone/`.
-- Capstone stays offline with FakeModel, FakeRetriever, and static paper fixtures; solution tests prove the six rubric success criteria.
+- Capstone stays offline with a deterministic LangChain `BaseChatModel`, a real
+  `BaseRetriever`, and static paper fixtures; solution tests prove the six
+  outcome criteria plus the LC-execution gate.
 - Capstone tests live under `course/capstone/` and are run explicitly (outside default `tests/` paths).
 
 Phase R9 adds reference and support materials:
@@ -127,7 +129,10 @@ Phase F0–F1 scaffold and start parallel framework teaching tracks (does not re
 - `course/tracks/langchain/` and `course/tracks/langgraph/` entrypoints.
 - Teaching packages `packages/langchain_course` and `packages/langgraph_course` (optional uv groups; not product runtime).
 - DeepSeek via env or local `.env` (gitignored); hello lab + LC Parts 1–2 (agent kernel + evidence chain).
-- LC track F0–F3 complete (Parts 1–7 + Capstone). Full LG track (F4–F5) is planned.
+- LC track F0–F3R complete: Parts 1–7 + Capstone now include LangChain-native
+  Document/Retriever/Runnable/history/parallel/callback paths, pre-tool approval,
+  executable Markdown, and a real offline tool-loop Capstone. Full LG track
+  (F4–F5) is planned.
 
 Real retrieval adapters, async delegation, streaming, real auth, real cloud deployment, real A2A transport, and live framework product adapters arrive in later phases.
 

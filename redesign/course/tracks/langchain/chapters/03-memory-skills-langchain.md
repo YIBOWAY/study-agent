@@ -6,10 +6,13 @@
 
 ## Learner Contract
 
-- **你会构建**：离线 `Notebook`（write / recall policy）+ progressive `SkillLoader`（先 `SKILL.md`，再显式读 reference）。
+- **你会构建**：离线 `Notebook` policy、LangChain
+  `RunnableWithMessageHistory` 会话历史，以及 progressive `SkillLoader`。
 - **你会解释**：为什么不是什么都能写进 memory；为什么 `load()` 不偷读全部 references；`PINNED` 如何影响召回顺序。
 - **你怎么验收**：`uv run pytest packages/langchain_course/tests/test_memory.py packages/langchain_course/tests/test_skills.py -q`（离线）。
-- **诚实边界**：教学用进程内 notebook 与本地 skill 文件夹，不是向量库、不是 skill marketplace、不接远程 sync。
+- **诚实边界**：`RunnableWithMessageHistory` 在当前 LangChain Core 1.4.x
+  已提示迁往 LangGraph persistence；本章用它理解 LC 历史合同，F4 再学
+  checkpoint/store。Notebook policy 与聊天历史不是同一件事。
 
 ## 与 handwritten 对照
 
@@ -20,6 +23,7 @@
 | `MemoryKind`（WORKING / SESSION 等） | `MemoryKind`：`note` / `preference` / `fact` / `warning` / `pinned` / `scratch` |
 | `SkillRuntime` / `SkillPackage` | `SkillLoader` / `SkillManifest` |
 | progressive disclosure | `load()` 只读 `SKILL.md`；`read_reference()` 显式读 |
+| 会话消息历史 | `RunnableWithMessageHistory` + `InMemoryChatMessageHistory` |
 
 > [DD] **为何不直接上 LangChain ConversationBuffer / VectorStore？** 教学目标是写/召回 **策略** 与 progressive skill 边界，而不是绑定某一家 memory 产品 API。`Notebook` 保持可检查、可单测。类型名刻意不同，避免与产品 core 共享类。
 
@@ -40,7 +44,7 @@ SkillLoader.load(SKILL.md)  ->  (optional) read_reference(...)
 
 ```bash
 # 在 redesign/ 下；unit 不需要 key
-uv run python
+PYTHONPATH=packages/langchain_course/src uv run python
 ```
 
 ```python
@@ -206,13 +210,48 @@ except SkillError as exc:
 
 > [TRAP] **progressive disclosure 不是“懒加载缓存”**：是教学纪律——默认不把全部 reference 塞进 agent 上下文。
 
-## Section 6 [BREAK / FIX]
+## Section 6 [BUILD / INSPECT]：真实 LC message history
+
+Notebook 保存的是经过策略筛选、值得跨任务保留的事实；message history
+保存的是某个会话的 Human/AI 消息。下面用真实 Runnable 包装器观察隔离：
+
+```python
+from langchain_core.language_models.fake_chat_models import FakeListChatModel
+from langchain_course.memory import SessionHistoryStore, build_history_runnable
+
+history_store = SessionHistoryStore()
+history_model = FakeListChatModel(responses=["noted", "the rule was citations"])
+history_chain = build_history_runnable(history_model, history_store)
+
+history_chain.invoke(
+    {"question": "Remember: claims need evidence."},
+    config={"configurable": {"session_id": "research-1"}},
+)
+history_chain.invoke(
+    {"question": "What rule did we discuss?"},
+    config={"configurable": {"session_id": "research-1"}},
+)
+messages = history_store.get("research-1").messages
+print([message.type for message in messages])
+assert len(messages) == 4
+```
+
+> [CHECK] 如果忘记 `configurable.session_id`，框架会拒绝调用；它不会偷偷把
+> 所有用户放进同一个全局历史。
+
+> [DD] 当前版本会发出迁移 LangGraph persistence 的 warning。这不是课程坏了，
+> 而是一个值得保留的版本事实：LC 先教 Runnable/history 合同，LG 再教持久化状态。
+
+## Section 7 [BREAK / FIX]
 
 1. `importance` 低于 `min_importance` → `MemoryError`
 2. `read_reference(..., "missing.md")` → `SkillError`（not listed）
 3. `kind=PINNED` 且传入 `pinned=False` → 返回 note 的 `pinned is True`
+4. history 调用不带 `session_id` → 配置错误；修复 invocation config。
+5. 把完整 history 当长期 memory → prompt 越来越长；修复为“history 管会话，
+   Notebook 管筛选后的长期记录”。
 
-## Section 7：与 Part 1 trail 的关系
+## Section 8 [REFLECT]：与 Part 1 trail 的关系
 
 Memory / skill **本身不自动**写入 `AgentStep`。你在产品里会选择：
 

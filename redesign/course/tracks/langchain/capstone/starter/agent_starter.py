@@ -3,14 +3,17 @@
 Do not import research_core. Use langchain_course only.
 
 Hints (import when you implement TODOs):
-- langchain_course.research: PaperDoc, EvidenceItem, ClaimItem, KeywordRetriever,
-  ResearchReport, build_claim_links
+- langchain_course.fake_models: deterministic BaseChatModel for the offline path
+- langchain_course.research: PaperDoc, EvidenceItem, ClaimItem,
+  LangChainPaperRetriever, ResearchReport, build_claim_links
 - langchain_course.memory: Notebook, MemoryNote, MemoryKind, MemoryWritePolicy
 - langchain_course.skills: SkillLoader
 - langchain_course.workbench: WorkbenchSnapshot and panel adapters
 - langchain_course.production: RunDiagnostics, JsonlStepStore, ApprovalPolicy,
   SandboxPolicy
 - langchain_course.agent_kernel: AgentStep
+- langchain_course.agent_kernel: run_tool_calling_agent; do not hand-build the
+  main tool trail just to satisfy tests
 """
 
 from __future__ import annotations

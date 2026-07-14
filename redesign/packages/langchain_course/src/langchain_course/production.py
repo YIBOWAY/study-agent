@@ -14,12 +14,81 @@ from enum import StrEnum
 from fnmatch import fnmatchcase
 from pathlib import Path
 from typing import Any
+from uuid import UUID
 
-from langchain_course.agent_kernel import AgentStep
+from langchain_core.callbacks import BaseCallbackHandler
+
+from langchain_course.agent_kernel import AgentStep, BeforeToolHook, ToolGateDecision
 
 
 class ProductionError(ValueError):
     """Raised when production contracts receive invalid input."""
+
+
+class LangChainTraceRecorder(BaseCallbackHandler):
+    """Small local callback handler that exposes real LC lifecycle events."""
+
+    def __init__(self) -> None:
+        super().__init__()
+        self.records: list[dict[str, Any]] = []
+
+    def on_chat_model_start(
+        self,
+        serialized: dict[str, Any],
+        messages: list[list[Any]],
+        *,
+        run_id: UUID,
+        **kwargs: Any,
+    ) -> None:
+        self.records.append(
+            {
+                "kind": "chat_model_start",
+                "run_id": str(run_id),
+                "batch_count": len(messages),
+                "tags": list(kwargs.get("tags") or ()),
+                "name": serialized.get("name"),
+            }
+        )
+
+    def on_llm_end(
+        self,
+        response: Any,
+        *,
+        run_id: UUID,
+        **kwargs: Any,
+    ) -> None:
+        del response, kwargs
+        self.records.append({"kind": "llm_end", "run_id": str(run_id)})
+
+    def on_tool_start(
+        self,
+        serialized: dict[str, Any],
+        input_str: str,
+        *,
+        run_id: UUID,
+        **kwargs: Any,
+    ) -> None:
+        del kwargs
+        self.records.append(
+            {
+                "kind": "tool_start",
+                "run_id": str(run_id),
+                "name": serialized.get("name"),
+                "input": input_str,
+            }
+        )
+
+    def on_tool_end(
+        self,
+        output: Any,
+        *,
+        run_id: UUID,
+        **kwargs: Any,
+    ) -> None:
+        del kwargs
+        self.records.append(
+            {"kind": "tool_end", "run_id": str(run_id), "output": str(output)}
+        )
 
 
 JSONL_STEP_LOG_SCHEMA_VERSION = "lc.agent_step_log.v1"
@@ -239,6 +308,31 @@ class ApprovalPolicy:
             mode=self.default_mode,
             reason=self.default_reason,
         )
+
+
+def build_approval_hook(
+    policy: ApprovalPolicy,
+    *,
+    approved_tools: set[str] | frozenset[str] = frozenset(),
+) -> BeforeToolHook:
+    """Adapt approval policy to the agent kernel's pre-execution tool hook."""
+    approved = frozenset(approved_tools)
+
+    def _before_tool(tool_name: str, _args: Mapping[str, Any]) -> ToolGateDecision:
+        decision = policy.decide(tool_name)
+        allowed = decision.mode is ApprovalMode.ALLOW or (
+            decision.mode is ApprovalMode.REQUIRE_APPROVAL and tool_name in approved
+        )
+        reason = decision.reason
+        if decision.requires_review and tool_name in approved:
+            reason = f"human approval recorded; {reason}"
+        return ToolGateDecision(
+            allowed=allowed,
+            mode=decision.mode.value,
+            reason=reason,
+        )
+
+    return _before_tool
 
 
 @dataclass(frozen=True, slots=True)

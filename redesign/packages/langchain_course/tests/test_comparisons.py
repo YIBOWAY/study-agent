@@ -98,6 +98,8 @@ def test_run_lc_baseline_structure() -> None:
     assert summary.tool_call_count == 1
     assert summary.error_count == 0
     assert "model_request" in summary.step_sequence
+    assert "user_message" in summary.step_sequence
+    assert "model_response" in summary.step_sequence
     assert "tool_call" in summary.step_sequence
     rec = summary.to_record()
     assert rec["final_answer"]

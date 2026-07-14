@@ -6,7 +6,8 @@
 
 ## Learner Contract
 
-- **你会构建**：`DelegationCoordinator` 串行派工：`WorkerRole` + `WorkerTask` + `WorkerBudget` → `WorkerResult` / `MergeResult`。
+- **你会构建**：真实 `RunnableParallel` 多链组合，以及带 context 隔离、预算
+  和 parent trail 的 `DelegationCoordinator`。
 - **你会解释**：为什么 child prompt 含 Role instructions + objective + allowed context（不含 parent 私有历史）；为什么 budget 按 child `model_request` **事后**计数；为什么 merge 不吞 failed / not-run worker。
 - **你怎么验收**：`uv run pytest packages/langchain_course/tests/test_delegation.py -q`（离线）。
 - **诚实边界**：不自动 enforce skill/memory allowlist；提供 `filter_tools_for_role` helper。预算是 post-hoc（runner 已返回后比对步数）。不依赖 LangGraph。
@@ -52,7 +53,7 @@ Parent
 ## Section 2 [BUILD]：编译 child prompt（隔离）
 
 ```bash
-uv run python
+PYTHONPATH=packages/langchain_course/src uv run python
 ```
 
 ```python
@@ -184,7 +185,30 @@ assert [t.name for t in filter_tools_for_role(role_all, [echo, add])] == ["echo"
 
 > [DD] **诚实边界**：`run_task` 会对传入的 `tools` 调用 `filter_tools_for_role`。skill/memory allowlist **不**自动 enforce——与主课 Part 4 同一课。工牌上的声明不等于 runtime 魔法。
 
-## Section 6 [BREAK / FIX]
+## Section 6 [BUILD / INSPECT]：真实 RunnableParallel
+
+当两个 worker 只读同一输入、没有共享预算或副作用时，可以使用 LangChain
+原生并行组合：
+
+```python
+from langchain_core.runnables import RunnableLambda
+from langchain_course.delegation import build_parallel_worker_runnable
+
+parallel = build_parallel_worker_runnable(
+    {
+        "citation": RunnableLambda(lambda x: f"cite:{x['question']}"),
+        "risk": RunnableLambda(lambda x: f"risk:{x['question']}"),
+    }
+)
+parallel_result = parallel.invoke({"question": "RAG"})
+print(parallel_result)
+assert set(parallel_result) == {"citation", "risk"}
+```
+
+> [CHECK] `RunnableParallel` 解决组合与并发，不自动解决 worker budget、失败
+> 合并、父级审计或副作用回滚。需要这些合同就使用 coordinator。
+
+## Section 7 [BREAK / FIX]
 
 1. `role.max_steps > budget.max_steps_per_worker` → `DelegationError`（跑之前）
 2. `len(tasks) > budget.max_workers` → `DelegationError`

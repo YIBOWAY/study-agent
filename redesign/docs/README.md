@@ -39,6 +39,7 @@ This directory is the canonical archive for the redesign version of the project.
 - `plans/2026-07-10-phase-f1-langchain-parts-1-2.md`: Phase F1 LangChain Parts 1–2 plan.
 - `plans/2026-07-10-phase-f2-langchain-parts-3-4.md`: Phase F2 LangChain Parts 3–4 plan.
 - `plans/2026-07-10-phase-f3-langchain-parts-5-7-capstone.md`: Phase F3 LangChain Parts 5–7 + Capstone plan.
+- `plans/2026-07-14-phase-f3r-langchain-teaching-completion.md`: Phase F3R audit remediation and teaching-completion plan.
 - `progress/overall.md`: phase status dashboard for humans and agents.
 - `architecture/overview.md`: double-layer repository and dependency direction.
 - `architecture/runtime.md`: runtime contracts, Phase 1 agent loop, fake provider boundary, delegation events, Phase 5-7 product/production boundaries, and Capstone composition boundary.
@@ -65,7 +66,10 @@ This directory is the canonical archive for the redesign version of the project.
 - `../course/reference/troubleshooting.md`: common errors and fix guidance.
 - `../course/reference/design-decisions-index.md`: index of all `[DD]` / `[TRAP]` callouts.
 - `../course/reference/discussion-prompts.md`: per-part discussion prompts with detailed answers and analysis.
-- `../course/tracks/langchain/README.md`: LangChain parallel teaching track (F0–F3: full LC + Capstone).
+- `../course/tracks/langchain/README.md`: LangChain parallel teaching track (F0–F3R: native LC execution + full course + Capstone).
+- `../course/tracks/langchain/reference/langchain-primitives.md`: LC Core primitive/course-contract boundary reference.
+- `../course/tracks/langchain/reference/study-checkpoints.md`: retrieval-practice checkpoints.
+- `../course/tracks/langchain/reference/troubleshooting.md`: LC track troubleshooting.
 - `../course/tracks/langchain/chapters/01-agent-kernel-langchain.md`: LC Part 1 tool-calling agent.
 - `../course/tracks/langchain/chapters/02-research-core-langchain.md`: LC Part 2 evidence chain.
 - `../course/tracks/langchain/chapters/03-memory-skills-langchain.md`: LC Part 3 memory + skills.

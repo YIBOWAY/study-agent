@@ -9,7 +9,7 @@
 ```bash
 cd redesign   # 仓库内 redesign 根
 uv sync --group langchain-course
-uv run python
+PYTHONPATH=packages/langchain_course/src uv run python
 ```
 
 ```python

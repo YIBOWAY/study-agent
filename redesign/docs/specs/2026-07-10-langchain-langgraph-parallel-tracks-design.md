@@ -1,6 +1,6 @@
 # Design: LangChain & LangGraph Parallel Teaching Tracks
 
-> **Status:** Approved (2026-07-10); F0–F3 complete (full LC track + Capstone)  
+> **Status:** Approved (2026-07-10); F0–F3 delivered; F3R audit remediation complete (2026-07-14)
 > **Date:** 2026-07-10  
 > **Branch:** `codex/redesign-course-r7` (or successor teaching branch)  
 > **Related:** handwritten course R1–R9 complete; Part 6 framework profiles remain deterministic records only

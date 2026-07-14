@@ -7,14 +7,19 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
-from langchain_course.agent_kernel import AgentStep
+from langchain_core.messages import AIMessage
+from langchain_core.tools import BaseTool, StructuredTool
+from langchain_course.agent_kernel import AgentRunResult, AgentStep, run_tool_calling_agent
 from langchain_course.delegation import (
     DelegationCoordinator,
     WorkerBudget,
     WorkerRole,
     WorkerTask,
-    make_plain_agent_result,
-    scripted_runner,
+    compile_child_prompt,
+)
+from langchain_course.fake_models import (
+    DeterministicToolCallingChatModel,
+    tool_then_final_model,
 )
 from langchain_course.memory import (
     MemoryKind,
@@ -27,13 +32,15 @@ from langchain_course.production import (
     ApprovalPolicy,
     ApprovalRule,
     JsonlStepStore,
+    LangChainTraceRecorder,
     RunDiagnostics,
     SandboxPolicy,
+    build_approval_hook,
 )
 from langchain_course.research import (
     ClaimItem,
     EvidenceItem,
-    KeywordRetriever,
+    LangChainPaperRetriever,
     PaperDoc,
     ResearchReport,
     build_claim_links,
@@ -79,6 +86,7 @@ class CapstoneResult:
     sandbox_records: list[dict[str, Any]]
     jsonl_path: Path
     delegation_summary: str
+    callback_records: list[dict[str, Any]]
 
 
 def load_paper_docs(path: Path = FIXTURES_PATH) -> list[PaperDoc]:
@@ -99,14 +107,19 @@ def load_paper_docs(path: Path = FIXTURES_PATH) -> list[PaperDoc]:
 def build_evidence_and_report(
     docs: list[PaperDoc],
 ) -> tuple[list[EvidenceItem], ResearchReport]:
-    retriever = KeywordRetriever(docs)
-    hits = retriever.search("citation grounding RAG evaluation memory delegation", limit=4)
-    if len(hits) < 3:
+    retriever = LangChainPaperRetriever.from_papers(docs, k=4)
+    documents = retriever.invoke(
+        "citation grounding RAG evaluation memory delegation"
+    )
+    if len(documents) < 3:
         # Fall back to first three docs if ranking is thin.
         chosen = docs[:3]
     else:
         by_id = {doc.id: doc for doc in docs}
-        chosen = [by_id[hit.source_id] for hit in hits[:3]]
+        chosen = [
+            by_id[str(document.metadata["source_id"])]
+            for document in documents[:3]
+        ]
 
     evidence: list[EvidenceItem] = []
     claims: list[ClaimItem] = []
@@ -143,6 +156,27 @@ def build_evidence_and_report(
     return evidence, report
 
 
+def build_keyword_search_tool(docs: list[PaperDoc]) -> BaseTool:
+    retriever = LangChainPaperRetriever.from_papers(docs, k=3)
+
+    def keyword_search(query: str) -> str:
+        """Search local paper fixtures and return stable source ids."""
+        documents = retriever.invoke(query)
+        return json.dumps(
+            [
+                {
+                    "source_id": document.metadata["source_id"],
+                    "source_uri": document.metadata["source_uri"],
+                    "snippet": document.page_content[:160],
+                }
+                for document in documents
+            ],
+            ensure_ascii=False,
+        )
+
+    return StructuredTool.from_function(keyword_search, name="keyword_search")
+
+
 def run_capstone(*, jsonl_path: Path | None = None) -> CapstoneResult:
     docs = load_paper_docs()
     evidence, report = build_evidence_and_report(docs)
@@ -170,24 +204,42 @@ def run_capstone(*, jsonl_path: Path | None = None) -> CapstoneResult:
     manifest = skill_loader.load(SKILL_PATH)
     rules = skill_loader.read_reference(manifest, "citation-rules.md")
 
-    steps = [
-        AgentStep(kind="model_request", payload={"step": "plan", "question": RESEARCH_QUESTION}),
-        AgentStep(
-            kind="tool_call",
-            payload={"tool": "keyword_search", "query": "citation grounding"},
+    approval = ApprovalPolicy(
+        rules=(
+            ApprovalRule(
+                tool_name_pattern="keyword_*",
+                mode=ApprovalMode.ALLOW,
+                reason="local keyword retrieval is allowed",
+            ),
+            ApprovalRule(
+                tool_name_pattern="shell_*",
+                mode=ApprovalMode.DENY,
+                reason="shell tools are denied in Capstone sandbox",
+            ),
+        )
+    )
+    search_tool = build_keyword_search_tool(docs)
+    model = tool_then_final_model(
+        tool_name="keyword_search",
+        tool_args={"query": "citation grounding"},
+        final_text=report.summary,
+        call_id="capstone_search_1",
+    )
+    callback_recorder = LangChainTraceRecorder()
+    agent_result = run_tool_calling_agent(
+        user_message=RESEARCH_QUESTION,
+        system_prompt=(
+            "Use the local keyword_search tool before answering. "
+            "Keep claims tied to inspectable evidence."
         ),
-        AgentStep(
-            kind="tool_result",
-            payload={"tool": "keyword_search", "hit_count": len(docs)},
-        ),
-        AgentStep(kind="model_request", payload={"step": "synthesize"}),
-        AgentStep(
-            kind="final",
-            payload={"text": report.summary},
-        ),
-    ]
+        tools=[search_tool],
+        model=model,
+        config={"callbacks": [callback_recorder], "tags": ["lc-capstone"]},
+        before_tool=build_approval_hook(approval),
+    )
+    steps = list(agent_result.steps)
 
-    # Optional delegation: scripted child citation review.
+    # Optional delegation: deterministic child through the real LC model loop.
     coord = DelegationCoordinator()
     role = WorkerRole(
         name="citation_reviewer",
@@ -205,9 +257,19 @@ def run_capstone(*, jsonl_path: Path | None = None) -> CapstoneResult:
         ),
     )
     budget = WorkerBudget(max_workers=1, max_steps_per_worker=2, max_total_steps=4)
-    runner = scripted_runner(
-        {"t_cite_review": make_plain_agent_result("all claims linked", model_requests=1)}
+    child_model = DeterministicToolCallingChatModel(
+        responses=[AIMessage(content="all claims linked")]
     )
+
+    def runner(worker_task: WorkerTask, tools: list[BaseTool]) -> AgentRunResult:
+        return run_tool_calling_agent(
+            user_message=compile_child_prompt(worker_task),
+            system_prompt=worker_task.role.system_prompt,
+            tools=tools,
+            model=child_model,
+            max_steps=worker_task.role.max_steps,
+        )
+
     worker = coord.run_task(task, budget, runner=runner)
     steps.extend(list(coord.parent_steps))
 
@@ -268,20 +330,6 @@ def run_capstone(*, jsonl_path: Path | None = None) -> CapstoneResult:
     store = JsonlStepStore(out_jsonl)
     store.append_steps(run_id, steps)
 
-    approval = ApprovalPolicy(
-        rules=(
-            ApprovalRule(
-                tool_name_pattern="keyword_*",
-                mode=ApprovalMode.ALLOW,
-                reason="local keyword retrieval is allowed",
-            ),
-            ApprovalRule(
-                tool_name_pattern="shell_*",
-                mode=ApprovalMode.DENY,
-                reason="shell tools are denied in Capstone sandbox",
-            ),
-        )
-    )
     sandbox = SandboxPolicy(
         readable_paths=(CAPSTONE_ROOT,),
         writable_paths=(Path(__file__).resolve().parent,),
@@ -312,6 +360,30 @@ def run_capstone(*, jsonl_path: Path | None = None) -> CapstoneResult:
         sandbox_records=sandbox_records,
         jsonl_path=out_jsonl,
         delegation_summary=worker.final_text,
+        callback_records=list(callback_recorder.records),
+    )
+
+
+def run_live_capstone_agent() -> AgentRunResult:
+    """Optional DeepSeek smoke using the same local tool and approval boundary."""
+    docs = load_paper_docs()
+    search_tool = build_keyword_search_tool(docs)
+    policy = ApprovalPolicy(
+        rules=(
+            ApprovalRule(
+                tool_name_pattern="keyword_*",
+                mode=ApprovalMode.ALLOW,
+                reason="local fixture retrieval",
+            ),
+        )
+    )
+    return run_tool_calling_agent(
+        user_message=(
+            f"{RESEARCH_QUESTION} You must call keyword_search once before answering."
+        ),
+        tools=[search_tool],
+        before_tool=build_approval_hook(policy),
+        max_steps=4,
     )
 
 

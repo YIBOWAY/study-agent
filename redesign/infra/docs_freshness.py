@@ -6,6 +6,7 @@ from dataclasses import dataclass
 from pathlib import Path
 
 _CODE_SPAN_PATTERN = re.compile(r"`([^`]+\.md)`")
+_MARKDOWN_LINK_PATTERN = re.compile(r"(?<!!)\[[^\]]*\]\(([^)]+\.md(?:#[^)]+)?)\)")
 
 
 @dataclass(frozen=True, slots=True)
@@ -29,6 +30,7 @@ def validate_docs_freshness(project_root: str | Path) -> DocsFreshnessReport:
             root / "docs" / "course" / "roadmap.md",
             root / "docs" / "plans" / "2026-06-25-redesign-execution-roadmap.md",
             root / "course" / "README.md",
+            root / "course" / "tracks" / "langchain" / "README.md",
         ),
     )
 
@@ -58,11 +60,13 @@ def _markdown_code_spans(index_path: Path) -> tuple[str, ...]:
     if not index_path.exists():
         raise ValueError(f"index path does not exist: {index_path}")
     content = index_path.read_text(encoding="utf-8")
-    return tuple(
-        token
-        for token in _CODE_SPAN_PATTERN.findall(content)
-        if not _is_placeholder_path(token)
+    tokens = list(_CODE_SPAN_PATTERN.findall(content))
+    tokens.extend(
+        target.split("#", 1)[0]
+        for target in _MARKDOWN_LINK_PATTERN.findall(content)
+        if "://" not in target
     )
+    return tuple(token for token in tokens if not _is_placeholder_path(token))
 
 
 def _resolve_index_token(root: Path, index_path: Path, token: str) -> Path:

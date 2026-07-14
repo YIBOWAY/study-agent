@@ -439,3 +439,50 @@ Exit criteria:
 - Unit tests for agent kernel and research chain green without API key.
 - Course materials under `course/tracks/langchain/` for Parts 1–2.
 - Indexes and progress mark F1 complete without claiming Parts 3–7 done.
+
+### Phase F2: LangChain Parts 3–4
+
+Plan: `redesign/docs/plans/2026-07-10-phase-f2-langchain-parts-3-4.md`
+
+Status: Complete (2026-07-10).
+
+Delivered memory/skills and delegation materials plus offline contracts. F3R
+later added the missing `RunnableWithMessageHistory` and `RunnableParallel`
+framework paths without removing the explicit policy/budget lessons.
+
+### Phase F3: LangChain Parts 5–7 + Capstone
+
+Plan: `redesign/docs/plans/2026-07-10-phase-f3-langchain-parts-5-7-capstone.md`
+
+Status: Complete (2026-07-14), followed by F3R audit remediation.
+
+Delivered Workbench, comparisons, production contracts, and the first offline
+LC Capstone composition.
+
+### Phase F3R: LangChain Teaching Completion
+
+Plan: `redesign/docs/plans/2026-07-14-phase-f3r-langchain-teaching-completion.md`
+
+Status: Complete (2026-07-14).
+
+Purpose:
+
+- Replace synthetic/custom-only claims with real LangChain Core execution paths.
+- Restore the full Build -> Inspect -> Break -> Fix -> Reflect teaching contract.
+- Make the LC Capstone run a real deterministic tool loop and add optional live smoke.
+- Put all LC chapter/lab/solution Python blocks under the offline docs gate.
+
+Exit criteria:
+
+- Parts 2–4 demonstrate Document/Retriever/Runnable/history/parallel primitives.
+- Part 7 demonstrates callbacks and approval before tool execution.
+- Part 6 and Capstone no longer pass through hand-built main trails.
+- Package, Capstone, main, Markdown, docs, ruff, and lock verification are green.
+
+### Phases F4–F5: LangGraph Full Mirror
+
+Status: Planned.
+
+Begin only from the F3R-complete LC baseline. F4/F5 must treat the current
+`RunnableWithMessageHistory` migration warning as a teaching bridge into graph
+state, store, checkpoint, interrupt, and resume—not as a warning to hide.

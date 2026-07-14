@@ -6,7 +6,7 @@
 
 | Group | Packages (lower bounds) | Used by |
 | --- | --- | --- |
-| `langchain-course` | `langchain-core>=0.3`, `langchain-openai>=0.2`, `python-dotenv>=1.0` | LC track code + labs |
+| `langchain-course` | `langchain-core>=1.4,<2`, `langchain-openai>=1.3,<2`, `python-dotenv>=1.0` | LC track code + labs |
 | `langgraph-course` | above + `langgraph>=0.2` | LG track (from F4) |
 
 Install:
@@ -25,10 +25,21 @@ uv sync --group langgraph-course
 | Model | `deepseek-chat` |
 | Client | `langchain_openai.ChatOpenAI` |
 
+## Verified baseline（2026-07-14）
+
+- `langchain-core==1.4.9`
+- `langchain-openai==1.3.4`
+- `python-dotenv==1.2.2`
+- Python 3.12.13（项目仍声明支持 3.11+）
+
+`uv.lock` 随仓库提交，课程重现默认使用锁定结果；上面的 dependency range
+用于表达可接受的 1.x API 家族，不允许无审查跨 major。
+
 ## Upgrade policy
 
-- F0 使用 **lower bounds**，不锁死精确 patch，以便 uv 解析。
-- 升级 major/minor 时：重跑 `packages/langchain_course/tests`，并做一次 live hello（若有 key）。
+- 同一 1.x 范围升级时：更新 lock、重跑 package/Markdown/Capstone tests。
+- 跨 major 时：先新增 phase plan，再更新课程和 version boundary。
+- 有 key 时补一次 live hello + live Capstone tool smoke。
 - 若上游 breaking，在对应 phase plan 中改 pin 与 lab，而不是静默改主课。
 
 ## Out of tree

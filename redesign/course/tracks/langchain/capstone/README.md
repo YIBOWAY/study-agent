@@ -11,7 +11,7 @@ Researcher question:
 Your assistant must answer **offline for unit tests**:
 
 1. Load local paper fixtures.
-2. Retrieve with `KeywordRetriever`.
+2. Retrieve through `LangChainPaperRetriever(BaseRetriever)` and `Document`.
 3. Extract evidence quotes.
 4. Produce a cited report where every claim traces to evidence.
 5. Write at least one memory under an explicit write policy.
@@ -26,8 +26,10 @@ This track uses `langchain_course` only—**never import** `research_core`.
 
 - **Before you start**: finish LC Parts 1–7 materials (F0–F3).
 - **You will build**: starter under `starter/` (or equivalent) satisfying the rubric.
-- **You prove it**: six rubric criteria Pass + solution/starter tests green.
-- **Offline unit guarantee**: fixtures + scripted steps; live DeepSeek is optional polish, not the gate.
+- **You prove it**: six outcome criteria plus the LC-execution gate Pass, and
+  solution/starter tests stay green.
+- **Offline unit guarantee**: deterministic `BaseChatModel` + local fixtures; the
+  real message/tool/callback path still runs, while live DeepSeek stays optional.
 
 ## Directory Map
 
@@ -69,10 +71,38 @@ uv run pytest packages/langchain_course/tests -q
 
 | Part | LC building blocks used here |
 | --- | --- |
-| 1 | `AgentStep` trail (scripted) |
-| 2 | `PaperDoc`, `KeywordRetriever`, `EvidenceItem`, `ClaimItem`, `build_claim_links` |
+| 1 | real `run_tool_calling_agent` + deterministic `BaseChatModel` + `BaseTool` |
+| 2 | `PaperDoc` → `Document` → `LangChainPaperRetriever` + evidence links |
 | 3 | `Notebook` + `SkillLoader` |
-| 4 | optional `DelegationCoordinator` |
+| 4 | `DelegationCoordinator`; child also runs the LC loop |
 | 5 | `WorkbenchSnapshot` |
 | 6 | reflection lens (build vs adopt) |
 | 7 | `RunDiagnostics`, `JsonlStepStore`, `ApprovalPolicy`, `SandboxPolicy` |
+
+## Build → Inspect → Break → Fix
+
+1. **Build:** run the solution and inspect `result.steps`.
+2. **Inspect:** find `model_response`, `tool_call`, `tool_decision`, `tool_result`,
+   `delegate_start`, and `delegate_finish`.
+3. **Break:** change the approval rule from `keyword_*` to `other_*`; verify the
+   tool is blocked before retrieval.
+4. **Fix:** restore the allow rule and keep the tool-decision record.
+5. **Reflect:** explain which objects come from LangChain and which invariants
+   remain course-owned.
+
+## Optional live boundary
+
+```bash
+RUN_DEEPSEEK_TESTS=1 uv run pytest \
+  course/tracks/langchain/capstone/solution -m integration -q
+```
+
+The live smoke asks DeepSeek to call the same local retrieval tool. It asserts
+structure and non-empty final text, never exact model prose.
+
+## Exit questions
+
+1. Why is a deterministic `BaseChatModel` a real offline framework test while a
+   manually assembled `AgentStep` list is not?
+2. What happens before `BaseTool.invoke`, and what evidence remains afterward?
+3. Which Capstone component would LangGraph replace or deepen in F4/F5?

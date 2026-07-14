@@ -66,6 +66,24 @@ assert "RuntimeError" in failed.error_message
 assert coord.parent_step_kinds() == ["delegate_start", "delegate_finish"]
 ```
 
+### L2 RunnableParallel 参考
+
+```python
+from langchain_core.runnables import RunnableLambda
+from langchain_course.delegation import build_parallel_worker_runnable
+
+parallel = build_parallel_worker_runnable(
+    {
+        "citation": RunnableLambda(lambda x: f"cite:{x['question']}"),
+        "risk": RunnableLambda(lambda x: f"risk:{x['question']}"),
+    }
+)
+assert set(parallel.invoke({"question": "RAG"})) == {"citation", "risk"}
+```
+
+`RunnableParallel` 提供 LC 原生并行组合，但不提供 child context 编译、总步数
+预算、失败合并和 parent 审计，所以不能删除 coordinator。
+
 ### L3 Budget edges
 
 ```python

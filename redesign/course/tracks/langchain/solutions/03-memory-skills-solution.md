@@ -53,6 +53,25 @@ except SkillError as exc:
     assert "unsafe" in str(exc)
 ```
 
+### L2 Message history 参考
+
+```python
+from langchain_core.language_models.fake_chat_models import FakeListChatModel
+from langchain_course.memory import SessionHistoryStore, build_history_runnable
+
+store = SessionHistoryStore()
+model = FakeListChatModel(responses=["a1", "a2", "b1"])
+chain = build_history_runnable(model, store)
+chain.invoke({"question": "q1"}, config={"configurable": {"session_id": "a"}})
+chain.invoke({"question": "q2"}, config={"configurable": {"session_id": "a"}})
+chain.invoke({"question": "q3"}, config={"configurable": {"session_id": "b"}})
+assert len(store.get("a").messages) == 4
+assert len(store.get("b").messages) == 2
+```
+
+为什么正确：每次 invocation 明确携带 session id，wrapper 负责读写 Human/AI
+消息；Notebook 仍只接收通过 write policy 的长期记录。两者不能互相冒充。
+
 ### L3 Design 参考
 
 1. **kind 过滤优先**：`allowed_kinds=(MemoryKind.FACT,)` 时，即使 note 是 PINNED，只要 kind 不在集合内就不会进入候选。pinned 只影响**已通过 kind 过滤**的排序。

@@ -197,6 +197,9 @@ PYTHONPATH=packages/research_core/src uv run python
 - [tracks/langchain/chapters/06-comparisons-langchain.md](tracks/langchain/chapters/06-comparisons-langchain.md): F3 Part 6 comparisons after real LC。
 - [tracks/langchain/chapters/07-production-langchain.md](tracks/langchain/chapters/07-production-langchain.md): F3 Part 7 production contracts。
 - [tracks/langchain/capstone/README.md](tracks/langchain/capstone/README.md): F3 LC Capstone。
+- [tracks/langchain/reference/langchain-primitives.md](tracks/langchain/reference/langchain-primitives.md): LC 原语与课程自定义合同边界速查。
+- [tracks/langchain/reference/study-checkpoints.md](tracks/langchain/reference/study-checkpoints.md): 分 Part 检索练习与 Capstone exit ticket。
+- [tracks/langchain/reference/troubleshooting.md](tracks/langchain/reference/troubleshooting.md): Retriever/history/callback/approval 排障。
 - [tracks/langgraph/README.md](tracks/langgraph/README.md): LangGraph 轨入口（F0 占位；系统内容从 F4 起）。
 - 设计：`docs/specs/2026-07-10-langchain-langgraph-parallel-tracks-design.md`
 
@@ -219,6 +222,7 @@ PYTHONPATH=packages/research_core/src uv run python
 | F1 | LC Parts 1–2：tool-calling agent kernel + local evidence chain（课程材料 + unit 测试） |
 | F2 | LC Parts 3–4：memory/skills notebook + multi-worker delegation（课程材料 + unit 测试） |
 | F3 | LC Parts 5–7 + Capstone：workbench / comparisons / production / 离线 Capstone |
+| F3R | LC 教学补全：真实 Document/Retriever/Runnable/history/callback/tool-loop + executable docs |
 | F4–F5 | 计划中：LG Parts 1–7 + Capstone |
 
 学习时用一个简单判断：Parts 1-7 按 R1-R7 新结构认真做完整循环；做完后进入 Capstone，按 rubric 自检，先独立完成 starter，再对照 solution；卡住或复习时回查 R9 reference。若要学 LangChain/LangGraph，走「并行框架轨」，不要替换主线路径。

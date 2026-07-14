@@ -48,7 +48,7 @@ uv run pytest packages/langchain_course/tests/test_config.py packages/langchain_
 ### 4. 一次 hello chat
 
 ```bash
-uv run python -c "from langchain_course.deepseek import run_hello_chat; print(run_hello_chat())"
+PYTHONPATH=packages/langchain_course/src uv run python -c "from langchain_course.deepseek import run_hello_chat; print(run_hello_chat())"
 ```
 
 期望：打印模型回复（非空字符串）。默认 prompt 要求回复 `pong` 一类短答；模型可能略有发挥，**有非空文本即过**。
@@ -58,7 +58,7 @@ uv run python -c "from langchain_course.deepseek import run_hello_chat; print(ru
 若本机没有 export key，可临时移开 `.env` 再测；或：
 
 ```bash
-env -u DEEPSEEK_API_KEY uv run python -c "
+env -u DEEPSEEK_API_KEY PYTHONPATH=packages/langchain_course/src uv run python -c "
 from langchain_course.config import load_deepseek_settings
 load_deepseek_settings(load_dotenv=False, environ={})
 "

@@ -76,6 +76,7 @@ def validate_markdown_python_blocks(
 def _ensure_source_paths(root: Path) -> None:
     source_dirs = (
         root / "packages" / "research_core" / "src",
+        root / "packages" / "langchain_course" / "src",
         root / "apps" / "api" / "src",
     )
     for source_dir in source_dirs:

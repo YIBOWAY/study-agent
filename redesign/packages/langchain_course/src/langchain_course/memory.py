@@ -5,6 +5,15 @@ from __future__ import annotations
 import re
 from dataclasses import dataclass, field
 from enum import StrEnum
+from typing import Any
+
+from langchain_core.chat_history import (
+    BaseChatMessageHistory,
+    InMemoryChatMessageHistory,
+)
+from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
+from langchain_core.runnables import Runnable
+from langchain_core.runnables.history import RunnableWithMessageHistory
 
 
 class MemoryError(ValueError):
@@ -151,3 +160,41 @@ def format_memory_block(notes: tuple[MemoryNote, ...] | list[MemoryNote]) -> str
         pin = "PINNED " if note.pinned else ""
         lines.append(f"- [{note.kind.value}] {pin}{note.content}")
     return "\n".join(lines)
+
+
+@dataclass
+class SessionHistoryStore:
+    """Inspectable session store used by `RunnableWithMessageHistory`."""
+
+    _sessions: dict[str, InMemoryChatMessageHistory] = field(default_factory=dict)
+
+    def get(self, session_id: str) -> BaseChatMessageHistory:
+        if not session_id.strip():
+            raise MemoryError("session_id must be non-empty")
+        return self._sessions.setdefault(session_id, InMemoryChatMessageHistory())
+
+    def session_ids(self) -> tuple[str, ...]:
+        return tuple(sorted(self._sessions))
+
+
+def build_history_runnable(
+    model: Runnable[Any, Any],
+    store: SessionHistoryStore,
+    *,
+    system_prompt: str = "You are a careful research assistant.",
+) -> RunnableWithMessageHistory:
+    """Wrap a LangChain prompt/model Runnable with per-session chat history."""
+    prompt = ChatPromptTemplate.from_messages(
+        [
+            ("system", system_prompt),
+            MessagesPlaceholder(variable_name="history"),
+            ("human", "{question}"),
+        ]
+    )
+    chain = prompt | model
+    return RunnableWithMessageHistory(
+        chain,
+        store.get,
+        input_messages_key="question",
+        history_messages_key="history",
+    )

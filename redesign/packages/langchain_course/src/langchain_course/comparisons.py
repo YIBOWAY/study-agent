@@ -1,7 +1,8 @@
 """Part 6: offline build-vs-adopt comparison harness (LangChain track).
 
 Framework profiles are deterministic teaching records — not live wrappers for
-third-party SDKs. The LC baseline uses scripted AgentRunResult steps only.
+third-party SDKs. The LC baseline runs the real Part 1 LangChain tool loop with
+a deterministic `BaseChatModel`.
 """
 
 from __future__ import annotations
@@ -11,7 +12,9 @@ from dataclasses import dataclass, field
 from math import isfinite
 from typing import Any
 
-from langchain_course.agent_kernel import AgentRunResult, AgentStep, step_kinds
+from langchain_course.agent_kernel import run_tool_calling_agent, step_kinds
+from langchain_course.fake_models import tool_then_final_model
+from langchain_course.tools_echo import echo
 
 
 class ComparisonError(ValueError):
@@ -300,16 +303,16 @@ def build_state_resume_task() -> ComparisonTask:
 
 
 def run_lc_baseline(task: ComparisonTask) -> TaskRunSummary:
-    """Offline LC baseline: scripted steps only (no live model)."""
-    # Fixed structural trail that mirrors Part 1 tool-calling loop shape.
-    result = AgentRunResult(
+    """Offline LC baseline through `bind_tools` + message/tool execution."""
+    model = tool_then_final_model(
+        tool_name="echo",
+        tool_args={"text": task.id},
         final_text=f"LC baseline complete for {task.id}",
-        steps=[
-            AgentStep(kind="model_request", payload={"step": "plan"}),
-            AgentStep(kind="tool_call", payload={"tool": "echo", "args": {"text": task.id}}),
-            AgentStep(kind="tool_result", payload={"tool": "echo", "ok": True}),
-            AgentStep(kind="final", payload={"text": "done"}),
-        ],
+    )
+    result = run_tool_calling_agent(
+        user_message=f"Echo the fixed task id {task.id}, then report completion.",
+        tools=[echo],
+        model=model,
     )
     kinds = step_kinds(result)
     return TaskRunSummary(

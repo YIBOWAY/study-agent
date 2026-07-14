@@ -3,16 +3,20 @@ from __future__ import annotations
 from pathlib import Path
 
 import pytest
-from langchain_course.agent_kernel import AgentStep
+from langchain_course.agent_kernel import AgentStep, run_tool_calling_agent
+from langchain_course.fake_models import tool_then_final_model
 from langchain_course.production import (
     ApprovalMode,
     ApprovalPolicy,
     ApprovalRule,
     JsonlStepStore,
+    LangChainTraceRecorder,
     ProductionError,
     RunDiagnostics,
     SandboxPolicy,
+    build_approval_hook,
 )
+from langchain_course.tools_echo import echo
 
 
 def test_run_diagnostics_from_steps() -> None:
@@ -103,3 +107,43 @@ def test_sandbox_policy_paths_and_network(tmp_path: Path) -> None:
     assert net.allowed is False
     assert policy.runtime_decision(5).allowed is True
     assert policy.runtime_decision(11).allowed is False
+
+
+def test_langchain_callbacks_capture_real_model_lifecycle() -> None:
+    recorder = LangChainTraceRecorder()
+    model = tool_then_final_model(
+        tool_name="echo",
+        tool_args={"text": "callback input"},
+        final_text="callback answer",
+    )
+
+    result = run_tool_calling_agent(
+        user_message="hello callbacks",
+        model=model,
+        tools=[echo],
+        config={"callbacks": [recorder], "tags": ["part-7"]},
+    )
+
+    assert result.final_text == "callback answer"
+    kinds = [record["kind"] for record in recorder.records]
+    assert "chat_model_start" in kinds
+    assert "llm_end" in kinds
+    assert "tool_start" in kinds
+    assert "tool_end" in kinds
+
+
+def test_approval_hook_translates_policy_before_execution() -> None:
+    policy = ApprovalPolicy(
+        rules=(
+            ApprovalRule("local_*", ApprovalMode.ALLOW, "local fixture"),
+            ApprovalRule("shell_*", ApprovalMode.DENY, "unsafe shell"),
+        )
+    )
+    hook = build_approval_hook(policy, approved_tools={"review_me"})
+
+    assert hook("local_search", {}).allowed is True
+    assert hook("shell_rm", {}).allowed is False
+    assert hook("review_me", {}).allowed is True
+    pending = hook("unknown", {})
+    assert pending.allowed is False
+    assert pending.mode == "require_approval"

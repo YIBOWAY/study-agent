@@ -45,7 +45,7 @@ user_message
 
 ```bash
 # 在 redesign/ 下；unit 不需要 key
-uv run python
+PYTHONPATH=packages/langchain_course/src uv run python
 ```
 
 ```python
@@ -120,7 +120,7 @@ assert result.final_text == "The tool said hello."
 
 ```bash
 # redesign/.env 中设置 DEEPSEEK_API_KEY=...
-uv run python -c "
+PYTHONPATH=packages/langchain_course/src uv run python -c "
 from langchain_course.agent_kernel import run_tool_calling_agent, step_kinds
 from langchain_course.tools_echo import echo
 r = run_tool_calling_agent(

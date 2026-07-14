@@ -8,6 +8,12 @@ from __future__ import annotations
 
 import re
 from dataclasses import asdict, dataclass, field
+from typing import Any
+
+from langchain_core.callbacks.manager import CallbackManagerForRetrieverRun
+from langchain_core.documents import Document
+from langchain_core.retrievers import BaseRetriever
+from langchain_core.runnables import Runnable, RunnableLambda, RunnablePassthrough
 
 
 class ResearchChainError(ValueError):
@@ -117,6 +123,100 @@ class KeywordRetriever:
             )
         hits.sort(key=lambda h: (-h.score, h.source_id))
         return hits[:limit]
+
+
+def paper_docs_to_documents(docs: list[PaperDoc]) -> list[Document]:
+    """Convert course records at the framework boundary.
+
+    `PaperDoc` remains the stable, inspectable course record. `Document` is the
+    LangChain-native value that flows through retrievers and Runnables.
+    """
+    return [
+        Document(
+            page_content=doc.content,
+            metadata={
+                "source_id": doc.id,
+                "source_uri": doc.uri,
+                "title": doc.title,
+            },
+        )
+        for doc in docs
+    ]
+
+
+class LangChainPaperRetriever(BaseRetriever):
+    """Deterministic `BaseRetriever` over local LangChain Documents."""
+
+    documents: tuple[Document, ...]
+    k: int = 3
+
+    @classmethod
+    def from_papers(
+        cls,
+        docs: list[PaperDoc],
+        *,
+        k: int = 3,
+    ) -> LangChainPaperRetriever:
+        if k < 1:
+            raise ResearchChainError("retriever k must be >= 1")
+        return cls(documents=tuple(paper_docs_to_documents(docs)), k=k)
+
+    def _get_relevant_documents(
+        self,
+        query: str,
+        *,
+        run_manager: CallbackManagerForRetrieverRun,
+    ) -> list[Document]:
+        del run_manager  # callbacks are managed by BaseRetriever.invoke
+        query_tokens = _tokens(query)
+        if not query_tokens:
+            return []
+        ranked: list[tuple[float, str, Document]] = []
+        for document in self.documents:
+            title = str(document.metadata.get("title", ""))
+            overlap = query_tokens & _tokens(f"{title} {document.page_content}")
+            if not overlap:
+                continue
+            score = len(overlap) / len(query_tokens)
+            source_id = str(document.metadata.get("source_id", ""))
+            ranked.append((score, source_id, document))
+        ranked.sort(key=lambda item: (-item[0], item[1]))
+        return [document for _, _, document in ranked[: self.k]]
+
+
+def documents_to_context(documents: list[Document], *, max_chars: int = 1200) -> str:
+    chunks: list[str] = []
+    used = 0
+    for document in documents:
+        source_id = str(document.metadata.get("source_id", "unknown"))
+        title = str(document.metadata.get("title", "Untitled"))
+        piece = f"[{source_id}] {title}\n{document.page_content}\n"
+        if chunks and used + len(piece) > max_chars:
+            break
+        chunks.append(piece)
+        used += len(piece)
+    return "\n".join(chunks).strip()
+
+
+def build_research_context_runnable(
+    retriever: BaseRetriever,
+) -> Runnable[dict[str, Any], dict[str, Any]]:
+    """Compose question -> BaseRetriever -> inspectable prompt context with LCEL."""
+
+    question = RunnableLambda(lambda item: str(item["question"]))
+    retrieve = question | retriever
+
+    def _attach_context(item: dict[str, Any]) -> dict[str, Any]:
+        documents = list(item["documents"])
+        return {
+            **item,
+            "documents": documents,
+            "context": documents_to_context(documents),
+        }
+
+    return RunnablePassthrough.assign(documents=retrieve) | RunnableLambda(
+        _attach_context
+    )
 
 
 def build_claim_links(

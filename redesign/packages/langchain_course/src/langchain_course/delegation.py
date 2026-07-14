@@ -2,10 +2,11 @@
 
 from __future__ import annotations
 
-from collections.abc import Callable, Sequence
+from collections.abc import Callable, Mapping, Sequence
 from dataclasses import dataclass, field
 from typing import Any
 
+from langchain_core.runnables import Runnable, RunnableParallel
 from langchain_core.tools import BaseTool
 
 from langchain_course.agent_kernel import AgentRunResult, AgentStep
@@ -98,6 +99,22 @@ class MergeResult:
 
 
 WorkerRunner = Callable[[WorkerTask, Sequence[BaseTool]], AgentRunResult]
+
+
+def build_parallel_worker_runnable(
+    workers: Mapping[str, Runnable[Any, Any]],
+) -> RunnableParallel[Any]:
+    """Compose independent LangChain workers with `RunnableParallel`.
+
+    This teaches genuine LC composition. The budgeted coordinator below remains
+    sequential because budget/side-effect accounting is a separate product
+    contract that `RunnableParallel` does not provide automatically.
+    """
+    if not workers:
+        raise DelegationError("parallel workers must not be empty")
+    if any(not name.strip() for name in workers):
+        raise DelegationError("parallel worker names must be non-empty")
+    return RunnableParallel(dict(workers))
 
 
 def compile_child_prompt(task: WorkerTask) -> str:

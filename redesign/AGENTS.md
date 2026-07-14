@@ -52,6 +52,10 @@ For course markdown changes that include runnable Python examples, also run:
 PYTHONPATH=packages/research_core/src uv run pytest tests/course/test_markdown_python_blocks.py -q
 ```
 
+This gate covers the handwritten setup/Parts 1–7 files and all 23 LangChain
+track chapter/lab/solution files. Blocks that intentionally require a live key
+must use a `python-live` fence so the offline gate does not call external APIs.
+
 For Capstone changes, also run:
 
 ```bash
@@ -59,9 +63,12 @@ PYTHONPATH=packages/research_core/src uv run pytest course/capstone/solution/tes
 ```
 
 This gate currently covers setup material plus Parts 1-7 chapter/lab/solution
-files, and it compares stdout for blocks followed by an `Expected output:` text
-fence. Capstone is covered by dedicated tests under `course/capstone/` rather
-than the markdown Python block gate.
+files in the handwritten course plus the LangChain parallel track, and it
+compares stdout for blocks followed by an `Expected output:` text fence.
+Capstones are covered by dedicated tests rather than the Markdown block gate.
+
+`uv.lock` is intentionally tracked from F3R onward so framework-course installs
+reuse the verified LangChain 1.x dependency set.
 
 ## Architecture Direction
 

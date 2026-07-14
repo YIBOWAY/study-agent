@@ -21,6 +21,7 @@ This folder is the redesign progress dashboard for humans and agents.
 - `phases/phase-f1.md`: progress record for LangChain Parts 1–2.
 - `phases/phase-f2.md`: progress record for LangChain Parts 3–4.
 - `phases/phase-f3.md`: progress record for LangChain Parts 5–7 + Capstone.
+- `phases/phase-f3r.md`: audit-driven LangChain native-execution and teaching-completion record.
 
 ## Maintenance Rule
 

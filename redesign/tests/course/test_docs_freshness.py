@@ -40,3 +40,19 @@ def test_docs_freshness_ignores_non_markdown_code_spans(tmp_path) -> None:
 
     assert report.checked_paths == ()
     assert report.missing_paths == ()
+
+
+def test_docs_freshness_checks_relative_markdown_links(tmp_path) -> None:
+    index = tmp_path / "course" / "README.md"
+    index.parent.mkdir()
+    index.write_text(
+        "Read [good](chapters/good.md) and [bad](labs/missing.md#step).\n",
+        encoding="utf-8",
+    )
+    (tmp_path / "course" / "chapters").mkdir()
+    (tmp_path / "course" / "chapters" / "good.md").write_text("ok\n", encoding="utf-8")
+
+    report = validate_index_paths(tmp_path, (index,))
+
+    assert "course/chapters/good.md" in report.checked_paths
+    assert report.missing_paths == ("course/labs/missing.md",)

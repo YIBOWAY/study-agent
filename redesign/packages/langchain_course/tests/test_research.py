@@ -1,15 +1,19 @@
 from __future__ import annotations
 
 import pytest
+from langchain_core.documents import Document
 from langchain_course.paper_fixtures import default_paper_docs
 from langchain_course.research import (
     ClaimItem,
     EvidenceItem,
     KeywordRetriever,
+    LangChainPaperRetriever,
     ResearchChainError,
     ResearchReport,
     build_claim_links,
+    build_research_context_runnable,
     format_context_block,
+    paper_docs_to_documents,
 )
 
 
@@ -82,3 +86,25 @@ def test_format_context_block_includes_titles() -> None:
     block = format_context_block(docs[:2])
     assert "RAG Evaluation Survey" in block
     assert "paper_1" in block
+
+
+def test_paper_docs_convert_to_langchain_documents() -> None:
+    documents = paper_docs_to_documents(default_paper_docs())
+    assert documents
+    assert all(isinstance(document, Document) for document in documents)
+    assert documents[0].metadata["source_id"] == "paper_1"
+    assert documents[0].metadata["source_uri"].startswith("paper://")
+
+
+def test_langchain_retriever_and_runnable_preserve_inspectable_context() -> None:
+    retriever = LangChainPaperRetriever.from_papers(default_paper_docs(), k=2)
+    runnable = build_research_context_runnable(retriever)
+
+    result = runnable.invoke({"question": "citation grounding"})
+
+    assert result["question"] == "citation grounding"
+    assert result["documents"]
+    assert all(isinstance(document, Document) for document in result["documents"])
+    assert result["documents"][0].metadata["source_id"] == "paper_1"
+    assert "RAG Evaluation Survey" in result["context"]
+    assert len(runnable.get_graph().nodes) >= 3

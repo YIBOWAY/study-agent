@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 import pytest
+from langchain_core._api.deprecation import LangChainDeprecationWarning
+from langchain_core.language_models.fake_chat_models import FakeListChatModel
 from langchain_course.memory import (
     MemoryError,
     MemoryKind,
@@ -8,6 +10,8 @@ from langchain_course.memory import (
     MemoryRecallPolicy,
     MemoryWritePolicy,
     Notebook,
+    SessionHistoryStore,
+    build_history_runnable,
     format_memory_block,
 )
 
@@ -89,3 +93,31 @@ def test_recall_pinned_first_and_query() -> None:
     assert any(n.id == "n2" for n in recalled)
     block = format_memory_block(recalled)
     assert "PINNED" in block
+
+
+def test_runnable_with_message_history_isolated_by_session() -> None:
+    store = SessionHistoryStore()
+    model = FakeListChatModel(
+        responses=["first answer", "second answer", "other session"]
+    )
+    with pytest.warns(LangChainDeprecationWarning, match="LangGraph"):
+        runnable = build_history_runnable(model, store)
+
+    first = runnable.invoke(
+        {"question": "Remember that claims need evidence."},
+        config={"configurable": {"session_id": "research-a"}},
+    )
+    second = runnable.invoke(
+        {"question": "What rule did we discuss?"},
+        config={"configurable": {"session_id": "research-a"}},
+    )
+    runnable.invoke(
+        {"question": "Fresh session"},
+        config={"configurable": {"session_id": "research-b"}},
+    )
+
+    assert first.content == "first answer"
+    assert second.content == "second answer"
+    assert len(store.get("research-a").messages) == 4
+    assert len(store.get("research-b").messages) == 2
+    assert "claims need evidence" in store.get("research-a").messages[0].content

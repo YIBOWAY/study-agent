@@ -7,7 +7,7 @@ inspect think → act → observe without FakeModel.
 
 from __future__ import annotations
 
-from collections.abc import Sequence
+from collections.abc import Callable, Mapping, Sequence
 from dataclasses import dataclass, field
 from typing import Any
 
@@ -19,6 +19,7 @@ from langchain_core.messages import (
     SystemMessage,
     ToolMessage,
 )
+from langchain_core.runnables import RunnableConfig
 from langchain_core.tools import BaseTool
 
 from langchain_course.config import DeepSeekSettings
@@ -40,6 +41,18 @@ class AgentRunResult:
     final_text: str
     steps: list[AgentStep] = field(default_factory=list)
     message_records: list[dict[str, Any]] = field(default_factory=list)
+
+
+@dataclass(frozen=True, slots=True)
+class ToolGateDecision:
+    """Decision returned before a tool is allowed to execute."""
+
+    allowed: bool
+    mode: str
+    reason: str
+
+
+BeforeToolHook = Callable[[str, Mapping[str, Any]], ToolGateDecision]
 
 
 def step_kinds(result: AgentRunResult) -> list[str]:
@@ -100,6 +113,8 @@ def run_tool_calling_agent(
     model: BaseChatModel | None = None,
     settings: DeepSeekSettings | None = None,
     max_steps: int = 6,
+    config: RunnableConfig | None = None,
+    before_tool: BeforeToolHook | None = None,
 ) -> AgentRunResult:
     """Run a multi-step tool-calling loop and record inspectable steps.
 
@@ -129,7 +144,7 @@ def run_tool_calling_agent(
                 payload={"message_count": len(messages)},
             )
         )
-        ai_message = bound.invoke(messages)
+        ai_message = bound.invoke(messages, config=config)
         if not isinstance(ai_message, AIMessage):
             raise AgentKernelError(
                 f"expected AIMessage from model, got {type(ai_message)!r}"
@@ -170,10 +185,35 @@ def run_tool_calling_agent(
             if tool is None:
                 observation = f"unknown tool: {name}"
             else:
-                try:
-                    observation = tool.invoke(args)
-                except Exception as exc:  # noqa: BLE001 - surface tool failures
-                    observation = f"tool error: {type(exc).__name__}: {exc}"
+                decision = (
+                    before_tool(name, args)
+                    if before_tool is not None
+                    else ToolGateDecision(
+                        allowed=True,
+                        mode="allow",
+                        reason="no pre-tool gate configured",
+                    )
+                )
+                if before_tool is not None:
+                    steps.append(
+                        AgentStep(
+                            kind="tool_decision",
+                            payload={
+                                "id": call_id,
+                                "name": name,
+                                "allowed": decision.allowed,
+                                "mode": decision.mode,
+                                "reason": decision.reason,
+                            },
+                        )
+                    )
+                if not decision.allowed:
+                    observation = f"tool blocked: {decision.mode}: {decision.reason}"
+                else:
+                    try:
+                        observation = tool.invoke(args, config=config)
+                    except Exception as exc:  # noqa: BLE001 - surface tool failures
+                        observation = f"tool error: {type(exc).__name__}: {exc}"
             result_text = (
                 observation if isinstance(observation, str) else str(observation)
             )

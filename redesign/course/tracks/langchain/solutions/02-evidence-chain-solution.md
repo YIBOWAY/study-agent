@@ -46,6 +46,27 @@ assert "paper://citation-mapping" in uris
 assert "paper://rag-evaluation-survey" in uris
 ```
 
+## LangChain Retriever / Runnable 参考
+
+```python
+from langchain_course.research import (
+    LangChainPaperRetriever,
+    build_research_context_runnable,
+)
+
+retriever = LangChainPaperRetriever.from_papers(docs, k=2)
+documents = retriever.invoke("citation grounding")
+assert documents[0].metadata["source_id"] == "paper_1"
+
+chain = build_research_context_runnable(retriever)
+result = chain.invoke({"question": "citation grounding"})
+assert result["documents"]
+assert "RAG Evaluation Survey" in result["context"]
+```
+
+为什么正确：检索经过 `BaseRetriever.invoke`，组合经过 LCEL Runnable；稳定的
+引用校验仍由 `build_claim_links` 完成。框架组合与业务 invariant 各负其责。
+
 ## L3 Break / policy
 
 ```python
@@ -87,5 +108,8 @@ except ResearchChainError as exc:
 - 不共享 Python 类型，避免框架轨与产品 core 缠在一起。
 
 ## 为何正确
+
+常见错误：把 `Document.metadata` 当数据库 schema。这里只存跨框架边界所需的
+稳定 source 标识；Evidence/Claim 仍用显式类型，不藏进任意 metadata。
 
 断言证明的是 **link 完整性**，不是文笔。这与主课 Part 2 的 citation 纪律一致，只是用 LC 轨自己的记录类型表达。

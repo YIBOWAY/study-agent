@@ -6,6 +6,7 @@ import pytest
 from langchain_core.messages import AIMessage, HumanMessage, SystemMessage, ToolMessage
 from langchain_course.agent_kernel import (
     AgentKernelError,
+    ToolGateDecision,
     run_tool_calling_agent,
     step_kinds,
 )
@@ -151,3 +152,45 @@ def test_unknown_tool_records_error_observation() -> None:
     tool_result = next(s for s in result.steps if s.kind == "tool_result")
     assert "unknown tool" in tool_result.payload["content"]
     assert result.final_text == "handled missing tool"
+
+
+def test_tool_gate_blocks_before_tool_execution() -> None:
+    calls: list[str] = []
+
+    def dangerous_tool(value: str) -> str:
+        """Record a dangerous side effect for the gate test."""
+        calls.append(value)
+        return value
+
+    from langchain_core.tools import StructuredTool
+
+    dangerous = StructuredTool.from_function(dangerous_tool, name="dangerous")
+    model = ScriptedChatModel(
+        [
+            AIMessage(
+                content="",
+                tool_calls=[
+                    {"id": "gate_1", "name": "dangerous", "args": {"value": "boom"}}
+                ],
+            ),
+            AIMessage(content="blocked safely"),
+        ]
+    )
+
+    result = run_tool_calling_agent(
+        user_message="run dangerous",
+        tools=[dangerous],
+        model=model,  # type: ignore[arg-type]
+        before_tool=lambda _name, _args: ToolGateDecision(
+            allowed=False,
+            mode="deny",
+            reason="requires human review",
+        ),
+    )
+
+    assert calls == []
+    assert "tool_decision" in step_kinds(result)
+    decision = next(step for step in result.steps if step.kind == "tool_decision")
+    assert decision.payload["allowed"] is False
+    tool_result = next(step for step in result.steps if step.kind == "tool_result")
+    assert "blocked" in tool_result.payload["content"]

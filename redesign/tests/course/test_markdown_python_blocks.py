@@ -35,6 +35,12 @@ COURSE_MARKDOWN_PATHS = (
     PROJECT_ROOT / "course" / "labs" / "07-production-readiness-lab.md",
     PROJECT_ROOT / "course" / "solutions" / "07-production-readiness-solution.md",
 )
+LANGCHAIN_TRACK_ROOT = PROJECT_ROOT / "course" / "tracks" / "langchain"
+LANGCHAIN_COURSE_MARKDOWN_PATHS = (
+    tuple(sorted((LANGCHAIN_TRACK_ROOT / "chapters").glob("*.md")))
+    + tuple(sorted((LANGCHAIN_TRACK_ROOT / "labs").glob("*.md")))
+    + tuple(sorted((LANGCHAIN_TRACK_ROOT / "solutions").glob("*.md")))
+)
 
 
 def test_markdown_python_blocks_execute_with_shared_namespace_and_expected_output(
@@ -168,3 +174,16 @@ def test_course_python_blocks_for_parts_0_through_7_stay_executable() -> None:
     expected_files = tuple(path.resolve(strict=False) for path in COURSE_MARKDOWN_PATHS)
     assert report.checked_files == expected_files
     assert report.executed_blocks > 0
+
+
+def test_langchain_track_python_blocks_stay_offline_executable() -> None:
+    assert len(LANGCHAIN_COURSE_MARKDOWN_PATHS) == 23
+    report = validate_markdown_python_blocks(
+        LANGCHAIN_COURSE_MARKDOWN_PATHS,
+        PROJECT_ROOT,
+    )
+    expected_files = tuple(
+        path.resolve(strict=False) for path in LANGCHAIN_COURSE_MARKDOWN_PATHS
+    )
+    assert report.checked_files == expected_files
+    assert report.executed_blocks >= 46

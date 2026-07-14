@@ -5,7 +5,9 @@
 
 ## 你在学什么
 
-用 **真实 LangChain idioms** 重做「本地论文研究助手」同一业务场景：tool-calling agent、证据链/RAG 味、memory、多 agent、可检查产出、生产边界，最后做 Capstone。
+用 **真实 LangChain Core 执行路径**重做「本地论文研究助手」：
+`BaseChatModel/BaseTool`、`Document/BaseRetriever`、LCEL Runnable、message
+history、parallel workers、callback 与执行前 approval，最后做真实-loop Capstone。
 
 顺序约定（设计已定）：
 
@@ -59,13 +61,20 @@ uv run pytest course/tracks/langchain/capstone/solution -q
 uv run pytest -q
 
 # 一次 hello（读 .env 或环境变量）
-uv run python -c "from langchain_course.deepseek import run_hello_chat; print(run_hello_chat())"
+PYTHONPATH=packages/langchain_course/src uv run python -c "from langchain_course.deepseek import run_hello_chat; print(run_hello_chat())"
 
-# live integration（可选）
-RUN_DEEPSEEK_TESTS=1 uv run pytest packages/langchain_course/tests -m integration -q
+# live integration（可选，hello + Capstone tool smoke）
+RUN_DEEPSEEK_TESTS=1 uv run pytest \
+  packages/langchain_course/tests \
+  course/tracks/langchain/capstone/solution -m integration -q
+
+# 全部 LC 章节 / Lab / Solution 的离线 Python 块
+uv run pytest tests/course/test_markdown_python_blocks.py -q
 ```
 
-`pythonpath` 已在 `pyproject.toml` 配置 `packages/langchain_course/src`。
+`pytest` 会从 `pyproject.toml` 读取 `packages/langchain_course/src`；普通
+`uv run python` 不会读取 pytest 的这项配置，所以课程里的 shell 示例会显式写
+`PYTHONPATH=packages/langchain_course/src`。
 
 ## 学习路径（当前）
 
@@ -73,13 +82,13 @@ RUN_DEEPSEEK_TESTS=1 uv run pytest packages/langchain_course/tests -m integratio
 | --- | --- | --- |
 | 0 | [labs/00-deepseek-hello.md](labs/00-deepseek-hello.md) | F0 完成 |
 | 1 | [chapters/01-agent-kernel-langchain.md](chapters/01-agent-kernel-langchain.md) → [labs/01-tool-calling-agent-lab.md](labs/01-tool-calling-agent-lab.md) | F1 完成 |
-| 2 | [chapters/02-research-core-langchain.md](chapters/02-research-core-langchain.md) → [labs/02-evidence-chain-lab.md](labs/02-evidence-chain-lab.md) | F1 完成 |
-| 3 | [chapters/03-memory-skills-langchain.md](chapters/03-memory-skills-langchain.md) → [labs/03-memory-skills-lab.md](labs/03-memory-skills-lab.md) | F2 完成 |
-| 4 | [chapters/04-delegation-langchain.md](chapters/04-delegation-langchain.md) → [labs/04-delegation-lab.md](labs/04-delegation-lab.md) | F2 完成 |
-| 5 | [chapters/05-workbench-langchain.md](chapters/05-workbench-langchain.md) → [labs/05-workbench-lab.md](labs/05-workbench-lab.md) | F3 完成 |
-| 6 | [chapters/06-comparisons-langchain.md](chapters/06-comparisons-langchain.md) → [labs/06-comparisons-lab.md](labs/06-comparisons-lab.md) | F3 完成 |
-| 7 | [chapters/07-production-langchain.md](chapters/07-production-langchain.md) → [labs/07-production-lab.md](labs/07-production-lab.md) | F3 完成 |
-| Capstone | [capstone/README.md](capstone/README.md) | F3 完成 |
+| 2 | [chapters/02-research-core-langchain.md](chapters/02-research-core-langchain.md) → [labs/02-evidence-chain-lab.md](labs/02-evidence-chain-lab.md) | F3R 补全：Document/Retriever/Runnable |
+| 3 | [chapters/03-memory-skills-langchain.md](chapters/03-memory-skills-langchain.md) → [labs/03-memory-skills-lab.md](labs/03-memory-skills-lab.md) | F3R 补全：message history + policy |
+| 4 | [chapters/04-delegation-langchain.md](chapters/04-delegation-langchain.md) → [labs/04-delegation-lab.md](labs/04-delegation-lab.md) | F3R 补全：RunnableParallel + budgets |
+| 5 | [chapters/05-workbench-langchain.md](chapters/05-workbench-langchain.md) → [labs/05-workbench-lab.md](labs/05-workbench-lab.md) | F3R 教学闭环 |
+| 6 | [chapters/06-comparisons-langchain.md](chapters/06-comparisons-langchain.md) → [labs/06-comparisons-lab.md](labs/06-comparisons-lab.md) | F3R 真实 LC baseline |
+| 7 | [chapters/07-production-langchain.md](chapters/07-production-langchain.md) → [labs/07-production-lab.md](labs/07-production-lab.md) | F3R callbacks + pre-tool approval |
+| Capstone | [capstone/README.md](capstone/README.md) | F3R 真实 tool loop + optional live smoke |
 
 ## 当前进度
 
@@ -87,6 +96,7 @@ RUN_DEEPSEEK_TESTS=1 uv run pytest packages/langchain_course/tests -m integratio
 - [x] F1：Parts 1–2（agent kernel + evidence chain）
 - [x] F2：Parts 3–4（memory/skills + multi-worker delegation）
 - [x] F3：Parts 5–7 + Capstone
+- [x] F3R：真实 LC 原语、教学闭环、Capstone 与 Markdown 门禁补全
 
 ## 诚实边界
 
@@ -95,6 +105,9 @@ RUN_DEEPSEEK_TESTS=1 uv run pytest packages/langchain_course/tests -m integratio
 - 本轨不宣称替代产品 runtime；产品仍以 handwritten `research_core` 为准。
 - Part 1 **不依赖 LangGraph**（`bind_tools` 手写可观察 loop）。
 - 版本矩阵见 [reference/version-matrix.md](reference/version-matrix.md)。
+- 原语速查见 [reference/langchain-primitives.md](reference/langchain-primitives.md)。
+- 复习检查点见 [reference/study-checkpoints.md](reference/study-checkpoints.md)。
+- 排障见 [reference/troubleshooting.md](reference/troubleshooting.md)。
 
 ## 设计文档
 
@@ -102,3 +115,5 @@ RUN_DEEPSEEK_TESTS=1 uv run pytest packages/langchain_course/tests -m integratio
 - [F0 计划](../../../docs/plans/2026-07-10-phase-f0-langchain-langgraph-scaffold.md)
 - [F1 计划](../../../docs/plans/2026-07-10-phase-f1-langchain-parts-1-2.md)
 - [F2 计划](../../../docs/plans/2026-07-10-phase-f2-langchain-parts-3-4.md)
+- [F3 计划](../../../docs/plans/2026-07-10-phase-f3-langchain-parts-5-7-capstone.md)
+- [F3R 补全计划](../../../docs/plans/2026-07-14-phase-f3r-langchain-teaching-completion.md)

@@ -42,12 +42,17 @@ AgentStep / PaperDoc / Report / MemoryNote / SkillManifest
   WorkbenchSnapshot  --to_record()-->  JSON panels
 ```
 
+```text
+bad internal object --X--> UI guesses a repair
+validated adapter    ---> snapshot ---> UI only renders
+```
+
 九个 `to_record()` keys：`project, run, timeline, delegation, sources, report, memory, skills, evals`。
 
 ## Section 2 [BUILD]：demo snapshot
 
 ```bash
-uv run python
+PYTHONPATH=packages/langchain_course/src uv run python
 ```
 
 ```python
@@ -93,9 +98,58 @@ assert snap.to_record()["timeline"][1]["type"] == "tool_call"
 
 > [TRAP] **run.project_id 必须等于 project.id**；timeline 的 `run_id` 必须等于 `run.id`；report link 的 `source_id` 必须出现在 sources 里——否则构造时 raise，而不是把坏数据交给 UI。
 
-## Section 4：Reflection
+## Section 4 [INSPECT]：从外到内检查 record
+
+```python
+record = snap.to_record()
+panel_counts = {
+    "timeline": len(record["timeline"]),
+    "sources": len(record["sources"]),
+    "memory": len(record["memory"]),
+    "skills": len(record["skills"]),
+}
+print(panel_counts)
+assert record["run"]["id"] == "r1"
+assert record["timeline"][0]["run_id"] == record["run"]["id"]
+```
+
+> [CHECK] UI 可以排序、折叠和筛选，但不应该补造 source、claim 或 run id。
+
+## Section 5 [BREAK / FIX]：让引用故意断掉
+
+```python
+from langchain_course.workbench import WorkbenchError
+
+try:
+    WorkbenchSnapshot(
+        project=project,
+        run=WorkbenchRun(
+            id="bad-run",
+            project_id="another-project",
+            title="broken",
+            question="Why cite?",
+        ),
+    )
+except WorkbenchError as exc:
+    assert "project_id" in str(exc)
+```
+
+修复原则：回到产生错误 id 的 adapter；不要在 `to_record()` 或前端里替换它。
+
+> [DD] Part 5 不需要新的 LangChain orchestration primitive。它学习的是框架
+> 输出如何跨过产品边界；这也是为什么 LC callback/steps 必须先变成稳定 panel。
+
+## Eval gate
+
+```bash
+uv run pytest packages/langchain_course/tests/test_workbench.py -q
+```
+
+## Section 6 [REFLECT]：迁移问题
 
 1. 如果前端可以“修好”坏 snapshot，产品诚实性会怎样？  
 2. 本轨 timeline 基于 `AgentStep.kind`，与 handwritten `RunEventType` 对照时你会看什么、不看什么？  
+3. 如果将来 Part 1 从手写 loop 换成 LangChain `create_agent`，哪个 adapter
+   最可能变化，哪个 JSON panel 不应该变化？
 
 下一章 Part 6：用真实 LC 体验回看 build-vs-adopt 评分。

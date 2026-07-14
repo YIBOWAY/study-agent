@@ -87,6 +87,7 @@ Parts 1-7, Capstone, and R9 reference materials are current teaching materials.
 - [2026-07-10-phase-f1-langchain-parts-1-2.md](../plans/2026-07-10-phase-f1-langchain-parts-1-2.md): F1 LangChain Parts 1–2 plan.
 - [2026-07-10-phase-f2-langchain-parts-3-4.md](../plans/2026-07-10-phase-f2-langchain-parts-3-4.md): F2 LangChain Parts 3–4 plan.
 - [2026-07-10-phase-f3-langchain-parts-5-7-capstone.md](../plans/2026-07-10-phase-f3-langchain-parts-5-7-capstone.md): F3 LangChain Parts 5–7 + Capstone plan.
+- [2026-07-14-phase-f3r-langchain-teaching-completion.md](../plans/2026-07-14-phase-f3r-langchain-teaching-completion.md): F3R native-LC and pedagogy completion plan.
 - [course/tracks/langchain/README.md](../../course/tracks/langchain/README.md): LangChain parallel track entry (F0–F3).
 - [course/tracks/langchain/chapters/01-agent-kernel-langchain.md](../../course/tracks/langchain/chapters/01-agent-kernel-langchain.md): LC Part 1 chapter.
 - [course/tracks/langchain/chapters/02-research-core-langchain.md](../../course/tracks/langchain/chapters/02-research-core-langchain.md): LC Part 2 chapter.
@@ -134,5 +135,7 @@ Parts 1-7, Capstone, and R9 reference materials are current teaching materials.
 - Phase F1 (complete): LangChain Parts 1–2 (tool-calling agent + evidence chain), `.env` loading, track chapters/labs/solutions.
 - Phase F2 (complete): LangChain Parts 3–4 (memory/skills notebook + multi-worker delegation), offline unit tests, track chapters/labs/solutions.
 - Phase F3 (complete): LangChain Parts 5–7 + Capstone (workbench snapshot, comparisons, production contracts, offline Capstone).
-- Phase F3 (planned): LangChain Parts 5–7 + Capstone.
+- Phase F3R (complete): closed the audit gaps with `Document`/`BaseRetriever`/LCEL,
+  message history, `RunnableParallel`, callback tracing, pre-tool approval, real
+  LC baseline/Capstone loops, deeper labs/solutions, and LC Markdown gates.
 - Phase F4–F5 (planned): full LangGraph mirror (Parts 1–7 + Capstone) after LC.

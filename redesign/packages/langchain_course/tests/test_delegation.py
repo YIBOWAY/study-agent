@@ -1,12 +1,14 @@
 from __future__ import annotations
 
 import pytest
+from langchain_core.runnables import RunnableLambda, RunnableParallel
 from langchain_course.delegation import (
     DelegationCoordinator,
     DelegationError,
     WorkerBudget,
     WorkerRole,
     WorkerTask,
+    build_parallel_worker_runnable,
     compile_child_prompt,
     filter_tools_for_role,
     make_plain_agent_result,
@@ -96,6 +98,21 @@ def test_filter_tools_for_role_empty_returns_all_nonempty_filters() -> None:
 
     none = filter_tools_for_role(_role(tool_names=("missing",)), tools)
     assert none == []
+
+
+def test_parallel_worker_runnable_uses_langchain_parallel_primitive() -> None:
+    runnable = build_parallel_worker_runnable(
+        {
+            "citation": RunnableLambda(lambda item: f"cite:{item['question']}"),
+            "risk": RunnableLambda(lambda item: f"risk:{item['question']}"),
+        }
+    )
+
+    assert isinstance(runnable, RunnableParallel)
+    assert runnable.invoke({"question": "RAG"}) == {
+        "citation": "cite:RAG",
+        "risk": "risk:RAG",
+    }
 
 
 def test_run_task_success_records_delegate_start_and_finish() -> None:

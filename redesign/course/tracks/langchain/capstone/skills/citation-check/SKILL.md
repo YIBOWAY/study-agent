@@ -18,7 +18,7 @@ Progressive disclosure:
 
 ## Workflow
 
-1. Retrieve candidate sources with `KeywordRetriever`.
+1. Retrieve candidate sources through `LangChainPaperRetriever(BaseRetriever)`.
 2. Extract exact quotes into `EvidenceItem`.
 3. Attach evidence IDs to each `ClaimItem`.
 4. Call `build_claim_links(...)` before accepting a report.

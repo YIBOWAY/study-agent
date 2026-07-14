@@ -57,6 +57,16 @@ Use this rubric for the **LangChain track** Capstone. Every criterion is offline
 | Learner starter | starter tests skip until TODOs filled, then pass |
 | Project gate (recommended) | `uv run pytest -q` and `uv run ruff check .` |
 
+### 5A. LangChain execution is real
+
+| Check | Pass evidence |
+| --- | --- |
+| Model boundary | Offline model subclasses `BaseChatModel` |
+| Tool path | run contains model response → tool call → decision → tool result |
+| Retriever path | local tool invokes `LangChainPaperRetriever(BaseRetriever)` |
+| No synthetic pass | main trail is not hand-built merely to satisfy the rubric |
+| Live boundary | optional DeepSeek smoke asserts tool structure, not exact prose |
+
 ### 6. Reflection explains 3 design decisions
 
 | Check | Pass evidence |
